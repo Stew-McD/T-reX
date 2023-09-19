@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-*** This is the main function of the WasteAndMaterialFootprint tool ***
+*** This is the main module of the WasteAndMaterialFootprint tool ***
 
 * To use the defaults, just run the whole script (but this will only work if you have the same format of project and database names)
-* The terms of the search query can be edited in section 1.3 of this script
-* The names of the projects and databases can be edited in section 2 of this script
+* The terms of the waste search query can be edited config/queries_waste.py
+* The list of materials can be edited in config/list_materials.txt
+* The names of the projects and databases can be edited in config/user_settings.py
 
 DEFAULTS:
 
@@ -13,7 +14,7 @@ EI database is of form 'cutoff38' or 'con39'
 * versions = ["35", "38", "39", "391]
 * models = ["cutoff", 'con', 'apos']
 
-The script will copy the project "default"+<db_name> to project "WasteAndMaterialFootprint"+<db_name>
+The script will copy the project "default"+<db_name> to project "WasteAndMaterialFootprint_"+<db_name>
 * 'project_base': "default_"+<dbase>,
 * 'project_wasteandmaterial': "WasteAndMaterialFootprint_"+<dbase>,
 
@@ -24,116 +25,105 @@ Based on the work of LL
 
 """
 # %%% Imports
+import os
 import shutil
+import sys
+from pathlib import Path
 from datetime import datetime
+import bw2data as bd
+
+cwd = Path.cwd()
+# sys.path.insert(0, str(cwd))
+
+# Add the config dir to the Python path
+dir_config = cwd.parents[1] / 'config'
+sys.path.insert(0, str(dir_config))
+
 # custom modules
-from dbExplode import dbExplode
-from WasteAndMaterialFootprint.WasteAndMaterialSearch import WasteAndMaterialSearch
-from dbMakeCustom import dbWriteExcel, dbExcel2BW
 from ExchangeEditor import ExchangeEditor
 from MethodEditor import AddMethods
-# %% 1. DEFINE MAIN FUNCTION (EDIT YOUR SEARCH QUERY IN 1.3)
+from ExplodeDatabase import ExplodeDatabase
+from SearchWaste import SearchWaste
+from SearchMaterial import SearchMaterial
+from MakeCustomDatabase import dbWriteExcel, dbExcel2BW
 
+# import configuration
+from user_settings import args_list, dir_data, dir_tmp, dir_logs, dir_searchwaste_results, dir_searchmaterial_results
+
+from queries_waste import queries_waste
+from list_materials import list_materials
+
+# %% 1. DEFINE MAIN FUNCTION
 
 def WasteAndMaterialFootprint(args):
 
     print("\n*** Starting WasteAndMaterialFootprint ***\n")
     start = datetime.now()
 
-# %%% 1.1 Define the project names and database names based on the arguments given
+# %%% 1.0 Define the project names and database names based on the arguments given
     project_base = args['project_base']
     project_wasteandmaterial = args['project_wasteandmaterial']
     db_name = args['db_name']
     db_wasteandmaterial_name = args['db_wasteandmaterial_name']
 
-# %%% XX Delete files from previous runs if you want
-    # #%%%% Clear program output directory: "tmp"
-    # try:
-    #     shutil.rmtree("data")
-    #     print("tmp directory deleted\n")
-    # except:
-    #     print("tmp directory doesn't exist\n")
+    if project_wasteandmaterial in bd.projects:
+        print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
+        redo = input("Do you want to delete it and start over? (y/n):  ")
+        
+        if redo == "y":
+            bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
+            print(f"WasteAndMaterial project deleted: {project_wasteandmaterial}")
+        else:
+            print("WasteAndMaterial project will not be deleted. Exiting...")
+            sys.exit()
 
-    # #%%%% Clear program output directory "WasteAndMaterialSearchResults"
-    # try:
-    #     shutil.rmtree("WasteAndMaterialSearchResults")
-    #     print("WasteAndMaterialSearchResults directory deleted\n")
-    # except:
-    #     print("WasteAndMaterialSearchResults directory doesn't exist\n")
+    if project_wasteandmaterial not in bd.projects:
+        print(f"\n**Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
+        bd.projects.set_current(project_base)
+        bd.projects.copy_project(project_wasteandmaterial)
 
-# %%% 1.2 dbExplode.py -
-# Open up EcoInvent db with wurst and save results as .pickle
-    print("\n*** Running dbExplode...")
-    dbExplode(project_base, project_wasteandmaterial, db_name)
+# %%% 1.1 Delete files from previous runs if you want
 
-# %%% 1.3 WasteAndMaterialSearch.py -
-# Define the search parameters here and run WasteAndMaterialSearch for each query (needs # to have .pickle already there from dbExplode)
-# the terms should be either a string or a list of strings, as you find them
+    if os.path.isdir(dir_data):
+        redo = input("There is exiting output data, do you want to delete it and start over? (y/n):  ")
+    
+        if redo == "y":
+            shutil.rmtree(dir_data)
+            print("\n** Data directory deleted\n")
+        else:
+            print("\n** Data directory will not be deleted")
 
-# set the names of the waste and material flow categories you want to search for
-    names = ['digestion', 'hazardous', 'non_hazardous', "incineration",
-             "open_burning", "recycling", "landfill", "composting", "total", 'radioactive']
-# ! QUERY FORMAT
-# setup the dictionary of search terms for each waste and material flow category
-    queries_kg = []
-    for name in names:
-        query = {
-            "db_name": db_name,
-            "db_custom": db_wasteandmaterial_name,
-            "name": "",
-            "code": "",
-            "unit": "kilogram",
-            "AND": ["waste and material"],
-            # if you replace "None" below, it must be with a with a
-            # list of strings, like the other keywords have
-            "OR": None,
-            "NOT":  None
-        }
+    else:
+        pass
 
-# define here what the search parameters mean for each waste and material flow category
-# if you want to customize the search parameters, you will
-# likely need some trial and error to make sure you get what you want
+# %%% 1.2 ExplodeDatabase.py
+    """
+    Open up EcoInvent db with wurst and save results as .pickle
+    """
 
-        query.update({"name": "wasteandmaterial_"+name})
-        if 'landfill' in name:
-            query.update({"OR": ["landfill", "dumped", "deposit"]})
-        if 'hazardous' == name:
-            query.update({"OR": ["hazardous", "radioactive"]})
-        if 'non_hazardous' == name:
-            query.update({"NOT": ["hazardous", "radioactive"]})
-        if 'incineration' in name:
-            query["AND"] += ["incineration"]
-        if 'open_burning' in name:
-            query["AND"] += ["burning"]
-        if 'recycling' in name:
-            query["AND"] += ["recycling"]
-        if 'composting' in name:
-            query["AND"] += ["composting"]
-        if 'digestion' in name:
-            query["AND"] += ["digestion"]
-        if 'radioactive' in name:
-            query["AND"] += ["radioactive"]
+    ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
 
-# add the query to the list of queries
-        queries_kg.append(query)
+# %%% 1.3.1 WasteSearch.py 
+    '''
+    run SearchWaste for the list of waste queries defined in config/queries_waste.py
+    '''
 
-# add same queries defined above, now for liquid waste and material
-    queries_m3 = []
-    for q in queries_kg:
-        q = q.copy()
-        q.update({'unit': "cubic meter"})
-        queries_m3.append(q)
+    SearchWaste(queries_waste, project_wasteandmaterial, db_name)
 
-    queries = queries_kg + queries_m3
+# %%% 1.3.2 SearchMaterial.py
+    """
+    run SearchMaterial for the list of materials defined 
+    in config/list_materials.txt or from the default list 
+    """
+    SearchMaterial(list_materials, project_wasteandmaterial, db_name)
 
-# run WasteAndMaterialSearch for the list of queries
-    WasteAndMaterialSearch(queries)
+# %%% 1.4 The rest of the custom functions
+'''
+calls from dbMakeCustom.py, ExchangeEditor.py, MethodEditor.py
+They do pretty much what their names suggest...
+'''
 
-# %%% 1.4 The rest of the custom functions:
-# calls from dbMakeCustom.py, ExchangeEditor.py, MethodEditor.py
-# They do pretty much what their names suggest...
-
-# makes an xlsx file from WasteAndMaterialSearch results in the database format needed for brightway2
+# makes an xlsx file from WasteSearch results in the database format needed for brightway2
     xl_filename = dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
 
 # imports the db_wasteandmaterial to the brightway project "WasteAndMaterialFootprint_<db_name>"
@@ -157,33 +147,9 @@ def WasteAndMaterialFootprint(args):
 
 # %% 2. RUN MAIN FUNCTION
 if __name__ == '__main__':
-
-# if you have a series of projects with a naming convention the same as this one, it is easy to run them all in a loop
-# if not, you can edit the arguments in the list below to fit your naming convention or just run the function for a single project
-    
-    # simply comment out this section, edit the second last line of this script with the names of your project and database
-    versions = ["39"] #"35", "38","39", 
-    models = ["cutoff"] #, 'apos','con']
-    dbases = ["{}{}".format(x, y) for x in models for y in versions]
-
-    args_list = []
-    for dbase in dbases:
-        args = {'project_base': "default_"+dbase,
-                'project_wasteandmaterial': "WasteAndMaterialFootprint_"+dbase,
-                'db_name': dbase,
-                'db_wasteandmaterial_name': "db_wasteandmaterial_"+dbase}
-        args_list.append(args)
     
     for args in args_list:
         try:
             WasteAndMaterialFootprint(args)
         except Exception as e:
             print(e)
-            
-    # until here. 
-    
-    # now edit the args below to suit your naming conventions and and uncomment to run the function for a single project and database
-
-    # args = {'project_base': "default_cutoff35", 'project_wasteandmaterial': "WasteAndMaterialFootprint_cutoff35", 'db_name': "cutoff35", 'db_wasteandmaterial_name': "db_wasteandmaterial_cutoff35"}
-    # WasteAndMaterialFootprint(args)
-

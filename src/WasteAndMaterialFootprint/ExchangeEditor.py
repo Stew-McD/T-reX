@@ -23,9 +23,11 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
     db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
 
     # find files produced by WasteAndMaterialSearch(), make df for each, add to a dictionary
-    tmp = os.path.join(os.getcwd(), "data/tmp")
+    data = os.path.join(os.getcwd(), "../../data")
+    tmp = os.path.join(data, "tmp")
+    logs = os.path.join(data, "logs")
     search_results_path = os.path.join(
-        os.getcwd(), "data/WasteAndMaterialSearchResults", db_name)
+        os.getcwd(), "data/WasteSearchResults", db_name)
     file_dict = {}
     for f in os.listdir(search_results_path):
         f_path = os.path.join(search_results_path, f)
