@@ -1,40 +1,54 @@
 
 
-# Define the search parameters here each query (needs to have .pickle already there from ExplodeDatabase.py)
+# Define the search parameters here each query
+# (needs to have .pickle already there from ExplodeDatabase.py)
 
 
 # the terms should be either a string or a list of strings, as you find them
 
 # set the names of the waste flow categories you want to search for
-names = ["digestion",
-        "hazardous", 
-        "non_hazardous", 
-        "incineration",
-        "open_burning", 
-        "recycling", 
-        "landfill", 
-        "composting", 
-        "total", 
-        "radioactive"]
+names = [
+    "digestion",
+    "hazardous",
+    "non_hazardous",
+    "incineration",
+    "open_burning",
+    "recycling",
+    "landfill",
+    "composting",
+    "total",
+    "radioactive"
+    "non_hazardous",
+    "incineration",
+    "open_burning",
+    "recycling",
+    "landfill",
+    "composting",
+    "total",
+    "radioactive"
+]
 
 # ! QUERY FORMAT
-# setup the dictionary of search terms for each waste and material flow category
+# setup the dictionary of search terms for
+# each waste and material flow category
+
 queries_kg = []
 for name in names:
     query = {
-        "db_name": "", #db_name
-        "db_custom": "", #db_wasteandmaterial_name
+        "db_name": "",  # db_name
+        "db_custom": "",  # db_wasteandmaterial_name
         "name": "",
         "code": "",
         "unit": "kilogram",
-        "AND": ["waste and material"],
+        "AND": ["waste"],
         # if you replace "None" below, it must be with a with a
         # list of strings, like the other keywords have
         "OR": None,
         "NOT":  None
     }
 
-# define here what the search parameters mean for each waste and material flow category
+# define here what the search parameters mean for
+# each waste and material flow category
 # if you want to customize the search parameters, you will
 # likely need some trial and error to make sure you get what you want
 

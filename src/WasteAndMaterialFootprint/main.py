@@ -33,7 +33,7 @@ from datetime import datetime
 import bw2data as bd
 
 cwd = Path.cwd()
-# sys.path.insert(0, str(cwd))
+sys.path.insert(0, str(cwd))
 
 # Add the config dir to the Python path
 dir_config = cwd.parents[1] / 'config'
@@ -51,16 +51,18 @@ from MakeCustomDatabase import dbWriteExcel, dbExcel2BW
 from user_settings import args_list, dir_data, dir_tmp, dir_logs, dir_searchwaste_results, dir_searchmaterial_results
 
 from queries_waste import queries_waste
-from list_materials import list_materials
 
 # %% 1. DEFINE MAIN FUNCTION
+
+args = args_list[0]
 
 def WasteAndMaterialFootprint(args):
 
     print("\n*** Starting WasteAndMaterialFootprint ***\n")
     start = datetime.now()
 
-# %%% 1.0 Define the project names and database names based on the arguments given
+    # %%% 1.0 Define the project names and database names based on the arguments given
+    
     project_base = args['project_base']
     project_wasteandmaterial = args['project_wasteandmaterial']
     db_name = args['db_name']
@@ -74,8 +76,8 @@ def WasteAndMaterialFootprint(args):
             bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
             print(f"WasteAndMaterial project deleted: {project_wasteandmaterial}")
         else:
-            print("WasteAndMaterial project will not be deleted. Exiting...")
-            sys.exit()
+            print("WasteAndMaterial project will not be deleted.")
+            # sys.exit()
 
     if project_wasteandmaterial not in bd.projects:
         print(f"\n**Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
@@ -85,7 +87,7 @@ def WasteAndMaterialFootprint(args):
 # %%% 1.1 Delete files from previous runs if you want
 
     if os.path.isdir(dir_data):
-        redo = input("There is exiting output data, do you want to delete it and start over? (y/n):  ")
+        redo = input("There is exiting output data, do you want to delete it? (y/n):  ")
     
         if redo == "y":
             shutil.rmtree(dir_data)
@@ -108,20 +110,20 @@ def WasteAndMaterialFootprint(args):
     run SearchWaste for the list of waste queries defined in config/queries_waste.py
     '''
 
-    SearchWaste(queries_waste, project_wasteandmaterial, db_name)
+    SearchWaste(db_name)
 
 # %%% 1.3.2 SearchMaterial.py
     """
     run SearchMaterial for the list of materials defined 
     in config/list_materials.txt or from the default list 
     """
-    SearchMaterial(list_materials, project_wasteandmaterial, db_name)
+    SearchMaterial(project_wasteandmaterial, db_name)
 
 # %%% 1.4 The rest of the custom functions
-'''
-calls from dbMakeCustom.py, ExchangeEditor.py, MethodEditor.py
-They do pretty much what their names suggest...
-'''
+    '''
+    calls from dbMakeCustom.py, ExchangeEditor.py, MethodEditor.py
+    They do pretty much what their names suggest...
+    '''
 
 # makes an xlsx file from WasteSearch results in the database format needed for brightway2
     xl_filename = dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
@@ -146,10 +148,10 @@ They do pretty much what their names suggest...
 
 
 # %% 2. RUN MAIN FUNCTION
-if __name__ == '__main__':
+# if __name__ == '__main__':
     
-    for args in args_list:
-        try:
-            WasteAndMaterialFootprint(args)
-        except Exception as e:
-            print(e)
+#     for args in args_list:
+#         try:
+#             WasteAndMaterialFootprint(args)
+#         except Exception as e:
+#             print(e)

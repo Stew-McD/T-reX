@@ -6,20 +6,22 @@ Created on Sat Feb 11 10:02:15 2023
 @author: stew
 """
 #%%
+# db_name = "cutoff391"
+# project_wasteandmaterial = "WasteAndMaterialFootprint_"+db_name
 
 def SearchMaterial(db_name, project_wasteandmaterial):
     """
     Search for materials in a specified database and extract related information.
-    
+
     This function takes a database name as input, sets the project to the respective database, 
     and looks for activities involving a predefined list of materials. The function extracts 
     relevant details of these activities, such as ISIC and CPC classifications, and saves 
     the details to a CSV file. It also extracts related material exchanges and saves them 
     to another CSV file.
-    
+
     Parameters:
     db_name (str): The name of the database to search in.
-    
+
     Returns:
     None
 
@@ -27,43 +29,81 @@ def SearchMaterial(db_name, project_wasteandmaterial):
     Exception: If there is any error in reading the materials list from the file.
     """
     import os
+    import sys
+    from pathlib import Path
     import bw2data as bd
     import pandas as pd
 
+    # Add the config dir to the Python path
+    cwd = Path.cwd()
+    dir_config = cwd.parents[1] / 'config'
+    sys.path.insert(0, str(dir_config))
+
     # Importing the default materials list
     from default_materials import default_materials
-    from user_settings import dir_tmp
+    from user_settings import dir_tmp, dir_config, dir_logs, dir_searchmaterial_results
 
     if not os.path.isdir(dir_tmp): os.makedirs(dir_tmp)
+    if not os.path.isdir(dir_logs): os.makedirs(dir_logs)
+    if not os.path.isdir(dir_searchmaterial_results): os.makedirs(dir_searchmaterial_results)
+
+    # load exchanges into df from the dbExplode pickle file
+    pickle_path = os.path.join(dir_tmp, db_name+ "_exploded.pickle")
+    print("*** Loading pickle to dataframe...")
+    df = pd.read_pickle(pickle_path)
 
     # Setting the current project to the default project associated with the database name
     bd.projects.set_current(project_wasteandmaterial)
-    
+
     # Loading the database
     db = bd.Database(db_name)
 
     # Printing the loading status
     print("\nLoading activities from database:", db.name, 'in project:', project_wasteandmaterial)
-    
+
     # Creating a DataFrame of all activities with specific details
     acts_all = pd.DataFrame([x.as_dict() for x  in db])
     acts_all = acts_all[['code','name','unit','location','activity type','reference product', 'classifications', 'database', 'production amount',]]
 
     # Loading the list of materials to search for
     try:
-        with open('list_materials.txt') as f:
+        with open(dir_config / 'list_materials.txt') as f:
             materials = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+            print("\nLoaded materials list from file:", dir_config / 'list_materials.txt')
     except Exception as exc:
-        print(f'Something went wrong, using the default material list... \nError: {exc}')
+        print(f'Using the default material list... \nError: {exc}')
         materials = default_materials
 
-    # Filtering activities based on the materials list and location
-    acts = acts_all[(acts_all['name'].isin(materials)) & (acts_all['location'].isin(['GLO', 'RoW']))]
+    # Printing the number of materials found
+    print("\n** Materials:", len(materials), "\n")
+    print(*materials, sep="\n")
+
+    materials_df = pd.DataFrame(default_materials, columns=['name', 'group'])
+    materials_dict = dict(materials)
+    materials_groups = materials_df.group.unique()
+
+
+    #%%
+
+    # Filtering activities based on the materials list
+    acts = acts_all[(acts_all['name'].isin(materials_df.name))] #& (acts_all['location'].isin(['GLO', 'RoW']))]
     acts = acts.reset_index(drop=True)
+    acts['material_group'] = acts['name'].map(materials_dict)
 
     # Printing the number of material markets found
     print("\nmaterial markets:", len(acts.name))
     print(acts.name)
+
+    # # Compare the names in acts to the materials list
+    # print("\nMissing materials:")
+    # missing_materials = [x for x in materials_ if x not in acts.name.values]
+
+    # if len(missing_materials) > 0:
+    #     print(*missing_materials, sep='\n')
+
+    #     for i in missing_materials:
+    #         hits = db.search(i)
+    #         print("\n", i, ":", (hits))
 
     # Extracting ISIC and CPC classifications
     print("\nExtracting classification data")
@@ -75,30 +115,54 @@ def SearchMaterial(db_name, project_wasteandmaterial):
                 acts.loc[i,'ISIC'] = k[1]
             if "CPC" in k[0]:
                 acts.loc[i,'CPC'] = k[1]
-    
+
     # Removing the classifications column
     acts = acts.drop("classifications", axis=1)
 
     # Saving the activities list to a CSV file
-    f = "data/activities_list_materials_"+db_name+".csv"
+    f = dir_searchmaterial_results / f"{db_name}_material_activities.csv"
     print("\nSaved activities list to csv:", f)
     acts.to_csv(f, sep=";", index=False)
 
+
+    #%%
     # Loading a pickle file into a DataFrame
     pickle_path = os.path.join(dir_tmp, db_name+"_exploded.pickle")
     print("*** Loading pickle to dataframe...")
     df = pd.read_pickle(pickle_path)
-
+    df = df[df.ex_type == "technosphere"]
+    # df = df[df['location'] == 'RoW']
     # Removing the classifications column from the DataFrame
     df.pop("classifications")
     print("*** Searching for material exchanges...")
 
     # Finding and saving material exchanges to a CSV file
-    hits = df[df['reference product'].isin(acts["reference product"].values)]
-    hits["database"] = db_name
-    hits.to_csv(dir_tmp +'/material_exchanges_'+db_name+".csv", sep=";")
-    
-    # The function returns None
+
+
+
+    hits = df[df['ex_name'].isin(acts["name"].values)]
+
+    materials_dict = {k.replace("market for ", ""): v for k, v in materials_dict.items()}
+
+
+
+    hits.loc[:, "database"] = db_name
+    hits.loc[:, "material_group"] = hits["reference product"].map(materials_dict)
+    file_name = dir_searchmaterial_results / f"{db_name}_material_exchanges.csv"
+    hits.to_csv(file_name, sep=";")
+
+    print(f"\nThere were: {len(hits)} matching exchanges found in {db_name}")
+    print("\nSaved material exchanges to csv:", file_name)
+
+    # make a separate csv for each material group
+    for group in hits.material_group.unique():
+        print(f"\nThere were: {len(hits[hits.material_group == group])} matching exchanges found in {db_name} for {group}")
+        df = hits[hits.material_group == group]
+        file_name = dir_searchmaterial_results / f"{db_name}_material_exchanges_{group}.csv"
+        df.to_csv(file_name, sep=";")
+        print("\tSaved to csv:", file_name)
+
     return
+
 
 

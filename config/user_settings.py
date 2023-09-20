@@ -30,7 +30,7 @@ from pathlib import Path
 
 # Set projects and database names
 SINGLE_PROJECT = True
-database = "cutoff39"
+database = "cutoff391"
 
 if SINGLE_PROJECT:
     args_list = []
@@ -44,7 +44,7 @@ if SINGLE_PROJECT:
 # the same as this one, it is easy to run them all in a loop
 
 if not SINGLE_PROJECT:
-    versions = ["39"]  # "35", "38","39",
+    versions = ["391"]  # "35", "38","39",
     models = ["cutoff"]  # , 'apos','con']
     databases = [f"{x}{y}" for x in models for y in versions]
 

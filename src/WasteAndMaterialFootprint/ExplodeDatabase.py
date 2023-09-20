@@ -15,15 +15,19 @@ based on the work of LL
 
 # Imports
 import os
+import sys
+from pathlib import Path
 from datetime import datetime
 import pandas as pd
 import bw2data as bd
 import wurst as w
 
-# Set the paths
-from user_settings import dir_tmp, dir_logs
-if not os.path.isdir(dir_tmp): os.makedirs(dir_tmp)
-if not os.path.isdir(dir_logs): os.makedirs(dir_logs)
+# # Set the paths
+# cwd = Path.cwd()
+# dir_config = cwd.parents[1] / 'config'
+# sys.path.insert(0, str(dir_config))
+
+
 
 
 def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
@@ -43,12 +47,29 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
     None: The function saves the output to a file and logs the operation, but does not return any value.
     
     """
+    from user_settings import dir_tmp, dir_logs
+    if not os.path.isdir(dir_tmp): os.makedirs(dir_tmp)
+    if not os.path.isdir(dir_logs): os.makedirs(dir_logs)
+
+
 
     print("\n*** Starting ExplodeDatabase ***\n")
     print("** ExplodeDatabase uses wurst to open a bw2 database, \nexplodes the exchanges for each process, \nthen returns a pickle file with a DataFrame list of all activities **")
     print("\n * Using packages: ",
           "\n\t bw2data", bd.__version__,
           "\n\t wurst", w.__version__)
+
+    # Check if the database has already been exploded
+    pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
+    if os.path.isfile(pickle_path):
+        print("\n** There is already a pickle file for this database. \n**")
+        input("Do you want to overwrite it? (y/n):  ")
+        if input == "y":
+            print("\n** Okay, we will overwrite it. \n**")
+        else:
+            print("\n** Okay, we won't overwrite it. \n**")
+            return
+
 
     # Extract information from the specified database
     db = bd.Database(db_name)
@@ -83,7 +104,6 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
    
     # Save the DataFrame as a pickle file
     print("\n*** Pickling...")
-    pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
     df.to_pickle(pickle_path)
     print("\n Pickle is:", "%1.0f" % (os.path.getsize(pickle_path)/1024**2), "MB")
  

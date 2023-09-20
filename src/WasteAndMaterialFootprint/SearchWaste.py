@@ -14,7 +14,7 @@ Created on Wed Nov 16 15:09:03 2022
 based on the work of LL
 """
 
-def SearchWaste():
+def SearchWaste(db_name):
 
     """
     This fuction loads '<db name>_exploded.pickle', runs the a set of search querys (which are defined in the config/queries_waste.py file), and produces .csvs to store the results (and a log entry).
@@ -27,7 +27,6 @@ def SearchWaste():
     from user_settings import dir_searchwaste_results, dir_tmp, dir_logs
     from queries_waste import queries_waste
 
-    db_name = queries_waste[0]["db_name"]
     
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
 
@@ -39,7 +38,7 @@ def SearchWaste():
     print("*** Loading pickle to dataframe...")
     df = pd.read_pickle(pickle_path)
 
-    print("*** Searching for waste and material exchanges...")
+    print("*** Searching for waste exchanges...")
     # this subfunction runs each individual search query in the set of queries
 
     def search(query):
@@ -90,10 +89,10 @@ def SearchWaste():
         if df_results.shape[0] != 0:
             df_results.to_csv(wasteandmaterial_file+".csv", sep=";", )
             #df_results.to_html(wasteandmaterial_file+".html")
-
+ 
     # writes a log entry for each query
         log_entry = (
-            "TIME: " + str(datetime.now()) +
+            "TIME: " + datetime.now().strftime("%Y%m%d_%h%m%s") +
             ", DB: " + query["db_name"] +
             ", RESULTS: "+str(df_results.shape[0]) +
             ", NAME: " + query["name"] +
