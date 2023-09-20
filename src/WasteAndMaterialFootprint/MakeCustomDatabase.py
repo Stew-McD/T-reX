@@ -18,54 +18,77 @@ def dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
     import os
     from openpyxl import Workbook
 
-    search_results_path = os.path.join(os.getcwd(), "data/WasteAndMaterialSearchResults", db_name)
+    from user_settings import dir_data, dir_tmp, dir_logs, dir_searchwaste_results, dir_searchmaterial_results, dir_databases_wasteandmaterial
 
-    xl_filename = os.path.join(search_results_path, "WasteAndMaterialSearchDatabase.xlsx")
+    dir_searchwaste_results = dir_searchwaste_results / db_name
+    dir_searchmaterial_results_grouped = dir_searchmaterial_results / db_name / 'grouped'
+    
+    if not os.path.isdir(dir_databases_wasteandmaterial): os.makedirs(dir_databases_wasteandmaterial)
+
+    xl_filename = dir_databases_wasteandmaterial / (db_wasteandmaterial_name + ".xlsx")
 
 # delete existing file if it exists
     if os.path.isfile(xl_filename):
         os.remove(xl_filename)
 
 # create new file and write header
-    print("\n\n*** Writing custom database file:", db_wasteandmaterial_name, "-->", xl_filename)
+    print(f"\n\n*** Writing custom database file:       {db_wasteandmaterial_name} --> {xl_filename}\n")
+    
     xl = Workbook()
     xl_db = xl.active
     xl_db['A1'] = "Database"
     xl_db["B1"] = db_wasteandmaterial_name
     xl_db['A2'] = ''
 
-# find files produced by WasteAndMaterialSearch(), and make a database entry for each
+# find files produced by SearchWaste() and SearchMaterial(), and make a database entry for each
     count = 0
-    for f in os.listdir(search_results_path):
-        f_path = os.path.join(search_results_path, f)
-        if os.path.isfile(f_path) and f_path.endswith('.csv'):
-            count += 1
-            NAME = f.replace(".csv", '').replace(" ", "")
-            CODE = NAME
-            if "kilogram" in NAME:
-                UNIT = "kilogram"
-            if "cubicmeter" in NAME:
-                UNIT = "cubic meter"
+
+    files = os.listdir(dir_searchwaste_results) + os.listdir(dir_searchmaterial_results_grouped)
+    
+    for f in files:
+        count += 1
+        NAME = f.replace(".csv", '')
+        CODE = NAME
+        UNIT = ""
+        if "kilogram" in NAME:
+            UNIT = "kilogram"
+        elif "cubicmeter" in NAME:
+            UNIT = "cubic meter"
+        elif 'electricity' in NAME:
+            UNIT = 'kilowatt hour'
+        elif 'water' in NAME or 'gas' in NAME:
+            UNIT = 'cubic meter'
+        
+        if "Material" in NAME and UNIT == "":
+            UNIT = 'kilogram'
+
+        if 'waste' in NAME:
+            TYPE = 'waste'
+        elif 'Material' in NAME:
+            TYPE = 'material'
+        else:
+            TYPE = '?'
 
 # add a new activity to the custom database based on each search query (if there were results found)
-            db_entry = {
-                "Activity": NAME,
-                "categories": "water, air, land",
-                "code": CODE,
-                "type": "emission",
-                "unit": UNIT
-            }
+        db_entry = {
+            "Activity": NAME,
+            "categories": "water, air, land",
+            "code": CODE,
+            "type": "emission",
+            "unit": UNIT,
+            "type": TYPE,
+        }
 
-            print("Appending:", NAME)
-            for key, value in db_entry.items():
-                row = [key, str(value)]
-                xl_db.append(row)
+        print("\t Appending:", NAME)
+        for key, value in db_entry.items():
+            row = [key, str(value)]
+            xl_db.append(row)
 
 # BW2 ExcelImport requires an empty row between each activity
-            xl_db.append([""])
+        xl_db.append([""])
 
     xl.save(xl_filename)
-    print("Added", count, "entries to an xlsx for the custom waste and material db:", db_wasteandmaterial_name)
+    print(f"\n ** Added", count, f"entries to an xlsx for the custom waste and material db:{db_wasteandmaterial_name} ** \n")
 
     return xl_filename
 
@@ -73,7 +96,7 @@ def dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
 
 def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name, xl_filename):
     
-    print("Importing to brightway2 project {} the custom database  {} produced by WasteAndMaterialSearch() and dbWriteExcel".format(
+    print("Importing to brightway2 project {} the custom database  {} produced by WasteSearch()/MaterialSearch() and dbWriteExcel".format(
         project_wasteandmaterial, db_wasteandmaterial_name))
     
     import bw2data as bd
@@ -93,6 +116,6 @@ def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name, xl_filename):
 
     db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
     db_wasteandmaterial.register()
-    print(db_wasteandmaterial.metadata)
+    print(*db_wasteandmaterial.metadata, sep="\n")
 
     print("\nGreat success!")

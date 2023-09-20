@@ -30,6 +30,8 @@ def SearchWaste(db_name):
     
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
 
+    if not os.path.exists(dir_logs): 
+        os.makedirs(dir_logs)
     if not os.path.exists(dir_searchwaste_results):
         os.makedirs(dir_searchwaste_results)
 
@@ -63,6 +65,7 @@ def SearchWaste(db_name):
         AND = query["AND"]
         OR = query["OR"]
         NOT = query["NOT"]
+        query.update({"db_name": db_name})
 
     # applies the search terms to the df
         df_results = df[
@@ -92,8 +95,8 @@ def SearchWaste(db_name):
  
     # writes a log entry for each query
         log_entry = (
-            "TIME: " + datetime.now().strftime("%Y%m%d_%h%m%s") +
-            ", DB: " + query["db_name"] +
+            "TIME: " + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") +
+            ", DB: " + db_name +
             ", RESULTS: "+str(df_results.shape[0]) +
             ", NAME: " + query["name"] +
             ", Search parameters" +

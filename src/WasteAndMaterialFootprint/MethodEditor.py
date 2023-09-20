@@ -28,16 +28,23 @@ def AddMethods(project_wasteandmaterial, db_wasteandmaterial_name):
         m_name = value["name"]
         m_name = m_name.replace("kilogram", "solid")
         m_name = m_name.replace("cubicmeter", "liquid")
+        m_type = value["type"]
 
-# negative values for waste and material (to correct the fact that waste and material is considered a 'service' in LCA)
-        ch_factor = -1.0
+# negative values for waste (to correct the fact that waste is considered a 'service' in LCA)
+        if m_type == "waste":
+            ch_factor = -1.0
+            name_combined = "_".join((m_name.split("_")[0:2])) + "_combined"
+            method_key = ('Waste Footprint', name_combined, m_name)
+            m = bd.Method(method_key)
+            m.register(description="For estimating the waste footprint of an activity", unit=m_unit)
+        
+        elif m_type == "material":
+            ch_factor = 1.0
+            method_key = ('Material Demand Footprint', m_name, m_name.split("_")[1].capitalize())
+            m = bd.Method(method_key)
+            m.register(description="For estimating the material footprint of an activity", unit=m_unit)
 
-        name_combined = "_".join((m_name.split("_")[0:2])) + "_combined"
-        method_key = ('WasteAndMaterial Footprint', name_combined, m_name)
         method_entry = [((db_wasteandmaterial.name, m_code), ch_factor)]
-
-        m = bd.Method(method_key)
-        m.register(description="For estimating the waste and material footprint of an activity (kg): ", unit=m_unit)
         m.write(method_entry)
 
         print('* Added: {}\t'.format(str(method_key)))

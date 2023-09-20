@@ -40,12 +40,12 @@ dir_config = cwd.parents[1] / 'config'
 sys.path.insert(0, str(dir_config))
 
 # custom modules
-from ExchangeEditor import ExchangeEditor
-from MethodEditor import AddMethods
 from ExplodeDatabase import ExplodeDatabase
 from SearchWaste import SearchWaste
 from SearchMaterial import SearchMaterial
 from MakeCustomDatabase import dbWriteExcel, dbExcel2BW
+from ExchangeEditor import ExchangeEditor
+from MethodEditor import AddMethods
 
 # import configuration
 from user_settings import args_list, dir_data, dir_tmp, dir_logs, dir_searchwaste_results, dir_searchmaterial_results
@@ -74,13 +74,13 @@ def WasteAndMaterialFootprint(args):
         
         if redo == "y":
             bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
-            print(f"WasteAndMaterial project deleted: {project_wasteandmaterial}")
+            print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
         else:
-            print("WasteAndMaterial project will not be deleted.")
+            print("* WasteAndMaterial project will not be deleted, using existing project.\n")
             # sys.exit()
 
     if project_wasteandmaterial not in bd.projects:
-        print(f"\n**Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
+        print(f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
         bd.projects.set_current(project_base)
         bd.projects.copy_project(project_wasteandmaterial)
 
@@ -91,9 +91,9 @@ def WasteAndMaterialFootprint(args):
     
         if redo == "y":
             shutil.rmtree(dir_data)
-            print("\n** Data directory deleted\n")
+            print("\n* Data directory deleted\n")
         else:
-            print("\n** Data directory will not be deleted")
+            print("\n* Data directory will not be deleted")
 
     else:
         pass
@@ -117,7 +117,7 @@ def WasteAndMaterialFootprint(args):
     run SearchMaterial for the list of materials defined 
     in config/list_materials.txt or from the default list 
     """
-    SearchMaterial(project_wasteandmaterial, db_name)
+    SearchMaterial(db_name, project_wasteandmaterial)
 
 # %%% 1.4 The rest of the custom functions
     '''

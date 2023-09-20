@@ -29,31 +29,35 @@ After setting the project and database names, the script proceeds to set up vari
 from pathlib import Path
 
 # Set projects and database names
-SINGLE_PROJECT = True
+SINGLE_PROJECT = False
 database = "cutoff391"
 
 if SINGLE_PROJECT:
     args_list = []
-    args = {'project_base': "default_"+ database,
-            'project_wasteandmaterial': "WasteAndMaterialFootprint_"+ database,
-            'db_name': database,
-            'db_wasteandmaterial_name': "db_wasteandmaterial_"+ database}
+    args = {
+        "project_base": "default_" + database,
+        "project_wasteandmaterial": "WasteAndMaterialFootprint_" + database,
+        "db_name": database,
+        "db_wasteandmaterial_name": "db_wasteandmaterial_" + database,
+    }
     args_list.append(args)
 
-# if you have a series of projects with a naming convention 
+# if you have a series of projects with a naming convention
 # the same as this one, it is easy to run them all in a loop
 
 if not SINGLE_PROJECT:
     versions = ["391"]  # "35", "38","39",
-    models = ["cutoff"]  # , 'apos','con']
+    models = ["cutoff", 'con']  # , 'apos','con']
     databases = [f"{x}{y}" for x in models for y in versions]
 
     args_list = []
     for database in databases:
-        args = {'project_base': "default_"+database,
-                'project_wasteandmaterial': "WasteAndMaterialFootprint_"+database,
-                'db_name': database,
-                'db_wasteandmaterial_name': "db_wasteandmaterial_"+database}
+        args = {
+            "project_base": "default_" + database,
+            "project_wasteandmaterial": "WasteAndMaterialFootprint_" + database,
+            "db_name": database,
+            "db_wasteandmaterial_name": "db_wasteandmaterial_" + database,
+        }
         args_list.append(args)
 
 
@@ -65,12 +69,13 @@ cwd = Path.cwd()
 root = cwd.parents[1]
 
 # Set the paths
-dir_config = root / 'config'
-list_materials = dir_config / 'list_materials.txt'
+dir_config = root / "config"
+list_materials = dir_config / "list_materials.txt"
 
-dir_data = root / 'data'
-dir_tmp = dir_data / 'tmp'
-dir_logs = dir_data / 'logs'
+dir_data = root / "data"
+dir_tmp = dir_data / "tmp"
+dir_logs = dir_data / "logs"
 
-dir_searchwaste_results = dir_data / 'SearchWasteResults'
-dir_searchmaterial_results = dir_data / 'SearchMaterialResults'
+dir_searchwaste_results = dir_data / "SearchWasteResults"
+dir_searchmaterial_results = dir_data / "SearchMaterialResults"
+dir_databases_wasteandmaterial = dir_data / "DatabasesWasteAndMaterial"
