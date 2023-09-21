@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-*** This is the main module of the WasteAndMaterialFootprint tool ***
+``WasteAndMaterialFootprint``
 
-* To use the defaults, just run the whole script ("python main.py")
-* The terms of the waste search query can be edited config/queries_waste.py
-* The list of materials can be edited in config/list_materials.txt
-* The names of the projects and databases can be edited in config/user_settings.py
+This is the main module of the ``WasteAndMaterialFootprint`` tool, designed to analyze waste and material footprints in life cycle assessments.
 
-DEFAULTS:
+To use the ``default`` settings, simply run the whole script using "python main.py".
+You can customize the terms of the waste search query in config/queries_waste.py
+and the list of materials in config/list_materials.txt.
+The names of the projects and databases can be edited in config/user_settings.py.
 
-EI database named in the form 'default_<db_name>' 
+``DEFAULTS``:
+EI database named in the form ``default_<db_name>``.
 
-The script will copy the project "default_"+<db_name> to a new project 
-* 'project_base': "default_"+<dbase>,
-* 'project_wasteandmaterial': "WasteAndMaterialFootprint_"+<dbase>,
-
+The script will copy the project ``default_``+<db_name> to a new project:
+- 'project_base': ``default_``+<dbase>,
+- 'project_wasteandmaterial': ``WasteAndMaterialFootprint_``+<dbase>.
 
 Created on Sat Nov 19 11:24:06 2022
 @author: SC-McD
 Based on the work of LL
-
 """
+
 #%%  0. Imports and configuration
 
     # import standard modules
@@ -94,7 +94,7 @@ def WasteAndMaterialFootprint(args):
     if project_wasteandmaterial in bd.projects:
         print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
         redo = timed_input("Do you want to delete it and start over? (y/n): ")
-        
+
         if redo == "y":
             bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
             print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
@@ -107,7 +107,7 @@ def WasteAndMaterialFootprint(args):
         bd.projects.copy_project(project_wasteandmaterial)
 
     #%% 1.2 Explode the database into separate exchanges
-    
+
     # ExplodeDatabase.py
     # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
@@ -126,16 +126,16 @@ def WasteAndMaterialFootprint(args):
 
     #%% 1.3 Search the exploded database for waste and material flows
 
-        # 1.3.1 SearchWaste.py 
+        # 1.3.1 SearchWaste.py
             # run SearchWaste() for the list of waste queries defined in config/queries_waste.py
     SearchWaste(db_name)
 
         # 1.3.2 SearchMaterial.py
-            # run SearchMaterial for the list of materials defined in config/list_materials.txt 
-            # or from the default list in config/default_materials.py 
+            # run SearchMaterial for the list of materials defined in config/list_materials.txt
+            # or from the default list in config/default_materials.py
     SearchMaterial(db_name, project_wasteandmaterial)
 
-    #%% 1.4 Make the custom database from search results  
+    #%% 1.4 Make the custom database from search results
 
     # 1.4.1 MakeCustomDatabase.py
         # From the SearchWaste() and SearchMaterial() results make an xlsx file in the database format needed for brightway2
@@ -163,10 +163,12 @@ def WasteAndMaterialFootprint(args):
     print(f"\n*** Finished running WasteAndMaterialFootprint.\n\tDuration: {str(duration).split('.')[0]} ***")
     print('\t** Woah woah wee waa, great success!! **')
     print(f"{'='*50}")
-    
+
         # write the details of the run to a log file
     with open(f"{dir_logs / 'main_log.txt'}", "a") as l:
         l.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\t Duration:" + str(duration).split(".")[0] +" "+ db_name+"\n")
+
+    return None
 
 
 #%% 2. RUN MAIN FUNCTION
