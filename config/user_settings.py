@@ -47,7 +47,7 @@ if SINGLE_PROJECT:
 
 if not SINGLE_PROJECT:
     versions = ["391"]  # "35", "38","39",
-    models = ["cutoff", 'con']  # , 'apos','con']
+    models = ["con", 'cutoff', 'apos']  # , 'apos','con']
     databases = [f"{x}{y}" for x in models for y in versions]
 
     args_list = []

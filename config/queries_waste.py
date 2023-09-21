@@ -9,23 +9,14 @@
 # set the names of the waste flow categories you want to search for
 names = [
     "digestion",
+    "composting",
+    "open_burning",
+    "incineration",
+    "recycling",
+    "landfill",
     "hazardous",
     "non_hazardous",
-    "incineration",
-    "open_burning",
-    "recycling",
-    "landfill",
-    "composting",
     "total",
-    "radioactive"
-    "non_hazardous",
-    "incineration",
-    "open_burning",
-    "recycling",
-    "landfill",
-    "composting",
-    "total",
-    "radioactive"
 ]
 
 # ! QUERY FORMAT

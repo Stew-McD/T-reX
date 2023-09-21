@@ -40,7 +40,7 @@ def SearchMaterial(db_name, project_wasteandmaterial):
     for directory in [dir_tmp, dir_logs, dir_searchmaterial_results_grouped]:
         if not directory.exists():
             directory.mkdir(parents=True)
-
+    print("\n*** Starting SearchMaterial ***")
     print("*** Loading pickle to dataframe...")
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
     df = pd.read_pickle(pickle_path)
@@ -93,15 +93,15 @@ def SearchMaterial(db_name, project_wasteandmaterial):
 
     # Save activities to a CSV
     acts.to_csv(dir_searchmaterial_results_db / "material_activities.csv", sep=";", index=False)
-    print(f"\nSaved activities list to csv: {dir_searchmaterial_results_db / 'material_activities.csv'}")
+    print(f"\nSaved activities list to csv: \n{dir_searchmaterial_results_db / 'material_activities.csv'}")
 
     # Load and filter exchanges
+    print(f"\n*** Searching for material exchanges in {db_name} ***")
     print("\n*** Loading pickle to dataframe ***")
     df = pd.read_pickle(pickle_path)
     df = df[df.ex_type == "technosphere"]
     df.pop("classifications")
     
-    print("*** Searching for material exchanges ***")
     hits = df[df['ex_name'].isin(acts["name"].values)].copy()
     hits["database"] = db_name
     hits["material_group"] = hits["ex_name"].map(materials_dict)
@@ -110,13 +110,14 @@ def SearchMaterial(db_name, project_wasteandmaterial):
     file_name = dir_searchmaterial_results_db / "material_exchanges.csv"
     hits.to_csv(file_name, sep=";")
     print(f"\nThere were {len(hits)} matching exchanges found in {db_name}")
-    print(f"\nSaved material exchanges to csv: {file_name}")
+    print(f"\nSaved material exchanges to csv:\n{file_name}")
 
     # Generate and save grouped exchanges
-    for group in hits.material_group.unique():
+    print("\n*** Grouping material exchanges by material group ***")
+    for group in sorted(hits.material_group.unique()):
         df_group = hits[hits.material_group == group]
         file_name = dir_searchmaterial_results_grouped / f"MaterialDemand_{group}.csv"
         df_group.to_csv(file_name, sep=";")
-        print(f"\nSaved {group} exchanges (count: {len(df_group)}) to csv: {file_name}")
+        print(f"\t{group} : {len(df_group)}")
 
     return None

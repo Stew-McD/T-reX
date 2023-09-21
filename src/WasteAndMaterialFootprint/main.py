@@ -59,7 +59,7 @@ from user_settings import args_list, dir_tmp, dir_logs
 
 # Define timed input function
 
-def timed_input(prompt, timeout=5, default="y"):
+def timed_input(prompt, timeout=5, default="n"):
     def get_input(q):
         user_input = input(prompt)
         q.put(user_input)
@@ -79,7 +79,7 @@ def timed_input(prompt, timeout=5, default="y"):
 
 def WasteAndMaterialFootprint(args):
 
-    print("\n*** Starting WasteAndMaterialFootprint ***\n")
+    print(f"\n{'='*20}\n\t Starting WasteAndMaterialFootprint\n{'='*20}")
     start = datetime.now()
 
     #%% 1.1 Brightway2 project setup
@@ -93,11 +93,14 @@ def WasteAndMaterialFootprint(args):
     # make new project, delete previous project if you want to start over, or use existing project
     if project_wasteandmaterial in bd.projects:
         print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
-        redo = timed_input("Do you want to delete it and start over? (y/n): ")
+        redo = timed_input("If you want to delete it, press 'y' in the next 5 seconds...\n")
 
         if redo == "y":
             bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
             print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
+            print(f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
+            bd.projects.set_current(project_base)
+            bd.projects.copy_project(project_wasteandmaterial)
         else:
             print("* WasteAndMaterial project will not be deleted, using existing project.\n")
 
@@ -112,14 +115,13 @@ def WasteAndMaterialFootprint(args):
     # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
     if os.path.isfile(existing_file):
-        redo = timed_input(f"The database {db_name} has already been exploded, do you want to delete the existing pickle file and make a new one? (y/n): ")
+        redo = timed_input(f"\n** There is already a pickle file for database {db_name}\n if want to overwrite it, press 'y' in the next 5 seconds...\n")
 
         if redo == "y":
-            shutil.rmtree(existing_file)
-            print("\n* Existing data was deleted\n")
+            print("\n* Existing data will be overwritten")
             ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
         else:
-            print("\n* Existing data will be reused for the current run\n")
+            print("\n* Existing data will be reused for the current run")
 
     else:
         ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
@@ -139,7 +141,7 @@ def WasteAndMaterialFootprint(args):
 
     # 1.4.1 MakeCustomDatabase.py
         # From the SearchWaste() and SearchMaterial() results make an xlsx file in the database format needed for brightway2
-    dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
+    dbWriteExcel(db_name, db_wasteandmaterial_name)
 
         # imports the custom database "db_wasteandmaterial_<db_name>" to the brightway project "WasteAndMaterialFootprint_<db_name>"
     dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name)
@@ -178,6 +180,7 @@ if __name__ == '__main__':
 
     start_time = datetime.now()
     successful_count = 0
+    error_count = 0
 
     for idx, args in enumerate(args_list, 1):
         try:
@@ -185,12 +188,16 @@ if __name__ == '__main__':
             WasteAndMaterialFootprint(args)
             successful_count += 1
         except Exception as e:
-            print(f"Error processing database {idx}: {e}")
+            print(f"\n{'@'*50}\n\tError processing database! \n\n\t{idx}: {e}\n{'@'*50}\n")
+            error_count += 1
+            sys.exit(1)
 
     end_time = datetime.now()
     duration = end_time - start_time
 
-    print(f"\n*** Processing completed ***\n")
+    print("\n*** Processing completed ***\n")
     print(f"Total databases: {total_databases}")
     print(f"Successfully processed: {successful_count}")
     print(f"Duration: {str(duration).split('.')[0]}\n")
+    sys.exit(0)
+

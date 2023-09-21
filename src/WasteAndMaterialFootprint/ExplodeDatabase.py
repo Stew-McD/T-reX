@@ -44,29 +44,18 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
     if not os.path.isdir(dir_tmp): os.makedirs(dir_tmp)
     if not os.path.isdir(dir_logs): os.makedirs(dir_logs)
 
-
-
     print("\n*** Starting ExplodeDatabase ***\n")
-    print("ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, then returns a pickle file with a DataFrame list of all activities")
+    print("ExplodeDatabase uses wurst to open a bw2 database, \nexplodes the exchanges for each process, \nthen returns a pickle file with a DataFrame list of all activities")
 
-    # Check if the database has already been exploded
+    # Set the path to save the pickle file
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
-    if os.path.isfile(pickle_path):
-        print("\n** There is already a pickle file for this database.")
-        input("Do you want to overwrite it? (y/n):  ")
-        if input == "y":
-            print("\n** Okay, we will overwrite it.")
-        else:
-            print("\n** Okay, we won't overwrite it.")
-            return
-
 
     # Extract information from the specified database
     db = bd.Database(db_name)
-    print("\n* db:", db.name, "in project:", bd.projects.current, "will be processed")
+    print("\n** db:", db.name, "in project:", bd.projects.current, "will be processed")
     
     # Unpack the database using wurst
-    print("\n** Opening the sausage... \n")
+    print("\n** Opening the sausage... ")
     guts = w.extract_brightway2_databases(db.name)
     
     # Create a DataFrame from the extracted data

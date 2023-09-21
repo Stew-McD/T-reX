@@ -31,6 +31,8 @@ def SearchWaste(db_name):
     from user_settings import dir_searchwaste_results, dir_tmp, dir_logs
     from queries_waste import queries_waste
 
+    print("\n*** Starting SearchWaste ***")
+
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
 
     # Ensure necessary directories exist
@@ -71,8 +73,8 @@ def SearchWaste(db_name):
         df_results = df[
             (df["ex_name"].apply(lambda x: all(i in x for i in AND)))
             & (df["ex_unit"] == UNIT)
-            & (df['ex_amount'] < 0)
-            & (df["ex_amount"] != -1)
+            # & (df['ex_amount'] < 0)
+            # & (df["ex_amount"] != -1)
         ]
 
         # Apply OR and NOT search filters
@@ -100,7 +102,7 @@ def SearchWaste(db_name):
         with open(log_file, 'a') as l:
             l.write(str(log_entry) + "\n")
 
-        print(f"\t{query['name']} : {df_results.shape[0]}")
+        print(f"\t{query['name']} - {query['unit']} : {df_results.shape[0]}")
 
     # Execute each query using the search() function defined above
     for query in queries_waste:

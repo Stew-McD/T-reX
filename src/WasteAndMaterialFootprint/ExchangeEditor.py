@@ -65,6 +65,10 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
                  for f in os.listdir(dir_searchwaste_results)}
     file_dict.update({os.path.splitext(f)[0]: os.path.join(dir_searchmaterial_results_grouped, f) 
                   for f in os.listdir(dir_searchmaterial_results_grouped)})
+    
+    sorted_items = sorted(file_dict.items())
+    file_dict = dict(sorted_items)
+    
 
     # Create a DataFrame for each file and store in the dictionary
     for key, f_path in file_dict.items():
@@ -75,8 +79,8 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
         file_dict[key] = df
 
     # Start adding exchanges
-    print("\n\n*** ExchangeEditor() is running for " + db_name + " ***\n\n")
-    print(f"Appending waste and material exchanges as pseudo environmental flows in {db_wasteandmaterial_name}")
+    print("\n\n*** ExchangeEditor() is running for " + db_name + " ***\n")
+    print(f"* Appending waste and material exchanges in:*\n*\t{db_wasteandmaterial_name}\n *")
     countNAME = 0
 
     # Iterate over each category (NAME)
@@ -87,7 +91,7 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
         count = 0
 
         # For each exchange in the current category's DataFrame
-        for exc in tqdm(df.to_dict('records'), desc=f"**  {progress_db} - {NAME}: "):
+        for exc in tqdm(df.to_dict('records'), desc=f" * {progress_db} - {NAME}: "):
             # Extract details of the exchange
             code, name, location, ex_name, amount, unit, ex_location = exc["code"], exc["name"], exc["location"], exc["ex_name"], exc["ex_amount"], exc["ex_unit"], exc["ex_location"]
             

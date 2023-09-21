@@ -1,29 +1,30 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import bw2data as bd
-
 """
-Module for adding, deleting, and checking methods related to waste and material footprints in a project.
+This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.
 
 Created on Sat Nov 19 12:21:04 2022
 @author: SC-McD
 Based on the work of LL
 """
 
+import bw2data as bd
+
 def AddMethods(project_wasteandmaterial, db_wasteandmaterial_name):
     """
     Add methods to the specified project based on entries in the custom biosphere database.
 
-    Parameters:
-    - project_wasteandmaterial: Name of the project.
-    - db_wasteandmaterial_name: Name of the database.
+    :param project_wasteandmaterial: Name of the project.
+    :param db_wasteandmaterial_name: Name of the database.
     """
     print("\n*** Running AddMethods() ***\n")
     
     bd.projects.set_current(project_wasteandmaterial)
     db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
     dic = db_wasteandmaterial.load()
+    sorted_items = sorted(dic.items())
+    dic = dict(sorted_items)
 
     initial_method_count = len(bd.methods)
 
@@ -60,8 +61,7 @@ def DeleteMethods(project_wasteandmaterial):
     """
     Delete methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    Parameters:
-    - project_wasteandmaterial: Name of the project.
+    :param project_wasteandmaterial: Name of the project.
     """
 
     bd.projects.set_current(project_wasteandmaterial)
@@ -84,8 +84,7 @@ def CheckMethods(project_wasteandmaterial):
     """
     Check methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    Parameters:
-    - project_wasteandmaterial: Name of the project.
+    :param project_wasteandmaterial: Name of the project.
     """
 
     bd.projects.set_current(project_wasteandmaterial)

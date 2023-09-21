@@ -62,9 +62,16 @@ default_materials = [
     ("market for tap water", "water"),
     ("market for tungsten concentrate", "tungsten"),
     ("market for vegetable oil, refined", "vegetable oil"),
+    ("market for water, decarbonised", "water"),
+    ("market for water, ultrapure", "water"),	
+    ("market for water, deionised", "water"),	
+    ("market for water, completely softened", "water"),
+    ("market for water, harvested from rainwater", "water"),	
     ("market for zinc", "zinc")
 ]
 
+
+## BELOW HERE IS NOT USED
 materials_grouped = set([x[1] for x in default_materials])
 
 default_materials_names = [

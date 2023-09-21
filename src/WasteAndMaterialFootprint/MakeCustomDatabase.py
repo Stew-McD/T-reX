@@ -43,7 +43,7 @@ def dbWriteExcel(db_name, db_wasteandmaterial_name):
         os.remove(xl_filename)
 
     # create new file and write header
-    print(f"\n\n*** Writing custom database file: {db_wasteandmaterial_name} --> {xl_filename}\n")
+    print(f"\n\n*** Writing custom database file: {db_wasteandmaterial_name}\n")
     
     xl = Workbook()
     xl_db = xl.active
@@ -52,7 +52,7 @@ def dbWriteExcel(db_name, db_wasteandmaterial_name):
     xl_db['A2'] = ''
 
     count = 0
-    files = os.listdir(dir_searchwaste_results) + os.listdir(dir_searchmaterial_results_grouped)
+    files = os.listdir(dir_searchwaste_results_db) + os.listdir(dir_searchmaterial_results_grouped)
     
     for f in files:
         count += 1
@@ -83,9 +83,9 @@ def dbWriteExcel(db_name, db_wasteandmaterial_name):
         xl_db.append([""])
 
     xl.save(xl_filename)
-    print(f"\n ** Added {count} entries to the xlsx for the custom waste and material db: {db_wasteandmaterial_name} ** \n")
+    print(f"\n ** Added {count} entries to the xlsx for the custom waste and material db:\n{db_wasteandmaterial_name}")
 
-    return xl_filename
+    return 
 
 def determine_unit_from_name(name):
     """
@@ -108,7 +108,7 @@ def determine_unit_from_name(name):
     else:
         return ""
 
-def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name, xl_filename):
+def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name):
     """
     Import the custom database (created by dbWriteExcel) into Brightway2.
     
@@ -120,22 +120,28 @@ def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name, xl_filename):
     Returns:
     - None
     """
-    print(f"\n** Importing the custom database {db_wasteandmaterial_name} to the brightway2 project {project_wasteandmaterial} **")
+    print(f"\n** Importing the custom database {db_wasteandmaterial_name}**\n** to the brightway2 project {project_wasteandmaterial} **")
     
-    xl_path = xl_filename
+    xl_filename = dir_databases_wasteandmaterial / f"{db_wasteandmaterial_name}.xlsx"
     bd.projects.set_current(project_wasteandmaterial)
 
     # imports the custom database into BW2
-    print("** Running BW2io ExcelImporter **\n")
-    imp = bi.ExcelImporter(xl_path)
+    print("\n** Running BW2io ExcelImporter **\n")
+    imp = bi.ExcelImporter(xl_filename)
+    bi.create_core_migrations() # needed to stop it from occasional crashing
     imp.apply_strategies()
     imp.statistics() 
     imp.write_database()
 
+    db_wasteandmaterial_name = "db_wasteandmaterial_con391"
     db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
     db_wasteandmaterial.register()
 
-    print(f'Database metadata:\n\t{db_wasteandmaterial.metadata}')
+    db_dict = db_wasteandmaterial.metadata
+    print('\n** Database metadata **')
+    for key, value in db_dict.items():
+        print(f'{key}: {value}')
+
     print("\n*** Great success! ***")
 
     return None
