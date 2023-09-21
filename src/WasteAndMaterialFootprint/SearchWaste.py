@@ -2,24 +2,28 @@
 # -*- coding: utf-8 -*-
 
 """
-This is the second script of the WasteAndMaterialFootprint tool
+Script: WasteAndMaterialFootprint Tool (Script 2)
 
-SearchWaste() loads '<db name>_exploded.pickle', runs the search query, and produces a .csv to store the results (and a log entry).
-The query is a dictionary that holds the variables NAME, CODE, and the search terms keywords_AND keywords_OR and keywords_NOT.
-The format of the query dictionary is defined in config/queries_waste.py
+This script loads data from '<db name>_exploded.pickle', runs search queries, 
+and produces a CSV to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
-Created on Wed Nov 16 15:09:03 2022
-
-@author: SC-McD
-based on the work of LL
+Created on: Wed Nov 16 15:09:03 2022
+Author: SC-McD (based on the work of LL)
 """
 
 def SearchWaste(db_name):
-
     """
-    This fuction loads '<db name>_exploded.pickle', runs the a set of search querys (which are defined in the config/queries_waste.py file), and produces .csvs to store the results (and a log entry).
-    """
+    Load data from '<db name>_exploded.pickle', run search queries, and produce 
+    result CSVs and log entries.
 
+    Parameters:
+    - db_name (str): The database name.
+
+    The queries are defined in `config/queries_waste.py`.
+    """
+    
     import os
     from datetime import datetime
     import pandas as pd
@@ -27,92 +31,81 @@ def SearchWaste(db_name):
     from user_settings import dir_searchwaste_results, dir_tmp, dir_logs
     from queries_waste import queries_waste
 
-    
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
 
+    # Ensure necessary directories exist
     if not os.path.exists(dir_logs): 
         os.makedirs(dir_logs)
     if not os.path.exists(dir_searchwaste_results):
         os.makedirs(dir_searchwaste_results)
 
-    # load exchanges into df from the dbExplode pickle file
-    pickle_path = os.path.join(dir_tmp, db_name+ "_exploded.pickle")
-    print("*** Loading pickle to dataframe...")
+    # Load dataset
+    pickle_path = os.path.join(dir_tmp, db_name + "_exploded.pickle")
+    print("*** Loading pickle to dataframe ***")
     df = pd.read_pickle(pickle_path)
 
-    print("*** Searching for waste exchanges...")
-    # this subfunction runs each individual search query in the set of queries
+    print("*** Searching for waste exchanges ***")
 
     def search(query):
         """
-        This subfunction runs each individual search query in the set of queries which is a dictionary built by the config/queries_waste.py script
+        Execute an individual search query on the dataset.
 
-        Parameters
-        ----------
-        query : dict
-        
-        Returns
-        -------
-        A csv file with the results of the search query. This is saved in the data/SearchWasteResults/<db_name> folder with the name of the query.
+        Parameters:
+        - query (dict): Search query defined in `config/queries_waste.py`.
 
+        Returns:
+        A CSV file with search results, saved to `data/SearchWasteResults/<db_name>` with the query name.
         """
-        # the variables are simplified here for the sake of readability
+
+        # Extract and process query components (for readability in the code)
         NAME_BASE = query["name"]
         UNIT = query["unit"]
         NAME = NAME_BASE + "_" + UNIT
         CODE = NAME.replace(" ", "")
-        query.update({"code": NAME})
+        query.update({"code": NAME, "db_name": db_name})
         AND = query["AND"]
         OR = query["OR"]
         NOT = query["NOT"]
-        query.update({"db_name": db_name})
 
-    # applies the search terms to the df
+        # Apply the search terms to the dataframe
         df_results = df[
-            (df["ex_name"].apply(lambda x: True if all(
-                i in x for i in AND) else False))
+            (df["ex_name"].apply(lambda x: all(i in x for i in AND)))
             & (df["ex_unit"] == UNIT)
             & (df['ex_amount'] < 0)
             & (df["ex_amount"] != -1)
         ]
 
-    # applies the OR and NOT search filters to the df
-        if OR != None:
-            df_results = df_results[(df_results["ex_name"].apply(
-                lambda x: True if any(i in x for i in OR) else False))]
+        # Apply OR and NOT search filters
+        if OR:
+            df_results = df_results[df_results["ex_name"].apply(lambda x: any(i in x for i in OR))]
+        if NOT:
+            df_results = df_results[df_results["ex_name"].apply(lambda x: not any(i in x for i in NOT))]
 
-        if NOT != None:
-            df_results = df_results[(df_results["ex_name"].apply(
-                lambda x: False if any(i in x for i in NOT) else True))]
-
-    # writes a csv file for each query
+        # Save results to CSV
         wasteandmaterial_file_name = NAME.replace(" ", "")
         wasteandmaterial_file = os.path.join(dir_searchwaste_results, wasteandmaterial_file_name)
 
         if df_results.shape[0] != 0:
-            df_results.to_csv(wasteandmaterial_file+".csv", sep=";", )
-            #df_results.to_html(wasteandmaterial_file+".html")
- 
-    # writes a log entry for each query
+            df_results.to_csv(wasteandmaterial_file + ".csv", sep=";")
+
+        # Log the results
         log_entry = (
-            "TIME: " + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") +
-            ", DB: " + db_name +
-            ", RESULTS: "+str(df_results.shape[0]) +
-            ", NAME: " + query["name"] +
-            ", Search parameters" +
-            ", AND=" + str(query["AND"]) +
-            ", OR=" + str(query["OR"]) +
-            ", NOT="+str(query["NOT"]) +
-            ", UNIT=" + str(query['unit']) +
-            ", CODE=" + str(CODE)
+            f"TIME: {datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}, DB: {db_name}, RESULTS: {df_results.shape[0]}, "
+            f"NAME: {query['name']}, Search parameters, AND={query['AND']}, OR={query['OR']}, NOT={query['NOT']}, "
+            f"UNIT={query['unit']}, CODE={CODE}"
         )
 
-        print("\n"+str(log_entry))
         date = datetime.now().strftime("%Y%m%d")
         log_file = os.path.join(dir_logs, f'SearchWaste_{date}.log')
         with open(log_file, 'a') as l:
-            l.write(str(log_entry)+"\n")
+            l.write(str(log_entry) + "\n")
 
-    # calls the search function defined above for each query in the set of queries
+        print(f"\t{query['name']} : {df_results.shape[0]}")
+
+    # Execute each query using the search() function defined above
     for query in queries_waste:
         search(query)
+
+    print("*** Finished searching for waste exchanges ***")
+
+    return None

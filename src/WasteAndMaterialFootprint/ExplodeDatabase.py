@@ -22,13 +22,6 @@ import pandas as pd
 import bw2data as bd
 import wurst as w
 
-# # Set the paths
-# cwd = Path.cwd()
-# dir_config = cwd.parents[1] / 'config'
-# sys.path.insert(0, str(dir_config))
-
-
-
 
 def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
     
@@ -54,20 +47,17 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
 
 
     print("\n*** Starting ExplodeDatabase ***\n")
-    print("** ExplodeDatabase uses wurst to open a bw2 database, \nexplodes the exchanges for each process, \nthen returns a pickle file with a DataFrame list of all activities **")
-    print("\n * Using packages: ",
-          "\n\t bw2data", bd.__version__,
-          "\n\t wurst", w.__version__)
+    print("ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, then returns a pickle file with a DataFrame list of all activities")
 
     # Check if the database has already been exploded
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
     if os.path.isfile(pickle_path):
-        print("\n** There is already a pickle file for this database. \n**")
+        print("\n** There is already a pickle file for this database.")
         input("Do you want to overwrite it? (y/n):  ")
         if input == "y":
-            print("\n** Okay, we will overwrite it. \n**")
+            print("\n** Okay, we will overwrite it.")
         else:
-            print("\n** Okay, we won't overwrite it. \n**")
+            print("\n** Okay, we won't overwrite it.")
             return
 
 
@@ -108,7 +98,7 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
     print("\n Pickle is:", "%1.0f" % (os.path.getsize(pickle_path)/1024**2), "MB")
  
     # Log the operation with a timestamp, database name, and project name
-    print("\n*** The sausage <"+db.name + "> was exploded and pickled.\n\n Rejoice!\n")
+    print("\n*** The sausage <"+db.name + "> was exploded and pickled.\n Rejoice!\n")
     
     log_entry = (
         datetime.now().strftime("%Y-%m-%d %H:%M:%S") + 
@@ -119,4 +109,4 @@ def ExplodeDatabase(project_base, project_wasteandmaterial, db_name):
     with open(log_file, 'a') as l:
         l.write(str(log_entry)+"\n")
 
-    return
+    return None

@@ -1,0 +1,14 @@
+code;name;location;reference product;categories;ex_name;ex_amount;ex_unit;ex_product;ex_production volume;ex_type;ex_location;database;material_group
+10904713bbc45ebb2c6aa073a030cb02;lithium manganese oxide production;GLO;lithium manganese oxide;;market for lithium carbonate;0.21486;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+121f4439e32f45a5f52d17ba39844fad;lithium iron phosphate production, solid state process;RoW;lithium iron phosphate;;market for lithium carbonate;0.234;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+242cc045a96aca51c1abd5a3d02c2015;NMC111 oxide production, for Li-ion battery;CN;NMC111 oxide;;market for lithium carbonate;0.383;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+40d26b1e0fbee2cf6e8bfecdcf75f234;lithium sulfate production;GLO;lithium sulfate;;market for lithium carbonate;0.750478782234123;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+537737a2e8d5cd802939e488ced5a8c1;lithium chloride production;GLO;lithium chloride;;market for lithium carbonate;0.92732;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+72b568306f5d074cd32a4e8e76313a10;lithium iron phosphate production, solid state process;CN;lithium iron phosphate;;market for lithium carbonate;0.234;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+76bda9c763b26c7eac854e11ddd4bbc0;lithium hydroxide production;GLO;lithium hydroxide;;market for lithium carbonate;1.6227970530005518;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+80ba3911a25f37a35d1daa93a2d5862c;lithium fluoride production;RoW;lithium fluoride;;market for lithium carbonate;1.4883;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+8494e5856ee3f1020634761687e09edf;lithium fluoride production;CN;lithium fluoride;;market for lithium carbonate;1.4883;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+a2a8575b7e8d9218ea6060aef0801b92;lithium iron phosphate production, hydrothermal process;CN;lithium iron phosphate;;market for lithium sulfate;-0.696969696969697;kilogram;lithium sulfate;0.0;technosphere;GLO;con391;lithium
+c939fdfafb3d3adb34af9c1803fb258d;lithium iron phosphate production, hydrothermal process;RoW;lithium iron phosphate;;market for lithium sulfate;-0.696969696969697;kilogram;lithium sulfate;0.0;technosphere;GLO;con391;lithium
+d21331bb363a1e3c496b6e18072f2d01;NMC111 oxide production, for Li-ion battery;RoW;NMC111 oxide;;market for lithium carbonate;0.383;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium
+ec690fb3c737bd7f4f0fd930f48decd1;treatment of used Li-ion battery, hydrometallurgical treatment;GLO;used Li-ion battery;;market for lithium carbonate;-0.198;kilogram;lithium carbonate;0.0;technosphere;GLO;con391;lithium

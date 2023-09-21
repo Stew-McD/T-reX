@@ -3,18 +3,16 @@
 """
 *** This is the main module of the WasteAndMaterialFootprint tool ***
 
-* To use the defaults, just run the whole script (but this will only work if you have the same format of project and database names)
+* To use the defaults, just run the whole script ("python main.py")
 * The terms of the waste search query can be edited config/queries_waste.py
 * The list of materials can be edited in config/list_materials.txt
 * The names of the projects and databases can be edited in config/user_settings.py
 
 DEFAULTS:
 
-EI database is of form 'cutoff38' or 'con39'
-* versions = ["35", "38", "39", "391]
-* models = ["cutoff", 'con', 'apos']
+EI database named in the form 'default_<db_name>' 
 
-The script will copy the project "default"+<db_name> to project "WasteAndMaterialFootprint_"+<db_name>
+The script will copy the project "default_"+<db_name> to a new project 
 * 'project_base': "default_"+<dbase>,
 * 'project_wasteandmaterial': "WasteAndMaterialFootprint_"+<dbase>,
 
@@ -24,134 +22,173 @@ Created on Sat Nov 19 11:24:06 2022
 Based on the work of LL
 
 """
-# %%% Imports
+#%%  0. Imports and configuration
+
+    # import standard modules
 import os
 import shutil
 import sys
+import threading
+import queue
 from pathlib import Path
 from datetime import datetime
 import bw2data as bd
 
+    # Set the working directory to the location of this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
+    # Add the root dir to the Python path
 cwd = Path.cwd()
 sys.path.insert(0, str(cwd))
 
-# Add the config dir to the Python path
+    # Add the config dir to the Python path
 dir_config = cwd.parents[1] / 'config'
 sys.path.insert(0, str(dir_config))
 
-# custom modules
+    # import custom modules (from root dir)
 from ExplodeDatabase import ExplodeDatabase
 from SearchWaste import SearchWaste
 from SearchMaterial import SearchMaterial
 from MakeCustomDatabase import dbWriteExcel, dbExcel2BW
-from ExchangeEditor import ExchangeEditor
 from MethodEditor import AddMethods
+from ExchangeEditor import ExchangeEditor
 
-# import configuration
-from user_settings import args_list, dir_data, dir_tmp, dir_logs, dir_searchwaste_results, dir_searchmaterial_results
+    # import configuration from config/user_settings.py
+from user_settings import args_list, dir_tmp, dir_logs
 
-from queries_waste import queries_waste
+# Define timed input function
 
-# %% 1. DEFINE MAIN FUNCTION
+def timed_input(prompt, timeout=5, default="y"):
+    def get_input(q):
+        user_input = input(prompt)
+        q.put(user_input)
 
-args = args_list[0]
+    q = queue.Queue()
+    input_thread = threading.Thread(target=get_input, args=(q,))
+    input_thread.start()
+
+    input_thread.join(timeout=timeout)  # wait for the specified timeout
+
+    if not q.empty():
+        return q.get()
+    else:
+        return default
+
+#%% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
 
 def WasteAndMaterialFootprint(args):
 
     print("\n*** Starting WasteAndMaterialFootprint ***\n")
     start = datetime.now()
 
-    # %%% 1.0 Define the project names and database names based on the arguments given
-    
+    #%% 1.1 Brightway2 project setup
+
+    # Define the project names and database names based on the arguments given (defined in config/user_settings.py)
     project_base = args['project_base']
     project_wasteandmaterial = args['project_wasteandmaterial']
     db_name = args['db_name']
     db_wasteandmaterial_name = args['db_wasteandmaterial_name']
 
+    # make new project, delete previous project if you want to start over, or use existing project
     if project_wasteandmaterial in bd.projects:
         print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
-        redo = input("Do you want to delete it and start over? (y/n):  ")
+        redo = timed_input("Do you want to delete it and start over? (y/n): ")
         
         if redo == "y":
             bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
             print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
         else:
             print("* WasteAndMaterial project will not be deleted, using existing project.\n")
-            # sys.exit()
 
-    if project_wasteandmaterial not in bd.projects:
+    else:
         print(f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
         bd.projects.set_current(project_base)
         bd.projects.copy_project(project_wasteandmaterial)
 
-# %%% 1.1 Delete files from previous runs if you want
-
-    if os.path.isdir(dir_data):
-        redo = input("There is exiting output data, do you want to delete it? (y/n):  ")
+    #%% 1.2 Explode the database into separate exchanges
     
+    # ExplodeDatabase.py
+    # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
+    existing_file = dir_tmp / (db_name + "_exploded.pickle")
+    if os.path.isfile(existing_file):
+        redo = timed_input(f"The database {db_name} has already been exploded, do you want to delete the existing pickle file and make a new one? (y/n): ")
+
         if redo == "y":
-            shutil.rmtree(dir_data)
-            print("\n* Data directory deleted\n")
+            shutil.rmtree(existing_file)
+            print("\n* Existing data was deleted\n")
+            ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
         else:
-            print("\n* Data directory will not be deleted")
+            print("\n* Existing data will be reused for the current run\n")
 
     else:
-        pass
+        ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
 
-# %%% 1.2 ExplodeDatabase.py
-    """
-    Open up EcoInvent db with wurst and save results as .pickle
-    """
+    #%% 1.3 Search the exploded database for waste and material flows
 
-    ExplodeDatabase(project_base, project_wasteandmaterial, db_name)
-
-# %%% 1.3.1 WasteSearch.py 
-    '''
-    run SearchWaste for the list of waste queries defined in config/queries_waste.py
-    '''
-
+        # 1.3.1 SearchWaste.py 
+            # run SearchWaste() for the list of waste queries defined in config/queries_waste.py
     SearchWaste(db_name)
 
-# %%% 1.3.2 SearchMaterial.py
-    """
-    run SearchMaterial for the list of materials defined 
-    in config/list_materials.txt or from the default list 
-    """
+        # 1.3.2 SearchMaterial.py
+            # run SearchMaterial for the list of materials defined in config/list_materials.txt 
+            # or from the default list in config/default_materials.py 
     SearchMaterial(db_name, project_wasteandmaterial)
 
-# %%% 1.4 The rest of the custom functions
-    '''
-    calls from dbMakeCustom.py, ExchangeEditor.py, MethodEditor.py
-    They do pretty much what their names suggest...
-    '''
+    #%% 1.4 Make the custom database from search results  
 
-# makes an xlsx file from WasteSearch results in the database format needed for brightway2
-    xl_filename = dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
+    # 1.4.1 MakeCustomDatabase.py
+        # From the SearchWaste() and SearchMaterial() results make an xlsx file in the database format needed for brightway2
+    dbWriteExcel(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
 
-# imports the db_wasteandmaterial to the brightway project "WasteAndMaterialFootprint_<db_name>"
-    dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name, xl_filename)
+        # imports the custom database "db_wasteandmaterial_<db_name>" to the brightway project "WasteAndMaterialFootprint_<db_name>"
+    dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name)
 
-# adds waste and material flows as elementary exchanges to each of the activities found
-    ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
-
-# adds LCIA methods to for each of the waste and material categories defined above
+        # 1.4.2 MethodEditor.py
+            # adds LCIA methods to the project for each of the waste and material categories defined in the custom database
     AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
 
+    #%% 1.5 Add waste and material flows to the activities
+
+        # ExchangeEditor.py
+            # adds waste and material flows as elementary exchanges to each of the activities found by the search functions
+    ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
+
+
+    #%% 1.5 Final message and log
+
+        # print message to console
     duration = (datetime.now() - start)
-    print("\n*** Finished running WasteAndMaterialFootprint.\n\tDuration: " +
-          str(duration).split(".")[0])
-    print('*** Woah woah wee waa, great success!!')
+    print(f"{'='*50}")
+    print(f"\n*** Finished running WasteAndMaterialFootprint.\n\tDuration: {str(duration).split('.')[0]} ***")
+    print('\t** Woah woah wee waa, great success!! **')
+    print(f"{'='*50}")
     
-# write the details of the run to a log file
-    with open("data/tmp/main_log.txt", "a") as l:
+        # write the details of the run to a log file
+    with open(f"{dir_logs / 'main_log.txt'}", "a") as l:
         l.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\t Duration:" + str(duration).split(".")[0] +" "+ db_name+"\n")
 
 
-# %% 2. RUN MAIN FUNCTION
-# if __name__ == '__main__':
-    
-#     for args in args_list:
-#         try:
-#             WasteAndMaterialFootprint(args)
-#         except Exception as e:
-#             print(e)
+#%% 2. RUN MAIN FUNCTION
+if __name__ == '__main__':
+    total_databases = len(args_list)
+    print(f"\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases ***\n")
+
+    start_time = datetime.now()
+    successful_count = 0
+
+    for idx, args in enumerate(args_list, 1):
+        try:
+            print(f"\nProcessing database {idx} out of {total_databases}\n")
+            WasteAndMaterialFootprint(args)
+            successful_count += 1
+        except Exception as e:
+            print(f"Error processing database {idx}: {e}")
+
+    end_time = datetime.now()
+    duration = end_time - start_time
+
+    print(f"\n*** Processing completed ***\n")
+    print(f"Total databases: {total_databases}")
+    print(f"Successfully processed: {successful_count}")
+    print(f"Duration: {str(duration).split('.')[0]}\n")

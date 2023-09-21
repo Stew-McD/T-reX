@@ -1,0 +1,17 @@
+code;name;location;reference product;categories;ex_name;ex_amount;ex_unit;ex_product;ex_production volume;ex_type;ex_location;database;material_group
+0f57c2d85e58e22b1cfc80d93f49975c;microwave oven production;GLO;microwave oven;;market for gold;1.5e-05;kilogram;gold;0.0;technosphere;GLO;con391;gold
+2bbf8c07fc7360a1551464e9fd39e20c;printed wiring board production, for surface mounting, Pb free surface;GLO;printed wiring board, for surface mounting, Pb free surface;;market for gold;0.00015474;kilogram;gold;0.0;technosphere;GLO;con391;gold
+2ffa63f60b053247c4a54ad818779bbb;switch production, toggle type;RoW;switch, toggle type;;market for gold;0.00041;kilogram;gold;0.0;technosphere;GLO;con391;gold
+36925c921a5317cbda935321646b50a0;electric connector production, peripheral component interconnect buss;GLO;electric connector, peripheral component interconnect buss;;market for gold;0.00205;kilogram;gold;0.0;technosphere;GLO;con391;gold
+46677f018a409975fa98f74344a68cfa;silver-gold mine operation with refinery;CL;silver;;market for gold;-0.026696428571428572;kilogram;gold;0.0;technosphere;GLO;con391;gold
+7c3a8b2f63264a5bc6ea4ac74fa997c9;gold mine operation and refining;SE;copper, cathode;;market for gold;-2.4365122615803813e-05;kilogram;gold;0.0;technosphere;GLO;con391;gold
+7edf988c3a18b228e53ad8acbe39a36b;treatment of precious metal from electronics scrap, in anode slime, precious metal extraction;RoW;precious metal from electronics scrap, in anode slime;;market for gold;-0.0279602963791416;kilogram;gold;0.0;technosphere;GLO;con391;gold
+8ec167776a5f4310d9ed764f9802afb1;processing of anode slime from electrorefining of copper, anode;GLO;copper telluride cement;;market for gold;-0.201098901;kilogram;gold;0.0;technosphere;GLO;con391;gold
+90b1b11aea0c410ae5afdf79c68c5b83;treatment of precious metal from electronics scrap, in anode slime, precious metal extraction;SE;precious metal from electronics scrap, in anode slime;;market for gold;-0.02796029637914162;kilogram;gold;0.0;technosphere;GLO;con391;gold
+9bf7b9eadc6049ba5f2b1b3c8036d781;integrated circuit production, memory type;GLO;integrated circuit, memory type;;market for gold;0.001;kilogram;gold;0.0;technosphere;GLO;con391;gold
+cff5c3ae1f77635a9155f7f3bb8819d2;primary zinc production from concentrate;RoW;zinc;;market for gold;-4.56704024485952e-06;kilogram;gold;0.0;technosphere;GLO;con391;gold
+d3975778e834f74912bf16742c86a330;platinum group metal, extraction and refinery operations;ZA;platinum;;market for gold;-0.0436;kilogram;gold;0.0;technosphere;GLO;con391;gold
+ef53e1cca7ae6b42d6373ae21c9a8148;inductor production, miniature radio frequency chip;GLO;inductor, miniature radio frequency chip;;market for gold;0.001184;kilogram;gold;0.0;technosphere;GLO;con391;gold
+f11ee8ada627cb3715255bcd6cd2836d;integrated circuit production, logic type;GLO;integrated circuit, logic type;;market for gold;0.01082;kilogram;gold;0.0;technosphere;GLO;con391;gold
+f1343940a9cd2ee1436bda32f8fbcf51;silver-gold mine operation with refinery;RoW;silver;;market for gold;-0.0266964285714286;kilogram;gold;0.0;technosphere;GLO;con391;gold
+fdf200780f1dc0ebfc444a7aa7d58efd;switch production, toggle type;CA-QC;switch, toggle type;;market for gold;0.00041;kilogram;gold;0.0;technosphere;GLO;con391;gold
