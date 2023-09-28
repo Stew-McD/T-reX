@@ -44,9 +44,14 @@ def SearchWaste(db_name):
 
     # Load dataset
     pickle_path = os.path.join(dir_tmp, db_name + "_exploded.pickle")
-    print("*** Loading pickle to dataframe ***")
-    df = pd.read_pickle(pickle_path)
-
+    if os.path.isfile(pickle_path):
+        df = pd.read_pickle(pickle_path)
+        print("*** Loading pickle to dataframe ***")
+    else:
+        print("Pickle file does not exist.")
+        return
+    
+    
     print("*** Searching for waste exchanges ***")
 
     def search(query):

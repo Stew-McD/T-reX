@@ -99,7 +99,7 @@ def CheckMethods(project_wasteandmaterial):
     bd.projects.set_current(project_wasteandmaterial)
 
     methods_wasteandmaterial = [
-        m for x in list(bd.methods) if "WasteAndMaterial Footprint" == x[0]
+        x for x in list(bd.methods) if "WasteAndMaterial Footprint" == x[0]
     ]
 
     for m in methods_wasteandmaterial:

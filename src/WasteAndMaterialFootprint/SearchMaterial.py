@@ -44,7 +44,13 @@ def SearchMaterial(db_name, project_wasteandmaterial):
     print("\n*** Starting SearchMaterial ***")
     print("*** Loading pickle to dataframe...")
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
-    df = pd.read_pickle(pickle_path)
+    
+    if os.path.isfile(pickle_path):
+        df = pd.read_pickle(pickle_path)
+        print("*** Loading pickle to dataframe ***")
+    else:
+        print("Pickle file does not exist.")
+        return
 
     # Set the current project
     bd.projects.set_current(project_wasteandmaterial)

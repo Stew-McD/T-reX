@@ -92,6 +92,7 @@ def WasteAndMaterialFootprint(args):
     db_name = args["db_name"]
     db_wasteandmaterial_name = args["db_wasteandmaterial_name"]
 
+# %%
     # # make new project, delete previous project if you want to start over, or use existing project
     # if project_wasteandmaterial in bd.projects:
     #     print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
@@ -137,7 +138,8 @@ def WasteAndMaterialFootprint(args):
 
     # else:
     #     ExplodeDatabase(db_name)
-
+#%% 1.2 ExplodeDatabase.py - Explode the database into separate exchanges
+    ExplodeDatabase(db_name)
     # %% 1.3 Search the exploded database for waste and material flows
 
     # 1.3.1 SearchWaste.py
