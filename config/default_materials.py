@@ -5,7 +5,8 @@ To add an entry, make sure that it matches EXACTLY (but case insensitive)
 with the activity's name in the database  
 This list is designed for ecoinvent v3.9.1 and contains all of 
 the activities that matched closest with EU CRM list 2023
-Additional materials are also included, such as sand, water, gas, and electricity
+Additional materials are also included, such as sand, water, gas, electricity and other 
+items from "strategic materials" lists
 """
 
 
@@ -14,6 +15,7 @@ default_materials = [
     ("market for bauxite", "bauxite"),
     ("market for beryllium", "beryllium"),
     ("market for calcium borates", "borates"),
+    ("market for cement, unspecified", "cement"),
     ("market for cobalt", "cobalt"),
     ("market for coke", "coke"),
     ("market for copper, anode", "copper"),
@@ -68,65 +70,4 @@ default_materials = [
     ("market for water, completely softened", "water"),
     ("market for water, harvested from rainwater", "water"),	
     ("market for zinc", "zinc")
-]
-
-
-## BELOW HERE IS NOT USED
-materials_grouped = set([x[1] for x in default_materials])
-
-default_materials_names = [
-    'market for antimony',
-    'market for barite',
-    'market for bauxite',
-    'market for beryllium',
-    'market for calcium borates',
-    'market for cobalt',
-    'market for coke',
-    'market for copper, anode',
-    'market for copper, cathode',
-    'market for electricity, high voltage',
-    'market for electricity, low voltage',
-    'market for electricity, medium voltage',
-    'market for ferroniobium, 66% Nb',
-    'market for fluorspar, 97% purity',
-    'market for gallium, semiconductor-grade',
-    'market for gold',
-    'market for graphite',
-    'market for hafnium sponge',
-    'market for hafnium tetrachloride',
-    'market for helium',
-    'market for indium',
-    'market for latex',
-    'market for lithium carbonate',
-    'market for lithium sulfate',
-    'market for magnesium',
-    'market for natural gas, high pressure',
-    'market for natural gas, low pressure',
-    'market for nickel, class 1',
-    'market for palladium',
-    'market for petroleum',
-    'market for phosphate rock, beneficiated',
-    'market for platinum',
-    'market for rare earth carbonate concentrate',
-    'market for rare earth oxide concentrate, 50% REO',
-    'market for rare earth oxide concentrate, 70% REO',
-    'market for rhodium',
-    'market for sand',
-    'market for scandium oxide',
-    'market for silicon carbide',
-    'market for silicon tetrahydride',
-    'market for silicon, electronics grade',
-    'market for silicon, metallurgical grade',
-    'market for silicon, multi-Si, casted',
-    'market for silicon, single crystal, Czochralski process, electronics',
-    'market for silicon, single crystal, Czochralski process, photovoltaics',
-    'market for silicon, solar grade',
-    'market for silver',
-    'market for sodium borates',
-    'market for strontium sulfate, 90% SrSO4',
-    'market for tantalum concentrate, 30% Ta2O5',
-    'market for tap water',
-    'market for tungsten concentrate',
-    'market for vegetable oil, refined',
-    'market for zinc',
 ]

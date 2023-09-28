@@ -4,7 +4,7 @@ user_settings.py
 Script to Configure Project and Database Settings
 
 -----
-Author: SC-McD
+Author: Stew-McD
 Email: s.c.mcdowall@cml.leidenuniv.nl
 Created: 2023-09-11
 -----
@@ -27,12 +27,17 @@ After setting the project and database names, the script proceeds to set up vari
 
 """
 from pathlib import Path
+import bw2data as bd
 
 # Set projects and database names
 SINGLE_PROJECT = False
-database = "cutoff391"
+SYSTEM_MODELS = False
+MULTIPLE_PROJECTS = False
+MULTIPLE_DATABASES = True
 
+# change to fit your needs
 if SINGLE_PROJECT:
+    database = "cutoff391"  # for example
     args_list = []
     args = {
         "project_base": "default_" + database,
@@ -42,12 +47,30 @@ if SINGLE_PROJECT:
     }
     args_list.append(args)
 
+if MULTIPLE_DATABASES:
+    project = "SSP125_cutoff391"
+    databases = None # you could also specify a list of databases here
+    
+    if not databases:
+        exclude = ["biosphere3"] # add to here if you want
+        databases = sorted([x for x in bd.databases if x not in exclude])
+
+    args_list = []
+    for database in databases:
+        args = {
+            "project_base": project,
+            "project_wasteandmaterial": f"WMF-{project}",
+            "db_name": database,
+            "db_wasteandmaterial_name": "WMF-" + database,
+        }
+        args_list.append(args)
+
+
 # if you have a series of projects with a naming convention
 # the same as this one, it is easy to run them all in a loop
-
-if not SINGLE_PROJECT:
+if SYSTEM_MODELS:
     versions = ["391"]  # "35", "38","39",
-    models = ["con", 'cutoff', 'apos']  # , 'apos','con']
+    models = ["con", "cutoff", "apos"]  # , 'apos','con']
     databases = [f"{x}{y}" for x in models for y in versions]
 
     args_list = []
@@ -61,7 +84,10 @@ if not SINGLE_PROJECT:
         args_list.append(args)
 
 
-# %% Set the paths (to the data, config, and the results
+
+
+# %% DIRECTORY PATHS
+# Set the paths (to the data, config, and the results
 
 # Get the directory of the main script
 cwd = Path.cwd()

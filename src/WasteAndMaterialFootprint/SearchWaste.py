@@ -10,12 +10,13 @@ formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND,
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
 Created on: Wed Nov 16 15:09:03 2022
-Author: SC-McD (based on the work of LL)
+Author: Stew-McD (based on the work of LL)
 """
+
 
 def SearchWaste(db_name):
     """
-    Load data from '<db name>_exploded.pickle', run search queries, and produce 
+    Load data from '<db name>_exploded.pickle', run search queries, and produce
     result CSVs and log entries.
 
     Parameters:
@@ -23,7 +24,7 @@ def SearchWaste(db_name):
 
     The queries are defined in `config/queries_waste.py`.
     """
-    
+
     import os
     from datetime import datetime
     import pandas as pd
@@ -36,7 +37,7 @@ def SearchWaste(db_name):
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
 
     # Ensure necessary directories exist
-    if not os.path.exists(dir_logs): 
+    if not os.path.exists(dir_logs):
         os.makedirs(dir_logs)
     if not os.path.exists(dir_searchwaste_results):
         os.makedirs(dir_searchwaste_results)
@@ -79,13 +80,19 @@ def SearchWaste(db_name):
 
         # Apply OR and NOT search filters
         if OR:
-            df_results = df_results[df_results["ex_name"].apply(lambda x: any(i in x for i in OR))]
+            df_results = df_results[
+                df_results["ex_name"].apply(lambda x: any(i in x for i in OR))
+            ]
         if NOT:
-            df_results = df_results[df_results["ex_name"].apply(lambda x: not any(i in x for i in NOT))]
+            df_results = df_results[
+                df_results["ex_name"].apply(lambda x: not any(i in x for i in NOT))
+            ]
 
         # Save results to CSV
         wasteandmaterial_file_name = NAME.replace(" ", "")
-        wasteandmaterial_file = os.path.join(dir_searchwaste_results, wasteandmaterial_file_name)
+        wasteandmaterial_file = os.path.join(
+            dir_searchwaste_results, wasteandmaterial_file_name
+        )
 
         if df_results.shape[0] != 0:
             df_results.to_csv(wasteandmaterial_file + ".csv", sep=";")
@@ -98,8 +105,8 @@ def SearchWaste(db_name):
         )
 
         date = datetime.now().strftime("%Y%m%d")
-        log_file = os.path.join(dir_logs, f'SearchWaste_{date}.log')
-        with open(log_file, 'a') as l:
+        log_file = os.path.join(dir_logs, f"SearchWaste_{date}.log")
+        with open(log_file, "a") as l:
             l.write(str(log_entry) + "\n")
 
         print(f"\t{query['name']} - {query['unit']} : {df_results.shape[0]}")

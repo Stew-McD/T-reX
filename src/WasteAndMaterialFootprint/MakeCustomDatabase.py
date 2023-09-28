@@ -1,6 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+"""
+|===============================================================|
+| File: MakeCustomDatabase.py                                   |
+| Project: WasteAndMaterialFootprint                            |
+| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint   |
+| Description: <<description>>                                  |
+|---------------------------------------------------------------|
+| File Created: Monday, 18th September 2023 11:21:13 am         |
+| Author: Stewart Charles McDowall                              |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+| Github: Stew-McD                                                |
+| Company: CML, Leiden University                               |
+|---------------------------------------------------------------|
+| Last Modified: Sunday, 24th September 2023 7:58:55 pm         |
+| Modified By: Stewart Charles McDowall                         |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+|---------------------------------------------------------------|
+|License: The Unlicense                                         |
+|===============================================================|
+"""
 """
 This module contains functions for creating an xlsx representation of a Brightway2 database 
 and importing it into Brightway2. 
