@@ -33,11 +33,8 @@ from premise_gwp import add_premise_gwp
 
 
 # Make a new project
-# base_project = "default_cutoff391"
-# new_project = "SSP125_cutoff391"
-
-base_project = "default_cutoff391"
-new_project = "SSP_cutoff391"
+base_project = "default_con391"
+new_project = "SSP125_con391"
 
 delete_existing = False
 
@@ -94,17 +91,17 @@ ndb = pm.NewDatabase(
         {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
     ],
-    source_db="ecoinvent_cutoff_3.9",
+    source_db="ecoinvent_consequential_3.9",
     source_version="3.9.1",
     key=premise_key,
 )
 
 # Update the database
-ndb.update_all()
-ndb.update_cars()
-ndb.update_buses()
+# ndb.update_all()
+# ndb.update_cars()
+# ndb.update_buses()
 # ndb.update_two_wheelers() # not working
-
+nbd.update_electricity()
 
 # ndb.generate_scenario_report()
 # ndb.generate_change_report()

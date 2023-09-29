@@ -46,6 +46,10 @@ sys.path.insert(0, str(cwd))
 dir_config = cwd.parents[1] / "config"
 sys.path.insert(0, str(dir_config))
 
+
+# run premise first
+import FutureScenarios 
+
 # import custom modules (from root dir)
 from ExplodeDatabase import ExplodeDatabase
 from SearchWaste import SearchWaste
