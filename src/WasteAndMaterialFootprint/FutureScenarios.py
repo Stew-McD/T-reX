@@ -33,6 +33,9 @@ from premise_gwp import add_premise_gwp
 
 
 # Make a new project
+# base_project = "default_cutoff391"
+# new_project = "SSP125_cutoff391"
+
 base_project = "default_cutoff391"
 new_project = "SSP125_cutoff391"
 
@@ -70,11 +73,11 @@ with open(key_path, "r") as f:
 
 ndb = pm.NewDatabase(
     scenarios=[
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
         # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
         # {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
         # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
@@ -85,8 +88,13 @@ ndb = pm.NewDatabase(
         # {"model":"remind", "pathway":"SSP5-Base", "year":2030},
         # {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
         # {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
+        {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+        {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
+        {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+        {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
+        {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
     ],
-    source_db="cutoff391",
+    source_db="ecoinvent_cutoff_3.9",
     source_version="3.9.1",
     key=premise_key,
 )
@@ -98,12 +106,12 @@ ndb.update_buses()
 # ndb.update_two_wheelers() # not working
 
 
-ndb.generate_scenario_report()
-ndb.generate_change_report()
+# ndb.generate_scenario_report()
+# ndb.generate_change_report()
 # Write the new database to Brightway2
 ndb.write_db_to_brightway()
 
 add_premise_gwp()
 # check databases
 
-bd.databases
+# bd.databases

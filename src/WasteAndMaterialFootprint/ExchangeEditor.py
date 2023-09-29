@@ -127,24 +127,30 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
             )
 
             # Retrieve the process and wasteandmaterial exchange from the databases
-            process = db.get(code)
-            wasteandmaterial_ex = db_wasteandmaterial.get(NAME)
+            try:
+                process = db.get(code)
+            
+                wasteandmaterial_ex = db_wasteandmaterial.get(NAME)
 
-            before = len(process.exchanges())
+                before = len(process.exchanges())
 
-            # Create a new exchange in the process
-            process.new_exchange(
-                input=wasteandmaterial_ex.key,
-                amount=amount,
-                unit=unit,
-                type="biosphere",
-            ).save()
-            after = len(process.exchanges())
+                # Create a new exchange in the process
+                process.new_exchange(
+                    input=wasteandmaterial_ex.key,
+                    amount=amount,
+                    unit=unit,
+                    type="biosphere",
+                ).save()
+                after = len(process.exchanges())
 
-            # If the exchange was successfully added, increment the counter
-            if (after - before) == 1:
-                count += 1
+                # If the exchange was successfully added, increment the counter
+                if (after - before) == 1:
+                    count += 1
 
+            except:
+                print(f"Process {name} not found in {db_name}")
+                continue
+            
         # Log the time taken and number of additions for this category
         end = datetime.now()
         duration = end - start
@@ -166,4 +172,5 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
 
     print(f"\n*** ExchangeEditor() completed for {db_name} in {str(duration)} ***\n")
 
+    del bd.databases[db_wasteandmaterial_name]
     return None

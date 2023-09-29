@@ -93,53 +93,59 @@ def WasteAndMaterialFootprint(args):
     db_wasteandmaterial_name = args["db_wasteandmaterial_name"]
 
 # %%
-    # # make new project, delete previous project if you want to start over, or use existing project
-    # if project_wasteandmaterial in bd.projects:
-    #     print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
-    #     redo = timed_input(
-    #         "If you want to delete it, press 'y' in the next 5 seconds...\n"
-    #     )
+    # make new project, delete previous project if you want to start over, or use existing project
+    if project_wasteandmaterial in bd.projects:
+        print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
+        redo = timed_input(
+            "If you want to delete it, press 'y' in the next 5 seconds...\n"
+        )
 
-    #     if redo == "y":
-    #         bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
-    #         print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
-    #         print(
-    #             f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
-    #         )
-    #         bd.projects.set_current(project_base)
-    #         bd.projects.copy_project(project_wasteandmaterial)
-    #     else:
-    #         print(
-    #             "* WasteAndMaterial project will not be deleted, using existing project.\n"
-    #         )
+        if redo == "y":
+            bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
+            print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
+            print(
+                f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
+            )
+            bd.projects.set_current(project_base)
+            bd.projects.copy_project(project_wasteandmaterial)
+        else:
+            print(
+                "* WasteAndMaterial project will not be deleted, using existing project.\n"
+            )
+            bd.projects.set_current(project_wasteandmaterial)
 
-    # else:
-    #     print(
-    #         f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
-    #     )
-    #     bd.projects.set_current(project_base)
-    #     bd.projects.copy_project(project_wasteandmaterial)
+    else:
+        print(
+            f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
+        )
+        bd.projects.set_current(project_base)
+        bd.projects.copy_project(project_wasteandmaterial)
 
-    # # %% 1.2 Explode the database into separate exchanges
+    # %% 1.2 Explode the database into separate exchanges
 
-    # # ExplodeDatabase.py
-    # # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
-    # existing_file = dir_tmp / (db_name + "_exploded.pickle")
-    # if os.path.isfile(existing_file):
-    #     redo = timed_input(
-    #         f"\n** There is already a pickle file for database {db_name}\n if want to overwrite it, press 'y' in the next 5 seconds...\n"
-    #     )
+    # ExplodeDatabase.py
+    # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
+    existing_file = dir_tmp / (db_name + "_exploded.pickle")
+    if os.path.isfile(existing_file):
+        redo = timed_input(
+            f"\n** There is already a pickle file for database {db_name}\n if want to overwrite it, press 'y' in the next 5 seconds...\n"
+        )
 
-    #     if redo == "y":
-    #         print("\n* Existing data will be overwritten")
-    #         ExplodeDatabase(db_name)
-    #     else:
-    #         print("\n* Existing data will be reused for the current run")
+        if redo == "y":
+            print("\n* Existing data will be overwritten")
+            ExplodeDatabase(db_name)
+        else:
+            print("\n* Existing data will be reused for the current run")
 
-    # else:
-    #     ExplodeDatabase(db_name)
+    else:
+        ExplodeDatabase(db_name)
 #%% 1.2 ExplodeDatabase.py - Explode the database into separate exchanges
-    ExplodeDatabase(db_name)
+    # if project_wasteandmaterial in bd.projects:
+    #     bd.set_current(project_wasteandmaterial)
+    # else:
+    #     bd.set_current(project_base)
+    #     bd.copy_project(project_wasteandmaterial)
+    # ExplodeDatabase(db_name)
     # %% 1.3 Search the exploded database for waste and material flows
 
     # 1.3.1 SearchWaste.py
@@ -216,7 +222,6 @@ if __name__ == "__main__":
                 f"\n{'@'*50}\n\tError processing database! \n\n\t{idx}: {e}\n{'@'*50}\n"
             )
             error_count += 1
-            sys.exit(1)
 
     end_time = datetime.now()
     duration = end_time - start_time
@@ -225,4 +230,3 @@ if __name__ == "__main__":
     print(f"Total databases: {total_databases}")
     print(f"Successfully processed: {successful_count}")
     print(f"Duration: {str(duration).split('.')[0]}\n")
-    sys.exit(0)

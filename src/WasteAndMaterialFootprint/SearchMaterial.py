@@ -42,7 +42,6 @@ def SearchMaterial(db_name, project_wasteandmaterial):
         if not directory.exists():
             directory.mkdir(parents=True)
     print("\n*** Starting SearchMaterial ***")
-    print("*** Loading pickle to dataframe...")
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
     
     if os.path.isfile(pickle_path):

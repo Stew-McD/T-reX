@@ -1,93 +1,88 @@
-"""
-user_settings.py
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+'''
+|===============================================================|
+| File: user_settings.py                                        |
+| Project: WasteAndMaterialFooprint                             |
+| Repository: www.github.com/Stew-McD/WasteAndMaterialFooprint  |
+| Description: Configure Project and Database Settings          |
+|---------------------------------------------------------------|
+| File Created: Tuesday, 19th September 2023 10:08:47 am        |
+| Author: Stewart Charles McDowall                              |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+| Github: Stew-McD                                              |
+| Company: CML, Leiden University                               |
+|---------------------------------------------------------------|
+| Last Modified: Friday, 29th September 2023 9:15:39 am         |
+| Modified By: Stewart Charles McDowall                         |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+|---------------------------------------------------------------|
+|License: The Unlicense                                         |
+|===============================================================|
 
-Script to Configure Project and Database Settings
-
------
-Author: Stew-McD
-Email: s.c.mcdowall@cml.leidenuniv.nl
-Created: 2023-09-11
------
 
 This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
 
 The script allows for two modes of operation:
 
-1. Single Project Mode (`SINGLE_PROJECT` is True):
+1. Single Mode (`SINGLE` is True):
     - In this mode, the project and database names are set to a single specified value.
-    - The `database` variable is used to define the database name.
     - An argument dictionary containing various project and database names is created and appended to the `args_list`.
 
-2. Multiple Projects Mode (`SINGLE_PROJECT` is False):
-    - This mode facilitates batch processing of multiple projects sharing a naming convention.
-    - Users can specify different versions and models which are then used to create different database names.
+2. Multiple projects/databases mode (`MULTIPLE` is True):
+    - This mode facilitates batch processing of multiple projects and databases..
     - For each combination of models and versions, an argument dictionary is created and appended to the `args_list`.
 
 After setting the project and database names, the script proceeds to set up various paths using Python's `pathlib` module:
 
-"""
+'''
+
 from pathlib import Path
 import bw2data as bd
 
 # Set projects and database names
-SINGLE_PROJECT = False
-SYSTEM_MODELS = False
-MULTIPLE_PROJECTS = False
-MULTIPLE_DATABASES = True
+SINGLE = False
+MULTIPLE = True
 
 # change to fit your needs
-if SINGLE_PROJECT:
-    database = "cutoff391"  # for example
+if SINGLE:
+    database = "ecoinvent_cutoff_3.9"  # for example
     args_list = []
     args = {
         "project_base": "default_" + database,
-        "project_wasteandmaterial": "WasteAndMaterialFootprint_" + database,
+        "project_wasteandmaterial": "WMF" + database,
         "db_name": database,
-        "db_wasteandmaterial_name": "db_wasteandmaterial_" + database,
+        "db_wasteandmaterial_name": "WMF-" + database,
     }
     args_list.append(args)
 
-if MULTIPLE_DATABASES:
-    project = "SSP125_cutoff391"
-    databases = None # you could also specify a list of databases here
+if MULTIPLE:
+    args_list = []
     
-    if not databases:
-        exclude = ["biosphere3"] # add to here if you want
-        databases = sorted([x for x in bd.databases if x not in exclude])
+    projects = ["SSP125_cutoff391"]
+    for project in projects:
+        bd.projects.set_current(project)
+        
+        databases = None # you could also specify a list of databases here
+        
+        if not databases:
+            exclude = ["biosphere3", "2030", "2040", "2050"]
+            databases = sorted([x for x in bd.databases if not any(sub in x for sub in exclude)])
+            
+            databases.remove('ecoinvent_cutoff_3.9')
 
-    args_list = []
-    for database in databases:
-        args = {
-            "project_base": project,
-            "project_wasteandmaterial": f"WMF-{project}",
-            "db_name": database,
-            "db_wasteandmaterial_name": "WMF-" + database,
-        }
-        args_list.append(args)
-
-
-# if you have a series of projects with a naming convention
-# the same as this one, it is easy to run them all in a loop
-if SYSTEM_MODELS:
-    versions = ["391"]  # "35", "38","39",
-    models = ["con", "cutoff", "apos"]  # , 'apos','con']
-    databases = [f"{x}{y}" for x in models for y in versions]
-
-    args_list = []
-    for database in databases:
-        args = {
-            "project_base": "default_" + database,
-            "project_wasteandmaterial": "WasteAndMaterialFootprint_" + database,
-            "db_name": database,
-            "db_wasteandmaterial_name": "db_wasteandmaterial_" + database,
-        }
-        args_list.append(args)
-
-
+        for database in databases:
+            args = {
+                "project_base": project,
+                "project_wasteandmaterial": f"WMF-{project}",
+                "db_name": database,
+                "db_wasteandmaterial_name": "WMF-" + database,
+            }
+            args_list.append(args)
 
 
 # %% DIRECTORY PATHS
-# Set the paths (to the data, config, and the results
+# Set the paths (to the data, config, logs, and the results)
 
 # Get the directory of the main script
 cwd = Path.cwd()

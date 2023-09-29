@@ -168,7 +168,6 @@ def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name):
     imp.statistics()
     imp.write_database()
 
-    db_wasteandmaterial_name = "db_wasteandmaterial_con391"
     db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
     db_wasteandmaterial.register()
 
