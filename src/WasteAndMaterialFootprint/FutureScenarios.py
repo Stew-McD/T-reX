@@ -29,6 +29,16 @@ import os
 import premise as pm
 import bw2data as bd
 from premise_gwp import add_premise_gwp
+from itertools import zip_longest
+import logging
+
+logging.basicConfig(filename='../../data/logs/FutureScenarios.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# function to split a list into chunks of n (to avoid memory errors)
+def grouper(iterable, n, fillvalue=None):
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
@@ -36,8 +46,7 @@ os.chdir(script_dir)
 
 # Make a new project
 base_project = "default"
-new_project = "SSP125"
-
+new_project = "SSP125_cutoff"
 delete_existing = True
 
 if new_project in bd.projects and delete_existing:
@@ -56,22 +65,18 @@ else:
     bd.projects.copy_project(new_project)
     print(f"Created new project {new_project} from {base_project}")
 
-bd.databases
-
 # Get the premise key
 key_path = Path(__file__).parents[2] / ".secrets" / "premise_key.txt"
 with open(key_path, "r") as f:
     premise_key = f.read()
 
-
-pm.clear_cache()
+if delete_existing: pm.clear_cache()
 
 # Create new databases for selected future scenarios
 # Details of the scenarios can be found here:
 # https://www.carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
 
-ndb = pm.NewDatabase(
-    scenarios=[
+scenarios_all = [
         {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
         {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
         {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
@@ -92,19 +97,32 @@ ndb = pm.NewDatabase(
         {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
         {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
-    ],
-    source_db="ecoinvent_3.9.1_cutoff",
-    source_version="3.9.1",
-    # system_model="consequential",
-    # system_model_args=args # Optional. Arguments.
-    key=premise_key,
-)
+]
+
+batch_size = 5
+count = 0
+for scenarios_set in grouper(scenarios_all, batch_size):
+    count += 1
+    logging.info(f'\n ** Processing scenario set {count} of{len(scenarios_all)/batch_size : .0f}')
+    for scenario in scenarios_set:
+        logging.info(f'    - {scenario["model"]}, {scenario["pathway"]}, {scenario["year"]}')
+    ndb = pm.NewDatabase(
+        scenarios= scenarios_set,
+        source_db="ecoinvent_3.9.1_cutoff",
+        source_version="3.9.1",
+        # system_model="consequential",
+        # system_model_args=args # Optional. Arguments.
+        key=premise_key,
+    )
+
+    ndb.update_all()
+    ndb.update_cars()
+    ndb.update_buses()
+    # ndb.update_two_wheelers() # not working
+    ndb.write_db_to_brightway()
 
 
-
-ndb.update_all()
-ndb.update_cars()
-ndb.update_buses()
-# ndb.update_two_wheelers() # not working
-ndb.write_db_to_brightway()
 add_premise_gwp()
+
+
+logging.info("Done!")
