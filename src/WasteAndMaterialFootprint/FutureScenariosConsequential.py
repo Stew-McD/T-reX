@@ -33,10 +33,10 @@ from premise_gwp import add_premise_gwp
 
 
 # Make a new project
-base_project = "default_con391"
-new_project = "SSP125_con391"
+base_project = "default"
+new_project = "SSP125_con"
 
-delete_existing = False
+delete_existing = True
 
 if new_project in bd.projects and delete_existing:
     bd.projects.delete_project(new_project, True)
@@ -94,14 +94,15 @@ ndb = pm.NewDatabase(
     source_db="ecoinvent_consequential_3.9",
     source_version="3.9.1",
     key=premise_key,
+    system_model = 'consequential',
 )
 
 # Update the database
-# ndb.update_all()
+ndb.update_all()
 # ndb.update_cars()
 # ndb.update_buses()
 # ndb.update_two_wheelers() # not working
-nbd.update_electricity()
+# ndb.update_electricity()
 
 # ndb.generate_scenario_report()
 # ndb.generate_change_report()

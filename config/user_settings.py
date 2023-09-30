@@ -37,8 +37,12 @@ After setting the project and database names, the script proceeds to set up vari
 
 '''
 
+
+import os
 from pathlib import Path
 import bw2data as bd
+
+# os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
 
 # Set projects and database names
 SINGLE = False
@@ -59,17 +63,17 @@ if SINGLE:
 if MULTIPLE:
     args_list = []
     
-    projects = ["SSP125_cutoff391"]
+    projects = ["SSP125"]
     for project in projects:
         bd.projects.set_current(project)
         
         databases = None # you could also specify a list of databases here
         
         if not databases:
-            exclude = ["biosphere3", "2030", "2040", "2050"]
+            exclude = ['biosphere3']
             databases = sorted([x for x in bd.databases if not any(sub in x for sub in exclude)])
             
-            databases.remove('ecoinvent_cutoff_3.9')
+            # databases.remove('ecoinvent_cutoff_3.9')
 
         for database in databases:
             args = {

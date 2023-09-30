@@ -24,22 +24,21 @@
 # Based on R.Sacchi's tutorial:
 # https://github.com/polca/premise/blob/master/examples/examples.ipynb
 
-
 from pathlib import Path
-
+import os
 import premise as pm
 import bw2data as bd
 from premise_gwp import add_premise_gwp
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+# os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
 
 # Make a new project
-# base_project = "default_cutoff391"
-# new_project = "SSP125_cutoff391"
+base_project = "default"
+new_project = "SSP125"
 
-base_project = "default_cutoff391"
-new_project = "SSP_cutoff391"
-
-delete_existing = False
+delete_existing = True
 
 if new_project in bd.projects and delete_existing:
     bd.projects.delete_project(new_project, True)
@@ -65,7 +64,7 @@ with open(key_path, "r") as f:
     premise_key = f.read()
 
 
-# pm.clear_cache()
+pm.clear_cache()
 
 # Create new databases for selected future scenarios
 # Details of the scenarios can be found here:
@@ -94,24 +93,18 @@ ndb = pm.NewDatabase(
         {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
     ],
-    source_db="ecoinvent_cutoff_3.9",
+    source_db="ecoinvent_3.9.1_cutoff",
     source_version="3.9.1",
+    # system_model="consequential",
+    # system_model_args=args # Optional. Arguments.
     key=premise_key,
 )
 
-# Update the database
+
+
 ndb.update_all()
 ndb.update_cars()
 ndb.update_buses()
 # ndb.update_two_wheelers() # not working
-
-
-# ndb.generate_scenario_report()
-# ndb.generate_change_report()
-# Write the new database to Brightway2
 ndb.write_db_to_brightway()
-
 add_premise_gwp()
-# check databases
-
-# bd.databases
