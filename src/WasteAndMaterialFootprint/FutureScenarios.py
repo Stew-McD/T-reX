@@ -102,10 +102,14 @@ scenarios_all = [
 batch_size = 5
 count = 0
 for scenarios_set in grouper(scenarios_all, batch_size):
+    
+    # information on the scenarios being processed
     count += 1
     logging.info(f'\n ** Processing scenario set {count} of{len(scenarios_all)/batch_size : .0f}')
     for scenario in scenarios_set:
         logging.info(f'    - {scenario["model"]}, {scenario["pathway"]}, {scenario["year"]}')
+    
+    # premise functions
     ndb = pm.NewDatabase(
         scenarios= scenarios_set,
         source_db="ecoinvent_3.9.1_cutoff",
@@ -121,7 +125,7 @@ for scenarios_set in grouper(scenarios_all, batch_size):
     # ndb.update_two_wheelers() # not working
     ndb.write_db_to_brightway()
 
-
+# add biogenic carbon, etc. to the project
 add_premise_gwp()
 
 
