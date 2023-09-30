@@ -24,25 +24,51 @@
 # Based on R.Sacchi's tutorial:
 # https://github.com/polca/premise/blob/master/examples/examples.ipynb
 
-from pathlib import Path
 import os
-import premise as pm
-import bw2data as bd
-from premise_gwp import add_premise_gwp
-from itertools import zip_longest
+import sys
 import logging
+from pathlib import Path
+from itertools import zip_longest
 
-logging.basicConfig(filename='../../data/logs/FutureScenarios.log', level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+import bw2data as bd
+import premise as pm
+from premise_gwp import add_premise_gwp
+
+
+# change working directory to the location of this script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
+# set the project directory if you want
+# os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
+
+# setup logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# create a file handler
+file_handler = logging.FileHandler('../../data/logs/FutureScenarios.log')
+file_handler.setLevel(logging.INFO)
+
+# create a stream handler
+stream_handler = logging.StreamHandler(sys.stdout)
+stream_handler.setLevel(logging.INFO)
+
+# create a logging format
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+stream_handler.setFormatter(formatter)
+
+# add the handlers to the logger
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
+logger.info('*** Starting FutureScenarios.py ***')
 
 # function to split a list into chunks of n (to avoid memory errors)
 def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
-
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
-# os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
 
 # Make a new project
 base_project = "default"
@@ -70,7 +96,8 @@ key_path = Path(__file__).parents[2] / ".secrets" / "premise_key.txt"
 with open(key_path, "r") as f:
     premise_key = f.read()
 
-if delete_existing: pm.clear_cache()
+if delete_existing: 
+    pm.clear_cache()
 
 # Create new databases for selected future scenarios
 # Details of the scenarios can be found here:
@@ -105,9 +132,12 @@ for scenarios_set in grouper(scenarios_all, batch_size):
     
     # information on the scenarios being processed
     count += 1
-    logging.info(f'\n ** Processing scenario set {count} of{len(scenarios_all)/batch_size : .0f}')
+    logging.info(f'\n ** Processing scenario set \
+        {count} of{len(scenarios_all)/batch_size : .0f}')
     for scenario in scenarios_set:
-        logging.info(f'    - {scenario["model"]}, {scenario["pathway"]}, {scenario["year"]}')
+        logging.info(f'    - {scenario["model"]}, \
+                     {scenario["pathway"]}, \
+                     {scenario["year"]}')
     
     # premise functions
     ndb = pm.NewDatabase(
