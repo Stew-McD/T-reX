@@ -15,8 +15,8 @@ names = [
     "recycling",
     "landfill",
     "hazardous",
-    "non_hazardous",
-    "total",
+    # "non_hazardous",
+    # "total",
 ]
 
 # ! QUERY FORMAT

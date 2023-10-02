@@ -148,7 +148,7 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
                     count += 1
 
             except:
-                print(f"Process {name} not found in {db_name}")
+                print(f"Process {name}, {ex_location} not found in {db_name}")
                 continue
             
         # Log the time taken and number of additions for this category

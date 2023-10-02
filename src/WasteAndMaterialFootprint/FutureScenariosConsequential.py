@@ -73,7 +73,7 @@ def grouper(iterable, n, fillvalue=None):
 # Make a new project
 base_project = "default"
 new_project = "SSP125_con"
-delete_existing = True
+delete_existing = False
 
 if new_project in bd.projects and delete_existing:
     bd.projects.delete_project(new_project, True)
@@ -104,14 +104,14 @@ if delete_existing:
 # https://www.carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
 
 scenarios_all = [
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
         {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
         {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
         {"model":"remind", "pathway":"SSP1-Base", "year":2030},
@@ -126,7 +126,7 @@ scenarios_all = [
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
 ]
 
-batch_size = 5
+batch_size = 4
 count = 0
 for scenarios_set in grouper(scenarios_all, batch_size):
     
@@ -138,16 +138,18 @@ for scenarios_set in grouper(scenarios_all, batch_size):
         logging.info(f'    - {scenario["model"]}, \
                      {scenario["pathway"]}, \
                      {scenario["year"]}')
+        
+        print(f'    - {scenario["model"]}, {scenario["pathway"]}, {scenario["year"]}')
     
     # premise functions
     ndb = pm.NewDatabase(
-        scenarios= scenarios_set,
-        source_db="ecoinvent_3.9.1_consequential",
-        source_version="3.9.1",
-        system_model="consequential",
-        # system_model_args=args # Optional. Arguments.
-        key=premise_key,
-    )
+    scenarios= scenarios_set,
+    source_db="ecoinvent_3.9.1_consequential",
+    source_version="3.9.1",
+    system_model="consequential",
+    # system_model_args=args # Optional. Arguments.
+    key=premise_key,
+)
 
     ndb.update_all()
     # ndb.update_cars()

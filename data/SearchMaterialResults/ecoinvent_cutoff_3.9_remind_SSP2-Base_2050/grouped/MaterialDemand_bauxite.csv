@@ -1,29 +1,29 @@
 code;name;location;reference product;categories;ex_name;ex_amount;ex_unit;ex_product;ex_production volume;ex_type;ex_location;database;material_group
 0508e36d1fb6fc06f291fb30ce63078f;ferrochromium production, high-carbon, 68% Cr;RoW;ferrochromium, high-carbon, 68% Cr;;market for bauxite;0.25;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-08459fbee0df482fa6fc557040ed7f53;clinker production;MEA;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-0da46307ebb44550a8a8fc2a83eb9da6;clinker production;World;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+0b6ce90c445f483298a8ecddf05a5fd0;clinker production;IND;clinker;;market for bauxite;0.0078;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 0f3c8ff499b99096d5e318cf2a339bbf;aluminium hydroxide production;CN;aluminium hydroxide;;market for bauxite;1.861;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-1b162744179c46bca41c5d3ff8b8da5e;clinker production;CHA;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-3be3da78060b4450a7c3b4b4eba47af3;clinker production;OAS;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+1a74c33939df40d789f4ede54d6d3d48;clinker production;OAS;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+2861db6e975244af83a3087c3c5ec2de;clinker production;USA;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 42c69a7fb8f25ffca24b31d8ee965fb1;aluminium hydroxide production;IAI Area, Russia & RER w/o EU27 & EFTA;aluminium hydroxide;;market for bauxite;1.861;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 44f50914fd6f9bd97e6c31419f6e1a58;refractory production, high aluminium oxide, packed;RoW;refractory, high aluminium oxide, packed;;market for bauxite;1.04;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 50e12f4269bd138d3c1af86c677137e8;stone wool production;RoW;stone wool;;market for bauxite;0.062271;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 570132c4ee7fc51da6dc8bd3f88fedfc;aluminium hydroxide production;IAI Area, EU27 & EFTA;aluminium hydroxide;;market for bauxite;1.409;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-5dbfee0bb3014c0b91a1f49a9192823e;clinker production;SSA;clinker;;market for bauxite;0.04;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+5ef8efb558294b6bbdad0db303140884;clinker production;NEU;clinker;;market for bauxite;0.0027;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 642564289d5b27b8b8b0339e1ab3da64;aluminium hydroxide production;UN-OCEANIA;aluminium hydroxide;;market for bauxite;2.213;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 6c415ade9bd38b20c51c87d9ffcde438;lime production, hydraulic;RoW;lime, hydraulic;;market for bauxite;0.00012;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-6e0fe0728f73430e845af073cc256f58;clinker production;IND;clinker;;market for bauxite;0.0078;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 75d9d6447399d7be7da3ce50db2ff387;aluminium hydroxide production;IAI Area, Asia, without China and GCC;aluminium hydroxide;;market for bauxite;1.861;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 80182b08d415cbf669364d207f654e51;aluminium hydroxide production;RNA;aluminium hydroxide;;market for bauxite;1.46;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 83237c344c83adaa165667c3a0b7126f;stone wool production;CH;stone wool;;market for bauxite;0.062271;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+85b5dca2341f4a98994d18b196239be2;clinker production;World;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+869c30522a4f47fa9aae4f7f9106d8ab;clinker production;CHA;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+89974cee68af4c068f2dc5f21c920e5c;clinker production;CAZ;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 89f09fc0eebba6d4c8ea397e96fcade9;refractory production, high aluminium oxide, packed;DE;refractory, high aluminium oxide, packed;;market for bauxite;1.04;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-90b7b64410a24a4a9a1c47d586c313ab;clinker production;EUR;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-b7112a2f8ca74e9db1c85c37d4c837f0;clinker production;JPN;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+998b1ba40b1546d2a616c5ec8ea57a7b;clinker production;JPN;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+b5f5ab3d1bc24511aa51225697f95281;clinker production;MEA;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 c00f0b595aaa58928fac8b6eade9a064;ferrochromium production, high-carbon, 68% Cr;KZ;ferrochromium, high-carbon, 68% Cr;;market for bauxite;0.25;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 c28daa5303a7750a9b9ccfd3a8e8a208;lime production, hydraulic;CH;lime, hydraulic;;market for bauxite;0.00012;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-cefc0281a4df4e5b97d700e9bc2c7177;clinker production;REF;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-d3be5ed225aa46c0840218b73bf8a8c8;clinker production;USA;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 d7e499a679e0c4b5dbb00d7d52a4a7f7;aluminium hydroxide production;IAI Area, South America;aluminium hydroxide;;market for bauxite;1.565;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+db952cef4479445d86d28a3047e3ccd9;clinker production;EUR;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
 e3b2a3b421ea2ea8aeefd2c37a0c93c4;aluminium hydroxide production;RoW;aluminium hydroxide;;market for bauxite;1.861;kilogram;bauxite;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-e80c7d5defcf4723bc7c643cad55ba61;clinker production;NEU;clinker;;market for bauxite;0.0027;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
-f47c357391fd4f75adf4ccf4c0eca893;clinker production;CAZ;clinker;;market for bauxite;0.00012;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+f6e684efa48a44afb047f2b19f4effd2;clinker production;SSA;clinker;;market for bauxite;0.04;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite
+ff134316739f4dc38c25e95b8213388d;clinker production;REF;clinker;;market for bauxite;0.00449909374107036;kilogram;bauxite;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP2-Base_2050;bauxite

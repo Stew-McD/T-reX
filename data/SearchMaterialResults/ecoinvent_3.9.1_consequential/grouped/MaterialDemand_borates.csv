@@ -1,0 +1,14 @@
+code;name;location;reference product;categories;ex_name;ex_amount;ex_unit;ex_product;ex_production volume;ex_type;ex_location;database;material_group
+1b609c71ed7d0bb8826ba12fb2da84be;wood preservative production, inorganic salt, containing Cr, outdoor use, ground contact;GLO;wood preservative, inorganic salt, containing Cr;;market for sodium borates;0.1;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+356118d84ec56b1b8e320f5abe457555;glass wool mat production;RoW;glass wool mat;;market for sodium borates;0.0576;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+3adeac64cc44bb02819a46a6d46300ba;glass wool mat production, without cullet;GLO;glass wool mat;;market for sodium borates;0.0576;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+4724731c402d1851b63a5413c6c27150;peanut production, reduced tillage;BR-SP;peanut;;market for calcium borates;0.00749799265570344;kilogram;calcium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+49883a9662fdbaddbf64de0431cd6aac;boric acid production, anhydrous, powder;RoW;boric acid, anhydrous, powder;;market for calcium borates;1.97;kilogram;calcium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+4b5bc4456f9c58c5af983241da3d699c;silver mine operation with extraction;PE;silver, unrefined;;market for sodium borates;17.18;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+4d7b97957f32ee54288554913fc984e8;borax production, anhydrous, powder;RER;borax, anhydrous, powder;;market for sodium borates;1.71;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+5f53bc47221588ae7c4f8f5e99ac71b1;glass wool mat production;CH;glass wool mat;;market for sodium borates;0.0576;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+7645ee4c3bdc832f86a0f00c7d722742;glass wool mat production;CA-QC;glass wool mat;;market for sodium borates;0.0576;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+9e39f157a2023977a0cec5779ebbb513;mandarin production;ZA;mandarin;;market for sodium borates;6.58606e-07;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+a4e5dd377eddf9e0291018cd27b8c7af;borax production, anhydrous, powder;RoW;borax, anhydrous, powder;;market for sodium borates;1.71;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+aa3dc9ef4874c3ebf1cff84b0dab455b;boric acid production, anhydrous, powder;RER;boric acid, anhydrous, powder;;market for calcium borates;1.97;kilogram;calcium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates
+bf94d016af12199b6a4af3831f0ffd3b;gold mine operation with extraction;PE;gold-silver, ingot;;market for sodium borates;1.0;kilogram;sodium borates;0.0;technosphere;GLO;ecoinvent_3.9.1_consequential;borates

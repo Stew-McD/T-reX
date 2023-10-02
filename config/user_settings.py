@@ -63,7 +63,7 @@ if SINGLE:
 if MULTIPLE:
     args_list = []
     
-    projects = ["SSP125_cutoff, SSP125_con"]
+    projects = ["SSP125_cutoff"]
     for project in projects:
         bd.projects.set_current(project)
         
