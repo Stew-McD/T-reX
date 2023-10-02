@@ -110,23 +110,23 @@ scenarios_all = [
         # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
         # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
         # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
+#        {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
         # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
-        {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
-        {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
-        {"model":"remind", "pathway":"SSP1-Base", "year":2030},
-        {"model":"remind", "pathway":"SSP2-Base", "year":2030},
-        {"model":"remind", "pathway":"SSP5-Base", "year":2030},
-        {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
-        {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
-        {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
+#        {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
+#        {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
+#        {"model":"remind", "pathway":"SSP1-Base", "year":2030},
+#        {"model":"remind", "pathway":"SSP2-Base", "year":2030},
+#        {"model":"remind", "pathway":"SSP5-Base", "year":2030},
+#        {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
+#        {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
+#        {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+#        {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
+#        {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+#        {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
         {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
 ]
 
-batch_size = 4
+batch_size = 1
 count = 0
 for scenarios_set in grouper(scenarios_all, batch_size):
     
