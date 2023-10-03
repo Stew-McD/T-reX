@@ -172,5 +172,5 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
 
     print(f"\n*** ExchangeEditor() completed for {db_name} in {str(duration)} ***\n")
 
-    del bd.databases[db_wasteandmaterial_name]
+    # del bd.databases[db_wasteandmaterial_name]
     return None
