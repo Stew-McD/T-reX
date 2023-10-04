@@ -33,6 +33,9 @@ import queue
 from pathlib import Path
 from datetime import datetime
 import bw2data as bd
+from multiprocessing import Pool, cpu_count
+
+num_cpus = int(os.getenv("SLURM_CPUS_PER_TASK"), cpu_count())
 
 # Set the working directory to the location of this script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -215,19 +218,21 @@ if __name__ == "__main__":
     )
 
     start_time = datetime.now()
-    successful_count = 0
-    error_count = 0
 
-    for idx, args in enumerate(args_list, 1):
+    def process_db(args):
         try:
-            print(f"\nProcessing database {idx} out of {total_databases}\n")
+            print(f"\nProcessing database {args['db_name']}\n")
             WasteAndMaterialFootprint(args)
-            successful_count += 1
+            return 1  # successfully processed
         except Exception as e:
-            print(
-                f"\n{'@'*50}\n\tError processing database! \n\n\t{idx}: {e}\n{'@'*50}\n"
-            )
-            error_count += 1
+            print(f"\n{'@'*50}\n\tError processing database {args['db_name']}! \n\n\t{e}\n{'@'*50}\n")
+            return 0  # error occurred
+
+    with Pool(processes=num_cpus) as pool:
+        results = pool.map(process_db, args_list)
+
+    successful_count = sum(results)
+    error_count = len(results) - successful_count
 
     end_time = datetime.now()
     duration = end_time - start_time
