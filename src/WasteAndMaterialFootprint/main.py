@@ -35,7 +35,8 @@ from datetime import datetime
 import bw2data as bd
 from multiprocessing import Pool, cpu_count
 
-num_cpus = int(os.getenv("SLURM_CPUS_PER_TASK"), cpu_count())
+
+num_cpus = int(os.environ.get('SLURM_CPUS_PER_TASK', os.environ.get('SLURM_JOB_CPUS_PER_NODE', cpu_count())))
 
 # Set the working directory to the location of this script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -64,26 +65,27 @@ from ExchangeEditor import ExchangeEditor
 # import configuration from config/user_settings.py
 from user_settings import args_list, dir_tmp, dir_logs
 
-# Define timed input function
 
+# %% 1.1 Brightway2 project setup
 
-def timed_input(prompt, timeout=5, default="n"):
-    def get_input(q):
-        user_input = input(prompt)
-        q.put(user_input)
+# Define the project names and database names based on the arguments given (defined in config/user_settings.py)
+project_base = args_list[0]["project_base"]
+project_wasteandmaterial = args_list[0]["project_wasteandmaterial"]
+db_name = args_list[0]["db_name"]
+db_wasteandmaterial_name = args_list[0]["db_wasteandmaterial_name"]
 
-    q = queue.Queue()
-    input_thread = threading.Thread(target=get_input, args=(q,))
-    input_thread.start()
-
-    input_thread.join(timeout=timeout)  # wait for the specified timeout
-
-    if not q.empty():
-        return q.get()
-    else:
-        return default
-
-
+# %%
+# make new project, delete previous project if you want to start over, or use existing project
+if project_wasteandmaterial in bd.projects:
+    print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
+    bd.projects.set_current(project_wasteandmaterial)
+else:
+    print(
+        f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
+    )
+    bd.projects.set_current(project_base)
+    bd.projects.copy_project(project_wasteandmaterial)
+        
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
 
 
@@ -91,70 +93,17 @@ def WasteAndMaterialFootprint(args):
     print(f"\n{'='*20}\n\t Starting WasteAndMaterialFootprint\n{'='*20}")
     start = datetime.now()
 
-    # %% 1.1 Brightway2 project setup
-
-    # Define the project names and database names based on the arguments given (defined in config/user_settings.py)
-    project_base = args["project_base"]
-    project_wasteandmaterial = args["project_wasteandmaterial"]
-    db_name = args["db_name"]
-    db_wasteandmaterial_name = args["db_wasteandmaterial_name"]
-
-# %%
-    # make new project, delete previous project if you want to start over, or use existing project
-    if project_wasteandmaterial in bd.projects:
-        print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
-        redo = timed_input(
-            "If you want to delete it, press 'y' in the next 5 seconds...\n"
-        )
-
-        if redo == "y":
-            bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
-            print(f"* WasteAndMaterial project deleted: {project_wasteandmaterial}")
-            print(
-                f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
-            )
-            bd.projects.set_current(project_base)
-            bd.projects.copy_project(project_wasteandmaterial)
-        else:
-            print(
-                "* WasteAndMaterial project will not be deleted, using existing project.\n"
-            )
-            bd.projects.set_current(project_wasteandmaterial)
-
-    else:
-        print(
-            f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
-        )
-        bd.projects.set_current(project_base)
-        bd.projects.copy_project(project_wasteandmaterial)
-    
-
-
     # %% 1.2 Explode the database into separate exchanges
 
     # ExplodeDatabase.py
     # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
     if os.path.isfile(existing_file):
-        redo = timed_input(
-            f"\n** There is already a pickle file for database {db_name}\n if want to overwrite it, press 'y' in the next 5 seconds...\n"
-        )
-
-        if redo == "y":
-            print("\n* Existing data will be overwritten")
-            ExplodeDatabase(db_name)
-        else:
-            print("\n* Existing data will be reused for the current run")
-
+        print(f"\n* Existing exploded database found: {existing_file}")
+        print("\n* Existing data will be reused for the current run")
     else:
         ExplodeDatabase(db_name)
-# %% 1.2 ExplodeDatabase.py - Explode the database into separate exchanges
-    if project_wasteandmaterial in bd.projects:
-        bd.set_current(project_wasteandmaterial)
-    else:
-        bd.set_current(project_base)
-        bd.copy_project(project_wasteandmaterial)
-    ExplodeDatabase(db_name)
+
     # %% 1.3 Search the exploded database for waste and material flows
 
     # 1.3.1 SearchWaste.py
@@ -177,7 +126,7 @@ def WasteAndMaterialFootprint(args):
 
     # 1.4.2 MethodEditor.py
     # adds LCIA methods to the project for each of the waste and material categories defined in the custom database
-    #AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
+    AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
 
     # %% 1.5 Add waste and material flows to the activities
 
