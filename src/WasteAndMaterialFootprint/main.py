@@ -157,7 +157,7 @@ if __name__ == "__main__":
 
     # %%
     print(
-        f"\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases ***\n"
+        f"\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases  in project '{project_base}***\n"
     )
     for arg in args_list:
         print(f"\t{arg['db_name']}")
