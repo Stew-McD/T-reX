@@ -26,10 +26,7 @@ Based on the work of LL
 
 # import standard modules
 import os
-import shutil
 import sys
-import threading
-import queue
 from pathlib import Path
 from datetime import datetime
 import bw2data as bd
@@ -69,10 +66,11 @@ from user_settings import dir_tmp, dir_logs, generate_args_list
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
 
 def WasteAndMaterialFootprint(args):
-    print(f"\n{'='*20}\n\t Starting WasteAndMaterialFootprint\n{'='*20}")
+    db_name = args["db_name"]
+    db_wasteandmaterial_name = args["db_wasteandmaterial_name"]
+    print(f"\n{'='*80}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*80}")
     start = datetime.now()
 
-    db_name = args["db_name"]
     # %% 1.2 Explode the database into separate exchanges
     # ExplodeDatabase.py
     # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
@@ -101,12 +99,12 @@ def WasteAndMaterialFootprint(args):
 
     # 1.4.2 MethodEditor.py
     # adds LCIA methods to the project for each of the waste and material categories defined in the custom database
-    AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
+    #AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
 
     # %% 1.5 Add waste and material flows to the activities
     # ExchangeEditor.py
     # adds waste and material flows as elementary exchanges to each of the activities found by the search functions
-    ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
+    #ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
 
     # %% 1.5 Final message and log
     # print message to console
@@ -153,18 +151,18 @@ if __name__ == "__main__":
     # Set the global vars from the arguments
     project_base = args_list[0]["project_base"]
     project_wasteandmaterial = args_list[0]["project_wasteandmaterial"]
-    db_wasteandmaterial_name = args_list[0]["db_wasteandmaterial_name"]
 
     # %%
     print(
-        f"\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases  in project '{project_base}***\n"
+        f"\n\n{'#'*100}\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases  in project '{project_base}***\n"
     )
     for arg in args_list:
         print(f"\t{arg['db_name']}")
+    print(f"{'#' * 100}\n\n")
     
     # make new project, delete previous project if you want to start over, or use existing project
     if project_wasteandmaterial in bd.projects:
-        print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
+        print(f"* WasteAndMaterial project already exists: {project_wasteandmaterial}")
         bd.projects.set_current(project_wasteandmaterial)
     
     if project_wasteandmaterial in bd.projects and delete_project:
@@ -179,7 +177,7 @@ if __name__ == "__main__":
 
     def process_db(args):
         try:
-            print(f"\nProcessing database {args['db_name']}\n")
+            print(f"\n* Processing database {args['db_name']}\n")
             WasteAndMaterialFootprint(args)
             return 1  # successfully processed
         except Exception as e:

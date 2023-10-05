@@ -111,8 +111,7 @@ def dbWriteExcel(db_name, db_wasteandmaterial_name):
 
     xl.save(xl_filename)
     print(
-        f"\n ** Added {count} entries to the xlsx for the \
-        custom waste and material db:\n{db_wasteandmaterial_name}"
+        f"\n ** Added {count} entries to the xlsx for the custom waste and material database:\n\t{db_wasteandmaterial_name}"
     )
 
     return
@@ -152,10 +151,7 @@ def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name):
     Returns:
     - None
     """
-    print(
-        f"\n** Importing the custom database {db_wasteandmaterial_name}**\n**\
-              to the brightway2 project {project_wasteandmaterial} **"
-    )
+    print(f"\n** Importing the custom database {db_wasteandmaterial_name}**\n\t to the brightway2 project{project_wasteandmaterial}")
 
     xl_filename = dir_databases_wasteandmaterial / f"{db_wasteandmaterial_name}.xlsx"
     bd.projects.set_current(project_wasteandmaterial)
