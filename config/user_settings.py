@@ -44,45 +44,26 @@ import bw2data as bd
 
 # os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
 
-# Set projects and database names
-SINGLE = False
-MULTIPLE = True
+# set project name here (or give it as an argument to main.py)
 
-# change to fit your needs
-if SINGLE:
-    database = "ecoinvent_cutoff_3.9"  # for example
-    args_list = []
-    args = {
-        "project_base": "default_" + database,
-        "project_wasteandmaterial": "WMF" + database,
-        "db_name": database,
-        "db_wasteandmaterial_name": "WMF-" + database,
-    }
-    args_list.append(args)
-
-if MULTIPLE:
-    args_list = []
-    
-    projects = ["SSP125_con"]
-    for project in projects:
-        bd.projects.set_current(project)
+def generate_args_list(project='default', multiple=False, databases=['ecoinvent_3.9.1_cutoff']):
+    # change to fit your needs
         
-        databases = None # you could also specify a list of databases here
-        
-        if not databases:
-            exclude = ['biosphere3']
-            databases = sorted([x for x in bd.databases if not any(sub in x for sub in exclude)])
+    if multiple:
+        exclude = ['biosphere3']
+        databases = sorted([x for x in bd.databases if not any(sub in x for sub in exclude)])
             
-            # databases.remove('ecoinvent_cutoff_3.9')
-
-        for database in databases:
-            args = {
-                "project_base": project,
-                "project_wasteandmaterial": f"WMF-{project}",
-                "db_name": database,
-                "db_wasteandmaterial_name": "WMF-" + database,
-            }
-            args_list.append(args)
+    args_list = []
+    for database in databases:
+        args = {
+            "project_base": project,
+            "project_wasteandmaterial": f"WMF-{project}",
+            "db_name": database,
+            "db_wasteandmaterial_name": "WMF-" + database,
+        }
+        args_list.append(args)
+        
+    return args_list
 
 
 # %% DIRECTORY PATHS

@@ -34,7 +34,8 @@ from pathlib import Path
 from datetime import datetime
 import bw2data as bd
 from multiprocessing import Pool, cpu_count
-
+import argparse
+from time import sleep
 
 num_cpus = int(os.environ.get('SLURM_CPUS_PER_TASK', os.environ.get('SLURM_JOB_CPUS_PER_NODE', cpu_count())))
 
@@ -63,38 +64,16 @@ from MethodEditor import AddMethods
 from ExchangeEditor import ExchangeEditor
 
 # import configuration from config/user_settings.py
-from user_settings import args_list, dir_tmp, dir_logs
+from user_settings import dir_tmp, dir_logs, generate_args_list
 
-
-# %% 1.1 Brightway2 project setup
-
-# Define the project names and database names based on the arguments given (defined in config/user_settings.py)
-project_base = args_list[0]["project_base"]
-project_wasteandmaterial = args_list[0]["project_wasteandmaterial"]
-db_name = args_list[0]["db_name"]
-db_wasteandmaterial_name = args_list[0]["db_wasteandmaterial_name"]
-
-# %%
-# make new project, delete previous project if you want to start over, or use existing project
-if project_wasteandmaterial in bd.projects:
-    print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
-    bd.projects.set_current(project_wasteandmaterial)
-else:
-    print(
-        f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}"
-    )
-    bd.projects.set_current(project_base)
-    bd.projects.copy_project(project_wasteandmaterial)
-        
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
-
 
 def WasteAndMaterialFootprint(args):
     print(f"\n{'='*20}\n\t Starting WasteAndMaterialFootprint\n{'='*20}")
     start = datetime.now()
 
+    db_name = args["db_name"]
     # %% 1.2 Explode the database into separate exchanges
-
     # ExplodeDatabase.py
     # Open up EcoInvent db with wurst and save results as .pickle (also delete files from previous runs if you want)
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
@@ -105,22 +84,18 @@ def WasteAndMaterialFootprint(args):
         ExplodeDatabase(db_name)
 
     # %% 1.3 Search the exploded database for waste and material flows
-
     # 1.3.1 SearchWaste.py
     # run SearchWaste() for the list of waste queries defined in config/queries_waste.py
     SearchWaste(db_name)
-
     # 1.3.2 SearchMaterial.py
     # run SearchMaterial for the list of materials defined in config/list_materials.txt
     # or from the default list in config/default_materials.py
     SearchMaterial(db_name, project_wasteandmaterial)
 
     # %% 1.4 Make the custom database from search results
-
     # 1.4.1 MakeCustomDatabase.py
     # From the SearchWaste() and SearchMaterial() results make an xlsx file in the database format needed for brightway2
     dbWriteExcel(db_name, db_wasteandmaterial_name)
-
     # imports the custom database "db_wasteandmaterial_<db_name>" to the brightway project "WasteAndMaterialFootprint_<db_name>"
     dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name)
 
@@ -129,13 +104,11 @@ def WasteAndMaterialFootprint(args):
     AddMethods(project_wasteandmaterial, db_wasteandmaterial_name)
 
     # %% 1.5 Add waste and material flows to the activities
-
     # ExchangeEditor.py
     # adds waste and material flows as elementary exchanges to each of the activities found by the search functions
-    #ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
+    ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name)
 
     # %% 1.5 Final message and log
-
     # print message to console
     duration = datetime.now() - start
     print(f"{'='*50}")
@@ -161,12 +134,48 @@ def WasteAndMaterialFootprint(args):
 
 # %% 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
+
+    start_time = datetime.now()
+
+    parser = argparse.ArgumentParser(description='CLI for your project.')
+    parser.add_argument('--project', type=str, default='default', help='Project name. Default is "default".')
+    parser.add_argument('--multiple', action='store_true', help='Use multiple databases. Default is False.')
+    parser.add_argument('--databases', type=str, nargs='+', default=['ecoinvent_3.9.1_cutoff'], help='List of database names. Default is ["ecoinvent_3.9.1_cutoff"].')
+    parser.add_argument('--delete', action='store_true', help='Delete the old project before running. Default is False.')
+    parser.add_argument("--multiprocessing", action="store_true", help="Use multiprocessing. Default is False.")
+    # Parse the arguments
+    args_cli = parser.parse_args()
+    delete_project = args_cli.delete
+    use_multiprocessing = args_cli.multiprocessing
+    args_list = generate_args_list(project=args_cli.project, multiple=args_cli.multiple, databases=args_cli.databases)
     total_databases = len(args_list)
+    
+    # Set the global vars from the arguments
+    project_base = args_list[0]["project_base"]
+    project_wasteandmaterial = args_list[0]["project_wasteandmaterial"]
+    db_wasteandmaterial_name = args_list[0]["db_wasteandmaterial_name"]
+
+    # %%
     print(
         f"\n*** Beginning WasteAndMaterialFootprint for {total_databases} databases ***\n"
     )
+    for arg in args_list:
+        print(f"\t{arg['db_name']}")
+    
+    # make new project, delete previous project if you want to start over, or use existing project
+    if project_wasteandmaterial in bd.projects:
+        print(f"WasteAndMaterial project already exists: {project_wasteandmaterial}")
+        bd.projects.set_current(project_wasteandmaterial)
+    
+    if project_wasteandmaterial in bd.projects and delete_project:
+        print(f"\n* Deleting previous project {project_wasteandmaterial}")
+        bd.projects.delete_project(project_wasteandmaterial, delete_dir=True)
+    
+    if project_wasteandmaterial not in bd.projects:
+        print(f"\n* Project {project_base} will be copied to a new project: {project_wasteandmaterial}")
+        bd.projects.set_current(project_base)
+        bd.projects.copy_project(project_wasteandmaterial)
 
-    start_time = datetime.now()
 
     def process_db(args):
         try:
@@ -176,17 +185,29 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"\n{'@'*50}\n\tError processing database {args['db_name']}! \n\n\t{e}\n{'@'*50}\n")
             return 0  # error occurred
+    
+    if use_multiprocessing:
+        with Pool(processes=num_cpus) as pool:
+            results = []
+            for arg in args_list:
+                pool.apply_async(process_db, (arg,), callback=results.append)
+                sleep(5)  # sleep for 5 seconds before sending the next task
 
-    with Pool(processes=num_cpus) as pool:
-        results = pool.map(process_db, args_list)
+            pool.close()
+            pool.join()
+    else:
+        results = [process_db(arg) for arg in args_list]
 
-    successful_count = sum(results)
-    error_count = len(results) - successful_count
+        successful_count = sum(results)
+        error_count = len(results) - successful_count
 
-    end_time = datetime.now()
-    duration = end_time - start_time
+        end_time = datetime.now()
+        duration = end_time - start_time
 
-    print("\n*** Processing completed ***\n")
-    print(f"Total databases: {total_databases}")
-    print(f"Successfully processed: {successful_count}")
-    print(f"Duration: {str(duration).split('.')[0]}\n")
+    print(f"""
+    *** Processing Completed ***
+
+    Total databases:          {total_databases}
+    Successfully processed:   {successful_count}
+    Duration:                 {str(duration).split('.')[0]} seconds
+    """)
