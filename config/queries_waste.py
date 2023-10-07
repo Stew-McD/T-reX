@@ -15,7 +15,7 @@ names = [
     "recycling",
     "landfill",
     "hazardous",
-    "non_hazardous",
+    # "non_hazardous",
     "total",
 ]
 
