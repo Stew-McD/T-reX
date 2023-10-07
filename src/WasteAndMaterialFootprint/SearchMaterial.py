@@ -7,13 +7,14 @@ Created on Sat Feb 11 10:02:15 2023
 """
 
 import os
+import shutil
 import bw2data as bd
 import pandas as pd
 from default_materials import default_materials
 from user_settings import dir_tmp, dir_config, dir_logs, dir_searchmaterial_results
 
 
-def SearchMaterial(db_name, project_wasteandmaterial):
+def SearchMaterial(db_name, project_wmf):
     """
     Search for materials in a specified database and extract related information.
 
@@ -33,10 +34,16 @@ def SearchMaterial(db_name, project_wasteandmaterial):
     Exception: If there is any error in reading the materials list from the file.
     """
 
+    
+
     # Configuring search result directories
     dir_searchmaterial_results_db = dir_searchmaterial_results / db_name
     dir_searchmaterial_results_grouped = dir_searchmaterial_results_db / "grouped"
 
+    if os.path.isdir(dir_searchmaterial_results_db):
+        print("Deleting existing results directory")
+        shutil.rmtree(dir_searchmaterial_results_db)
+    
     # Ensure necessary directories exist
     for directory in [dir_tmp, dir_logs, dir_searchmaterial_results_grouped]:
         if not directory.exists():
@@ -52,12 +59,12 @@ def SearchMaterial(db_name, project_wasteandmaterial):
         return
 
     # Set the current project
-    bd.projects.set_current(project_wasteandmaterial)
+    bd.projects.set_current(project_wmf)
 
     # Load the database
     db = bd.Database(db_name)
     print(
-        f"\n*** Loading activities \nfrom database: {db.name} \nin project: {project_wasteandmaterial}"
+        f"\n*** Loading activities \nfrom database: {db.name} \nin project: {project_wmf}"
     )
 
     # Extracting activities from the database

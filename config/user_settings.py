@@ -37,29 +37,41 @@ After setting the project and database names, the script proceeds to set up vari
 
 '''
 
-
 import os
 from pathlib import Path
+
+custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
+if custom_bw2_dir:
+    os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
+
 import bw2data as bd
 
-# os.environ["BRIGHTWAY2_DIR"] = os.path.expanduser("~") + '/bw'
+project_base = 'default'
+project_wmf = f"WMF-{project_base}"
+db_wmf_name = "WasteAndMaterialFootprint"
+single = False
+database = None
+delete = True
+use_multiprocessing = False
 
-# set project name here (or give it as an argument to main.py)
-
-def generate_args_list(project='default', multiple=False, databases=['ecoinvent_3.9.1_cutoff']):
+# set project name and other things here (or give as an argument to main.py)
+def generate_args_list():
     # change to fit your needs
-        
-    if multiple:
-        exclude = ['biosphere3']
+    bd.projects.set_current(project_base)
+    if single:
+        databases = [database]
+    
+    else:
+        exclude = ['biosphere3', 'WasteAndMaterialFootprint']
         databases = sorted([x for x in bd.databases if not any(sub in x for sub in exclude)])
             
     args_list = []
     for database in databases:
         args = {
-            "project_base": project,
-            "project_wasteandmaterial": f"WMF-{project}",
+            "project_base": project_base,
+            "project_wmf": project_wmf,
             "db_name": database,
-            "db_wasteandmaterial_name": "WMF-" + database,
+            "db_wmf_name": db_wmf_name,
         }
         args_list.append(args)
         

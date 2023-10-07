@@ -29,10 +29,11 @@ Functions:
 - dbExcel2BW: Imports the custom database (created by dbWriteExcel) into Brightway2.
 """
 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 import os
 import bw2data as bd
 import bw2io as bi
+import glob
 
 from user_settings import (
     dir_searchwaste_results,
@@ -41,52 +42,64 @@ from user_settings import (
 )
 
 
-def dbWriteExcel(db_name, db_wasteandmaterial_name):
+def get_files_from_tree(dir_searchmaterial_results, dir_searchwaste_results):
+    # Get files in the SearchMaterial/*/grouped/ directory
+    search_material_files = glob.glob(os.path.join(dir_searchmaterial_results, "*", "grouped", "*"))
+    
+    # Get files in the SearchWasteResults/* directory
+    search_waste_files = glob.glob(os.path.join(dir_searchwaste_results, "*", "*"))
+    
+    all_files = search_material_files + search_waste_files
+
+    # Extract only the filename without the suffix
+    names = sorted(set(os.path.splitext(os.path.basename(file))[0] for file in all_files))
+    
+    return names
+
+db_wmf_name = "WasteAndMaterialFootprint"
+def dbWriteExcel(db_wmf_name):
     """
     Create an xlsx file representing a custom Brightway2 database.
 
     Parameters:
     - db_name (str): Name of the database.
-    - db_wasteandmaterial_name (str): Custom name for the Brightway2 database file.
+    - db_wmf_name (str): Custom name for the Brightway2 database file.
 
     Returns:
     - str: Path to the generated xlsx file.
     """
-
-    dir_searchwaste_results_db = dir_searchwaste_results / db_name
-    dir_searchmaterial_results_grouped = (
-        dir_searchmaterial_results / db_name / "grouped"
-    )
-
+        
     if not os.path.isdir(dir_databases_wasteandmaterial):
         os.makedirs(dir_databases_wasteandmaterial)
 
-    xl_filename = dir_databases_wasteandmaterial / f"{db_wasteandmaterial_name}.xlsx"
+    xl_filename = dir_databases_wasteandmaterial / f"{db_wmf_name}.xlsx"
 
     # delete existing file if it exists
-    if os.path.isfile(xl_filename):
-        os.remove(xl_filename)
+    if not os.path.isfile(xl_filename):
 
-    # create new file and write header
-    print(f"\n\n*** Writing custom database file: {db_wasteandmaterial_name}\n")
+        # create new file and write header
+        print(f"\n\n*** Writing custom database file: {db_wmf_name}\n")
 
-    xl = Workbook()
-    xl_db = xl.active
-    xl_db["A1"] = "Database"
-    xl_db["B1"] = db_wasteandmaterial_name
-    xl_db["A2"] = ""
+        xl = Workbook()
+        xl_db = xl.active
+        xl_db["A1"] = "Database"
+        xl_db["B1"] = db_wmf_name
+        xl_db["A2"] = ""
 
-    count = 0
-    files = os.listdir(dir_searchwaste_results_db) + os.listdir(
-        dir_searchmaterial_results_grouped
-    )
+    else:
+        # open existing file and append to it
+        print(f"\n\n*** Appending to existing custom database file: {db_wmf_name}\n")
 
-    for f in files:
+        xl = load_workbook(xl_filename)
+        xl_db = xl.active
+
+    count = 0      
+    names = get_files_from_tree(dir_searchmaterial_results, dir_searchwaste_results)
+    for NAME in names:
         count += 1
-        NAME = f.replace(".csv", "")
         CODE = NAME
-        UNIT = determine_unit_from_name(NAME)
-
+        UNIT = determine_unit_from_name(NAME)  
+      
         if "waste" in NAME:
             TYPE = "waste"
         elif "Material" in NAME:
@@ -111,7 +124,7 @@ def dbWriteExcel(db_name, db_wasteandmaterial_name):
 
     xl.save(xl_filename)
     print(
-        f"\n ** Added {count} entries to the xlsx for the custom waste and material database:\n\t{db_wasteandmaterial_name}"
+        f"\n ** Added {count} entries to the xlsx for the custom waste and material database:\n\t{db_wmf_name}"
     )
 
     return
@@ -139,38 +152,53 @@ def determine_unit_from_name(name):
         return ""
 
 
-def dbExcel2BW(project_wasteandmaterial, db_wasteandmaterial_name):
+def dbExcel2BW(project_wmf):
     """
     Import the custom database (created by dbWriteExcel) into Brightway2.
 
     Parameters:
-    - project_wasteandmaterial (str): Name of the Brightway2 project.
-    - db_wasteandmaterial_name (str): Name of the custom Brightway2 database.
+    - project_wmf (str): Name of the Brightway2 project.
+    - db_wmf_name (str): Name of the custom Brightway2 database.
     - xl_filename (str): Path to the xlsx file.
 
     Returns:
     - None
     """
-    print(f"\n** Importing the custom database {db_wasteandmaterial_name}**\n\t to the brightway2 project{project_wasteandmaterial}")
+    print(f"\n** Importing the custom database {db_wmf_name}**\n\t to the brightway2 project: {project_wmf}")
 
-    xl_filename = dir_databases_wasteandmaterial / f"{db_wasteandmaterial_name}.xlsx"
-    bd.projects.set_current(project_wasteandmaterial)
+    xl_filename = dir_databases_wasteandmaterial / f"{db_wmf_name}.xlsx"
+    bd.projects.set_current(project_wmf)
 
-    # imports the custom database into BW2
-    print("\n** Running BW2io ExcelImporter **\n")
-    imp = bi.ExcelImporter(xl_filename)
-    bi.create_core_migrations()  # needed to stop it from occasional crashing
-    imp.apply_strategies()
-    imp.statistics()
-    imp.write_database()
+    if db_wmf_name not in bd.databases:
+        # imports the custom database into BW2
+        print("\n** Running BW2io ExcelImporter **\n")
+        imp = bi.ExcelImporter(xl_filename)
+        bi.create_core_migrations()  # needed to stop it from occasional crashing
+        imp.apply_strategies()
+        imp.statistics()
+        imp.write_database()
 
-    db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
-    db_wasteandmaterial.register()
+        db_wmf = bd.Database(db_wmf_name)
+        db_wmf.register()
 
-    db_dict = db_wasteandmaterial.metadata
-    print("\n** Database metadata **")
-    for key, value in db_dict.items():
-        print(f"{key}: {value}")
+        db_dict = db_wmf.metadata
+        print("\n** Database metadata **")
+        for key, value in db_dict.items():
+            print(f"{key}: {value}")
+            
+    else:
+        print(f"\n** Database {db_wmf_name} already exists **\n")
+        db_wmf = bd.Database(db_wmf_name)
+        imp = bi.ExcelImporter(xl_filename)
+        
+        for act in imp:
+            if act['name'] not in db_wmf:
+                print(f"\t Adding: \t{act['name']} to: \t {db_wmf_name}")
+                db_wmf.new_activity(act)
+            else:
+                print(f"\t {act['name']} already exists in {db_wmf_name}")
+
+        
 
     print("\n*** Great success! ***")
 

@@ -27,7 +27,7 @@ queries_kg = []
 for name in names:
     query = {
         "db_name": "",  # db_name
-        "db_custom": "",  # db_wasteandmaterial_name
+        "db_custom": "",  # db_wmf_name
         "name": "",
         "code": "",
         "unit": "kilogram",
@@ -48,6 +48,7 @@ for name in names:
         query.update({"OR": ["landfill", "dumped", "deposit"]})
     if "hazardous" == name:
         query.update({"OR": ["hazardous", "radioactive"]})
+        query.update({"NOT": ["non-hazardous", "non-radioactive"]})
     if "non_hazardous" == name:
         query.update({"NOT": ["hazardous", "radioactive"]})
     if "incineration" in name:

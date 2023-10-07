@@ -48,7 +48,7 @@ def ExplodeDatabase(db_name):
 
     Parameters:
     project_base (str): Base name of the project
-    project_wasteandmaterial (str): Name of the project with waste and material specifics
+    project_wmf (str): Name of the project with waste and material specifics
     db_name (str): Name of the Brightway2 database to be exploded
 
     Returns:
@@ -78,7 +78,7 @@ def ExplodeDatabase(db_name):
 
     # Unpack the database using wurst
     print("\n** Opening the sausage... ")
-    guts = w.extract_brightway2_databases(db.name)
+    guts = w.extract_brightway2_databases(db_name)
 
     # Create a DataFrame from the extracted data
     print("\n*** Extracting activities from db...")

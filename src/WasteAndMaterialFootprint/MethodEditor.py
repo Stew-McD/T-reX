@@ -10,20 +10,21 @@ Based on the work of LL
 """
 
 import bw2data as bd
+from user_settings import project_wmf, db_wmf_name
 
 
-def AddMethods(project_wasteandmaterial, db_wasteandmaterial_name):
+def AddMethods():
     """
     Add methods to the specified project based on entries in the custom biosphere database.
 
-    :param project_wasteandmaterial: Name of the project.
-    :param db_wasteandmaterial_name: Name of the database.
+    :param project_wmf: Name of the project.
+    :param db_wmf_name: Name of the database.
     """
     print("\n*** Running AddMethods() ***\n")
 
-    bd.projects.set_current(project_wasteandmaterial)
-    db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
-    dic = db_wasteandmaterial.load()
+    bd.projects.set_current(project_wmf)
+    db_wmf = bd.Database(db_wmf_name)
+    dic = db_wmf.load()
     sorted_items = sorted(dic.items())
     dic = dict(sorted_items)
 
@@ -48,16 +49,23 @@ def AddMethods(project_wasteandmaterial, db_wasteandmaterial_name):
             method_key = (
                 "Material Demand Footprint",
                 m_name,
-                m_name.split("_")[1].capitalize(),
+                m_name.split("_")[1].capitalize() + ' (demand)',
             )
             description = "For estimating the material footprint of an activity"
 
         m = bd.Method(method_key)
-        m.register(description=description, unit=m_unit)
-        method_entry = [((db_wasteandmaterial.name, m_code), ch_factor)]
-        m.write(method_entry)
+        
+        count = 0
+        if m in bd.methods:
+            print(f"\t {str(method_key)} already exists")
+            continue
+            count += 1
+        else:
+            m.register(description=description, unit=m_unit)
+            method_entry = [((db_wmf.name, m_code), ch_factor)]
+            m.write(method_entry)
 
-        print(f"\t {str(method_key)}")
+            print(f"\t {str(method_key)}")
 
     methods_added = len(bd.methods) - initial_method_count
     print("\n*** Added", methods_added, " new methods ***")
@@ -65,14 +73,14 @@ def AddMethods(project_wasteandmaterial, db_wasteandmaterial_name):
     return None
 
 
-def DeleteMethods(project_wasteandmaterial):
+def DeleteMethods():
     """
     Delete methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    :param project_wasteandmaterial: Name of the project.
+    :param project_wmf: Name of the project.
     """
 
-    bd.projects.set_current(project_wasteandmaterial)
+    bd.projects.set_current(project_wmf)
 
     initial_method_count = len(bd.methods)
     print("\nInitial # of methods:", initial_method_count, "\n")
@@ -89,14 +97,14 @@ def DeleteMethods(project_wasteandmaterial):
     return None
 
 
-def CheckMethods(project_wasteandmaterial):
+def CheckMethods():
     """
     Check methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    :param project_wasteandmaterial: Name of the project.
+    :param project_wmf: Name of the project.
     """
 
-    bd.projects.set_current(project_wasteandmaterial)
+    bd.projects.set_current(project_wmf)
 
     methods_wasteandmaterial = [
         x for x in list(bd.methods) if "WasteAndMaterial Footprint" == x[0]

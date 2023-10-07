@@ -4,7 +4,7 @@
 """
 ExchangeEditor():
 For every activity identified by WasteAndMaterialSearch(), this function appends the pertinent exchange 
-from the db_wasteandmaterial. This is the most time-consuming function, taking around 10 minutes per database.
+from the db_wmf. This is the most time-consuming function, taking around 10 minutes per database.
 
 Created on Thu Nov 17 15:30:24 2022
 @author: Stew-McD
@@ -12,19 +12,19 @@ based on the work of LL
 """
 
 
-def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
+def ExchangeEditor(project_wmf, db_name, db_wmf_name):
     """
     Modify the specified project's database to append relevant exchanges
-    from the db_wasteandmaterial for every activity identified by WasteAndMaterialSearch().
+    from the db_wmf for every activity identified by WasteAndMaterialSearch().
 
     For each exchange found, this function identifies the process, and then adds
-    a new exchange to that process in the `db_wasteandmaterial`. The new exchange
+    a new exchange to that process in the `db_wmf`. The new exchange
     replicates the same amount and unit as the original technosphere waste and material exchange.
 
     Parameters:
-    - project_wasteandmaterial (str): Name of the Brightway2 project to be modified.
+    - project_wmf (str): Name of the Brightway2 project to be modified.
     - db_name (str): Name of the database within the project where activities and exchanges are stored.
-    - db_wasteandmaterial_name (str): Name of the database containing waste and material exchange details.
+    - db_wmf_name (str): Name of the database containing waste and material exchange details.
 
     Returns:
     None
@@ -54,12 +54,12 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
         dir_searchmaterial_results,
     )
 
-    # Set the current project to project_wasteandmaterial
-    bd.projects.set_current(project_wasteandmaterial)
+    # Set the current project to project_wmf
+    bd.projects.set_current(project_wmf)
 
     # Get database objects
     db = bd.Database(db_name)
-    db_wasteandmaterial = bd.Database(db_wasteandmaterial_name)
+    db_wmf = bd.Database(db_wmf_name)
 
     # Define directories
     dir_searchwaste_results = dir_searchwaste_results / db_name
@@ -102,7 +102,7 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
     # Start adding exchanges
     print("\n\n*** ExchangeEditor() is running for " + db_name + " ***\n")
     print(
-        f"* Appending waste and material exchanges in:*\n*\t{db_wasteandmaterial_name}\n *"
+        f"* Appending waste and material exchanges in:*\n*\t{db_wmf_name}\n *"
     )
     countNAME = 0
 
@@ -130,7 +130,7 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
             try:
                 process = db.get(code)
             
-                wasteandmaterial_ex = db_wasteandmaterial.get(NAME)
+                wasteandmaterial_ex = db_wmf.get(NAME)
 
                 before = len(process.exchanges())
 
@@ -142,6 +142,7 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
                     type="biosphere",
                 ).save()
                 after = len(process.exchanges())
+
 
                 # If the exchange was successfully added, increment the counter
                 if (after - before) == 1:
@@ -172,5 +173,5 @@ def ExchangeEditor(project_wasteandmaterial, db_name, db_wasteandmaterial_name):
 
     print(f"\n*** ExchangeEditor() completed for {db_name} in {str(duration)} ***\n")
 
-    # del bd.databases[db_wasteandmaterial_name]
+    # del bd.databases[db_wmf_name]
     return None

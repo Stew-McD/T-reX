@@ -28,6 +28,7 @@ def SearchWaste(db_name):
     import os
     from datetime import datetime
     import pandas as pd
+    import shutil
 
     from user_settings import dir_searchwaste_results, dir_tmp, dir_logs
     from queries_waste import queries_waste
@@ -35,6 +36,9 @@ def SearchWaste(db_name):
     print("\n*** Starting SearchWaste ***")
 
     dir_searchwaste_results = os.path.join(dir_searchwaste_results, db_name)
+    if os.path.isdir(dir_searchwaste_results):
+        print("Deleting existing results directory")
+        shutil.rmtree(dir_searchwaste_results)
 
     # Ensure necessary directories exist
     if not os.path.exists(dir_logs):
@@ -51,7 +55,7 @@ def SearchWaste(db_name):
         print("Pickle file does not exist.")
         return
     
-    
+            
     print("*** Searching for waste exchanges ***")
 
     def search(query):
