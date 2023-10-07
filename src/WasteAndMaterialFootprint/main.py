@@ -148,11 +148,11 @@ def main(
     """)
     
     # %% 1.4 Make the custom database from search results
-    dbWriteExcel(db_wmf_name)
+    dbWriteExcel()
 
     # imports the custom database "db_wmf_<db_name>"
     # to the brightway project "WasteAndMaterialFootprint_<db_name>"
-    dbExcel2BW(project_wmf)
+    dbExcel2BW()
 
     # 1.4.2 MethodEditor.py
     # adds LCIA methods to the project for each of the waste 

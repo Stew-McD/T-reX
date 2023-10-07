@@ -51,7 +51,7 @@ project_wmf = f"WMF-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
 database = None
-delete = True
+delete = False
 use_multiprocessing = False
 
 # set project name and other things here (or give as an argument to main.py)

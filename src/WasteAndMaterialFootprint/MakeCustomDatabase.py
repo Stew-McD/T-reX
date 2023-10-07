@@ -39,6 +39,8 @@ from user_settings import (
     dir_searchwaste_results,
     dir_searchmaterial_results,
     dir_databases_wasteandmaterial,
+    project_wmf,
+    db_wmf_name
 )
 
 
@@ -56,8 +58,7 @@ def get_files_from_tree(dir_searchmaterial_results, dir_searchwaste_results):
     
     return names
 
-db_wmf_name = "WasteAndMaterialFootprint"
-def dbWriteExcel(db_wmf_name):
+def dbWriteExcel():
     """
     Create an xlsx file representing a custom Brightway2 database.
 
@@ -75,23 +76,27 @@ def dbWriteExcel(db_wmf_name):
     xl_filename = dir_databases_wasteandmaterial / f"{db_wmf_name}.xlsx"
 
     # delete existing file if it exists
-    if not os.path.isfile(xl_filename):
+    if os.path.isfile(xl_filename):
+        os.remove(xl_filename)
+        
+    
 
-        # create new file and write header
-        print(f"\n\n*** Writing custom database file: {db_wmf_name}\n")
+    # create new file and write header
+    print(f"\n\n*** Writing custom database file: {db_wmf_name}\n")
 
-        xl = Workbook()
-        xl_db = xl.active
-        xl_db["A1"] = "Database"
-        xl_db["B1"] = db_wmf_name
-        xl_db["A2"] = ""
+    xl = Workbook()
+    xl_db = xl.active
+    xl_db["A1"] = "Database"
+    xl_db["B1"] = db_wmf_name
+    xl_db["A2"] = ""
+    
+    xl.save(xl_filename)
 
-    else:
-        # open existing file and append to it
-        print(f"\n\n*** Appending to existing custom database file: {db_wmf_name}\n")
+    # open existing file and append to it
+    print(f"\n\n*** Appending to existing custom database file: {db_wmf_name}\n")
 
-        xl = load_workbook(xl_filename)
-        xl_db = xl.active
+    xl = load_workbook(xl_filename)
+    xl_db = xl.active
 
     count = 0      
     names = get_files_from_tree(dir_searchmaterial_results, dir_searchwaste_results)
@@ -152,7 +157,7 @@ def determine_unit_from_name(name):
         return ""
 
 
-def dbExcel2BW(project_wmf):
+def dbExcel2BW():
     """
     Import the custom database (created by dbWriteExcel) into Brightway2.
 
@@ -197,8 +202,6 @@ def dbExcel2BW(project_wmf):
                 db_wmf.new_activity(act)
             else:
                 print(f"\t {act['name']} already exists in {db_wmf_name}")
-
-        
 
     print("\n*** Great success! ***")
 
