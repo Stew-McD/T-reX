@@ -46,7 +46,7 @@ if custom_bw2_dir:
 
 import bw2data as bd
 
-project_base = 'default'
+project_base = 'SSP125_cutoff'
 project_wmf = f"WMF-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
