@@ -1,11 +1,6 @@
-
-
 # Define the search parameters here each query
 # (needs to have .pickle already there from ExplodeDatabase.py)
-
-
 # the terms should be either a string or a list of strings, as you find them
-
 # set the names of the waste flow categories you want to search for
 names = [
     "digestion",
@@ -15,7 +10,7 @@ names = [
     "recycling",
     "landfill",
     "hazardous",
-    # "non_hazardous",
+    "non_hazardous",
     "total",
 ]
 

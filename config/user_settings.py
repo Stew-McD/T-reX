@@ -46,6 +46,7 @@ if custom_bw2_dir:
 
 import bw2data as bd
 
+## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 project_base = 'SSP125_cutoff'
 project_wmf = f"WMF-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
@@ -53,6 +54,7 @@ single = False
 database = None
 delete = False
 use_multiprocessing = False
+
 
 # set project name and other things here (or give as an argument to main.py)
 def generate_args_list():
@@ -78,7 +80,50 @@ def generate_args_list():
     return args_list
 
 
-# %% DIRECTORY PATHS
+#%% PREMISE SETTINGS -  to construct future LCA databases
+
+use_premise = True
+
+premise_key = None
+project_premise_base = "default"
+project_premise = "SSP1_cutoff"
+delete_existing = False
+batch_size = 5
+
+# Get the premise key
+if premise_key is None:
+    key_path = Path(__file__).parents[1] / ".secrets" / "premise_key.txt"
+    with open(key_path, "r") as f:
+        premise_key = f.read()
+        
+        
+# Details of the scenarios can be found here:
+# carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
+
+scenarios_all = [
+        {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
+        # {"model":"remind", "pathway":"SSP1-Base", "year":2030},
+        # {"model":"remind", "pathway":"SSP2-Base", "year":2030},
+        # {"model":"remind", "pathway":"SSP5-Base", "year":2030},
+        # {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
+        # {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
+]
+
+# %% GENERAL DIRECTORY PATHS
 # Set the paths (to the data, config, logs, and the results)
 
 # Get the directory of the main script

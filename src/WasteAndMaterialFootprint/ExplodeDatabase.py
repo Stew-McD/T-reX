@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 |===============================================================|
 | File: ExplodeDatabase.py                                      |
@@ -12,7 +10,7 @@
 | Github: Stew-McD                                                |
 | Company: CML, Leiden University                               |
 |---------------------------------------------------------------|
-| Last Modified: Sunday, 24th September 2023 7:56:13 pm         |
+| Last Modified: Sunday, 10th September 2023 7:56:13 pm         |
 | Modified By: Stewart Charles McDowall                         |
 | Email: s.c.mcdowall@cml.leidenuniv.nl                         |
 |---------------------------------------------------------------|
@@ -31,8 +29,6 @@
 
 # Imports
 import os
-import sys
-from pathlib import Path
 from datetime import datetime
 import pandas as pd
 import bw2data as bd
