@@ -42,24 +42,23 @@ def AddMethods():
         ch_factor = -1.0 if m_type == "waste" else 1.0
 
         if m_type == "waste":
-            name_combined = "_".join((m_name.split("_")[0:2])) + "_combined"
+            name_combined = " ".join([word.capitalize() for word in m_name.split("_")[0:2]]) + " combined"
+            m_name = " ".join([word.capitalize() for word in m_name.split("_")[0:3]])
             method_key = ("Waste Footprint", name_combined, m_name)
             description = "For estimating the waste footprint of an activity"
         else:
             method_key = (
                 "Material Demand Footprint",
-                m_name,
+                f'{m_name.split("_")[0]} ({m_name.split("_")[1].capitalize()})',
                 m_name.split("_")[1].capitalize() + ' (demand)',
             )
             description = "For estimating the material footprint of an activity"
 
         m = bd.Method(method_key)
         
-        count = 0
         if m in bd.methods:
             print(f"\t {str(method_key)} already exists")
             continue
-            count += 1
         else:
             m.register(description=description, unit=m_unit)
             method_entry = [((db_wmf.name, m_code), ch_factor)]

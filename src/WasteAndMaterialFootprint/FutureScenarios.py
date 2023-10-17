@@ -24,6 +24,7 @@
 # Based on R.Sacchi's tutorial:
 # https://github.com/polca/premise/blob/master/examples/examples.ipynb
 
+import os
 import logging
 from datetime import datetime
 from itertools import zip_longest
@@ -44,8 +45,12 @@ try:
         project_premise,
         project_premise_base,
         scenarios_all,
+        verbose,
+        use_mp
     )
+    print("Using user_settings.py file")
 except ImportError:
+    print("No user_settings.py file found, using defaults")
     premise_key = None
     project_premise_base = "default"
     project_premise = "premise_default"
@@ -54,13 +59,15 @@ except ImportError:
     batch_size = 1
     scenarios_all = [{"model": "remind", "pathway": "SSP2-Base", "year": 2050}]
     dir_logs = Path.cwd()
+    verbose = False
+    use_mp = False
+    
 
 # Initialize logging with timestamp
-log_filename = datetime.today().strftime(f"{dir_logs}/FutureScenarios_%Y%m%d.log")
+if not os.path.exists(dir_logs):
+    os.makedirs(dir_logs)
+log_filename = datetime.today().strftime(f"{dir_logs}/%Y%m%d_FutureScenarios.log")
 logging.basicConfig(filename=log_filename, level=logging.INFO)
-
-print("*** Starting FutureScenarios.py ***")
-logging.info("*** Starting FutureScenarios.py ***")
 
 
 # Function to split scenarios into smaller groups (for batch processing)
@@ -68,13 +75,15 @@ def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
-
 # Main function
 def FutureScenarios():
+    print("*** Starting FutureScenarios.py ***")
+    print(f'\tUsing premise version {pm.__version__}')
+    
     # Delete existing project if specified
+    bd.projects.purge_deleted_directories()
     if project_premise in bd.projects and delete_existing:
         bd.projects.delete_project(project_premise, True)
-        logging.info(f"Deleted existing project {project_premise}")
         print(f"Deleted existing project {project_premise}")
 
         bd.projects.set_current(project_premise_base)
@@ -92,7 +101,7 @@ def FutureScenarios():
         bd.projects.copy_project(project_premise)
         print(f"Created new project {project_premise} from {project_premise_base}")
         print(f'Removing unneeded databases..')
-        for db in bd.databases:
+        for db in list(bd.databases):
             if db not in [database_name, 'biosphere3']:
                 del bd.databases[db]
                 print(f'Removed {db}')
@@ -106,20 +115,27 @@ def FutureScenarios():
     version = db_parts[-2]
     model = db_parts[-1]
 
+    print(f"\n** Using: {database_name}, {version}, {model} **")
+    
     # Loop through scenario batches
     for scenarios_set in grouper(scenarios_all, batch_size):
+        
+        if len(scenarios_all) < batch_size:
+            total_batches = 1
+            scenarios_set = scenarios_all
+        
+        else:
+            total_batches = len(scenarios_all)//batch_size
+        
         count += 1
         print(
-            f"\n ** Processing scenario set {count} of {len(scenarios_all)//batch_size : .0f}"
+            f"\n ** Processing scenario set {count} of {total_batches: .0f}, batch size {batch_size} **"
         )
         logging.info(
-            f"\n ** Processing scenario set {count} of {len(scenarios_all)//batch_size : .0f}"
+            f"\n ** Processing scenario set {count} of {total_batches : .0f}, batch size {batch_size} **"
         )
-
-        for scenario in scenarios_set:
-            print(
-                f'    - {scenario["model"]}, {scenario["pathway"]}, {scenario["year"]}'
-            )
+        
+        model_args = {"range time":2, "duration":False, "foresight":False, "lead time":True, "capital replacement rate":False, "measurement": 0, "weighted slope start": 0.75, "weighted slope end": 1.00}
 
         # Create new database based on scenario details
         ndb = pm.NewDatabase(
@@ -128,17 +144,30 @@ def FutureScenarios():
             source_version=version,
             system_model=model,
             key=premise_key,
+            quiet= not verbose,
+            use_multiprocessing=use_mp,
+            system_args=model_args,
         )
 
         # Updates depending on the model
         if model == "cutoff":
-            ndb.update_all()
+            # ndb.update_all()
             ndb.update_cars()
-            ndb.update_buses()
+            # ndb.update_buses()
 
         if model == "consequential":
+            # ndb.update_all()
+            # ndb.update_two_wheelers()
             ndb.update_electricity()
-
+            ndb.update_cars()
+            ndb.update_trucks()
+            ndb.update_buses()
+            ndb.update_cement()
+            ndb.update_steel()
+            ndb.update_fuels()
+            ndb.update_emissions()
+            ndb.update_dac()
+            
         # Write the new database to brightway
         ndb.write_db_to_brightway()
 

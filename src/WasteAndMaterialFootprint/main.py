@@ -81,6 +81,7 @@ from user_settings import (
     project_base,
     project_wmf,
     use_premise,
+    use_multiprocessing,
 )
 
 print(f"{80*'='}")
@@ -93,21 +94,17 @@ if custom_bw2_dir:
 import bw2data as bd
 
 # Run premise to make future scenarios databases
-if use_premise:
-    FutureScenarios()
+
 
 
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
-def main(
-    custom_bw2_dir,
-    project,
-    single,
-    database,
-    delete_project,
-    use_multiprocessing,
-):
+def main():
     """Main function serving as a wrapper for the WasteAndMaterialFootprint tool."""
 
+    # create future scenario databases
+    if use_premise:
+        FutureScenarios()
+        
     start_time = datetime.now()
     args_list = generate_args_list()
     total_databases = len(args_list)
@@ -290,12 +287,23 @@ def EditExchanges(args):
 
 # %% 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CLI for your project.")
-    parser.add_argument("--project", type=str, default="default", help='Project name. Default is "default".')
-    parser.add_argument("--single", action="store_true", help="Use a single databases. Default is False.")
-    parser.add_argument("--database", type=str, default="ecoinvent_3.9.1_cutoff", help='Database name. Default:"ecoinvent_3.9.1_cutoff".')
-    parser.add_argument("--delete", action="store_true", help="Delete the old project before running. Default is False.")
-    parser.add_argument("--multiprocessing", action="store_true", help="Use multiprocessing. Default is False.")
-    args_cli = parser.parse_args()
+    # parser = argparse.ArgumentParser(description="CLI for your project.")
+    # parser.add_argument("--project", type=str, default="default", help='Project name. Default is "default".')
+    # parser.add_argument("--single", action="store_true", help="Use a single databases. Default is False.")
+    # parser.add_argument("--database", type=str, default="ecoinvent_3.9.1_cutoff", help='Database name. Default:"ecoinvent_3.9.1_cutoff".')
+    # parser.add_argument("--delete", action="store_true", help="Delete the old project before running. Default is False.")
+    # parser.add_argument("--multiprocessing", action="store_true", help="Use multiprocessing. Default is False.")
+    # parser.add_argument("--use_premise", action="store_true", help="Use premise to make future scenarios databases. Default is False.")
+    # args_cli = parser.parse_args()
 
-    main(custom_bw2_dir, project=args_cli.project, single=args_cli.single, database=args_cli.database, delete_project=args_cli.delete, use_multiprocessing=args_cli.multiprocessing)
+    # main(
+    #     custom_bw2_dir, 
+    #      project=args_cli.project, 
+    #      single=args_cli.single, 
+    #      database=args_cli.database, 
+    #      delete_project=args_cli.delete, 
+    #      use_multiprocessing=args_cli.multiprocessing, 
+    #      use_premise=args_cli.use_premise
+    #      )
+    
+    main()

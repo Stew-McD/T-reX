@@ -5,12 +5,12 @@
 names = [
     "digestion",
     "composting",
-    "open_burning",
+    "open-burning",
     "incineration",
     "recycling",
     "landfill",
     "hazardous",
-    "non_hazardous",
+    "non-hazardous",
     "total",
 ]
 
@@ -44,11 +44,11 @@ for name in names:
     if "hazardous" == name:
         query.update({"OR": ["hazardous", "radioactive"]})
         query.update({"NOT": ["non-hazardous", "non-radioactive"]})
-    if "non_hazardous" == name:
+    if "non-hazardous" == name:
         query.update({"NOT": ["hazardous", "radioactive"]})
     if "incineration" in name:
         query["AND"] += ["incineration"]
-    if "open_burning" in name:
+    if "open-burning" in name:
         query["AND"] += ["burning"]
     if "recycling" in name:
         query["AND"] += ["recycling"]

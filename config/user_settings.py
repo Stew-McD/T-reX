@@ -47,16 +47,65 @@ if custom_bw2_dir:
 import bw2data as bd
 
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-project_base = 'SSP125_cutoff'
+# set project name and other things here (or give as an argument to main.py)
+
+project_base = 'SSP125base_consequential'
 project_wmf = f"WMF-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
 database = None
-delete = False
+delete = True
 use_multiprocessing = False
+verbose = False
 
+#%% PREMISE SETTINGS -  to construct future LCA databases
 
-# set project name and other things here (or give as an argument to main.py)
+use_premise = True
+
+premise_key = None
+project_premise_base = "default"
+project_premise = "SSP125base_consequential"
+database_name = "ecoinvent_3.9.1_consequential"
+delete_existing = False
+use_mp = False
+batch_size = 1
+
+if use_premise:
+    project_wmf = f"WMF-{project_premise}"
+    
+# Get the premise key
+if premise_key is None:
+    key_path = Path(__file__).parents[1] / ".secrets" / "premise_key.txt"
+    with open(key_path, "r") as f:
+        premise_key = f.read()
+
+        
+# Details of the scenarios can be found here:
+# carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
+
+scenarios_all = [
+        {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
+        {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
+        {"model":"remind", "pathway":"SSP1-Base", "year":2030},
+        {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+        {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
+        {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
+        {"model":"remind", "pathway":"SSP2-Base", "year":2030},
+        {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
+        {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
+        {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
+        {"model":"remind", "pathway":"SSP5-Base", "year":2030},
+        {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
+        # {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
+        # {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
+        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
+]
+
 def generate_args_list():
     # change to fit your needs
     bd.projects.set_current(project_base)
@@ -78,51 +127,6 @@ def generate_args_list():
         args_list.append(args)
         
     return args_list
-
-
-#%% PREMISE SETTINGS -  to construct future LCA databases
-
-use_premise = True
-
-premise_key = None
-project_premise_base = "default"
-project_premise = "SSP1_cutoff"
-delete_existing = False
-batch_size = 5
-
-# Get the premise key
-if premise_key is None:
-    key_path = Path(__file__).parents[1] / ".secrets" / "premise_key.txt"
-    with open(key_path, "r") as f:
-        premise_key = f.read()
-        
-        
-# Details of the scenarios can be found here:
-# carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
-
-scenarios_all = [
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-        # {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-        # {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
-        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
-        # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
-        # {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
-        # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
-        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
-        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
-        # {"model":"remind", "pathway":"SSP1-Base", "year":2030},
-        # {"model":"remind", "pathway":"SSP2-Base", "year":2030},
-        # {"model":"remind", "pathway":"SSP5-Base", "year":2030},
-        # {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
-        # {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
-        # {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
-        # {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
-        # {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
-        # {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
-        # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
-]
-
 # %% GENERAL DIRECTORY PATHS
 # Set the paths (to the data, config, logs, and the results)
 
