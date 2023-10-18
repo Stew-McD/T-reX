@@ -1,7 +1,23 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+'''
+|===============================================================|
+| File: ExchangeEditor.py                                       |
+| Project: WasteAndMaterialFootprint                            |
+| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
+| Description: <<description>>                                  |
+|---------------------------------------------------------------|
+| File Created: Monday, 18th September 2023 11:21:13 am         |
+| Author: Stewart Charles McDowall                              |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+| Github: Stew-McD                                              |
+| Company: CML, Leiden University                               |
+|---------------------------------------------------------------|
+| Last Modified: Wednesday, 18th October 2023 9:40:06 am        |
+| Modified By: Stewart Charles McDowall                         |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+|---------------------------------------------------------------|
+|License: The Unlicense                                         |
+|===============================================================|
 
-"""
 ExchangeEditor():
 For every activity identified by WasteAndMaterialSearch(), this function appends the pertinent exchange 
 from the db_wmf. This is the most time-consuming function, taking around 10 minutes per database.
@@ -9,7 +25,7 @@ from the db_wmf. This is the most time-consuming function, taking around 10 minu
 Created on Thu Nov 17 15:30:24 2022
 @author: Stew-McD
 based on the work of LL
-"""
+'''
 
 
 def ExchangeEditor(project_wmf, db_name, db_wmf_name):

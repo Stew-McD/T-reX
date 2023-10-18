@@ -1,10 +1,23 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-Created on Sat Feb 11 10:02:15 2023
-@author: Stew-McD
-"""
+'''
+|===============================================================|
+| File: SearchMaterial.py                                       |
+| Project: WasteAndMaterialFootprint                            |
+| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
+| Description: <<description>>                                  |
+|---------------------------------------------------------------|
+| File Created: Monday, 18th September 2023 6:11:14 pm          |
+| Author: Stewart Charles McDowall                              |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+| Github: Stew-McD                                              |
+| Company: CML, Leiden University                               |
+|---------------------------------------------------------------|
+| Last Modified: Wednesday, 18th October 2023 9:38:46 am        |
+| Modified By: Stewart Charles McDowall                         |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+|---------------------------------------------------------------|
+|License: The Unlicense                                         |
+|===============================================================|
+'''
 
 import os
 import shutil

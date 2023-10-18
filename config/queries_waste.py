@@ -1,3 +1,4 @@
+
 # Define the search parameters here each query
 # (needs to have .pickle already there from ExplodeDatabase.py)
 # the terms should be either a string or a list of strings, as you find them

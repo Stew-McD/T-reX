@@ -64,11 +64,11 @@ use_premise = True
 
 premise_key = None
 project_premise_base = "default"
-project_premise = "SSP125base_consequential"
+project_premise = "SSP125base_consequential_test"
 database_name = "ecoinvent_3.9.1_consequential"
 delete_existing = False
-use_mp = False
-batch_size = 1
+use_mp = True
+batch_size = 5
 
 if use_premise:
     project_wmf = f"WMF-{project_premise}"

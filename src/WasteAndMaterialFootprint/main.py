@@ -3,7 +3,7 @@
 | File: main.py                                                 |
 | Project: WasteAndMaterialFootprint                            |
 | Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
-| Description: This is the main module of the ``WasteAndMaterialFootprint`` tool |
+| Description: Main module of `WasteAndMaterialFootprint` tool  |
 |---------------------------------------------------------------|
 | File Created: Monday, 18th September 2023 11:21:13 am         |
 | Author: Stewart Charles McDowall                              |

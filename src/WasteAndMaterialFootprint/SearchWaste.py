@@ -1,17 +1,30 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+'''
+|===============================================================|
+| File: SearchWaste.py                                          |
+| Project: WasteAndMaterialFootprint                            |
+| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
+| Description: <<description>>                                  |
+|---------------------------------------------------------------|
+| File Created: Monday, 18th September 2023 11:21:13 am         |
+| Author: Stewart Charles McDowall                              |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+| Github: Stew-McD                                              |
+| Company: CML, Leiden University                               |
+|---------------------------------------------------------------|
+| Last Modified: Wednesday, 18th October 2023 9:39:10 am        |
+| Modified By: Stewart Charles McDowall                         |
+| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
+|---------------------------------------------------------------|
+|License: The Unlicense                                         |
+|===============================================================
 
-"""
-Script: WasteAndMaterialFootprint Tool (Script 2)
-
+<<description>>
 This script loads data from '<db name>_exploded.pickle', runs search queries, 
 and produces a CSV to store the results and a log entry. The search queries are 
 formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
-Created on: Wed Nov 16 15:09:03 2022
-Author: Stew-McD (based on the work of LL)
-"""
+'''
 
 
 def SearchWaste(db_name):
