@@ -82,6 +82,7 @@ from user_settings import (
     project_wmf,
     use_premise,
     use_multiprocessing,
+    use_wmf,
 )
 
 print(f"{80*'='}")
@@ -104,6 +105,8 @@ def main():
     # create future scenario databases
     if use_premise:
         FutureScenarios()
+        
+    assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
         
     start_time = datetime.now()
     args_list = generate_args_list()

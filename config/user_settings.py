@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 '''
 |===============================================================|
 | File: user_settings.py                                        |
@@ -23,7 +22,7 @@
 
 This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
 
-The script allows for two modes of operation:
+The script allows for two modes of operation for the WasteAndMaterialFootprint tool:
 
 1. Single Mode (`SINGLE` is True):
     - In this mode, the project and database names are set to a single specified value.
@@ -48,7 +47,7 @@ import bw2data as bd
 
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 # set project name and other things here (or give as an argument to main.py)
-
+use_wmf = False
 project_base = 'SSP125base_consequential'
 project_wmf = f"WMF-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
@@ -85,17 +84,17 @@ if premise_key is None:
 
 scenarios_all = [
         {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
-        {"model":"remind", "pathway":"SSP1-Base", "year":2030},
-        {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
-        {"model":"remind", "pathway":"SSP2-Base", "year":2030},
-        {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
-        {"model":"remind", "pathway":"SSP5-Base", "year":2030},
-        {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
+        # {"model":"remind", "pathway":"SSP1-Base", "year":2030},
+        # {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
+        # {"model":"remind", "pathway":"SSP2-Base", "year":2030},
+        # {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
+        # {"model":"remind", "pathway":"SSP5-Base", "year":2030},
+        # {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
         # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
         # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
         # {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
