@@ -25,14 +25,13 @@
 # https://github.com/polca/premise/blob/master/examples/examples.ipynb
 
 import os
+import shutil
 import logging
 from datetime import datetime
 from itertools import zip_longest
 from pathlib import Path
 
 import bw2data as bd
-import premise as pm
-from premise_gwp import add_premise_gwp
 
 # Import user settings or set defaults
 try:
@@ -41,6 +40,7 @@ try:
         database_name,
         delete_existing,
         dir_logs,
+        dir_data,
         premise_key,
         project_premise,
         project_premise_base,
@@ -61,7 +61,15 @@ except ImportError:
     dir_logs = Path.cwd()
     verbose = False
     use_mp = False
-    
+
+# easiest way to stop premise from making a mess
+dir_premise = dir_data / "premise"
+if not os.path.exists(dir_premise):
+    os.makedirs(dir_premise)
+os.chdir(dir_premise)
+import premise as pm
+from premise_gwp import add_premise_gwp
+
 
 # Initialize logging with timestamp
 if not os.path.exists(dir_logs):
@@ -175,7 +183,10 @@ def FutureScenarios():
     add_premise_gwp()
     print("***** Done! *****")
     logging.info("Done!")
-
+    
+    # change back to the original directory
+    os.chdir(Path(__file__).parent)
+    
 
 # Run the main function
 if __name__ == "__main__":
