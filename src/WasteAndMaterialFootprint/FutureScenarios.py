@@ -110,7 +110,7 @@ def FutureScenarios():
         print(f"Created new project {project_premise} from {project_premise_base}")
         print(f'Removing unneeded databases..')
         for db in list(bd.databases):
-            if db not in [database_name, 'biosphere3']:
+            if db not in [database_name] and 'biosphere' not in db:
                 del bd.databases[db]
                 print(f'Removed {db}')
 
@@ -159,9 +159,9 @@ def FutureScenarios():
 
         # Updates depending on the model
         if model == "cutoff":
-            # ndb.update_all()
+            ndb.update_all()
             ndb.update_cars()
-            # ndb.update_buses()
+            ndb.update_buses()
 
         if model == "consequential":
             # ndb.update_all()
