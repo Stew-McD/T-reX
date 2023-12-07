@@ -52,6 +52,8 @@ print(f'\n{"-"*80}\n')
 def parse_db_name(db_name):
     if db_name == 'ecoinvent_3.9.1_cutoff':
         db_name = 'ecoinvent_cutoff_3.9_none_none0-none_2020'
+    if db_name == 'ecoinvent_3.9.1_consequential':
+        db_name = 'ecoinvent_consequential_3.9_none_none0-none_2020'
     
     parts = db_name.split('_')
     db_base = parts[0]
