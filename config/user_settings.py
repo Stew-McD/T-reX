@@ -41,7 +41,7 @@ import bw2data as bd
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 # set project name and other things here (or give as an argument to main.py)
 use_wmf = True
-project_base = "SSP-base_cutoff"
+project_base = "SSP-cutoff"
 project_wmf = f"WMFootprint-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
@@ -52,11 +52,11 @@ verbose = False
 
 # %% PREMISE SETTINGS -  to construct future LCA databases
 
-use_premise = False
+use_premise = True
 
 premise_key = None  # add your own key here or have it stored in .secrets/premise_key.txt (tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo=)
 project_premise_base = "default"
-project_premise = "SSP-base_cutoff"
+project_premise = project_base
 database_name = "ecoinvent_3.9.1_cutoff"
 delete_existing = True
 use_mp = False
@@ -64,7 +64,7 @@ batch_size = 3
 premise_quiet = True
 
 if use_premise:
-    project_wmf = f"WMF-{project_premise}"
+    project_wmf = f"WMFootprint-{project_premise}"
 
 # Get the premise key
 if premise_key is None:
@@ -80,36 +80,30 @@ if premise_key is None:
 # https://premisedash-6f5a0259c487.herokuapp.com/ (there is a nice dashboard here to explore the scenarios)
 scenarios_all = [
     {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2045},
     {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2035},
     {"model": "remind", "pathway": "SSP1-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2025},
-    # {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
+    {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
     {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2045},
     {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2035},
     {"model": "remind", "pathway": "SSP2-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2025},
-    # # {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
-    # {"model": "remind", "pathway": "SSP2-NPi", "year": 2050},
-    # {"model": "remind", "pathway": "SSP2-NPi", "year": 2040},
-    # {"model":"remind", "pathway":"SSP2-NPi", "year":2030},
-    # # {"model": "remind", "pathway": "SSP2-NPi", "year": 2020},
-    # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
-    # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
-    # {"model":"remind", "pathway":"SSP2-PkBudg500", "year":2030},
-    # {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
+    {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
     {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2045},
     {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2035},
     {"model": "remind", "pathway": "SSP5-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2025},
-    # {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+    {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
+    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2050},
+    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2040},
+    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2030},
+    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2020},
+    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
+    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
+    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2030},
+    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
+    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2050},
+    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2040},
+    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2030},
+    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2020},
 ]
-
 
 # Set the project and databases to be processed with the WMF tool
 def generate_args_list():
@@ -129,7 +123,6 @@ def generate_args_list():
         exclude = [
             "biosphere",
             "WasteAndMaterialFootprint",
-            "consequential",
         ]
         databases = sorted(
             [x for x in bd.databases if not any(sub in x for sub in exclude)]
