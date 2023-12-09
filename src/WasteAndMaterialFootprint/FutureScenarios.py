@@ -110,9 +110,10 @@ def FutureScenarios():
         bd.projects.set_current(project_premise_base)
         bd.projects.copy_project(project_premise)
         print(f"Created new project {project_premise} from {project_premise_base}")
+        print(f"Using database {database_name}")
         print("Removing unneeded databases..")
         for db in list(bd.databases):
-            if db not in [database_name] and "biosphere" not in db:
+            if db != database_name and "biosphere" not in db:
                 del bd.databases[db]
                 print(f"Removed {db}")
 
@@ -121,11 +122,12 @@ def FutureScenarios():
         pm.clear_cache()
 
     count = 0
-    db_parts = database_name.split("_")
+    db_parts = database_name.split("-")
     version = db_parts[-2]
     model = db_parts[-1]
 
-    print(f"\n** Using: {database_name}, {version}, {model} **")
+    print(f"\n** Using: {database_name}**")
+    print()
 
     # Loop through scenario batches
     for scenarios_set in grouper(scenarios_all, batch_size):
@@ -167,15 +169,8 @@ def FutureScenarios():
             quiet=premise_quiet,
         )
 
-        # Updates depending on the model
-        if model == "cutoff":
+        try:
             ndb.update_all()
-            ndb.update_cars()
-            ndb.update_buses()
-
-        if model == "consequential":
-            ndb.update_all()
-            # ndb.update_two_wheelers()
             ndb.update_electricity()
             ndb.update_cars()
             ndb.update_trucks()
@@ -185,6 +180,9 @@ def FutureScenarios():
             ndb.update_fuels()
             ndb.update_emissions()
             ndb.update_dac()
+            ndb.update_two_wheelers()
+        except Exception as e:
+            print(f"Error: {e}")
 
         # Write the new database to brightway
         ndb.write_db_to_brightway()

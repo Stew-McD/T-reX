@@ -57,7 +57,7 @@ use_premise = True
 premise_key = None  # add your own key here or have it stored in .secrets/premise_key.txt (tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo=)
 project_premise_base = "default"
 project_premise = project_base
-database_name = "ecoinvent_3.9.1_cutoff"
+database_name = "ecoinvent-3.9.1-cutoff"
 delete_existing = True
 use_mp = False
 batch_size = 3
