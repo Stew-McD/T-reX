@@ -1,45 +1,63 @@
-'''
-|===============================================================|
-| File: main.py                                                 |
-| Project: WasteAndMaterialFootprint                            |
-| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
-| Description: Main module of `WasteAndMaterialFootprint` tool  |
-|---------------------------------------------------------------|
-| File Created: Monday, 18th September 2023 11:21:13 am         |
-| Author: Stewart Charles McDowall                              |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-| Github: Stew-McD                                              |
-| Company: CML, Leiden University                               |
-|---------------------------------------------------------------|
-| Last Modified: Monday, 16th October 2023 5:27:34 pm           |
-| Modified By: Stewart Charles McDowall                         |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-|---------------------------------------------------------------|
-|License: The Unlicense                                         |
-|===============================================================|
+"""
+main Module
+===========
 
-* To use the ``default`` settings, simply run the whole script using "python main.py".
+Main module of the `WasteAndMaterialFootprint` tool.
 
-* You can provide arguments to the script to change the project and database names, 
-and to delete the project before running.
+This script serves as the entry point for the `WasteAndMaterialFootprint` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges. 
 
-* You can customize the terms of the waste search query in config/queries_waste.py
- and the list of materials in config/default_materials.py.
- 
-* The other settings, like the names of the projects and databases can be 
- edited in config/user_settings.py.
+The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.
 
-'''
+Customisation:
+--------------
+- Project and database names, and other settings can be edited in `config/user_settings.py`.
+- Waste search query terms can be customised in `config/queries_waste.py`.
+- The list of materials can be modified in `config/queries_materials.py`.
 
-#%%  0. Imports and configuration
+Usage:
+------
+To use the default settings, run the script with `python main.py`. 
+Arguments can be provided to change project/database names or to delete the project before running.
+
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+Licence: The Unlicense
+
+"""
+
+print(
+    f"""
+    {80*'='}
+    {80*'~'}
+    {'** Starting the WasteAndMaterialFootprint tool **'.center(80, ' ')}
+    {80*'~'}
+    {80*'='}
+    """
+)
+
+# %%  0. Imports and configuration
 
 # Import standard modules
-import argparse
 import os
 import sys
+from time import sleep
 from datetime import datetime
 from multiprocessing import Pool, cpu_count
 from pathlib import Path
+import bw2data as bd
+
+
+# not necessary (but fun), so in a try/except block
+try:
+    import cowsay
+    import logging
+
+    logging.getLogger("playsound").setLevel(logging.ERROR)
+    from playsound import playsound
+except ImportError:
+    pass
 
 # If running on a cluster, get the number of CPUs available
 num_cpus = int(
@@ -52,7 +70,7 @@ num_cpus = int(
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
-# Add the root dir to the Python path
+# Add the cwd to the Python path
 cwd = Path.cwd()
 sys.path.insert(0, str(cwd))
 
@@ -63,12 +81,12 @@ sys.path.insert(0, str(dir_config))
 # import custom modules (from root dir)
 from ExchangeEditor import ExchangeEditor
 from ExplodeDatabase import ExplodeDatabase
+from FutureScenarios import FutureScenarios
 from MakeCustomDatabase import dbExcel2BW, dbWriteExcel
 from MethodEditor import AddMethods
 from SearchMaterial import SearchMaterial
 from SearchWaste import SearchWaste
 from VerifyDatabase import VerifyDatabase
-from FutureScenarios import FutureScenarios
 
 # import configuration from config/user_settings.py
 from user_settings import (
@@ -80,49 +98,54 @@ from user_settings import (
     generate_args_list,
     project_base,
     project_wmf,
-    use_premise,
     use_multiprocessing,
+    use_premise,
     use_wmf,
 )
-
-print(f"{80*'='}")
-print(f'\t ** Starting WasteAndMaterialFootprint for project "{project_base}" **')
-print(f"{80*'='}")
 
 # Check from the settings if a custom datadir is declared
 if custom_bw2_dir:
     os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
-import bw2data as bd
-
-# Run premise to make future scenarios databases
-
 
 
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
 def main():
-    """Main function serving as a wrapper for the WasteAndMaterialFootprint tool."""
+    """
+    Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
+
+    This function coordinates the various components of the tool, including:
+        creating future scenario databases,
+        setting up and processing each database for waste and material footprinting,
+        and combining results into a custom database.
+        adding LCIA methods to the project for each of the waste/material flows.
+
+    The function supports various modes of operation based on the settings in `config/user_settings.py`.
+    Specifications for material and waste searches can be customised in `queries_materials.
+    """
 
     # create future scenario databases
     if use_premise:
         FutureScenarios()
-        
+
     assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
-        
+
     start_time = datetime.now()
     args_list = generate_args_list()
     total_databases = len(args_list)
-    all_databases = list(set(bd.databases) - {'biosphere3'})
+    all_databases = list(set(bd.databases) - {"biosphere3"})
 
-    print(f"\nStarting WasteAndMaterialFootprint for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}")
+    print(
+        f"\nStarting WasteAndMaterialFootprint for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
+    )
     for arg in args_list:
         print(f"\t{arg['db_name']}")
 
-    
     # Make new project, delete previous project if you want to start over, or use existing project
     bd.projects.purge_deleted_directories()
     if project_wmf in bd.projects and delete:
         print(f"\n* Deleting previous project {project_wmf}")
         bd.projects.delete_project(project_wmf, True)
+        bd.projects.purge_deleted_directories()
 
     if project_wmf in bd.projects:
         print(f"* WasteAndMaterial project already exists: {project_wmf}")
@@ -136,43 +159,54 @@ def main():
         bd.projects.copy_project(project_wmf)
         bd.projects.set_current(project_wmf)
 
-    #%% 1.1 Run the initial steps for each database in the project
-    def process_db_setup(args):
+    # %% 1.1 Run the initial steps for each database in the project
+    def process_db_setup(args, db_number, total_databases):
+        """
+        Process initial setup for a given database within the project.
+
+        This function is responsible for setting up each database by running the ExplodeAndSearch process.
+        It handles any exceptions during the process and logs errors.
+
+        :param dict args: Arguments containing database and project settings.
+        :param int db_number: The current database number in the processing sequence.
+        :param int total_databases: Total number of databases to be processed.
+        :return: int: Returns 1 if successful, 0 if an error occurred.
+        """
+        print(f'\n{"-"*80}')
         try:
-            print(f"\n* Processing database {args['db_name']}\n")
+            print(
+                f"\n** Pre-processing database ({db_number+1}/{total_databases}): {args['db_name']}**\n"
+            )
             print(args)
             ExplodeAndSearch(args)
+            print(f'\n{"-"*80}')
             return 1  # successfully processed
         except Exception as e:
-            print(f"\n{'@'*50}\n\tError processing database {args['db_name']}! \n\n\t{e}\n{'@'*50}\n")
+            print(
+                f"\n{'@'*50}\n\tError pre-processing database {args['db_name']}! \n\n\t{e}\n{'@'*50}\n"
+            )
+            print(f'\n{"-"*80}')
             return 0  # error occurred
 
     results = []
     if use_multiprocessing:
         with Pool(processes=num_cpus) as pool:
-            for arg in args_list:
-                pool.apply_async(process_db_setup, (arg,), callback=results.append)
+            for db_number, arg in enumerate(args_list):
+                pool.apply_async(
+                    process_db_setup,
+                    (arg, db_number, total_databases),
+                    callback=results.append,
+                )
 
     else:
-        for args in args_list:
-            result = process_db_setup(args)
+        for db_number, arg in enumerate(args_list):
+            result = process_db_setup(arg, db_number, total_databases)
             results.append(result)
 
     successful_count = sum(results)
 
     end_time = datetime.now()
     duration = end_time - start_time
-
-    print(
-        f"""
-    *** Processing Completed ***
-
-    \t Total databases:          {total_databases}
-    \t Successfully processed:   {successful_count}
-    \t Duration:                 {str(duration).split('.')[0]} seconds
-    
-    """
-    )
 
     # %% 1.2 MakeCustomDatabase.py: Make the custom database from the combined search results
     dbWriteExcel()
@@ -180,28 +214,61 @@ def main():
     # %% 1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows
     AddMethods()
 
-    def process_db(args):
-        ''' This function is called by the multiprocessing pool'''
+    print(
+        f"""
+    {80*'-'}
+    *** Preprocessing completed ***
+
+    \t Total databases:          {total_databases}
+    \t Successfully processed:   {successful_count}
+    \t Duration:                 {str(duration).split('.')[0]} (h:m:s)
+    {80*'-'}
+    
+    """
+    )
+
+    def process_db(args, db_number, total_databases):
+        """
+        Process the database by editing exchanges
+
+        :param dict args: Arguments containing database and project settings.
+        :param int db_number: The current database number in the processing sequence.
+        :param int total_databases: Total number of databases to be processed.
+
+        :return: int: Returns 1 if successful, 0 if an error occurred.
+        """
+        print(f'\n{"-"*80}')
+        db_number += 1
         try:
-            print(f"\n* Processing database {args['db_name']}\n")
+            print(
+                f"\n** Processing database ({db_number+1}/{total_databases}): {args['db_name']}**"
+            )
+            print("Arguments:")
             print(args)
             EditExchanges(args)
+            print(f'{"-"*80}\n')
             return 1  # successfully processed
         except Exception as e:
             print(
                 f"\n{'@'*50}\n\tError processing database {args['db_name']}! \n\n\t{e}\n{'@'*50}\n"
             )
+            print(f'{"-"*80}\n')
             return 0  # error occurred
 
     results = []
+    db_number = 0
     if use_multiprocessing:
         with Pool(processes=num_cpus) as pool:
             for arg in args_list:
-                pool.apply_async(process_db, (arg,), callback=results.append)
+                pool.apply_async(
+                    process_db,
+                    (arg, db_number, total_databases),
+                    callback=results.append,
+                )
 
     else:
         for args in args_list:
-            result = process_db(args)
+            result = process_db(args, db_number, total_databases)
             results.append(result)
 
     successful_count = sum(results)
@@ -209,34 +276,77 @@ def main():
     end_time = datetime.now()
     duration = end_time - start_time
 
+    # %% 1.4 VerifyDatabase.py: Verify the database
+    print(f'\n{"-"*80}')
+    print("\t*** Verifying all databases in the project **")
     for arg in args_list:
         db_name = arg["db_name"]
         VerifyDatabase(project_wmf, db_name)
+        print(f'\n{"-"*80}\n')
 
+    
+    try:
+        playsound(cwd.parents[1] / "misc/success.mp3")
+    except:
+        pass
+    
     print(
         f"""
-    *** Processing Completed ***
+    {80 * '~'}
+    {80 * '='}
+    {'WasteAndMaterialFootprint Completed'.center(80, ' ')}
+    {'~' * 80}
 
-    Total databases:          {total_databases}
-    Successfully processed:   {successful_count}
-    Duration:                 {str(duration).split('.')[0]} seconds
+    Project:                  {project_wmf}
+    Total Databases:          {total_databases}
+    Successfully Processed:   {successful_count}
+    Duration:                 {str(duration).split('.')[0]} (h:m:s)
+
+    {'=' * 80}
+    {'~' * 80}
     """
     )
 
+    sleep(1)
+
+    try:
+        def animate_cowsay(message, delay=0.2):
+            cow = cowsay.get_output_string("cow", message)
+            for line in cow.split("\n"):
+                print(line.center(80, " "))
+                sleep(delay)
+            playsound(cwd.parents[1] / "misc/moo.mp3")
+
+        message = "\nLet's moooooo\n some LCA!\n"
+        animate_cowsay(message)
+    except:
+        pass
+
+    print(f'\n{"-"*80}\n')
+    print(f'\n{"~"*80}\n')
+    print(f'\n{"="*80}\n')
+
+
 def ExplodeAndSearch(args):
     """
-    This function is called by the multiprocessing pool 
-    to run the setup for each database in the project.
-        This includes:
-            - ExplodeDatabase.py
-            - SearchWaste.py
-            - SearchMaterial.py
+    Exploding the database into separate exchanges, searching for waste and
+    material flows, and processing these results.
+
+    This includes:
+        - ExplodeDatabase.py
+        - SearchWaste.py
+        - SearchMaterial.py
+
+    :param args: Dictionary containing database and project settings.
+    :returns: None
     """
 
     project_wmf = args["project_wmf"]
     db_name = args["db_name"]
 
-    print(f"\n{'='*80}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*80}")
+    print(
+        f"\n{'='*100}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*100}"
+    )
 
     # %% 1.2 Explode the database into separate exchanges
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
@@ -250,33 +360,43 @@ def ExplodeAndSearch(args):
     SearchWaste(db_name)
     SearchMaterial(db_name, project_wmf)
 
-    return
+    return None
+
 
 def EditExchanges(args):
+    """
+    Edit exchanges in the database.
+
+    This function adds waste and material flows to the activities and verifies the database.
+
+    :param args: Dictionary containing database and project settings.
+    :returns: None
+    """
+
     db_name = args["db_name"]
     start = datetime.now()
     # Add waste and material flows to the activities, check that it worked
-    
+
     ExchangeEditor(project_wmf, db_name, db_wmf_name)
     exit_code = VerifyDatabase(project_wmf, db_name)
-    
+
     if exit_code == 0:
-        print("** Database verified successfully! **")
+        print("** Database verified successfully! **\n")
     else:
         print("** Error occurred during verification! **")
-        print(f"\t Look in the logfile for details. exit_code = {exit_code}")
+        print(f"\t Look in the logfile for details. exit_code = {exit_code}\n")
 
     # Final message and log
     duration = datetime.now() - start
-    print(f"{'='*50}")
+    print(f"{'='*90}")
     print(
-        f"\n*** Finished WasteAndMaterialFootprint.\n\tDuration: {str(duration).split('.')[0]} ***"
+        f"\t*** Finished WasteAndMaterialFootprint for {db_name} ***\n\t\t\tDuration: {str(duration).split('.')[0]} (h:m:s)"
     )
-    print("\t** Woah woah wee waa, great success!! **")
-    print(f"{'='*50}")
+    print("\t*** Woah woah wee waa, great success!! ***")
+    print(f"{'='*90}")
 
-    with open(f"{dir_logs / 'main_log.txt'}", "a") as l:
-        l.write(
+    with open(f"{dir_logs / 'main_log.txt'}", "a") as log:
+        log.write(
             datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             + "\t Duration:"
             + str(duration).split(".")[0]
@@ -285,28 +405,9 @@ def EditExchanges(args):
             + "\n"
         )
 
-    return
+    return None
 
 
 # %% 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser(description="CLI for your project.")
-    # parser.add_argument("--project", type=str, default="default", help='Project name. Default is "default".')
-    # parser.add_argument("--single", action="store_true", help="Use a single databases. Default is False.")
-    # parser.add_argument("--database", type=str, default="ecoinvent_3.9.1_cutoff", help='Database name. Default:"ecoinvent_3.9.1_cutoff".')
-    # parser.add_argument("--delete", action="store_true", help="Delete the old project before running. Default is False.")
-    # parser.add_argument("--multiprocessing", action="store_true", help="Use multiprocessing. Default is False.")
-    # parser.add_argument("--use_premise", action="store_true", help="Use premise to make future scenarios databases. Default is False.")
-    # args_cli = parser.parse_args()
-
-    # main(
-    #     custom_bw2_dir, 
-    #      project=args_cli.project, 
-    #      single=args_cli.single, 
-    #      database=args_cli.database, 
-    #      delete_project=args_cli.delete, 
-    #      use_multiprocessing=args_cli.multiprocessing, 
-    #      use_premise=args_cli.use_premise
-    #      )
-    
     main()

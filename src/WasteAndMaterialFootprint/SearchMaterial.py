@@ -1,30 +1,27 @@
-'''
-|===============================================================|
-| File: SearchMaterial.py                                       |
-| Project: WasteAndMaterialFootprint                            |
-| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
-| Description: <<description>>                                  |
-|---------------------------------------------------------------|
-| File Created: Monday, 18th September 2023 6:11:14 pm          |
-| Author: Stewart Charles McDowall                              |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-| Github: Stew-McD                                              |
-| Company: CML, Leiden University                               |
-|---------------------------------------------------------------|
-| Last Modified: Wednesday, 18th October 2023 9:38:46 am        |
-| Modified By: Stewart Charles McDowall                         |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-|---------------------------------------------------------------|
-|License: The Unlicense                                         |
-|===============================================================|
-'''
+"""
+SearchMaterial Module
+=====================
+
+This script loads data from '<db name>_exploded.pickle', runs search queries, 
+and produces a CSV to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
+
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+Licence: The Unlicense
+
+"""
 
 import os
 import shutil
+
 import bw2data as bd
 import pandas as pd
-from default_materials import default_materials
-from user_settings import dir_tmp, dir_config, dir_logs, dir_searchmaterial_results
+from queries_materials import queries_materials
+from user_settings import dir_config, dir_logs, dir_searchmaterial_results, dir_tmp
 
 
 def SearchMaterial(db_name, project_wmf):
@@ -32,22 +29,15 @@ def SearchMaterial(db_name, project_wmf):
     Search for materials in a specified database and extract related information.
 
     This function takes a database name as input, sets the project to the respective database,
-    and looks for activities involving a predefined list of materials. The function extracts
-    relevant details of these activities, such as ISIC and CPC classifications, and saves
-    the details to a CSV file. It also extracts related material exchanges and saves them
-    to another CSV file.
+    and looks for activities involving a predefined list of materials. It extracts relevant details
+    of these activities, such as ISIC and CPC classifications, and saves the details to a CSV file.
+    It also extracts related material exchanges and saves them to another CSV file.
 
-    Parameters:
-    db_name (str): The name of the database to search in.
-
-    Returns:
-    None
-
-    Raises:
-    Exception: If there is any error in reading the materials list from the file.
+    :param db_name: The name of the database to search in.
+    :param project_wmf: The Brightway2 project to set as current for the search.
+    :return: None
+    :raises Exception: If there is any error in reading the materials list from the file.
     """
-
-    
 
     # Configuring search result directories
     dir_searchmaterial_results_db = dir_searchmaterial_results / db_name
@@ -56,14 +46,14 @@ def SearchMaterial(db_name, project_wmf):
     if os.path.isdir(dir_searchmaterial_results_db):
         print("Deleting existing results directory")
         shutil.rmtree(dir_searchmaterial_results_db)
-    
+
     # Ensure necessary directories exist
     for directory in [dir_tmp, dir_logs, dir_searchmaterial_results_grouped]:
         if not directory.exists():
             directory.mkdir(parents=True)
     print("\n*** Starting SearchMaterial ***")
     pickle_path = dir_tmp / f"{db_name}_exploded.pickle"
-    
+
     if os.path.isfile(pickle_path):
         df = pd.read_pickle(pickle_path)
         print("*** Loading pickle to dataframe ***")
@@ -106,31 +96,81 @@ def SearchMaterial(db_name, project_wmf):
             )
     except Exception:
         print("Using the default material list")
-        materials = default_materials
+        materials = queries_materials
 
     # Display loaded materials
-    print(f"\n** Materials ({len(materials)}):\n")
-    print(*materials, sep="\n")
+    print(f"\n** Materials ({len(materials)}) | (activity, group)\n", end="\t")
+    print(*materials, sep="\n\t")
 
     # Filter activities based on the materials list
-    materials_df = pd.DataFrame(default_materials, columns=["name", "group"])
+    materials_df = pd.DataFrame(queries_materials, columns=["name", "group"])
     materials_dict = dict(materials)
-    acts = acts_all[acts_all["name"].isin(materials_df.name)].reset_index(drop=True)
-    acts["material_group"] = acts["name"].map(materials_dict)
+    # changed search criteria to include all activities that contain the material name, because future databases have different naming conventions
+    acts = acts_all[
+        acts_all["name"].apply(
+            lambda x: any(x.startswith(material) for material in materials_df.name)
+        )
+    ].reset_index(drop=True)
 
-    print(f"\nThe following {len(acts)} material markets were found:")
+    def map_materials(name):
+        for key, value in materials_dict.items():
+            if name.startswith(key):
+                return value
+        return "***"  # or return a default value
+
+    acts["material_group"] = acts["name"].apply(map_materials)
+
+    print(f"\n* {len(acts)} material markets were found:")
     print(acts[["name", "material_group", "location"]].sort_values(by="name"))
 
-    # Extract and populate ISIC and CPC classifications using a function and apply
-    def extract_classifications(row):
-        for classification in row["classifications"]:
-            if "ISIC" in classification[0]:
-                row["ISIC"] = classification[1]
-            if "CPC" in classification[0]:
-                row["CPC"] = classification[1]
+    # Extract and populate ISIC and CPC classifications
+    def extract_classifications(row, acts):
+        """
+        Extracts classifications (CPC, ISIC, etc.) from the list of classifications and adds them as columns to the dataframe
+
+        :param pd.Series row: A row of the dataframe
+        :param pd.DataFrame acts: The DataFrame containing activities data
+
+        :returns pd.Series row: The row with the classifications added as columns
+        """
+
+        # Check if the "classifications" column exists and is in the correct format
+        if not isinstance(row["classifications"], list):
+            print(
+                f'\tError for activity: {row["name"]}, classification: {row["classifications"]}'
+            )
+            print(
+                f'\t\tInferring from reference product base: "{row["reference product"].split(",")[0]}", from reference product "{row["reference product"]}"'
+            )
+
+            # Find activities with the same or similar "reference product"
+            matching_activities = acts[
+                acts["reference product"] == row["reference product"].split(",")[0]
+            ]
+
+            if not matching_activities.empty:
+                # Choose the first matching activity and use its classifications
+                inferred_classifications = matching_activities.iloc[0][
+                    "classifications"
+                ]
+                row["classifications"] = inferred_classifications
+            else:
+                print(
+                    f'No matching activities found for reference product: {row["reference product"]}'
+                )
+
+        # If the "classifications" column is a list, extract the values
+        if isinstance(row["classifications"], list):
+            for classification in row["classifications"]:
+                # Split the classification into code and value
+                code, value = classification
+                # Add a new column with the classification code and set its value
+                row[code] = value
+
         return row
 
-    acts = acts.apply(extract_classifications, axis=1)
+    print("\n* Extracting classifications...\n")
+    acts = acts.apply(lambda row: extract_classifications(row, acts), axis=1)
     acts.drop("classifications", axis=1, inplace=True)
 
     # Save activities to a CSV
@@ -150,7 +190,7 @@ def SearchMaterial(db_name, project_wmf):
 
     hits = df[df["ex_name"].isin(acts["name"].values)].copy()
     hits["database"] = db_name
-    hits["material_group"] = hits["ex_name"].map(materials_dict)
+    hits["material_group"] = hits["ex_name"].apply(map_materials)
 
     # Save exchanges to CSV
     file_name = dir_searchmaterial_results_db / "material_exchanges.csv"
@@ -159,11 +199,13 @@ def SearchMaterial(db_name, project_wmf):
     print(f"\nSaved material exchanges to csv:\n{file_name}")
 
     # Generate and save grouped exchanges
-    print("\n*** Grouping material exchanges by material group ***")
+    print("\n*** Grouping material exchanges by material group \n")
     for group in sorted(hits.material_group.unique()):
         df_group = hits[hits.material_group == group]
-        file_name = dir_searchmaterial_results_grouped / f"MaterialDemand_{group}.csv"
+        file_name = (
+            dir_searchmaterial_results_grouped / f"MaterialFootprint_{group}.csv"
+        )
         df_group.to_csv(file_name, sep=";")
-        print(f"\t{group} : {len(df_group)}")
+        print(f"\t{len(df_group):>6} : {group}")
 
     return None

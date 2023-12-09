@@ -1,16 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 """
+MethodEditor Module
+===================
+
 This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.
 
-Created on Sat Nov 19 12:21:04 2022
-@author: Stew-McD
-Based on the work of LL
+.. moduleauthor:: Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+
+
+Function Summary:
+-----------------
+- `AddMethods`: Adds new methods to a project based on a custom biosphere database.
+- `DeleteMethods`: Removes specific methods from a project, particularly those related to waste and material footprints.
+- `CheckMethods`: Lists and checks the methods in a project, focusing on those associated with waste and material footprints.
 """
 
 import bw2data as bd
-from user_settings import project_wmf, db_wmf_name
+from user_settings import db_wmf_name, project_wmf
 
 
 def AddMethods():
@@ -25,7 +34,7 @@ def AddMethods():
     bd.projects.set_current(project_wmf)
     db_wmf = bd.Database(db_wmf_name)
     dic = db_wmf.load()
-    sorted_items = sorted(dic.items())
+    sorted_items = sorted(dic.items(), key=lambda item: item[1]["name"])
     dic = dict(sorted_items)
 
     initial_method_count = len(bd.methods)
@@ -33,29 +42,26 @@ def AddMethods():
     for key, value in dic.items():
         m_unit = value["unit"]
         m_code = value["code"]
-        m_name = (
-            value["name"].replace("kilogram", "solid").replace("cubicmeter", "liquid")
-        )
+        m_name = value["name"]
         m_type = value["type"]
 
         # Assign characterization factor based on type
         ch_factor = -1.0 if m_type == "waste" else 1.0
 
         if m_type == "waste":
-            name_combined = " ".join([word.capitalize() for word in m_name.split("_")[0:2]]) + " combined"
-            m_name = " ".join([word.capitalize() for word in m_name.split("_")[0:3]])
-            method_key = ("Waste Footprint", name_combined, m_name)
+            name_combined = m_code.split(" ")[0] + " combined"
+            method_key = (
+                "WasteAndMaterialFootprint",
+                "Waste: " + name_combined,
+                m_code,
+            )
             description = "For estimating the waste footprint of an activity"
         else:
-            method_key = (
-                "Material Demand Footprint",
-                f'{m_name.split("_")[0]} ({m_name.split("_")[1].capitalize()})',
-                m_name.split("_")[1].capitalize() + ' (demand)',
-            )
-            description = "For estimating the material footprint of an activity"
+            method_key = ("WasteAndMaterialFootprint", "Demand: " + m_code, m_code)
+            description = "For estimating the material demand footprint of an activity"
 
         m = bd.Method(method_key)
-        
+
         if m in bd.methods:
             print(f"\t {str(method_key)} already exists")
             continue

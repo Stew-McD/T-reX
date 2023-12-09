@@ -1,22 +1,16 @@
 """
-|===============================================================|
-| File: VerifyDatabase.py                                       |
-| Project: WasteAndMaterialFootprint                            |
-| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
-| Description: <<description>>                                  |
-|---------------------------------------------------------------|
-| File Created: Friday, 6th October 2023 8:31:42 pm             |
-| Author: Stewart Charles McDowall                              |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-| Github: Stew-McD                                              |
-| Company: CML, Leiden University                               |
-|---------------------------------------------------------------|
-| Last Modified: Monday, 16th October 2023 4:11:10 pm           |
-| Modified By: Stewart Charles McDowall                         |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-|---------------------------------------------------------------|
-|License: The Unlicense                                         |
-|===============================================================|
+VerifyDatabase Module
+=====================
+
+This module contains a function to verify a (WasteAndMaterialFootprint) database 
+within a given project in Brightway2. It performs a verification by calculating LCA scores 
+for random activities within the specified database using selected methods.
+
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+Licence: The Unlicense
 """
 
 from datetime import datetime
@@ -31,15 +25,19 @@ def VerifyDatabase(
     project_name, database_name, check_material=True, check_waste=True, log=True
 ):
     """
-    Verifies a (WasteAndMaterialFootprint) database
-    within a given project in Brightway2.
+    Verifies a database within a given project in Brightway2 by calculating LCA scores
+    for random activities using selected methods.
 
-    Parameters:
-    project_name (str): The name of the Brightway2 project.
-    database_name (str): The name of the database to be verified.
+    This function assesses the integrity and validity of a specified database within a Brightway2 project.
+    It performs LCA calculations on random activities using Waste Footprint and Material Demand Footprint methods,
+    and logs the results.
 
-    Returns:
-    None: Prints the lca score for a random activity.
+    :param str project_name: The name of the Brightway2 project.
+    :param str database_name: The name of the database to be verified.
+    :param bool check_material: If True, checks for Material Demand Footprint methods.
+    :param bool check_waste: If True, checks for Waste Footprint methods.
+    :param bool log: If True, logs the results.
+    :return: Exit code (0 for success, 1 for failure).
     """
 
     # setup to log the result
@@ -60,6 +58,14 @@ def VerifyDatabase(
         exit_code = 1
         return exit_code
 
+    # screen for biosphere and WasteAndMaterialFootprint databases
+    
+    if any(word in database_name for word in ["biosphere","WasteAndMaterialFootprint"]):
+        print(f"Skipping {database_name}...")
+        exit_code = 0
+        return exit_code
+    
+    
     # Load the database
     if database_name in bd.databases:
         bd.Database(database_name)
@@ -69,13 +75,15 @@ def VerifyDatabase(
         exit_code = 1
         return exit_code
 
-    print(f"\n** Verifying database {database_name} in project {project_name} **")
+    print(f"\n** Verifying database {database_name} in project {project_name} **\n")
 
     # Initialize the score
     lca_score = 0
+    count = 0
     # Loop until a non-zero score is obtained
-    while lca_score == 0:
+    while lca_score == 0 and count < 5:
         try:
+            count += 1
             # Get a random activity from the database
             act = bd.Database(database_name).random()
 
@@ -84,13 +92,13 @@ def VerifyDatabase(
 
             # Find methods related to Waste Footprint
             if check_waste:
-                methods_waste = [x for x in bd.methods if "Waste Footprint" in x[0]]
+                methods_waste = [x for x in bd.methods if "Waste" in x[1]]
                 methods += methods_waste
 
             # Find methods related to Material Demand Footprint
             if check_material:
                 methods_material = [
-                    x for x in bd.methods if "Material Demand Footprint" in x[0]
+                    x for x in bd.methods if "Demand" in x[1]
                 ]
                 methods += methods_material
 
@@ -110,11 +118,13 @@ def VerifyDatabase(
             lca_score = lca.score
 
             # Print the result
-            log_statement = f"{lca_score:2e}|{method[2]}|{act['name']}|{database_name}"
+            log_statement = f"\tScore: {lca_score:2.2e} \n\tMethod: {method[2]} \n\tActivity: {act['name']} \n\tDatabase: {database_name}\n"
 
         except Exception as e:
             # Print any errors that occur
-            log_statement = f"Error occurred with '{database_name}': {e}"
+            log_statement = (
+                f"@@@@@@@@  Error occurred with '{database_name}': {e}! @@@@@@@@"
+            )
 
             exit_code = 1
             break
@@ -129,8 +139,8 @@ def VerifyDatabase(
 
 
 if __name__ == "__main__":
-    project_name = "WMF-default"
-    database_name = "ecoinvent_3.9.1_cutoff"
+    project_name = "WMF-default" # change this to the name of your project to run it independently
+    database_name = "ecoinvent_3.9.1_cutoff" # also this
     exit_code = VerifyDatabase(
         project_name, database_name, check_material=True, check_waste=True, log=True
     )

@@ -1,30 +1,31 @@
-'''
-|===============================================================|
-| File: SearchWaste.py                                          |
-| Project: WasteAndMaterialFootprint                            |
-| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint |
-| Description: <<description>>                                  |
-|---------------------------------------------------------------|
-| File Created: Monday, 18th September 2023 11:21:13 am         |
-| Author: Stewart Charles McDowall                              |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-| Github: Stew-McD                                              |
-| Company: CML, Leiden University                               |
-|---------------------------------------------------------------|
-| Last Modified: Wednesday, 18th October 2023 9:39:10 am        |
-| Modified By: Stewart Charles McDowall                         |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-|---------------------------------------------------------------|
-|License: The Unlicense                                         |
-|===============================================================
+"""
+SearchWaste Module
+==================
 
-<<description>>
 This script loads data from '<db name>_exploded.pickle', runs search queries, 
-and produces a CSV to store the results and a log entry. The search queries are 
+and produces CSV files to store the results and a log entry. The search queries are 
 formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
-'''
+Functionality
+-------------
+Provides a function, :func:`SearchWaste`, that loads data from '<db name>_exploded.pickle',
+runs search queries, and produces result CSVs and log entries.
+
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+Licence: The Unlicense
+"""
+
+import os
+import shutil
+from datetime import datetime
+
+import pandas as pd
+from queries_waste import queries_waste
+from user_settings import dir_logs, dir_searchwaste_results, dir_tmp
 
 
 def SearchWaste(db_name):
@@ -32,19 +33,23 @@ def SearchWaste(db_name):
     Load data from '<db name>_exploded.pickle', run search queries, and produce
     result CSVs and log entries.
 
-    Parameters:
-    - db_name (str): The database name.
+    This function processes waste-related data from a given database and runs
+    predefined queries to identify relevant waste exchanges. The results are
+    saved in CSV files and log entries are created for each search operation.
 
+    :param str db_name: The database name to be used in the search operation.
+
+    Note:
     The queries are defined in `config/queries_waste.py`.
     """
 
     import os
-    from datetime import datetime
-    import pandas as pd
     import shutil
+    from datetime import datetime
 
-    from user_settings import dir_searchwaste_results, dir_tmp, dir_logs
+    import pandas as pd
     from queries_waste import queries_waste
+    from user_settings import dir_logs, dir_searchwaste_results, dir_tmp
 
     print("\n*** Starting SearchWaste ***")
 
@@ -67,8 +72,7 @@ def SearchWaste(db_name):
     else:
         print("Pickle file does not exist.")
         return
-    
-            
+
     print("*** Searching for waste exchanges ***")
 
     def search(query):
@@ -85,20 +89,21 @@ def SearchWaste(db_name):
         # Extract and process query components (for readability in the code)
         NAME_BASE = query["name"]
         UNIT = query["unit"]
-        NAME = NAME_BASE + "_" + UNIT
+        NAME = NAME_BASE + "-" + UNIT
         CODE = NAME.replace(" ", "")
         query.update({"code": NAME, "db_name": db_name})
         AND = query["AND"]
         OR = query["OR"]
         NOT = query["NOT"]
+        DBNAME = query["db_name"]
 
         # Apply the search terms to the dataframe
         df_results = df[
             (df["ex_name"].apply(lambda x: all(i in x for i in AND)))
             & (df["ex_unit"] == UNIT)
-            # & (df['ex_amount'] < 0)
+            & (df["ex_amount"] != 0)
             # & (df["ex_amount"] != -1)
-        ]
+        ].copy()
 
         # Apply OR and NOT search filters
         if OR:
@@ -115,7 +120,7 @@ def SearchWaste(db_name):
         wasteandmaterial_file = os.path.join(
             dir_searchwaste_results, wasteandmaterial_file_name
         )
-
+        df_results["database"] = DBNAME
         if df_results.shape[0] != 0:
             df_results.to_csv(wasteandmaterial_file + ".csv", sep=";")
 
@@ -131,7 +136,9 @@ def SearchWaste(db_name):
         with open(log_file, "a") as l:
             l.write(str(log_entry) + "\n")
 
-        print(f"\t{query['name']} - {query['unit']} : {df_results.shape[0]}")
+        print(
+            f"\t{query['name']:<25} \t| {query['unit']:<13} \t| {df_results.shape[0]:>6}"
+        )
 
     # Execute each query using the search() function defined above
     for query in queries_waste:

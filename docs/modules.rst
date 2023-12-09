@@ -6,8 +6,10 @@ WasteAndMaterialFootprint
 
    ExchangeEditor
    ExplodeDatabase
+   FutureScenarios
    MakeCustomDatabase
    MethodEditor
    SearchMaterial
    SearchWaste
+   VerifyDatabase
    main

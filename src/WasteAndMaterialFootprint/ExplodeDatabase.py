@@ -1,37 +1,24 @@
 """
-|===============================================================|
-| File: ExplodeDatabase.py                                      |
-| Project: WasteAndMaterialFootprint                            |
-| Repository: www.github.com/Stew-McD/WasteAndMaterialFootprint   |
-|---------------------------------------------------------------|
-| File Created: Monday, 18th September 2023 11:21:13 am         |
-| Author: Stewart Charles McDowall                              |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-| Github: Stew-McD                                                |
-| Company: CML, Leiden University                               |
-|---------------------------------------------------------------|
-| Last Modified: Sunday, 10th September 2023 7:56:13 pm         |
-| Modified By: Stewart Charles McDowall                         |
-| Email: s.c.mcdowall@cml.leidenuniv.nl                         |
-|---------------------------------------------------------------|
-|License: The Unlicense                                         |
-|===============================================================|
-| Description:                                  |
-|---------------------------------------------------------------|
-| Module for exploding a Brightway2 database to a               |
-| single-level list of all exchanges.                           |
-|                                                               |
-| The module utilizes the wurst package to unpack the database, |
-| explode it to a list of all exchanges,                        |
-| and save this data in a DataFrame as a .pickle binary file.   |
-|===============================================================|
+ExplodeDatabase Module
+======================
+
+This module is responsible for exploding a Brightway2 database into a single-level list of all exchanges.
+It utilizes the wurst package to unpack the database, explode it to a list of all exchanges, and save this data 
+in a DataFrame as a .pickle binary file.
+
+Author: Stewart Charles McDowall
+Email: s.c.mcdowall@cml.leidenuniv.nl
+GitHub: Stew-McD
+Institution: CML, Leiden University
+
 """
 
 # Imports
 import os
 from datetime import datetime
-import pandas as pd
+
 import bw2data as bd
+import pandas as pd
 import wurst as w
 
 
@@ -39,28 +26,22 @@ def ExplodeDatabase(db_name):
     """
     Explode a Brightway2 database into a single-level list of all exchanges using wurst.
 
-    This function takes a Brightway2 database name as an input and returns a pickle file containing
-    a DataFrame list of all activities. It also creates a log entry recording the operation.
+    :param str db_name: Name of the Brightway2 database to be exploded.
 
-    Parameters:
-    project_base (str): Base name of the project
-    project_wmf (str): Name of the project with waste and material specifics
-    db_name (str): Name of the Brightway2 database to be exploded
-
-    Returns:
-    None: The function saves the output to a file and logs the operation, but does not return any value.
-
+    :returns: None
+        The function saves the output to a file and logs the operation, but does not return any value.
+    :rtype: None
     """
-    from user_settings import dir_tmp, dir_logs
+    from user_settings import dir_logs, dir_tmp
 
     if not os.path.isdir(dir_tmp):
         os.makedirs(dir_tmp)
     if not os.path.isdir(dir_logs):
         os.makedirs(dir_logs)
 
-    print("\n*** Starting ExplodeDatabase ***\n")
+    print("\n*** Starting ExplodeDatabase ***")
     print(
-        "ExplodeDatabase uses wurst to open a bw2 database, \nexplodes the exchanges for each process, \nthen returns a pickle file with a DataFrame list of all activities"
+        "ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities"
     )
 
     # Set the path to save the pickle file
@@ -68,12 +49,10 @@ def ExplodeDatabase(db_name):
 
     # Extract information from the specified database
     db = bd.Database(db_name)
-    print(
-        f"\n** db: {db.name}, \nin project: {bd.projects.current} \nwill be processed"
-    )
+    print(f"\n** db: {db.name}, in project: {bd.projects.current} will be processed")
 
     # Unpack the database using wurst
-    print("\n** Opening the sausage... ")
+    print("\n** Opening the sausage...")
     guts = w.extract_brightway2_databases(db_name)
 
     # Create a DataFrame from the extracted data
@@ -111,7 +90,7 @@ def ExplodeDatabase(db_name):
     print("\n Pickle is:", "%1.0f" % (os.path.getsize(pickle_path) / 1024**2), "MB")
 
     # Log the operation with a timestamp, database name, and project name
-    print("\n*** The sausage <" + db.name + "> was exploded and pickled.\n Rejoice!\n")
+    print("\n*** The sausage <" + db.name + "> was exploded and pickled. Rejoice!")
 
     log_entry = (
         datetime.now().strftime("%Y-%m-%d %H:%M:%S")
