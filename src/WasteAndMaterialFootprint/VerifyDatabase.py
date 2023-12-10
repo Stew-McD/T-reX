@@ -140,7 +140,7 @@ def VerifyDatabase(
 
 if __name__ == "__main__":
     project_name = "WMF-default" # change this to the name of your project to run it independently
-    database_name = "ecoinvent_3.9.1_cutoff" # also this
+    database_name = "ecoinvent-3.9.1-cutoff" # also this
     exit_code = VerifyDatabase(
         project_name, database_name, check_material=True, check_waste=True, log=True
     )

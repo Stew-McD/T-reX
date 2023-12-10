@@ -135,7 +135,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
             )
 
             KEY = (database, code)
-            WMF_KEY = (db_wmf_name, NAME.split("_")[1].capitalize().replace("-", " ").replace("kilogram", "(kg)").replace("cubicmeter", "(m3)"))
+            WMF_KEY = (db_wmf_name, NAME.split("_")[1].capitalize().replace("_", " ").replace("kilogram", "(kg)").replace("cubicmeter", "(m3)"))
             # Retrieve the process and wasteandmaterial exchange from the databases
             try:
                 process = bd.get_activity(KEY)
@@ -144,7 +144,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
 
                 # Create a new exchange in the process
                 process.new_exchange(
-                    input=wasteandmaterial_ex.key,
+                    input=wasteandmaterial_ex,
                     amount=amount,
                     unit=unit,
                     type="biosphere",

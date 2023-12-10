@@ -86,6 +86,7 @@ for name in names:
                 ]
             }
         )
+        query.update({"NOT": ["methane"]})
 
     # add the query to the list of queries
     queries_kg.append(query)

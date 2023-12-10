@@ -34,9 +34,10 @@ try:
         premise_quiet,
         project_premise,
         project_premise_base,
-        scenarios_all,
+        desired_scenarios,
         use_mp,
         verbose,
+        years,
     )
 
     print("\nUsing user_settings.py file\n")
@@ -45,10 +46,10 @@ except ImportError:
     premise_key = None
     project_premise_base = "default"
     project_premise = "premise_default"
-    database_name = "ecoinvent_3.9.1_cutoff"
+    database_name = "ecoinvent-3.9.1-cutoff"
     delete_existing = True
-    batch_size = 1
-    scenarios_all = [{"model": "remind", "pathway": "SSP2-Base", "year": 2050}]
+    batch_size = 3
+    desired_scenarios = [{"model": "remind", "pathway": "SSP2-Base", "year": 2050}]
     dir_logs = Path.cwd()
     verbose = False
     use_mp = False
@@ -73,6 +74,65 @@ logging.basicConfig(filename=log_filename, level=logging.INFO)
 def grouper(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
+
+# ---------------------------------------------------------------------------------
+# FILTER OUT SCENARIOS THAT ARE NOT AVAILABLE
+# ---------------------------------------------------------------------------------
+
+SCENARIO_DIR = pm.filesystem_constants.DATA_DIR / "iam_output_files"
+filenames = sorted([x for x in os.listdir(SCENARIO_DIR) if x.endswith(".csv")])
+
+# Split the string and extract the version number
+# parts = database_name.split("_")
+# source_version = parts[1] if "." in parts[1] else parts[1].split(".")[0]
+# source_systemmodel = parts[-1]
+
+
+# function to make arguments for "new database -- pm.nbd" based on possible scenarios
+def make_possible_scenario_list(filenames, desired_scenarios, years):
+    possible_scenarios = []
+    for filename in filenames:
+        climate_model = filename.split("_")[0]
+        ssp = filename.split("_")[1].split("-")[0]
+        rcp = filename.split("_")[1].split("-")[1].split(".")[0]
+        possible_scenarios.append({"model": climate_model, "pathway": ssp + "-" + rcp})
+
+    # scenarios = overlap of desired_scenarios and possible_scenarios
+    scenarios = [x for x in desired_scenarios if x in possible_scenarios]
+
+    # now add the years
+    scenarios = [{**scenario, "year": year} for scenario in scenarios for year in years]
+
+    return scenarios
+
+desired_scenarios = make_possible_scenario_list(filenames, desired_scenarios, years)
+
+def check_existing(desired_scenarios):
+    db_names = []
+    bd.projects.set_current(project_premise)
+    databases = list(bd.databases)
+    
+    db_parts = database_name.split("-")
+    version = db_parts[-2]
+    model = db_parts[-1]
+    if version == "3.9.1": version = "3.9"
+    
+    new_scenarios = []
+    for scenario in desired_scenarios:
+        
+        db_name = f"ecoinvent_{model}_{version}_{scenario['model']}_{scenario['pathway']}_{scenario['year']}"
+    
+        if db_name in databases:
+            print(f"Skipping existing {db_name}...")
+        else:
+            new_scenarios.append(scenario)
+            
+    print(f"Creating {len(new_scenarios)} new future databases...", end="\n\t")
+    print(*new_scenarios, sep="\n\t", end="\n")     
+    return new_scenarios
+            
+desired_scenarios = check_existing(desired_scenarios)
+
 
 
 # Main function
@@ -118,8 +178,8 @@ def FutureScenarios():
                 print(f"Removed {db}")
 
     # Clear cache if deletion is required
-    if delete_existing:
-        pm.clear_cache()
+    # if delete_existing:
+    #     pm.clear_cache()
 
     count = 0
     db_parts = database_name.split("-")
@@ -130,20 +190,20 @@ def FutureScenarios():
     print()
 
     # Loop through scenario batches
-    for scenarios_set in grouper(scenarios_all, batch_size):
-        if len(scenarios_all) < batch_size:
+    for scenarios_set in grouper(desired_scenarios, batch_size):
+        if len(desired_scenarios) < batch_size:
             total_batches = 1
-            scenarios_set = scenarios_all
+            scenarios_set = desired_scenarios
 
         else:
-            total_batches = len(scenarios_all) // batch_size
+            total_batches = 1 + (len(desired_scenarios) // batch_size)
 
         count += 1
         print(
-            f"\n ** Processing scenario set {count} of {total_batches: .0f}, batch size {batch_size} **"
+            f"\n ** Processing scenario set {count} of {total_batches}, batch size {batch_size} **"
         )
         logging.info(
-            f"\n ** Processing scenario set {count} of {total_batches : .0f}, batch size {batch_size} **"
+            f"\n ** Processing scenario set {count} of {total_batches}, batch size {batch_size} **"
         )
 
         model_args = {
@@ -167,20 +227,21 @@ def FutureScenarios():
             use_multiprocessing=use_mp,
             system_args=model_args,
             quiet=premise_quiet,
+            keep_uncertainty_data=True,
         )
 
         try:
             ndb.update_all()
-            ndb.update_electricity()
             ndb.update_cars()
-            ndb.update_trucks()
             ndb.update_buses()
-            ndb.update_cement()
-            ndb.update_steel()
-            ndb.update_fuels()
-            ndb.update_emissions()
-            ndb.update_dac()
-            ndb.update_two_wheelers()
+            # ndb.update_trucks()
+            # ndb.update_two_wheelers()
+            # ndb.update_electricity()
+            # ndb.update_cement()
+            # ndb.update_steel()
+            # ndb.update_fuels()
+            # ndb.update_emissions()
+            # ndb.update_dac()
         except Exception as e:
             print(f"Error: {e}")
 

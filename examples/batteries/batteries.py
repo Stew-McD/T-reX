@@ -50,9 +50,9 @@ print(f'\n{"-"*80}\n')
 
 
 def parse_db_name(db_name):
-    if db_name == 'ecoinvent_3.9.1_cutoff':
+    if db_name == 'ecoinvent-3.9.1-cutoff':
         db_name = 'ecoinvent_cutoff_3.9_none_none0-none_2020'
-    if db_name == 'ecoinvent_3.9.1_consequential':
+    if db_name == 'ecoinvent-3.9.1-consequential':
         db_name = 'ecoinvent_consequential_3.9_none_none0-none_2020'
     
     parts = db_name.split('_')
@@ -220,7 +220,7 @@ def get_results():
                 results.append(results_dict)
                 
                 # Pad and format the strings to the desired width
-                p_db = f'{i+1:02}/{len(dbs)} - {" ".join(db.name.split("_")[-2:]):<{width_db}}'
+                p_db = f'{i+1:02}/{len(dbs)} - {" ".join(db.name.split("-")[-2:]):<{width_db}}'
                 p_act = f'{ii+1:01}/{len(df)} - {",".join(act_name.split(",")[1:3])[:20]:<{width_activity}}'
                 p_method = f'{iii+1:03}/{len(methods)} - {method[2][:width_method]:<{width_method}}'
                 p_score = f'{lca.score:.2e}'.rjust(width_score)

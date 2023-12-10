@@ -25,11 +25,9 @@ Licence: The Unlicense
 
 import os
 import shutil
+from itertools import product
 from pathlib import Path
 
-import os
-import shutil
-from pathlib import Path
 
 # custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
 custom_bw2_dir = None
@@ -58,8 +56,8 @@ premise_key = None  # add your own key here or have it stored in .secrets/premis
 project_premise_base = "default"
 project_premise = project_base
 database_name = "ecoinvent-3.9.1-cutoff"
-delete_existing = True
-use_mp = False
+delete_existing = False
+use_mp = True
 batch_size = 3
 premise_quiet = True
 
@@ -73,37 +71,60 @@ if premise_key is None:
         premise_key = f.read()
 
 
+
 # Choose the scenarios to be processed with premise
 # Details of the scenarios can be found here:
 # carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
 # https://premise.readthedocs.io/en/latest/
 # https://premisedash-6f5a0259c487.herokuapp.com/ (there is a nice dashboard here to explore the scenarios)
-scenarios_all = [
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP1-Base", "year": 2020},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP2-Base", "year": 2020},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2050},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2040},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2030},
-    {"model": "remind", "pathway": "SSP5-Base", "year": 2020},
-    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2050},
-    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2040},
-    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2030},
-    {"model": "remind", "pathway": "SSP1-PkBudg500", "year": 2020},
-    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2050},
-    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2040},
-    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2030},
-    {"model": "remind", "pathway": "SSP2-PkBudg500", "year": 2020},
-    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2050},
-    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2040},
-    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2030},
-    {"model": "remind", "pathway": "SSP5-PkBudg500", "year": 2020},
+# desired_scenarios = [
+#     {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
+#     {"model": "remind", "pathway": "SSP1-Base", "year": 2045},
+# ]
+
+# CHOOSE SCENARIOS
+# Comment out the scenarios you don't want to use, otherwise all potential scenarios will be attempted
+# The full list of available scenarios is in the `filenames` variable (atm 15, but there could be more in future updates)
+# Not all combinations are available, later, we will filter out the scenarios that are not possible
+
+models = [
+    # "image",
+    "remind",
 ]
+
+ssps = [
+    "SSP1",
+    "SSP2",
+    "SSP5",
+]
+
+rcps = [
+    "Base",  # choose the rcp you want to use, (mostly this comment is to stop the linter from removing the line breaks)
+    # "RCP19",
+    # "RCP26",
+    # "NPi",
+    # "NDC",
+    "PkBudg500",
+    # "PkBudg1150",
+]
+
+# If the years you put here are inside the range of the scenario, in will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think.
+
+years = [
+    2020,
+    2025,
+    2030,
+    2035,
+    2040,
+    2045,
+    2050,
+]
+
+# this part makes all the possible combinations of the scenarios you want to use, the next part will filter out the ones that are not available
+desired_scenarios = []
+for model, ssp, rcp in product(models, ssps, rcps):
+    desired_scenarios.append({"model": model, "pathway": ssp + "-" + rcp})
+
 
 # Set the project and databases to be processed with the WMF tool
 def generate_args_list():
