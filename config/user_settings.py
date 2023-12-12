@@ -39,29 +39,33 @@ import bw2data as bd
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 # set project name and other things here (or give as an argument to main.py)
 use_wmf = True
-project_base = "SSP-cutoff"
-project_wmf = f"WMFootprint-{project_base}"
+project_base = "WMFootprint-SSP-cutoff"
+# if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
+project_wmf = project_base  # f"WMFootprint-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
-single = False
-database = None
-delete = True
+single = True
+single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"
+delete = False
 use_multiprocessing = False
 verbose = False
+do_search = True
+do_methods = True
+do_edit = True
 
 # %% PREMISE SETTINGS -  to construct future LCA databases
+# only databases that do not exist will be created
 
 use_premise = True
-
 premise_key = None  # add your own key here or have it stored in .secrets/premise_key.txt (tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo=)
 project_premise_base = "default"
-project_premise = project_base
+project_premise = "SSP-cutoff"
 database_name = "ecoinvent-3.9.1-cutoff"
 delete_existing = False
 use_mp = True
-batch_size = 3
+batch_size = 1
 premise_quiet = True
 
-if use_premise:
+if use_premise and project_base != project_premise:
     project_wmf = f"WMFootprint-{project_premise}"
 
 # Get the premise key
@@ -69,7 +73,6 @@ if premise_key is None:
     key_path = Path(__file__).parents[1] / ".secrets" / "premise_key.txt"
     with open(key_path, "r") as f:
         premise_key = f.read()
-
 
 
 # Choose the scenarios to be processed with premise
@@ -93,8 +96,8 @@ models = [
 ]
 
 ssps = [
-    "SSP1",
-    "SSP2",
+    # "SSP1",
+    # "SSP2",
     "SSP5",
 ]
 
@@ -104,19 +107,19 @@ rcps = [
     # "RCP26",
     # "NPi",
     # "NDC",
-    "PkBudg500",
+    # "PkBudg500",
     # "PkBudg1150",
 ]
 
 # If the years you put here are inside the range of the scenario, in will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think.
 
 years = [
-    2020,
-    2025,
-    2030,
-    2035,
-    2040,
-    2045,
+    # 2020,
+    # 2025,
+    # 2030,
+    # 2035,
+    # 2040,
+    # 2045,
     2050,
 ]
 
@@ -127,7 +130,7 @@ for model, ssp, rcp in product(models, ssps, rcps):
 
 
 # Set the project and databases to be processed with the WMF tool
-def generate_args_list():
+def generate_args_list(single_database=None):
     """
     Generate a list of argument dictionaries for processing multiple projects and databases.
 
@@ -138,7 +141,7 @@ def generate_args_list():
     """
     bd.projects.set_current(project_base)
     if single:
-        databases = [database]
+        databases = [single_database]
 
     else:
         exclude = [

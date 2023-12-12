@@ -1,8 +1,7 @@
 import WasteAndMaterialFootprint as wmf
 import bw2data as bd
 
-PROJECT_NAME = "WMFootprint-SSP-base_cutoff"
-PROJECT_NAME = "WMF-SSP-base_cutoff"
+PROJECT_NAME = "WMFootprint-SSP-cutoff"
 bd.projects.set_current(PROJECT_NAME)
 
 

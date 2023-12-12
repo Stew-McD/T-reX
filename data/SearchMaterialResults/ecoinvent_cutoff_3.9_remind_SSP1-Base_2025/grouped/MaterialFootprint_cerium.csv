@@ -1,0 +1,4 @@
+code;name;location;reference product;categories;ex_name;ex_amount;ex_unit;ex_product;ex_production volume;ex_type;ex_location;database;material_group
+51db34010b2b2f32b0f2a8799b9f1e82;cerium oxide to generic market for mischmetal;GLO;mischmetal;;market for cerium oxide;1.0;kilogram;cerium oxide;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP1-Base_2025;cerium
+bd9158bb6b9ee732259680127be479ef;glass production, for liquid crystal display;GLO;glass, for liquid crystal display;;market for cerium oxide;0.00058428;kilogram;cerium oxide;0.0;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP1-Base_2025;cerium
+be8a195ee5d1451380999774772e3e4f;electrolyzer production, 1MWe, SOEC, Stack;RER;electrolyzer, 1MWe, SOEC, Stack;;market for cerium oxide;91.5;kilogram;cerium oxide;;technosphere;GLO;ecoinvent_cutoff_3.9_remind_SSP1-Base_2025;cerium

@@ -97,10 +97,15 @@ from user_settings import (
     dir_tmp,
     generate_args_list,
     project_base,
+    project_premise,
     project_wmf,
     use_multiprocessing,
     use_premise,
     use_wmf,
+    do_search,
+    do_methods,
+    do_edit,
+    single_database,
 )
 
 # Check from the settings if a custom datadir is declared
@@ -130,7 +135,7 @@ def main():
     assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
 
     start_time = datetime.now()
-    args_list = generate_args_list()
+    args_list = generate_args_list(single_database=single_database)
     total_databases = len(args_list)
     all_databases = list(set(bd.databases) - {"biosphere3"})
 
@@ -141,7 +146,6 @@ def main():
         print(f"\t{arg['db_name']}")
 
     # Make new project, delete previous project if you want to start over, or use existing project
-    bd.projects.purge_deleted_directories()
     if project_wmf in bd.projects and delete:
         print(f"\n* Deleting previous project {project_wmf}")
         bd.projects.delete_project(project_wmf, True)
@@ -178,7 +182,8 @@ def main():
                 f"\n** Pre-processing database ({db_number+1}/{total_databases}): {args['db_name']}**\n"
             )
             print(args)
-            ExplodeAndSearch(args)
+            if do_search:
+                ExplodeAndSearch(args)
             print(f'\n{"-"*80}')
             return 1  # successfully processed
         except Exception as e:
@@ -208,11 +213,12 @@ def main():
     end_time = datetime.now()
     duration = end_time - start_time
 
-    # %% 1.2 MakeCustomDatabase.py: Make the custom database from the combined search results
-    dbWriteExcel()
-    dbExcel2BW()
-    # %% 1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows
-    AddMethods()
+    if do_methods:
+        # %% 1.2 MakeCustomDatabase.py: Make the custom database from the combined search results
+        dbWriteExcel()
+        dbExcel2BW()
+        # %% 1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows
+        AddMethods()
 
     print(
         f"""
@@ -238,14 +244,14 @@ def main():
         :return: int: Returns 1 if successful, 0 if an error occurred.
         """
         print(f'\n{"-"*80}')
-        db_number += 1
         try:
             print(
-                f"\n** Processing database ({db_number+1}/{total_databases}): {args['db_name']}**"
+                f"\n** Processing database ({db_number}/{total_databases}): {args['db_name']}**"
             )
             print("Arguments:")
             print(args)
-            EditExchanges(args)
+            if do_edit:
+                EditExchanges(args)
             print(f'{"-"*80}\n')
             return 1  # successfully processed
         except Exception as e:
@@ -268,6 +274,7 @@ def main():
 
     else:
         for args in args_list:
+            db_number += 1
             result = process_db(args, db_number, total_databases)
             results.append(result)
 
