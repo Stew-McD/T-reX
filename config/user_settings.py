@@ -36,16 +36,21 @@ if custom_bw2_dir:
 
 import bw2data as bd
 
+## SETTINGS FOR PROJECTS
+project_premise_base = "default"
+project_premise = "SSP-cutoff"
+project_base = project_premise
+project_wmf = f"WMFootprint-{project_base}"
+
+
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 # set project name and other things here (or give as an argument to main.py)
 use_wmf = True
-project_base = "WMFootprint-SSP-cutoff"
 # if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
-project_wmf = project_base  # f"WMFootprint-{project_base}"
 db_wmf_name = "WasteAndMaterialFootprint"
-single = True
-single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"
-delete = False
+single = False
+single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050" # choose one here
+delete = True
 use_multiprocessing = False
 verbose = False
 do_search = True
@@ -57,8 +62,6 @@ do_edit = True
 
 use_premise = True
 premise_key = None  # add your own key here or have it stored in .secrets/premise_key.txt (tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo=)
-project_premise_base = "default"
-project_premise = "SSP-cutoff"
 database_name = "ecoinvent-3.9.1-cutoff"
 delete_existing = False
 use_mp = True
@@ -97,8 +100,8 @@ models = [
 
 ssps = [
     # "SSP1",
-    # "SSP2",
-    "SSP5",
+    "SSP2",
+    # "SSP5",
 ]
 
 rcps = [
@@ -107,7 +110,7 @@ rcps = [
     # "RCP26",
     # "NPi",
     # "NDC",
-    # "PkBudg500",
+    "PkBudg500",
     # "PkBudg1150",
 ]
 
@@ -116,11 +119,17 @@ rcps = [
 years = [
     # 2020,
     # 2025,
-    # 2030,
+    2030,
     # 2035,
     # 2040,
     # 2045,
-    2050,
+    # 2050,
+    # 2060,
+    2065,
+    # 2070,
+    # 2080,
+    # 2090,
+    2100,
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the next part will filter out the ones that are not available

@@ -146,6 +146,7 @@ def main():
         print(f"\t{arg['db_name']}")
 
     # Make new project, delete previous project if you want to start over, or use existing project
+    bd.projects.purge_deleted_directories()
     if project_wmf in bd.projects and delete:
         print(f"\n* Deleting previous project {project_wmf}")
         bd.projects.delete_project(project_wmf, True)

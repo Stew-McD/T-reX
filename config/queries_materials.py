@@ -24,6 +24,7 @@ List of tuples where each tuple contains the activity name (as appears in the da
 """
 
 queries_materials = [
+    ("market for aluminium", "aluminium"),
     ("market for antimony", "antimony"),
     ("market for bauxite", "bauxite"),
     ("market for beryllium", "beryllium"),

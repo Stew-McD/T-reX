@@ -123,27 +123,28 @@ def check_existing(desired_scenarios):
     new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
         
     """
-    bd.projects.set_current(project_premise)
-    databases = list(bd.databases)
-    
-    db_parts = database_name.split("-")
-    version = db_parts[-2]
-    model = db_parts[-1]
-    if version == "3.9.1": version = "3.9"
-    
-    new_scenarios = []
-    for scenario in desired_scenarios:
+    if use_premise:
+        bd.projects.set_current(project_premise)
+        databases = list(bd.databases)
         
-        db_name = f"ecoinvent_{model}_{version}_{scenario['model']}_{scenario['pathway']}_{scenario['year']}"
-    
-        if db_name in databases:
-            print(f"Skipping existing {db_name}...")
-        else:
-            new_scenarios.append(scenario)
+        db_parts = database_name.split("-")
+        version = db_parts[-2]
+        model = db_parts[-1]
+        if version == "3.9.1": version = "3.9"
+        
+        new_scenarios = []
+        for scenario in desired_scenarios:
             
-    print(f"Creating {len(new_scenarios)} new future databases...", end="\n\t")
-    print(*new_scenarios, sep="\n\t", end="\n")     
-    return new_scenarios
+            db_name = f"ecoinvent_{model}_{version}_{scenario['model']}_{scenario['pathway']}_{scenario['year']}"
+        
+            if db_name in databases:
+                print(f"Skipping existing {db_name}...")
+            else:
+                new_scenarios.append(scenario)
+                
+        print(f"Creating {len(new_scenarios)} new future databases...", end="\n\t")
+        print(*new_scenarios, sep="\n\t", end="\n")     
+        return new_scenarios
 
 # Main function
 def FutureScenarios():
@@ -266,8 +267,9 @@ def FutureScenarios():
     # change back to the original directory
     os.chdir(Path(__file__).parent)
 
-desired_scenarios = make_possible_scenario_list(filenames, desired_scenarios, years)
-desired_scenarios = check_existing(desired_scenarios)
+if use_premise:
+    desired_scenarios = make_possible_scenario_list(filenames, desired_scenarios, years)
+    desired_scenarios = check_existing(desired_scenarios)
 
 # Run the main function
 if __name__ == "__main__":
