@@ -7,12 +7,4 @@ name = "WasteAndMaterialFootprint"
 version = "0.1.0"
 description = "A tool for analyzing waste and material footprints."
 readme = "README.md"
-homepage = "https://github.com/Stew-McD/WasteAndMaterialFootprint"
-classifiers = [ "Development Status :: 3 - Alpha", "Environment :: Console", "Intended Audience :: Developers", "Intended Audience :: Science/Research", "License :: OSI Approved :: The Unlicense (Unlicense)", "Operating System :: OS Independent", "Programming Language :: Python", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3.10", "Topic :: Scientific/Engineering", "Topic :: Scientific/Engineering :: Information Analysis",]
-python = "^3.6"
-[[project.authors]]
-name = "Stewart Charles McDowall | Stew-McD"
-email = "s.c.mcdowall@cml.leidenuniv.nl"
-
-[project.urls]
-Source = "https://github.com/Stew-McD/WasteAndMaterialFootprint"
+authors = [{name = "Stewart Charles McDowall | Stew-McD", email = "s.c.mcdowall@cml.leidenuniv.nl"}]
