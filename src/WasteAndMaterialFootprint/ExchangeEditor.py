@@ -7,11 +7,6 @@ It appends relevant exchanges from the `db_wmf` (database containing waste and m
 to activities identified by `WasteAndMaterialSearch()` in the specified project's database (`db_name`).
 Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-
 """
 
 # Imports

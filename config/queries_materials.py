@@ -10,12 +10,6 @@ Note:
 - The comma in material names is important for filtering specific activities in the database.
 - If an intermediate product is included, the inputs and outputs might cancel out, resulting in a zero result.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 
 
 queries_materials

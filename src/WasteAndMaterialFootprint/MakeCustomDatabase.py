@@ -9,12 +9,6 @@ Main functions:
 - dbWriteExcel: Creates an xlsx file representing a custom Brightway2 database.
 - dbExcel2BW: Imports the custom database (created by dbWriteExcel) into Brightway2.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 """
 
 import glob

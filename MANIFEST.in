@@ -1,7 +1,0 @@
-include README.md
-include LICENSE
-recursive-include docs *
-recursive-include examples *
-recursive-exclude tests *
-global-exclude *.py[cod] __pycache__ *.so *.dylib .DS_Store
-

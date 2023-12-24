@@ -8,7 +8,7 @@ setup(
     name="WasteAndMaterialFootprint",
     version="0.1.0",
     description="A tool for analyzing waste and material footprints.",
-    author="Stewart Charles McDowall",
+    author="Stewart Charles McDowall | Stew-McD",
     author_email="s.c.mcdowall@cml.leidenuniv.nl",
     url="https://github.com/Stew-McD/WasteAndMaterialFootprint",
     packages=find_packages(where="src"),

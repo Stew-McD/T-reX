@@ -4,13 +4,6 @@ MethodEditor Module
 
 This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.
 
-.. moduleauthor:: Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-
-
 Function Summary:
 -----------------
 - `AddMethods`: Adds new methods to a project based on a custom biosphere database.

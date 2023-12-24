@@ -7,12 +7,6 @@ and produces a CSV to store the results and a log entry. The search queries are
 formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 """
 
 import os

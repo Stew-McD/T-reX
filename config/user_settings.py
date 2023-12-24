@@ -15,12 +15,6 @@ Additionally, the script allows for the use of multiprocessing (`use_multiproces
 Premise can also be used to make future databases (`use_premise` is True).
 
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 """
 
 import os
@@ -49,7 +43,7 @@ use_wmf = True
 # if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
-single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050" # choose one here
+single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"  # choose one here
 delete = True
 use_multiprocessing = False
 verbose = False
@@ -83,10 +77,7 @@ if premise_key is None:
 # carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
 # https://premise.readthedocs.io/en/latest/
 # https://premisedash-6f5a0259c487.herokuapp.com/ (there is a nice dashboard here to explore the scenarios)
-# desired_scenarios = [
-#     {"model": "remind", "pathway": "SSP1-Base", "year": 2050},
-#     {"model": "remind", "pathway": "SSP1-Base", "year": 2045},
-# ]
+
 
 # CHOOSE SCENARIOS
 # Comment out the scenarios you don't want to use, otherwise all potential scenarios will be attempted
@@ -133,6 +124,7 @@ years = [
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the next part will filter out the ones that are not available
+
 desired_scenarios = []
 for model, ssp, rcp in product(models, ssps, rcps):
     desired_scenarios.append({"model": model, "pathway": ssp + "-" + rcp})

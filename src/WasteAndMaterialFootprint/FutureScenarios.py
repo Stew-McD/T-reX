@@ -4,12 +4,6 @@ FutureScenarios Module
 
 This module is responsible for creating future databases with premise.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 
 """
 
@@ -42,7 +36,7 @@ try:
         years,
     )
 
-    print("\nUsing user_settings.py file\n")
+
 except ImportError:
     print("No user_settings.py file found, using defaults")
     premise_key = None
@@ -71,7 +65,6 @@ if use_premise:
     log_filename = datetime.today().strftime(f"{dir_logs}/%Y%m%d_FutureScenarios.log")
     logging.basicConfig(filename=log_filename, level=logging.INFO)
 
-
     # Function to split scenarios into smaller groups (for batch processing)
     def grouper(iterable, n, fillvalue=None):
         args = [iter(iterable)] * n
@@ -92,6 +85,16 @@ if use_premise:
 
 # function to make arguments for "new database -- pm.nbd" based on possible scenarios
 def make_possible_scenario_list(filenames, desired_scenarios, years):
+    """
+    Make a list of dictionaries with scenario details based on the available scenarios and the desired scenarios.
+
+    args: filenames (list): list of filenames of available scenarios
+    desired_scenarios (list): list of dictionaries with scenario details
+    years (list): list of years to be used
+
+    returns: scenarios (list): list of dictionaries with scenario details that are available and desired
+
+    """
     possible_scenarios = []
     for filename in filenames:
         climate_model = filename.split("_")[0]
@@ -108,43 +111,39 @@ def make_possible_scenario_list(filenames, desired_scenarios, years):
     return scenarios
 
 
-
 def check_existing(desired_scenarios):
     """
     Check the project to see if the desired scenarios already exist, and if so, remove them from the list of scenarios to be created.
     Quite useful when running many scenarios, as it can take a long time to create them all, sometimes crashes, etc.
-    
-    Args
-    ----
-    desired_scenarios (list): list of dictionaries with scenario details
-    
-    Returns
-    -------
-    new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
-        
+
+    args: desired_scenarios (list): list of dictionaries with scenario details
+
+    returns: new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
+
     """
     if use_premise:
         bd.projects.set_current(project_premise)
         databases = list(bd.databases)
-        
+
         db_parts = database_name.split("-")
         version = db_parts[-2]
         model = db_parts[-1]
-        if version == "3.9.1": version = "3.9"
-        
+        if version == "3.9.1":
+            version = "3.9"
+
         new_scenarios = []
         for scenario in desired_scenarios:
-            
             db_name = f"ecoinvent_{model}_{version}_{scenario['model']}_{scenario['pathway']}_{scenario['year']}"
-        
+
             if db_name in databases:
                 print(f"Skipping existing {db_name}...")
             else:
                 new_scenarios.append(scenario)
-                
+
         print(f"Creating {len(new_scenarios)} new future databases...", end="\n\t")
-        print(*new_scenarios, sep="\n\t", end="\n")     
+        print(*new_scenarios, sep="\n\t", end="\n")
         return new_scenarios
+
 
 # Main function
 def FutureScenarios():
@@ -220,12 +219,12 @@ def FutureScenarios():
         model_args = {
             "range time": 2,
             "duration": False,
-            "foresight": False, # vs. myopic. shoul match the scenario, IMAGE = False, REMIND = True
-            "lead time": True, # otherwise market average is used
-            "capital replacement rate": True, # otherwise, baseline is used
-            "measurement": 0, # [slope, linear, area, weighted-slope, split]
-            "weighted slope start": 0.75, # only for method 3
-            "weighted slope end": 1.00, # only for method 3
+            "foresight": False,  # vs. myopic. shoul match the scenario, IMAGE = False, REMIND = True
+            "lead time": True,  # otherwise market average is used
+            "capital replacement rate": True,  # otherwise, baseline is used
+            "measurement": 0,  # [slope, linear, area, weighted-slope, split]
+            "weighted slope start": 0.75,  # only for method 3
+            "weighted slope end": 1.00,  # only for method 3
         }
 
         # Create new database based on scenario details
@@ -267,11 +266,23 @@ def FutureScenarios():
     # change back to the original directory
     os.chdir(Path(__file__).parent)
 
-if use_premise:
-    desired_scenarios = make_possible_scenario_list(filenames, desired_scenarios, years)
-    desired_scenarios = check_existing(desired_scenarios)
+
+def main():
+    """
+    Main function to run the FutureScenarios module.
+    Only activated if `use_premise` is set to True in `user_settings.py`.
+    """
+
+    if use_premise:
+        desired_scenarios = make_possible_scenario_list(
+            filenames, desired_scenarios, years
+        )
+        desired_scenarios = check_existing(desired_scenarios)
+        FutureScenarios()
+    else:
+        print("Premise not called for, continuing...")
+
 
 # Run the main function
 if __name__ == "__main__":
-    
-    FutureScenarios()
+    main()

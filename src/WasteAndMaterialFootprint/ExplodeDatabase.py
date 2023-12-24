@@ -6,11 +6,6 @@ This module is responsible for exploding a Brightway2 database into a single-lev
 It utilizes the wurst package to unpack the database, explode it to a list of all exchanges, and save this data 
 in a DataFrame as a .pickle binary file.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-
 """
 
 # Imports

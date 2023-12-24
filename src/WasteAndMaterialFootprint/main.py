@@ -19,12 +19,6 @@ Usage:
 To use the default settings, run the script with `python main.py`. 
 Arguments can be provided to change project/database names or to delete the project before running.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 """
 
 print(
@@ -292,12 +286,11 @@ def main():
         VerifyDatabase(project_wmf, db_name)
         print(f'\n{"-"*80}\n')
 
-    
     try:
         playsound(cwd.parents[1] / "misc/success.mp3")
     except:
         pass
-    
+
     print(
         f"""
     {80 * '~'}
@@ -318,6 +311,7 @@ def main():
     sleep(1)
 
     try:
+
         def animate_cowsay(message, delay=0.2):
             cow = cowsay.get_output_string("cow", message)
             for line in cow.split("\n"):

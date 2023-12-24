@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: WasteAndMaterialFootprint
+Version: 0.1.0
+Summary: A tool for analyzing waste and material footprints.
+Home-page: https://github.com/Stew-McD/WasteAndMaterialFootprint
+Author: Stewart Charles McDowall "Stew-McD"
+Author-email: s.c.mcdowall@cml.leiden.univ.nl
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: The Unlicense (Unlicense)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Requires-Python: >=3.6
+License-File: LICENSE

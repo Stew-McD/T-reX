@@ -12,12 +12,6 @@ The module creates two sets of queries:
 
 These queries are combined into the `queries_waste` list, which is then used by `SearchWaste.py` for filtering and extracting relevant data from the database.
 
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
-
 """
 
 names = [

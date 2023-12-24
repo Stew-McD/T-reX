@@ -5,12 +5,6 @@ VerifyDatabase Module
 This module contains a function to verify a (WasteAndMaterialFootprint) database 
 within a given project in Brightway2. It performs a verification by calculating LCA scores 
 for random activities within the specified database using selected methods.
-
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
 """
 
 from datetime import datetime
@@ -59,13 +53,14 @@ def VerifyDatabase(
         return exit_code
 
     # screen for biosphere and WasteAndMaterialFootprint databases
-    
-    if any(word in database_name for word in ["biosphere","WasteAndMaterialFootprint"]):
+
+    if any(
+        word in database_name for word in ["biosphere", "WasteAndMaterialFootprint"]
+    ):
         print(f"Skipping {database_name}...")
         exit_code = 0
         return exit_code
-    
-    
+
     # Load the database
     if database_name in bd.databases:
         bd.Database(database_name)
@@ -97,9 +92,7 @@ def VerifyDatabase(
 
             # Find methods related to Material Demand Footprint
             if check_material:
-                methods_material = [
-                    x for x in bd.methods if "Demand" in x[1]
-                ]
+                methods_material = [x for x in bd.methods if "Demand" in x[1]]
                 methods += methods_material
 
             if not check_waste and not check_material:
@@ -139,8 +132,10 @@ def VerifyDatabase(
 
 
 if __name__ == "__main__":
-    project_name = "WMF-default" # change this to the name of your project to run it independently
-    database_name = "ecoinvent-3.9.1-cutoff" # also this
+    project_name = (
+        "WMF-default"  # change this to the name of your project to run it independently
+    )
+    database_name = "ecoinvent-3.9.1-cutoff"  # also this
     exit_code = VerifyDatabase(
         project_name, database_name, check_material=True, check_waste=True, log=True
     )

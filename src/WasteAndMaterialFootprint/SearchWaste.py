@@ -11,12 +11,6 @@ Functionality
 -------------
 Provides a function, :func:`SearchWaste`, that loads data from '<db name>_exploded.pickle',
 runs search queries, and produces result CSVs and log entries.
-
-Author: Stewart Charles McDowall
-Email: s.c.mcdowall@cml.leidenuniv.nl
-GitHub: Stew-McD
-Institution: CML, Leiden University
-Licence: The Unlicense
 """
 
 import os
