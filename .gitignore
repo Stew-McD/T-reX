@@ -1,7 +1,7 @@
 .secrets/
 .vscode/
-
 .*
+!/.readthedocs.yaml
 data/tmp/
 
 __pycache__/
