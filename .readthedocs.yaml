@@ -4,11 +4,9 @@ sphinx:
   configuration: docs/source/conf.py
 
 formats: all
-
-python:
-  version: 3.8
-  install:
-    - path: .
-      method: pip
-      extra_requirements:
-        - docs
+# Set the version of Python
+build:
+  os: ubuntu-20.04  # <- add this line
+  tools:
+    python: "3.10"
+  
