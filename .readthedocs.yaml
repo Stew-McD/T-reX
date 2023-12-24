@@ -2,14 +2,22 @@ version: 2
 
 sphinx:
   configuration: docs/source/conf.py
+  fail_on_warning: true
+  fail_on_error: true
+
 
 formats: all
 
 # Set the OS, Python version and other tools you might need
 build:
-  os: ubuntu-22.04
+  image: latest
+  os:
+    - linux
+    - osx
   tools:
     python: "3.11"
+
+
 
 # Optional but recommended, declare the Python requirements required
 # to build your documentation
