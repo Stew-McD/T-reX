@@ -14,10 +14,9 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=read_requirements("requirements.txt"),
-    entry_points={
-        "console_scripts": [
-            # Add your console scripts here if any
-        ],
+    extras_require={
+        "dev": read_requirements("requirements-dev.txt"),
+        "docs": read_requirements("requirements-docs.txt"),
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
