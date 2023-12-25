@@ -1,0 +1,104 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{AddMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter C
+  \item \spxentry{check\_existing()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{11}
+  \item \spxentry{CheckMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}, 
+		\hyperpage{13}
+
+  \indexspace
+  \bigletter D
+  \item \spxentry{dbExcel2BW()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}, 
+		\hyperpage{12}
+  \item \spxentry{dbWriteExcel()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}, 
+		\hyperpage{12}
+  \item \spxentry{DeleteMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}, 
+		\hyperpage{13}
+  \item \spxentry{determine\_unit\_from\_name()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}, 
+		\hyperpage{12}
+
+  \indexspace
+  \bigletter E
+  \item \spxentry{EditExchanges()}\spxextra{in module WasteAndMaterialFootprint.main}, 
+		\hyperpage{9}
+  \item \spxentry{ExchangeEditor()}\spxextra{in module WasteAndMaterialFootprint.ExchangeEditor}, 
+		\hyperpage{10}
+  \item \spxentry{ExplodeAndSearch()}\spxextra{in module WasteAndMaterialFootprint.main}, 
+		\hyperpage{9}
+  \item \spxentry{ExplodeDatabase()}\spxextra{in module WasteAndMaterialFootprint.ExplodeDatabase}, 
+		\hyperpage{11}
+
+  \indexspace
+  \bigletter F
+  \item \spxentry{FutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{11}
+
+  \indexspace
+  \bigletter G
+  \item \spxentry{get\_files\_from\_tree()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}, 
+		\hyperpage{12}
+
+  \indexspace
+  \bigletter M
+  \item \spxentry{main()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{11}
+  \item \spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{11}
+  \item \spxentry{module}
+    \subitem \spxentry{WasteAndMaterialFootprint.ExchangeEditor}, \hyperpage{10}
+    \subitem \spxentry{WasteAndMaterialFootprint.ExplodeDatabase}, \hyperpage{11}
+    \subitem \spxentry{WasteAndMaterialFootprint.FutureScenarios}, \hyperpage{11}
+    \subitem \spxentry{WasteAndMaterialFootprint.main}, \hyperpage{9}
+    \subitem \spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}, \hyperpage{12}
+    \subitem \spxentry{WasteAndMaterialFootprint.MethodEditor}, \hyperpage{13}
+    \subitem \spxentry{WasteAndMaterialFootprint.SearchMaterial}, \hyperpage{13}
+    \subitem \spxentry{WasteAndMaterialFootprint.SearchWaste}, \hyperpage{14}
+    \subitem \spxentry{WasteAndMaterialFootprint.VerifyDatabase}, \hyperpage{14}
+
+  \indexspace
+  \bigletter R
+  \item \spxentry{run()}\spxextra{in module WasteAndMaterialFootprint.main}, \hyperpage{10}
+
+  \indexspace
+  \bigletter S
+  \item \spxentry{SearchMaterial()}\spxextra{in module WasteAndMaterialFootprint.SearchMaterial}, 
+		\hyperpage{13}
+  \item \spxentry{SearchWaste()}\spxextra{in module WasteAndMaterialFootprint.SearchWaste}, 
+		\hyperpage{14}
+
+  \indexspace
+  \bigletter V
+  \item \spxentry{VerifyDatabase()}\spxextra{in module WasteAndMaterialFootprint.VerifyDatabase}, 
+		\hyperpage{14}
+
+  \indexspace
+  \bigletter W
+  \item \spxentry{WasteAndMaterialFootprint.ExchangeEditor}
+    \subitem \spxentry{module}, \hyperpage{10}
+  \item \spxentry{WasteAndMaterialFootprint.ExplodeDatabase}
+    \subitem \spxentry{module}, \hyperpage{11}
+  \item \spxentry{WasteAndMaterialFootprint.FutureScenarios}
+    \subitem \spxentry{module}, \hyperpage{11}
+  \item \spxentry{WasteAndMaterialFootprint.main}
+    \subitem \spxentry{module}, \hyperpage{9}
+  \item \spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}
+    \subitem \spxentry{module}, \hyperpage{12}
+  \item \spxentry{WasteAndMaterialFootprint.MethodEditor}
+    \subitem \spxentry{module}, \hyperpage{13}
+  \item \spxentry{WasteAndMaterialFootprint.SearchMaterial}
+    \subitem \spxentry{module}, \hyperpage{13}
+  \item \spxentry{WasteAndMaterialFootprint.SearchWaste}
+    \subitem \spxentry{module}, \hyperpage{14}
+  \item \spxentry{WasteAndMaterialFootprint.VerifyDatabase}
+    \subitem \spxentry{module}, \hyperpage{14}
+
+\end{sphinxtheindex}

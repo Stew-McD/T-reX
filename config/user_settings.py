@@ -22,6 +22,8 @@ import shutil
 from itertools import product
 from pathlib import Path
 
+from WasteAndMaterialFootprint import CUSTOM_CONFIG_DIR, CUSTOM_DATA_DIR, CUSTOM_LOG_DIR
+
 
 # custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
 custom_bw2_dir = None
@@ -39,7 +41,7 @@ project_wmf = f"WMFootprint-{project_base}"
 
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 # set project name and other things here (or give as an argument to main.py)
-use_wmf = True
+use_wmf = False
 # if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
 db_wmf_name = "WasteAndMaterialFootprint"
 single = False
@@ -54,8 +56,8 @@ do_edit = True
 # %% PREMISE SETTINGS -  to construct future LCA databases
 # only databases that do not exist will be created
 
-use_premise = True
-premise_key = None  # add your own key here or have it stored in .secrets/premise_key.txt (tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo=)
+use_premise = False
+premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
 database_name = "ecoinvent-3.9.1-cutoff"
 delete_existing = False
 use_mp = True
@@ -170,15 +172,23 @@ def generate_args_list(single_database=None):
 # Set the paths (to the data, config, logs, and the results)
 
 # Get the directory of the main script
-cwd = Path.cwd()
+cwd = Path(__file__).resolve().parents[0]
 # Get the path two levels up
-root = cwd.parents[1]
+root = cwd.parents[0]
 
 # Set the paths
-dir_config = root / "config"
+if CUSTOM_CONFIG_DIR.is_dir():
+    dir_config = CUSTOM_CONFIG_DIR
+else:
+    dir_config = root / "config"
+
 list_materials = dir_config / "list_materials.txt"
 
-dir_data = root / "data"
+if not CUSTOM_DATA_DIR.is_dir():
+    CUSTOM_DATA_DIR.mkdir(parents=True, exist_ok=True)
+dir_data = CUSTOM_DATA_DIR
+# dir_data = root / "data"
+
 dir_tmp = dir_data / "tmp"
 dir_logs = dir_data / "logs"
 

@@ -3,5 +3,5 @@
 .*
 !/.readthedocs.yaml
 data/tmp/
-
+poetry.lock
 __pycache__/

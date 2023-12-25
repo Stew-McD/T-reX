@@ -21,15 +21,6 @@ Arguments can be provided to change project/database names or to delete the proj
 
 """
 
-print(
-    f"""
-    {80*'='}
-    {80*'~'}
-    {'** Starting the WasteAndMaterialFootprint tool **'.center(80, ' ')}
-    {80*'~'}
-    {80*'='}
-    """
-)
 
 # %%  0. Imports and configuration
 
@@ -69,7 +60,13 @@ cwd = Path.cwd()
 sys.path.insert(0, str(cwd))
 
 # Add the config dir to the Python path
-dir_config = cwd.parents[1] / "config"
+from . import CUSTOM_CONFIG_DIR
+
+if CUSTOM_CONFIG_DIR.exists():
+    dir_config = CUSTOM_CONFIG_DIR
+else:
+    dir_config = cwd.parents[1] / "config"
+
 sys.path.insert(0, str(dir_config))
 
 # import custom modules (from root dir)
@@ -108,7 +105,7 @@ if custom_bw2_dir:
 
 
 # %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
-def main():
+def run():
     """
     Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
 
@@ -119,9 +116,17 @@ def main():
         adding LCIA methods to the project for each of the waste/material flows.
 
     The function supports various modes of operation based on the settings in `config/user_settings.py`.
-    Specifications for material and waste searches can be customised in `queries_materials.
+    Specifications for material and waste searches can be customised in `queries_materials`.
     """
-
+    print(
+        f"""
+    {80*'='}
+    {80*'~'}
+    {'** Starting the WasteAndMaterialFootprint tool **'.center(80, ' ')}
+    {80*'~'}
+    {80*'='}
+    """
+    )
     # create future scenario databases
     if use_premise:
         FutureScenarios()
@@ -412,4 +417,4 @@ def EditExchanges(args):
 
 # %% 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
-    main()
+    run()

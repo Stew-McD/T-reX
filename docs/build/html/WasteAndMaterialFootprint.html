@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteAndMaterialFootprint package &mdash; WasteAndMaterialFootprint 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=a58bc63e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API Reference" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">WasteAndMaterialFootprint package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.main">WasteAndMaterialFootprint.main module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#main-module">main Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.main.EditExchanges"><code class="docutils literal notranslate"><span class="pre">EditExchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.main.ExplodeAndSearch"><code class="docutils literal notranslate"><span class="pre">ExplodeAndSearch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.main.run"><code class="docutils literal notranslate"><span class="pre">run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.ExchangeEditor">WasteAndMaterialFootprint.ExchangeEditor module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#exchangeeditor-module">ExchangeEditor Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.ExchangeEditor.ExchangeEditor"><code class="docutils literal notranslate"><span class="pre">ExchangeEditor()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.ExplodeDatabase">WasteAndMaterialFootprint.ExplodeDatabase module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#explodedatabase-module">ExplodeDatabase Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.ExplodeDatabase.ExplodeDatabase"><code class="docutils literal notranslate"><span class="pre">ExplodeDatabase()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.FutureScenarios">WasteAndMaterialFootprint.FutureScenarios module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#futurescenarios-module">FutureScenarios Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios"><code class="docutils literal notranslate"><span class="pre">FutureScenarios()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.check_existing"><code class="docutils literal notranslate"><span class="pre">check_existing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list"><code class="docutils literal notranslate"><span class="pre">make_possible_scenario_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.MakeCustomDatabase">WasteAndMaterialFootprint.MakeCustomDatabase module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#makecustomdatabase-module">MakeCustomDatabase Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MakeCustomDatabase.dbExcel2BW"><code class="docutils literal notranslate"><span class="pre">dbExcel2BW()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MakeCustomDatabase.dbWriteExcel"><code class="docutils literal notranslate"><span class="pre">dbWriteExcel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MakeCustomDatabase.determine_unit_from_name"><code class="docutils literal notranslate"><span class="pre">determine_unit_from_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MakeCustomDatabase.get_files_from_tree"><code class="docutils literal notranslate"><span class="pre">get_files_from_tree()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.MethodEditor">WasteAndMaterialFootprint.MethodEditor module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#methodeditor-module">MethodEditor Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MethodEditor.AddMethods"><code class="docutils literal notranslate"><span class="pre">AddMethods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MethodEditor.CheckMethods"><code class="docutils literal notranslate"><span class="pre">CheckMethods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.MethodEditor.DeleteMethods"><code class="docutils literal notranslate"><span class="pre">DeleteMethods()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.SearchMaterial">WasteAndMaterialFootprint.SearchMaterial module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#searchmaterial-module">SearchMaterial Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.SearchMaterial.SearchMaterial"><code class="docutils literal notranslate"><span class="pre">SearchMaterial()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.SearchWaste">WasteAndMaterialFootprint.SearchWaste module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#searchwaste-module">SearchWaste Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.SearchWaste.SearchWaste"><code class="docutils literal notranslate"><span class="pre">SearchWaste()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.VerifyDatabase">WasteAndMaterialFootprint.VerifyDatabase module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#verifydatabase-module">VerifyDatabase Module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.VerifyDatabase.VerifyDatabase"><code class="docutils literal notranslate"><span class="pre">VerifyDatabase()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API Reference</a></li>
+      <li class="breadcrumb-item active">WasteAndMaterialFootprint package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/WasteAndMaterialFootprint.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wasteandmaterialfootprint-package">
+<h1>WasteAndMaterialFootprint package<a class="headerlink" href="#wasteandmaterialfootprint-package" title="Link to this heading"></a></h1>
+<section id="module-WasteAndMaterialFootprint.main">
+<span id="wasteandmaterialfootprint-main-module"></span><h2>WasteAndMaterialFootprint.main module<a class="headerlink" href="#module-WasteAndMaterialFootprint.main" title="Link to this heading"></a></h2>
+<section id="main-module">
+<h3>main Module<a class="headerlink" href="#main-module" title="Link to this heading"></a></h3>
+<p>Main module of the <cite>WasteAndMaterialFootprint</cite> tool.</p>
+<p>This script serves as the entry point for the <cite>WasteAndMaterialFootprint</cite> tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges.</p>
+<p>The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.</p>
+<section id="customisation">
+<h4>Customisation:<a class="headerlink" href="#customisation" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Project and database names, and other settings can be edited in <cite>config/user_settings.py</cite>.</p></li>
+<li><p>Waste search query terms can be customised in <cite>config/queries_waste.py</cite>.</p></li>
+<li><p>The list of materials can be modified in <cite>config/queries_materials.py</cite>.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h4>Usage:<a class="headerlink" href="#usage" title="Link to this heading"></a></h4>
+<p>To use the default settings, run the script with <cite>python main.py</cite>. 
+Arguments can be provided to change project/database names or to delete the project before running.</p>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.main.EditExchanges">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.main.</span></span><span class="sig-name descname"><span class="pre">EditExchanges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.main.EditExchanges" title="Link to this definition"></a></dt>
+<dd><p>Edit exchanges in the database.</p>
+<p>This function adds waste and material flows to the activities and verifies the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Dictionary containing database and project settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.main.ExplodeAndSearch">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.main.</span></span><span class="sig-name descname"><span class="pre">ExplodeAndSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.main.ExplodeAndSearch" title="Link to this definition"></a></dt>
+<dd><p>Exploding the database into separate exchanges, searching for waste and
+material flows, and processing these results.</p>
+<dl class="simple">
+<dt>This includes:</dt><dd><ul class="simple">
+<li><p>ExplodeDatabase.py</p></li>
+<li><p>SearchWaste.py</p></li>
+<li><p>SearchMaterial.py</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Dictionary containing database and project settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.main.run">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.main.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.main.run" title="Link to this definition"></a></dt>
+<dd><p>Main function serving as the wrapper for the WasteAndMaterialFootprint tool.</p>
+<dl class="simple">
+<dt>This function coordinates the various components of the tool, including:</dt><dd><p>creating future scenario databases,
+setting up and processing each database for waste and material footprinting,
+and combining results into a custom database.
+adding LCIA methods to the project for each of the waste/material flows.</p>
+</dd>
+</dl>
+<p>The function supports various modes of operation based on the settings in <cite>config/user_settings.py</cite>.
+Specifications for material and waste searches can be customised in <cite>queries_materials</cite>.</p>
+</dd></dl>
+
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-WasteAndMaterialFootprint.ExchangeEditor">
+<span id="wasteandmaterialfootprint-exchangeeditor-module"></span><h2>WasteAndMaterialFootprint.ExchangeEditor module<a class="headerlink" href="#module-WasteAndMaterialFootprint.ExchangeEditor" title="Link to this heading"></a></h2>
+<section id="exchangeeditor-module">
+<h3>ExchangeEditor Module<a class="headerlink" href="#exchangeeditor-module" title="Link to this heading"></a></h3>
+<p>This module is responsible for editing exchanges with wurst and Brightway2.
+It appends relevant exchanges from the <cite>db_wmf</cite> (database containing waste and material exchange details) 
+to activities identified by <cite>WasteAndMaterialSearch()</cite> in the specified project’s database (<cite>db_name</cite>).
+Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.ExchangeEditor.ExchangeEditor">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.ExchangeEditor.</span></span><span class="sig-name descname"><span class="pre">ExchangeEditor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_wmf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_wmf_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.ExchangeEditor.ExchangeEditor" title="Link to this definition"></a></dt>
+<dd><p>Append relevant exchanges from <cite>db_wmf</cite> to each activity in <cite>db_name</cite> identified by <cite>WasteAndMaterialSearch()</cite>.</p>
+<p>This function modifies the specified project’s database by appending exchanges from the <cite>db_wmf</cite> to activities identified by <cite>WasteAndMaterialSearch()</cite>. The appended exchanges mirror the quantity and unit of the original technosphere waste and material exchange.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_wmf</strong> (<em>str</em>) – Name of the Brightway2 project to be modified.</p></li>
+<li><p><strong>db_name</strong> (<em>str</em>) – Name of the database within the project where activities and exchanges are stored.</p></li>
+<li><p><strong>db_wmf_name</strong> (<em>str</em>) – Name of the database containing waste and material exchange details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None. Modifies the given Brightway2 project by appending exchanges and logs statistics about the added exchanges.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If any specified process or exchange is not found in the database.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.ExplodeDatabase">
+<span id="wasteandmaterialfootprint-explodedatabase-module"></span><h2>WasteAndMaterialFootprint.ExplodeDatabase module<a class="headerlink" href="#module-WasteAndMaterialFootprint.ExplodeDatabase" title="Link to this heading"></a></h2>
+<section id="explodedatabase-module">
+<h3>ExplodeDatabase Module<a class="headerlink" href="#explodedatabase-module" title="Link to this heading"></a></h3>
+<p>This module is responsible for exploding a Brightway2 database into a single-level list of all exchanges.
+It utilizes the wurst package to unpack the database, explode it to a list of all exchanges, and save this data 
+in a DataFrame as a .pickle binary file.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.ExplodeDatabase.ExplodeDatabase">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.ExplodeDatabase.</span></span><span class="sig-name descname"><span class="pre">ExplodeDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.ExplodeDatabase.ExplodeDatabase" title="Link to this definition"></a></dt>
+<dd><p>Explode a Brightway2 database into a single-level list of all exchanges using wurst.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db_name</strong> (<em>str</em>) – Name of the Brightway2 database to be exploded.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None
+The function saves the output to a file and logs the operation, but does not return any value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.FutureScenarios">
+<span id="wasteandmaterialfootprint-futurescenarios-module"></span><h2>WasteAndMaterialFootprint.FutureScenarios module<a class="headerlink" href="#module-WasteAndMaterialFootprint.FutureScenarios" title="Link to this heading"></a></h2>
+<section id="futurescenarios-module">
+<h3>FutureScenarios Module<a class="headerlink" href="#futurescenarios-module" title="Link to this heading"></a></h3>
+<p>This module is responsible for creating future databases with premise.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.FutureScenarios">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">FutureScenarios</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios" title="Link to this definition"></a></dt>
+<dd><p>Create future databases with premise.</p>
+<p>This function processes scenarios and creates new databases based on the premise module. It configures and uses user-defined settings and parameters for database creation and scenario processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None
+The function does not return any value but performs operations to create and configure databases in Brightway2 based on specified scenarios.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If an error occurs during the processing of scenarios or database creation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.check_existing">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">check_existing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_scenarios</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.check_existing" title="Link to this definition"></a></dt>
+<dd><p>Check the project to see if the desired scenarios already exist, and if so, remove them from the list of scenarios to be created.
+Quite useful when running many scenarios, as it can take a long time to create them all, sometimes crashes, etc.</p>
+<p>args: desired_scenarios (list): list of dictionaries with scenario details</p>
+<p>returns: new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.main">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.main" title="Link to this definition"></a></dt>
+<dd><p>Main function to run the FutureScenarios module.
+Only activated if <cite>use_premise</cite> is set to True in <cite>user_settings.py</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">make_possible_scenario_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_scenarios</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">years</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list" title="Link to this definition"></a></dt>
+<dd><p>Make a list of dictionaries with scenario details based on the available scenarios and the desired scenarios.</p>
+<p>args: filenames (list): list of filenames of available scenarios
+desired_scenarios (list): list of dictionaries with scenario details
+years (list): list of years to be used</p>
+<p>returns: scenarios (list): list of dictionaries with scenario details that are available and desired</p>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.MakeCustomDatabase">
+<span id="wasteandmaterialfootprint-makecustomdatabase-module"></span><h2>WasteAndMaterialFootprint.MakeCustomDatabase module<a class="headerlink" href="#module-WasteAndMaterialFootprint.MakeCustomDatabase" title="Link to this heading"></a></h2>
+<section id="makecustomdatabase-module">
+<h3>MakeCustomDatabase Module<a class="headerlink" href="#makecustomdatabase-module" title="Link to this heading"></a></h3>
+<p>This module contains functions for creating an xlsx representation of a Brightway2 database 
+and importing it into Brightway2.</p>
+<p>Main functions:
+- dbWriteExcel: Creates an xlsx file representing a custom Brightway2 database.
+- dbExcel2BW: Imports the custom database (created by dbWriteExcel) into Brightway2.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MakeCustomDatabase.dbExcel2BW">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MakeCustomDatabase.</span></span><span class="sig-name descname"><span class="pre">dbExcel2BW</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MakeCustomDatabase.dbExcel2BW" title="Link to this definition"></a></dt>
+<dd><p>Import the custom database (created by dbWriteExcel) into Brightway2.</p>
+<p>This function imports a custom Brightway2 database from an Excel file into the Brightway2 software,
+making it available for further environmental impact analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MakeCustomDatabase.dbWriteExcel">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MakeCustomDatabase.</span></span><span class="sig-name descname"><span class="pre">dbWriteExcel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MakeCustomDatabase.dbWriteExcel" title="Link to this definition"></a></dt>
+<dd><p>Create an xlsx file representing a custom Brightway2 database.</p>
+<p>This function generates an Excel file which represents a custom database for Brightway2,
+using predefined directory and database settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path to the generated xlsx file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MakeCustomDatabase.determine_unit_from_name">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MakeCustomDatabase.</span></span><span class="sig-name descname"><span class="pre">determine_unit_from_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MakeCustomDatabase.determine_unit_from_name" title="Link to this definition"></a></dt>
+<dd><p>Determine the unit based on the name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – The name from which to infer the unit.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The inferred unit as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MakeCustomDatabase.get_files_from_tree">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MakeCustomDatabase.</span></span><span class="sig-name descname"><span class="pre">get_files_from_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_searchmaterial_results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_searchwaste_results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MakeCustomDatabase.get_files_from_tree" title="Link to this definition"></a></dt>
+<dd><p>Collects filenames from the SearchMaterial and SearchWasteResults directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_searchmaterial_results</strong> – Directory path for SearchMaterial results.</p></li>
+<li><p><strong>dir_searchwaste_results</strong> – Directory path for SearchWasteResults.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sorted list of filenames.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.MethodEditor">
+<span id="wasteandmaterialfootprint-methodeditor-module"></span><h2>WasteAndMaterialFootprint.MethodEditor module<a class="headerlink" href="#module-WasteAndMaterialFootprint.MethodEditor" title="Link to this heading"></a></h2>
+<section id="methodeditor-module">
+<h3>MethodEditor Module<a class="headerlink" href="#methodeditor-module" title="Link to this heading"></a></h3>
+<p>This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.</p>
+<section id="function-summary">
+<h4>Function Summary:<a class="headerlink" href="#function-summary" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><cite>AddMethods</cite>: Adds new methods to a project based on a custom biosphere database.</p></li>
+<li><p><cite>DeleteMethods</cite>: Removes specific methods from a project, particularly those related to waste and material footprints.</p></li>
+<li><p><cite>CheckMethods</cite>: Lists and checks the methods in a project, focusing on those associated with waste and material footprints.</p></li>
+</ul>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MethodEditor.AddMethods">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MethodEditor.</span></span><span class="sig-name descname"><span class="pre">AddMethods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MethodEditor.AddMethods" title="Link to this definition"></a></dt>
+<dd><p>Add methods to the specified project based on entries in the custom biosphere database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_wmf</strong> – Name of the project.</p></li>
+<li><p><strong>db_wmf_name</strong> – Name of the database.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MethodEditor.CheckMethods">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MethodEditor.</span></span><span class="sig-name descname"><span class="pre">CheckMethods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MethodEditor.CheckMethods" title="Link to this definition"></a></dt>
+<dd><p>Check methods associated with the “WasteAndMaterial Footprint” in the specified project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_wmf</strong> – Name of the project.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.MethodEditor.DeleteMethods">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.MethodEditor.</span></span><span class="sig-name descname"><span class="pre">DeleteMethods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.MethodEditor.DeleteMethods" title="Link to this definition"></a></dt>
+<dd><p>Delete methods associated with the “WasteAndMaterial Footprint” in the specified project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_wmf</strong> – Name of the project.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.SearchMaterial">
+<span id="wasteandmaterialfootprint-searchmaterial-module"></span><h2>WasteAndMaterialFootprint.SearchMaterial module<a class="headerlink" href="#module-WasteAndMaterialFootprint.SearchMaterial" title="Link to this heading"></a></h2>
+<section id="searchmaterial-module">
+<h3>SearchMaterial Module<a class="headerlink" href="#searchmaterial-module" title="Link to this heading"></a></h3>
+<p>This script loads data from ‘&lt;db name&gt;_exploded.pickle’, runs search queries, 
+and produces a CSV to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+keywords_OR, and keywords_NOT. These queries are defined in <cite>config/queries_waste.py</cite>.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.SearchMaterial.SearchMaterial">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.SearchMaterial.</span></span><span class="sig-name descname"><span class="pre">SearchMaterial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_wmf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.SearchMaterial.SearchMaterial" title="Link to this definition"></a></dt>
+<dd><p>Search for materials in a specified database and extract related information.</p>
+<p>This function takes a database name as input, sets the project to the respective database,
+and looks for activities involving a predefined list of materials. It extracts relevant details
+of these activities, such as ISIC and CPC classifications, and saves the details to a CSV file.
+It also extracts related material exchanges and saves them to another CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_name</strong> – The name of the database to search in.</p></li>
+<li><p><strong>project_wmf</strong> – The Brightway2 project to set as current for the search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If there is any error in reading the materials list from the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.SearchWaste">
+<span id="wasteandmaterialfootprint-searchwaste-module"></span><h2>WasteAndMaterialFootprint.SearchWaste module<a class="headerlink" href="#module-WasteAndMaterialFootprint.SearchWaste" title="Link to this heading"></a></h2>
+<section id="searchwaste-module">
+<h3>SearchWaste Module<a class="headerlink" href="#searchwaste-module" title="Link to this heading"></a></h3>
+<p>This script loads data from ‘&lt;db name&gt;_exploded.pickle’, runs search queries, 
+and produces CSV files to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+keywords_OR, and keywords_NOT. These queries are defined in <cite>config/queries_waste.py</cite>.</p>
+<section id="functionality">
+<h4>Functionality<a class="headerlink" href="#functionality" title="Link to this heading"></a></h4>
+<p>Provides a function, <a class="reference internal" href="#WasteAndMaterialFootprint.SearchWaste.SearchWaste" title="WasteAndMaterialFootprint.SearchWaste.SearchWaste"><code class="xref py py-func docutils literal notranslate"><span class="pre">SearchWaste()</span></code></a>, that loads data from ‘&lt;db name&gt;_exploded.pickle’,
+runs search queries, and produces result CSVs and log entries.</p>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.SearchWaste.SearchWaste">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.SearchWaste.</span></span><span class="sig-name descname"><span class="pre">SearchWaste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.SearchWaste.SearchWaste" title="Link to this definition"></a></dt>
+<dd><p>Load data from ‘&lt;db name&gt;_exploded.pickle’, run search queries, and produce
+result CSVs and log entries.</p>
+<p>This function processes waste-related data from a given database and runs
+predefined queries to identify relevant waste exchanges. The results are
+saved in CSV files and log entries are created for each search operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>db_name</strong> (<em>str</em>) – The database name to be used in the search operation.</p>
+</dd>
+</dl>
+<p>Note:
+The queries are defined in <cite>config/queries_waste.py</cite>.</p>
+</dd></dl>
+
+</section>
+<section id="module-WasteAndMaterialFootprint.VerifyDatabase">
+<span id="wasteandmaterialfootprint-verifydatabase-module"></span><h2>WasteAndMaterialFootprint.VerifyDatabase module<a class="headerlink" href="#module-WasteAndMaterialFootprint.VerifyDatabase" title="Link to this heading"></a></h2>
+<section id="verifydatabase-module">
+<h3>VerifyDatabase Module<a class="headerlink" href="#verifydatabase-module" title="Link to this heading"></a></h3>
+<p>This module contains a function to verify a (WasteAndMaterialFootprint) database 
+within a given project in Brightway2. It performs a verification by calculating LCA scores 
+for random activities within the specified database using selected methods.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.VerifyDatabase.VerifyDatabase">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.VerifyDatabase.</span></span><span class="sig-name descname"><span class="pre">VerifyDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_material</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_waste</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.VerifyDatabase.VerifyDatabase" title="Link to this definition"></a></dt>
+<dd><p>Verifies a database within a given project in Brightway2 by calculating LCA scores
+for random activities using selected methods.</p>
+<p>This function assesses the integrity and validity of a specified database within a Brightway2 project.
+It performs LCA calculations on random activities using Waste Footprint and Material Demand Footprint methods,
+and logs the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_name</strong> (<em>str</em>) – The name of the Brightway2 project.</p></li>
+<li><p><strong>database_name</strong> (<em>str</em>) – The name of the database to be verified.</p></li>
+<li><p><strong>check_material</strong> (<em>bool</em>) – If True, checks for Material Demand Footprint methods.</p></li>
+<li><p><strong>check_waste</strong> (<em>bool</em>) – If True, checks for Waste Footprint methods.</p></li>
+<li><p><strong>log</strong> (<em>bool</em>) – If True, logs the results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Exit code (0 for success, 1 for failure).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
