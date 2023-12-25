@@ -26,11 +26,14 @@ if CUSTOM_CONFIG_DIR.is_dir():
     print(f"\n* Using custom config directory: \n{CUSTOM_CONFIG_DIR}.\n")
 else:
     print(
-        f"\n* Custom config directory: {CUSTOM_CONFIG_DIR} not found.\n* Using default config directory: {DEFAULT_CONFIG_DIR}.\n* Either create a custom config directory by running 'wmf.config_setup()' or edit the files in the default config directory.\n"
+        f"\n* Custom config directory: {CUSTOM_CONFIG_DIR} not found.\n* One will be created"
     )
     package_root = Path(__file__).resolve().parents[2]
     target_config_dir = package_root / "config"
     sys.path.append(str(target_config_dir))
+
+from .CustomConfig import config_setup, config_reload
+config_setup()
 
 if CUSTOM_DATA_DIR.is_dir():
     print(f"\n* Using data directory: \n{CUSTOM_DATA_DIR}.\n")
@@ -45,7 +48,6 @@ __version__ = "0.1.1"
 __author__ = "Stewart Charles McDowall | Stew-McD"
 
 # Import modules here
-from .CustomConfig import config_setup, config_reload
 from .main import run
 from .ExchangeEditor import ExchangeEditor
 from .ExplodeDatabase import ExplodeDatabase
