@@ -16,9 +16,9 @@ author = 'Stewart Charles McDowall | Stew-McD'
 release = '0.1.1'
 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+# html_static_path = ['_static']
 extensions = ['sphinx.ext.autodoc']
-templates_path = ['_templates']
+# templates_path = ['_templates']
 exclude_patterns = []
 
 master_doc = 'index'

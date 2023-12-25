@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  25 DEC 2023 18:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  25 DEC 2023 18:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -876,21 +876,21 @@ Chapter 4.
 ]
 Chapter 5.
 LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-49.
+55.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
 )
 LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
-74.
+80.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/txfonts/t1txtt.fd
 File: t1txtt.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
-(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 174.
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 180.
  [9{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
 LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
-(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 290.
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 296.
  [10] [11] [12]
 [13] [14] [15] [16
 
@@ -899,7 +899,7 @@ Chapter 6.
 [17] [18
 
 ]
-Overfull \hbox (3.62183pt too wide) in paragraph at lines 823--824
+Overfull \hbox (3.62183pt too wide) in paragraph at lines 829--830
 []\T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase\T1/qtm/m/n/10 ,
  []
 
@@ -1016,7 +1016,7 @@ xmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/texlive/2023/texmf-d
 ist/fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texlive/2023/texmf-dist/f
 onts/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
 ype1/public/txfonts/t1xtt.pfb>
-Output written on WasteAndMaterialFootprint.pdf (26 pages, 185127 bytes).
+Output written on WasteAndMaterialFootprint.pdf (26 pages, 186609 bytes).
 PDF statistics:
  395 PDF objects out of 1000 (max. 8388607)
  351 compressed objects within 4 object streams
