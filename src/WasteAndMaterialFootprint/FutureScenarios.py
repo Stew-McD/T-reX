@@ -22,7 +22,7 @@ try:
     from user_settings import (
         batch_size,
         database_name,
-        delete_existing,
+        delete_existing_premise_project,
         dir_data,
         dir_logs,
         premise_key,
@@ -43,7 +43,7 @@ except ImportError:
     project_premise_base = "default"
     project_premise = "premise_default"
     database_name = "ecoinvent-3.9.1-cutoff"
-    delete_existing = True
+    delete_existing_premise_project = True
     batch_size = 3
     desired_scenarios = [{"model": "remind", "pathway": "SSP2-Base", "year": 2050}]
     dir_logs = Path.cwd()
@@ -146,7 +146,7 @@ def check_existing(desired_scenarios):
 
 
 # Main function
-def FutureScenarios():
+def FutureScenarios(scenario_list):
     """
     Create future databases with premise.
 
@@ -162,7 +162,7 @@ def FutureScenarios():
 
     # Delete existing project if specified
     bd.projects.purge_deleted_directories()
-    if project_premise in bd.projects and delete_existing:
+    if project_premise in bd.projects and delete_existing_premise_project:
         bd.projects.delete_project(project_premise, True)
         print(f"Deleted existing project {project_premise}")
 
@@ -171,7 +171,7 @@ def FutureScenarios():
         print(f"Created new project {project_premise} from {project_premise_base}")
 
     # Use existing project if available and deletion not required
-    elif project_premise in bd.projects and not delete_existing:
+    elif project_premise in bd.projects and not delete_existing_premise_project:
         print(f"Project {project_premise} already exists, we will use it")
         bd.projects.set_current(project_premise)
 
@@ -188,7 +188,7 @@ def FutureScenarios():
                 print(f"Removed {db}")
 
     # Clear cache if deletion is required (may not be necessary, but can help overcome errors sometimes)
-    # if delete_existing:
+    # if delete_existing_premise_project:
     #     pm.clear_cache()
 
     count = 0
@@ -200,13 +200,13 @@ def FutureScenarios():
     print()
 
     # Loop through scenario batches
-    for scenarios_set in grouper(desired_scenarios, batch_size):
-        if len(desired_scenarios) < batch_size:
+    for scenarios_set in grouper(scenario_list, batch_size):
+        if len(scenario_list) < batch_size:
             total_batches = 1
-            scenarios_set = desired_scenarios
+            scenarios_set = scenario_list
 
         else:
-            total_batches = math.ceil(len(desired_scenarios) / batch_size)
+            total_batches = math.ceil(len(scenario_list) / batch_size)
 
         count += 1
         print(
@@ -267,22 +267,24 @@ def FutureScenarios():
     os.chdir(Path(__file__).parent)
 
 
-def main():
+def MakeFutureScenarios():
     """
     Main function to run the FutureScenarios module.
     Only activated if `use_premise` is set to True in `user_settings.py`.
+
+    Calls the `FutureScenarios` function to create new databases based on the list of scenarios and settings specified in `user_settings.py`.
     """
 
     if use_premise:
-        desired_scenarios = make_possible_scenario_list(
+        available_scenarios = make_possible_scenario_list(
             filenames, desired_scenarios, years
         )
-        desired_scenarios = check_existing(desired_scenarios)
-        FutureScenarios()
+        scenario_list = check_existing(available_scenarios)
+        FutureScenarios(scenario_list)
     else:
         print("Premise not called for, continuing...")
 
 
 # Run the main function
 if __name__ == "__main__":
-    main()
+    MakeFutureScenarios()

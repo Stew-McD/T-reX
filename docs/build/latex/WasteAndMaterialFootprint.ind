@@ -46,12 +46,14 @@
   \bigletter G
   \item \spxentry{get\_files\_from\_tree()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}, 
 		\hyperpage{12}
+  \item \spxentry{grouper()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{12}
 
   \indexspace
   \bigletter M
-  \item \spxentry{main()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
-		\hyperpage{11}
   \item \spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
+		\hyperpage{12}
+  \item \spxentry{MakeFutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}, 
 		\hyperpage{11}
   \item \spxentry{module}
     \subitem \spxentry{WasteAndMaterialFootprint.ExchangeEditor}, \hyperpage{10}

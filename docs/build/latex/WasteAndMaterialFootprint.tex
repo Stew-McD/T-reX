@@ -64,7 +64,7 @@
 
 
 \title{WasteAndMaterialFootprint Documentation}
-\date{Dec 25, 2023}
+\date{Dec 26, 2023}
 \release{0.1.1}
 \author{Stewart Charles McDowall}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -373,7 +373,7 @@ This module is responsible for creating future databases with premise.
 \begin{fulllineitems}
 \phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.FutureScenarios}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{FutureScenarios}}}{}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{FutureScenarios}}}{\sphinxparam{\DUrole{n}{scenario\_list}}}{}
 \pysigstopsignatures
 \sphinxAtStartPar
 Create future databases with premise.
@@ -391,6 +391,22 @@ The function does not return any value but performs operations to create and con
 \sphinxstyleliteralstrong{\sphinxupquote{Exception}} \textendash{} If an error occurs during the processing of scenarios or database creation.
 
 \end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{MakeFutureScenarios() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{MakeFutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{MakeFutureScenarios}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Main function to run the FutureScenarios module.
+Only activated if \sphinxtitleref{use\_premise} is set to True in \sphinxtitleref{user\_settings.py}.
+
+\sphinxAtStartPar
+Calls the \sphinxtitleref{FutureScenarios} function to create new databases based on the list of scenarios and settings specified in \sphinxtitleref{user\_settings.py}.
 
 \end{fulllineitems}
 
@@ -413,17 +429,13 @@ returns: new\_scenarios (list): list of dictionaries with scenario details that 
 
 \end{fulllineitems}
 
-\index{main() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{main()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+\index{grouper() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{grouper()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
 
 \begin{fulllineitems}
-\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.main}}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.grouper}}
 \pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{main}}}{}{}
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{grouper}}}{\sphinxparam{\DUrole{n}{iterable}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fillvalue}\DUrole{o}{=}\DUrole{default_value}{None}}}{}
 \pysigstopsignatures
-\sphinxAtStartPar
-Main function to run the FutureScenarios module.
-Only activated if \sphinxtitleref{use\_premise} is set to True in \sphinxtitleref{user\_settings.py}.
-
 \end{fulllineitems}
 
 \index{make\_possible\_scenario\_list() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}

@@ -72,8 +72,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-WasteAndMaterialFootprint.FutureScenarios">WasteAndMaterialFootprint.FutureScenarios module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#futurescenarios-module">FutureScenarios Module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios"><code class="docutils literal notranslate"><span class="pre">FutureScenarios()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios"><code class="docutils literal notranslate"><span class="pre">MakeFutureScenarios()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.check_existing"><code class="docutils literal notranslate"><span class="pre">check_existing()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.grouper"><code class="docutils literal notranslate"><span class="pre">grouper()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list"><code class="docutils literal notranslate"><span class="pre">make_possible_scenario_list()</span></code></a></li>
 </ul>
 </li>
@@ -288,7 +289,7 @@ The function saves the output to a file and logs the operation, but does not ret
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.FutureScenarios">
-<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">FutureScenarios</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">FutureScenarios</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scenario_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios" title="Link to this definition"></a></dt>
 <dd><p>Create future databases with premise.</p>
 <p>This function processes scenarios and creates new databases based on the premise module. It configures and uses user-defined settings and parameters for database creation and scenario processing.</p>
 <dl class="field-list simple">
@@ -303,6 +304,14 @@ The function does not return any value but performs operations to create and con
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">MakeFutureScenarios</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios" title="Link to this definition"></a></dt>
+<dd><p>Main function to run the FutureScenarios module.
+Only activated if <cite>use_premise</cite> is set to True in <cite>user_settings.py</cite>.</p>
+<p>Calls the <cite>FutureScenarios</cite> function to create new databases based on the list of scenarios and settings specified in <cite>user_settings.py</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.check_existing">
 <span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">check_existing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_scenarios</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.check_existing" title="Link to this definition"></a></dt>
 <dd><p>Check the project to see if the desired scenarios already exist, and if so, remove them from the list of scenarios to be created.
@@ -312,11 +321,9 @@ Quite useful when running many scenarios, as it can take a long time to create t
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.main">
-<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.main" title="Link to this definition"></a></dt>
-<dd><p>Main function to run the FutureScenarios module.
-Only activated if <cite>use_premise</cite> is set to True in <cite>user_settings.py</cite>.</p>
-</dd></dl>
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.grouper">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.FutureScenarios.</span></span><span class="sig-name descname"><span class="pre">grouper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#WasteAndMaterialFootprint.FutureScenarios.grouper" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list">

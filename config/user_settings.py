@@ -22,9 +22,13 @@ import shutil
 from itertools import product
 from pathlib import Path
 
-from WasteAndMaterialFootprint import CUSTOM_CONFIG_DIR, CUSTOM_DATA_DIR, CUSTOM_LOG_DIR
+from WasteAndMaterialFootprint import CUSTOM_CONFIG_DIR, CUSTOM_DATA_DIR
 
+# ============================================================
+# ------------------------------------------------------------
+## SETTINGS FOR BRIGHTWAY2
 
+# you can set the brightway2 directory here, otherwise it will use the default one
 # custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
 custom_bw2_dir = None
 if custom_bw2_dir:
@@ -32,59 +36,78 @@ if custom_bw2_dir:
 
 import bw2data as bd
 
+# ------------------------------------------------------------
 ## SETTINGS FOR PROJECTS
+# set project name and other things here
+
 project_premise_base = "default"
 project_premise = "SSP-cutoff"
 project_base = project_premise
+# if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
 project_wmf = f"WMFootprint-{project_base}"
 
-
+# ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-# set project name and other things here (or give as an argument to main.py)
 use_wmf = False
-# if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
-db_wmf_name = "WasteAndMaterialFootprint"
+db_wmf_name = "WasteAndMaterialFootprint"  # name of the database that will be created (pseudobiosphere)
+
+# if you only want to run one database, set single to True and choose the database name here
 single = False
-single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"  # choose one here
-delete = True
+single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"
+
+# if you want to use a fresh project
+delete_wmf_project = False
 use_multiprocessing = False
 verbose = False
+
+# set these to True if you want to run the different parts of the tool separately
 do_search = True
 do_methods = True
 do_edit = True
 
-# %% PREMISE SETTINGS -  to construct future LCA databases
-# only databases that do not exist will be created
+# ------------------------------------------------------------
+## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = False
-premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
+use_premise = True
+
+# this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
-delete_existing = False
+
+# if you want to use a fresh project
+delete_existing_premise_project = False
+
+# if you want to use multiprocessing (some people have reported problems with this)
 use_mp = True
+
+# if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
 batch_size = 1
+
+# This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
 
 if use_premise and project_base != project_premise:
     project_wmf = f"WMFootprint-{project_premise}"
 
-# Get the premise key
+# Get the premise key (at the moment, it is stored in the code to make it easier for people, but it would be better to have it in a file)
+premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
 if premise_key is None:
     key_path = Path(__file__).parents[1] / ".secrets" / "premise_key.txt"
     with open(key_path, "r") as f:
         premise_key = f.read()
 
 
-# Choose the scenarios to be processed with premise
+# ************************************************************
+##  CHOOSE THE SCENARIOS YOU WANT TO USE WITH PREMISE
+
 # Details of the scenarios can be found here:
 # carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/
 # https://premise.readthedocs.io/en/latest/
 # https://premisedash-6f5a0259c487.herokuapp.com/ (there is a nice dashboard here to explore the scenarios)
 
 
-# CHOOSE SCENARIOS
 # Comment out the scenarios you don't want to use, otherwise all potential scenarios will be attempted
-# The full list of available scenarios is in the `filenames` variable (atm 15, but there could be more in future updates)
-# Not all combinations are available, later, we will filter out the scenarios that are not possible
+# The full list of available scenarios is in the `filenames` variable (at the moment there are 15, but there could be more in future updates)
+# Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
 
 models = [
     # "image",
@@ -97,8 +120,9 @@ ssps = [
     # "SSP5",
 ]
 
+# default is to have an optimistic and a pessimistic scenario
 rcps = [
-    "Base",  # choose the rcp you want to use, (mostly this comment is to stop the linter from removing the line breaks)
+    "Base",
     # "RCP19",
     # "RCP26",
     # "NPi",
@@ -107,7 +131,7 @@ rcps = [
     # "PkBudg1150",
 ]
 
-# If the years you put here are inside the range of the scenario, in will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think.
+# If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
     # 2020,
@@ -125,14 +149,14 @@ years = [
     2100,
 ]
 
-# this part makes all the possible combinations of the scenarios you want to use, the next part will filter out the ones that are not available
+# this part makes all the possible combinations of the scenarios you want to use, the will be filtered out later if they are not possible
 
 desired_scenarios = []
 for model, ssp, rcp in product(models, ssps, rcps):
     desired_scenarios.append({"model": model, "pathway": ssp + "-" + rcp})
 
 
-# Set the project and databases to be processed with the WMF tool
+# Set the arguments list of projects and databases to be processed with the WMF tool
 def generate_args_list(single_database=None):
     """
     Generate a list of argument dictionaries for processing multiple projects and databases.
@@ -149,7 +173,7 @@ def generate_args_list(single_database=None):
     else:
         exclude = [
             "biosphere",
-            "WasteAndMaterialFootprint",
+            db_wmf_name,  # this is the database that will be created by the wmf tool
         ]
         databases = sorted(
             [x for x in bd.databases if not any(sub in x for sub in exclude)]
@@ -168,8 +192,11 @@ def generate_args_list(single_database=None):
     return args_list
 
 
-# %% GENERAL DIRECTORY PATHS
+# ------------------------------------------------------------
+## GENERAL DIRECTORY PATHS
 # Set the paths (to the data, config, logs, and the results)
+# By default, the program will create new directories in the working directory
+
 
 # Get the directory of the main script
 cwd = Path(__file__).resolve().parents[0]
@@ -196,7 +223,6 @@ dir_searchwaste_results = dir_data / "SearchWasteResults"
 dir_searchmaterial_results = dir_data / "SearchMaterialResults"
 dir_databases_wasteandmaterial = dir_data / "DatabasesWasteAndMaterial"
 
-
 dir_wmf = [
     dir_tmp,
     dir_logs,
@@ -205,7 +231,12 @@ dir_wmf = [
     dir_databases_wasteandmaterial,
 ]
 
-if delete:
+# this will delete old results and logs
+if delete_wmf_project:
     for dir in dir_wmf:
         if os.path.exists(dir):
             shutil.rmtree(dir)
+
+
+# FIN #
+# ============================================================

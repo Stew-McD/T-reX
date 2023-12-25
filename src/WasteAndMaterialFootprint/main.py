@@ -72,7 +72,7 @@ sys.path.insert(0, str(dir_config))
 # import custom modules (from root dir)
 from ExchangeEditor import ExchangeEditor
 from ExplodeDatabase import ExplodeDatabase
-from FutureScenarios import FutureScenarios
+from FutureScenarios import MakeFutureScenarios
 from MakeCustomDatabase import dbExcel2BW, dbWriteExcel
 from MethodEditor import AddMethods
 from SearchMaterial import SearchMaterial
@@ -83,7 +83,7 @@ from VerifyDatabase import VerifyDatabase
 from user_settings import (
     custom_bw2_dir,
     db_wmf_name,
-    delete,
+    delete_wmf_project,
     dir_logs,
     dir_tmp,
     generate_args_list,
@@ -129,7 +129,7 @@ def run():
     )
     # create future scenario databases
     if use_premise:
-        FutureScenarios()
+        MakeFutureScenarios()
 
     assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
 
