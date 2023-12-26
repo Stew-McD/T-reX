@@ -32,7 +32,7 @@ import user_settings
 import queries_waste
 import queries_materials
 
-__version__ = "0.1.11"
+__version__ = "0.1.12"
 __author__ = "Stewart Charles McDowall | Stew-McD"
 
 

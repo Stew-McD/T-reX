@@ -7,7 +7,7 @@ import os
 import sys
 
 # Set an environment variable to indicate that we're running a Sphinx build
-os.environ['SPHINX_BUILD'] = '1'
+os.environ["SPHINX_BUILD"] = "1"
 
 sys.path.insert(0, os.path.abspath("../../src"))
 sys.path.insert(0, os.path.abspath("../../config"))
@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath("../../examples"))
 project = "WasteAndMaterialFootprint"
 copyright = "2023, Stewart Charles McDowall | Stew-McD"
 author = "Stewart Charles McDowall | Stew-McD"
-release = "0.1.11"
+release = "0.1.12"
 
 html_theme = "sphinx_rtd_theme"
 # html_static_path = ['_static']

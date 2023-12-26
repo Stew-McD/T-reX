@@ -199,7 +199,7 @@ This function uses the string tests `startswith` in `SearchMaterial.py` to ident
 
 The `examples` folder contains some example scripts that show how to use the program and the kind of results you can get.
 
-There is a basic case-study about batteries in there.
+There is a basic case study about batteries in there.
 
 ### Contributing
 
@@ -207,7 +207,7 @@ Contributions are welcome, test the code, report bugs, suggest features, etc. If
 
 ### License
 
-This project is licensed under the Unlicence, do whatever you want with it - see the [LICENSE.md](LICENSE.md) file for details
+WasteAndMaterialFootprint by Stewart Charles McDowall is marked with CC0 1.0 Universal, do whatever you want with it - see the [LICENSE](LICENSE) file for details
 
 ### Citation
 
