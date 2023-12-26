@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuration &mdash; WasteAndMaterialFootprint 0.1.12 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=297ad043"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h1>
+<p>By default, the program will create a folder <code class="docutils literal notranslate"><span class="pre">config</span></code> in the current working directory containing the default configuration files:</p>
+<section id="general-settings-user-settings-py">
+<h2>General Settings: <code class="docutils literal notranslate"><span class="pre">user_settings.py</span></code><a class="headerlink" href="#general-settings-user-settings-py" title="Link to this heading"></a></h2>
+<p>This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named <code class="docutils literal notranslate"><span class="pre">default</span></code> and copy that to a new project named <code class="docutils literal notranslate"><span class="pre">SSP-cutoff</span></code>, which is then copied to a new project named <code class="docutils literal notranslate"><span class="pre">WMFootprint-SSP-cutoff</span></code>.</p>
+<p>Doing it this way isolates the components and allows you to keep your original brightway2 project as it was. If space is an issue, you can set all of the project names to be the same.</p>
+<p>If you are happy with the default settings, you can just run the program and it will create the databases for you. If you want to change the settings, you can edit the <code class="docutils literal notranslate"><span class="pre">user_settings.py</span></code> file that you can find in the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory of your working directory.</p>
+<p>These are some extracts from <code class="docutils literal notranslate"><span class="pre">user_settings.py</span></code> with the most important settings (the ones you might want to change) and their default values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose whether to use premise to create future scenario databases</span>
+<span class="n">use_premise</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1"># Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)</span>
+<span class="n">use_wmf</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Choose the names of the projects to use</span>
+<span class="n">project_premise_base</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+<span class="n">project_premise</span> <span class="o">=</span> <span class="s2">&quot;SSP-cutoff&quot;</span>
+<span class="n">project_base</span> <span class="o">=</span> <span class="n">project_premise</span>
+<span class="n">project_wmf</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;WMFootprint-</span><span class="si">{</span><span class="n">project_base</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)</span>
+<span class="n">database_name</span> <span class="o">=</span> <span class="s2">&quot;ecoinvent-3.9.1-cutoff&quot;</span>
+
+<span class="c1"># if you want to use a fresh project</span>
+<span class="n">delete_existing_premise_project</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">delete_existing_wmf_project</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Choose the premise scenarios to generate (see FutureScenarios.py for more details)</span>
+<span class="c1"># Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible</span>
+<span class="c1"># the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;remind&quot;</span><span class="p">]</span>
+<span class="n">ssps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SSP2&quot;</span><span class="p">]</span>
+<span class="n">rcps</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Base&quot;</span><span class="p">,</span><span class="s2">&quot;PkBudg500&quot;</span><span class="p">]</span>
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2030</span><span class="p">,</span><span class="mi">2065</span><span class="p">,</span><span class="mi">2100</span><span class="p">,]</span>
+</pre></div>
+</div>
+</section>
+<section id="waste-search-settings-queries-waste-py">
+<h2>Waste Search Settings: <code class="docutils literal notranslate"><span class="pre">queries_waste.py</span></code><a class="headerlink" href="#waste-search-settings-queries-waste-py" title="Link to this heading"></a></h2>
+<p>This file sets up search parameters for different waste and material flow categories, crucial for the <code class="docutils literal notranslate"><span class="pre">SearchWaste.py</span></code> script. It leverages a <code class="docutils literal notranslate"><span class="pre">.pickle</span></code> file created by <code class="docutils literal notranslate"><span class="pre">ExplodeDatabase.py</span></code>.</p>
+<section id="categories">
+<h3>Categories<a class="headerlink" href="#categories" title="Link to this heading"></a></h3>
+<p>Handles various categories like digestion, composting, incineration, recycling, landfill, etc.</p>
+</section>
+<section id="query-types">
+<h3>Query Types<a class="headerlink" href="#query-types" title="Link to this heading"></a></h3>
+<p>Two sets of queries are created:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">queries_kg</span></code> for waste flows in kilograms.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queries_m3</span></code> for waste flows in cubic meters.</p></li>
+</ol>
+</section>
+<section id="adjusting-search-terms">
+<h3>Adjusting Search Terms<a class="headerlink" href="#adjusting-search-terms" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Search Keywords</strong>: Tweak the <code class="docutils literal notranslate"><span class="pre">AND</span></code>, <code class="docutils literal notranslate"><span class="pre">OR</span></code>, <code class="docutils literal notranslate"><span class="pre">NOT</span></code> lists to refine your search.</p></li>
+</ul>
+</section>
+<section id="category-specific-changes">
+<h3>Category-Specific Changes<a class="headerlink" href="#category-specific-changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Adding Categories</strong>: You can add new categories to the <code class="docutils literal notranslate"><span class="pre">names</span></code> list.</p></li>
+<li><p><strong>Modifying Queries</strong>: Update the query parameters for each category based on your requirements.</p></li>
+</ul>
+</section>
+<section id="optimizing-search-efficiency">
+<h3>Optimizing Search Efficiency<a class="headerlink" href="#optimizing-search-efficiency" title="Link to this heading"></a></h3>
+<p>You can choose to include or exclude whatever you want. For instance, “non-hazardous” is not included as it’s derivable from other categories and slows down the process.</p>
+</section>
+<section id="validating-search-terms">
+<h3>Validating Search Terms<a class="headerlink" href="#validating-search-terms" title="Link to this heading"></a></h3>
+<p>Isolate the function of <code class="docutils literal notranslate"><span class="pre">SearchWaste.py</span></code> to validate your search terms. That means, turning off the other functions in <code class="docutils literal notranslate"><span class="pre">user_settings.py</span></code>, or running the module directly. You can achieve this by setting the following in <code class="docutils literal notranslate"><span class="pre">user_settings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">use_premise</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">do_search</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">do_methods</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">do_edit</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="material-search-settings-queries-materials-py">
+<h2>Material Search Settings: <code class="docutils literal notranslate"><span class="pre">queries_materials.py</span></code><a class="headerlink" href="#material-search-settings-queries-materials-py" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">queries_materials</span></code> module creates demand methods in the WasteAndMaterialFootprint tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.</p>
+<p>This function uses the string tests <code class="docutils literal notranslate"><span class="pre">startswith</span></code> in <code class="docutils literal notranslate"><span class="pre">SearchMaterial.py</span></code> to identify activities beginning with the specified material name. This allows one to be more specific with the search terms (the <code class="docutils literal notranslate"><span class="pre">,</span></code> can be critical sometimes).</p>
+<section id="structure-and-customisation">
+<h3>Structure and Customisation<a class="headerlink" href="#structure-and-customisation" title="Link to this heading"></a></h3>
+<section id="tuple-structure">
+<h4>Tuple Structure<a class="headerlink" href="#tuple-structure" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><strong>First Part (Activity Name)</strong>: Specifies the exact activity in the database (e.g., <code class="docutils literal notranslate"><span class="pre">market</span> <span class="pre">for</span> <span class="pre">chromium</span></code>).</p></li>
+<li><p><strong>Second Part (Material Category)</strong>: Aggregates related activities under a common category (e.g., <code class="docutils literal notranslate"><span class="pre">chromium</span></code>), enhancing data processing efficiency.</p></li>
+</ul>
+</section>
+<section id="customisation-options">
+<h4>Customisation Options<a class="headerlink" href="#customisation-options" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><strong>Add or Remove Materials</strong>: Adapt the tuple list by including new materials or removing irrelevant ones.</p></li>
+<li><p><strong>Refine Search Terms</strong>: Update material categories for a better fit with your database, ensuring precision in naming, especially with the use of commas.</p></li>
+</ul>
+</section>
+</section>
+<section id="usage-considerations">
+<h3>Usage Considerations<a class="headerlink" href="#usage-considerations" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Material Quantity</strong>: The current list comprises over 40 materials. Modify this count to suit your project’s scope.</p></li>
+<li><p><strong>Database Alignment</strong>: Check that the material names correspond with your specific database version, like ecoinvent v3.9.1.</p></li>
+</ul>
+<section id="example-tuples">
+<h4>Example Tuples<a class="headerlink" href="#example-tuples" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">chromium&quot;,</span> <span class="pre">&quot;chromium&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">coal&quot;,</span> <span class="pre">&quot;coal&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">cobalt&quot;,</span> <span class="pre">&quot;cobalt&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">coke&quot;,</span> <span class="pre">&quot;coke&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">copper&quot;,</span> <span class="pre">&quot;copper&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">tap</span> <span class="pre">water&quot;,</span> <span class="pre">&quot;water&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(&quot;market</span> <span class="pre">for</span> <span class="pre">water,&quot;,</span> <span class="pre">&quot;water&quot;)</span></code></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

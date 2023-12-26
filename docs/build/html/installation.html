@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=1e825a29"></script>
+        <script src="_static/documentation_options.js?v=297ad043"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -47,7 +47,11 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-instructions">Installation Instructions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
@@ -79,6 +83,39 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<p>The program is written in Python and the required packages are listed in the <cite>requirements.txt</cite> file. These should be installed automatically when installing the program.</p>
+<p>The main dependencies are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.brightway.dev">brightway2</a></p></li>
+<li><p><a class="reference external" href="https://premise.readthedocs.io">premise</a></p></li>
+<li><p><a class="reference external" href="https://wurst.readthedocs.io">wurst</a></p></li>
+</ul>
+</section>
+<section id="installation-instructions">
+<h2>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading"></a></h2>
+<p><strong>It is recommended to use a fresh virtual environment to install the program.</strong></p>
+<p>You can simply clone the repo and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/WasteAndMaterialFootprint/main.py
+</pre></div>
+</div>
+<p>This will not install any of the dependencies, so you will need to install them manually if you don’t already have them.</p>
+<p>A better option: the program can be installed using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>WasteAndMaterialFootprint
+</pre></div>
+</div>
+<p>Or, if you want to install the latest version from GitHub:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+</pre></div>
+</div>
+<p>Or for an editable install (good for development and testing):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+<span class="nb">cd</span><span class="w"> </span>WasteAndMaterialFootprint
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
 </section>
 
 
