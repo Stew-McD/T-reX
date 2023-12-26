@@ -1,38 +1,15 @@
 # src/WasteAndMaterialFootprint/__init__.py
 
-import os
-from pathlib import Path
-import sys
-
-# maybe this is not ideal, but it is working for now
-CUSTOM_CONFIG_DIR = Path.cwd() / "config"
-CUSTOM_DATA_DIR = Path.cwd() / "data"
-
-if CUSTOM_CONFIG_DIR.is_dir():
-    sys.path.append(str(CUSTOM_CONFIG_DIR))
-    print(f"\n* Using config directory: \n{CUSTOM_CONFIG_DIR}.\n")
-else:
-    print(
-        f"\n* Custom config directory: {CUSTOM_CONFIG_DIR} not found.\n* One will be created"
-    )
-    package_root = Path(__file__).resolve().parents[2]
-    target_config_dir = package_root / "config"
-    sys.path.append(str(target_config_dir))
-
+# Import user settings
 from .CustomConfig import config_setup, config_reload
 
-# this will create the config directory in the cwd if it does not exist
-# config_setup()
+config_setup()
 
-if CUSTOM_DATA_DIR.is_dir():
-    print(f"\n* Using data directory: \n{CUSTOM_DATA_DIR}.\n")
+from config import user_settings
+from config import queries_waste
+from config import queries_materials
 
-# Import user settings
-import user_settings
-import queries_waste
-import queries_materials
-
-__version__ = "0.1.12"
+__version__ = "0.1.2"
 __author__ = "Stewart Charles McDowall | Stew-McD"
 
 

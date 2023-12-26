@@ -35,7 +35,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
     """
 
     # Import user settings and directory paths
-    from user_settings import (
+    from config.user_settings import (
         dir_logs,
         dir_searchmaterial_results,
         dir_searchwaste_results,
@@ -106,7 +106,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
     # Iterate over each category (NAME)
     for NAME, df in sorted(file_dict.items(), reverse=False):
         countNAME += 1
-        progress_db = f'{countNAME:2}/{len(file_dict.items())}'
+        progress_db = f"{countNAME:2}/{len(file_dict.items())}"
         count = 0
 
         # For each exchange in the current category's DataFrame
@@ -115,7 +115,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
             desc=f" - {progress_db} : {NAME} ",
             bar_format=bar_format,
             colour="magenta",
-            smoothing=0.01
+            smoothing=0.01,
         ):
             # Extract details of the exchange
             code, name, location, ex_name, amount, unit, ex_location, database = (
@@ -130,7 +130,15 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
             )
 
             KEY = (database, code)
-            WMF_KEY = (db_wmf_name, NAME.split("_")[1].capitalize().replace("_", " ").replace("-", " ").replace("kilogram", "(kg)").replace("cubicmeter", "(m3)"))
+            WMF_KEY = (
+                db_wmf_name,
+                NAME.split("_")[1]
+                .capitalize()
+                .replace("_", " ")
+                .replace("-", " ")
+                .replace("kilogram", "(kg)")
+                .replace("cubicmeter", "(m3)"),
+            )
             # Retrieve the process and wasteandmaterial exchange from the databases
             try:
                 process = bd.get_activity(KEY)
@@ -138,7 +146,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
                 before = len(process.exchanges())
 
                 #! TODO: Check if the exchange already exists in the process, and if so, skip it
-                # Create a new exchange in the process 
+                # Create a new exchange in the process
                 process.new_exchange(
                     input=wasteandmaterial_ex,
                     amount=amount,

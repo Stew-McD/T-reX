@@ -22,8 +22,6 @@ import shutil
 from itertools import product
 from pathlib import Path
 
-from WasteAndMaterialFootprint import CUSTOM_CONFIG_DIR, CUSTOM_DATA_DIR
-
 # ============================================================
 # ------------------------------------------------------------
 ## SETTINGS FOR BRIGHTWAY2
@@ -199,22 +197,13 @@ def generate_args_list(single_database=None):
 
 
 # Get the directory of the main script
-cwd = Path(__file__).resolve().parents[0]
-# Get the path two levels up
-root = cwd.parents[0]
-
+cwd = Path.cwd()
 # Set the paths
-if CUSTOM_CONFIG_DIR.is_dir():
-    dir_config = CUSTOM_CONFIG_DIR
-else:
-    dir_config = root / "config"
+dir_config = cwd / "config"
 
 list_materials = dir_config / "list_materials.txt"
 
-if not CUSTOM_DATA_DIR.is_dir():
-    CUSTOM_DATA_DIR.mkdir(parents=True, exist_ok=True)
-dir_data = CUSTOM_DATA_DIR
-# dir_data = root / "data"
+dir_data = cwd / "data"
 
 dir_tmp = dir_data / "tmp"
 dir_logs = dir_data / "logs"

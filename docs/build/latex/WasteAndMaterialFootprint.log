@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  26 DEC 2023 01:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  26 DEC 2023 18:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -847,7 +847,13 @@ al/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}] [2
 
 
 ]
-(./WasteAndMaterialFootprint.toc)
+(./WasteAndMaterialFootprint.toc
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
+2.
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/txfonts/t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+))
 \tf@toc=\write6
 \openout6 = `WasteAndMaterialFootprint.toc'.
 
@@ -863,54 +869,162 @@ Chapter 1.
 
 ]
 Chapter 2.
-[3] [4
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
+22.
+(/usr/local/texlive/2023/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
+File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
+) [3{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}] [4
 
 ]
 Chapter 3.
+LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 200.
 [5] [6
 
 ]
 Chapter 4.
-[7] [8
-
-]
+LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <14.4> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 213.
+LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 228.
+[7] [8] [9] [10]
 Chapter 5.
-[9] [10
+[11
+
+] [12
 
 ]
 Chapter 6.
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-70.
-(/usr/local/texlive/2023/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
-File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
-)
-(./WasteAndMaterialFootprint.ind) [11{/usr/local/texlive/2023/texmf-dist/fonts/
-enc/dvips/tex-gyre/q-ts1.enc}] (./WasteAndMaterialFootprint.aux)
+[13] [14] [15] [16] [17] [18] [19] [20
+
+]
+Chapter 7.
+[21] [22
+
+]
+Overfull \hbox (3.62183pt too wide) in paragraph at lines 1133--1134
+[]\T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase\T1/qtm/m/n/10 ,
+ []
+
+[23
+
+
+] (./WasteAndMaterialFootprint.ind [24
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+[]\T1/txtt/m/n/10 AddMethods() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Waste
+-And-Ma-te-ri-al-Foot-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--22
+[]\T1/txtt/m/n/10 dbExcel2BW() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Waste
+-And-Ma-te-ri-al-Foot-
+ []
+
+
+Underfull \hbox (badness 5954) in paragraph at lines 37--39
+[]\T1/txtt/m/n/10 ExplodeDatabase() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule 
+Waste-And-Ma-te-ri-al-
+ []
+
+
+Underfull \hbox (badness 5954) in paragraph at lines 42--44
+[]\T1/txtt/m/n/10 FutureScenarios() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule 
+Waste-And-Ma-te-ri-al-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--51
+[]\T1/txtt/m/n/10 grouper() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Waste-An
+d-Ma-te-ri-al-Foot-
+ []
+
+
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 59--60
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.ExchangeEditor\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (7.87187pt too wide) in paragraph at lines 60--61
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.ExplodeDatabase\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (7.87187pt too wide) in paragraph at lines 61--62
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.FutureScenarios\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (23.62183pt too wide) in paragraph at lines 63--64
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase\T1/qtm/m/n/10 
+,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.MethodEditor\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 65--66
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.SearchMaterial\T1/qtm/m/n/10 ,
+ []
+
+
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 67--68
+[]| \T1/txtt/m/n/10 WasteAndMaterialFootprint.VerifyDatabase\T1/qtm/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--79
+[]\T1/txtt/m/n/10 SearchWaste() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Wast
+e-And-Ma-te-ri-al-Foot-
+ []
+
+[25
+
+]
+Overfull \hbox (1.12183pt too wide) in paragraph at lines 95--96
+[]\T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase 
+ []
+
+[26
+
+]) (./WasteAndMaterialFootprint.aux)
  ***********
 LaTeX2e <2023-11-01>
 L3 programming layer <2023-11-09>
  ***********
 Package rerunfilecheck Info: File `WasteAndMaterialFootprint.out' has not chang
 ed.
-(rerunfilecheck)             Checksum: C61F6DCAE993DA7A86C420F4FB9F5145;3810.
+(rerunfilecheck)             Checksum: AF400C7915670A14512FA8A315681944;9336.
  ) 
 Here is how much of TeX's memory you used:
- 16233 strings out of 475387
- 269653 string characters out of 5769436
- 1930555 words of memory out of 5000000
- 37879 multiletter control sequences out of 15000+600000
- 607982 words of font info for 73 fonts, out of 8000000 for 9000
+ 16493 strings out of 475387
+ 276409 string characters out of 5769436
+ 1962555 words of memory out of 5000000
+ 38055 multiletter control sequences out of 15000+600000
+ 612530 words of font info for 79 fonts, out of 8000000 for 9000
  431 hyphenation exceptions out of 8191
- 72i,11n,79p,387b,516s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></us
-r/local/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/loc
-al/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/tex
-live/2023/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2
-023/texmf-dist/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on WasteAndMaterialFootprint.pdf (15 pages, 124742 bytes).
+ 72i,12n,79p,602b,743s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb>
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></
+usr/local/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/lo
+cal/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/local/t
+exlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive
+/2023/texmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2023/
+texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2023/texmf-
+dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/texlive/2023/texmf-dist/
+fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texlive/2023/texmf-dist/fonts
+/type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1
+/public/txfonts/t1xtt.pfb>
+Output written on WasteAndMaterialFootprint.pdf (30 pages, 225587 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 165 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 517 PDF objects out of 1000 (max. 8388607)
+ 464 compressed objects within 5 object streams
+ 106 named destinations out of 1000 (max. 500000)
+ 433 words of extra memory for PDF output out of 10000 (max. 10000000)
 

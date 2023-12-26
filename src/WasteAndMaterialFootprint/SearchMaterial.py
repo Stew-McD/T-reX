@@ -14,8 +14,13 @@ import shutil
 
 import bw2data as bd
 import pandas as pd
-from queries_materials import queries_materials
-from user_settings import dir_config, dir_logs, dir_searchmaterial_results, dir_tmp
+from config.queries_materials import queries_materials
+from config.user_settings import (
+    dir_config,
+    dir_logs,
+    dir_searchmaterial_results,
+    dir_tmp,
+)
 
 
 def SearchMaterial(db_name, project_wmf):

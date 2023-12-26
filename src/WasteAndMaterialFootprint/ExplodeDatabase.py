@@ -27,7 +27,7 @@ def ExplodeDatabase(db_name):
         The function saves the output to a file and logs the operation, but does not return any value.
     :rtype: None
     """
-    from user_settings import dir_logs, dir_tmp
+    from config.user_settings import dir_logs, dir_tmp
 
     if not os.path.isdir(dir_tmp):
         os.makedirs(dir_tmp)

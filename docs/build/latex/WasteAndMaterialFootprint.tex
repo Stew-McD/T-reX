@@ -65,7 +65,7 @@
 
 \title{WasteAndMaterialFootprint Documentation}
 \date{Dec 26, 2023}
-\release{0.1.12}
+\release{0.1.2}
 \author{Stewart Charles McDowall}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Release}
@@ -110,11 +110,303 @@ The full api reference is available on this site, however
 
 \chapter{Installation}
 \label{\detokenize{installation:installation}}\label{\detokenize{installation::doc}}
+
+\section{Dependencies}
+\label{\detokenize{installation:dependencies}}
+\sphinxAtStartPar
+The program is written in Python and the required packages are listed in the \sphinxtitleref{requirements.txt} file. These should be installed automatically when installing the program.
+
+\sphinxAtStartPar
+The main dependencies are:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://docs.brightway.dev}{brightway2}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://premise.readthedocs.io}{premise}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxhref{https://wurst.readthedocs.io}{wurst}
+
+\end{itemize}
+
+
+\section{Installation Instructions}
+\label{\detokenize{installation:installation-instructions}}
+\sphinxAtStartPar
+\sphinxstylestrong{It is recommended to use a fresh virtual environment to install the program.}
+
+\sphinxAtStartPar
+You can simply clone the repo and run:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+python\PYG{+w}{ }src/WasteAndMaterialFootprint/main.py
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+This will not install any of the dependencies, so you will need to install them manually if you don’t already have them.
+
+\sphinxAtStartPar
+A better option: the program can be installed using pip:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+pip\PYG{+w}{ }install\PYG{+w}{ }WasteAndMaterialFootprint
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Or, if you want to install the latest version from GitHub:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+pip\PYG{+w}{ }install\PYG{+w}{ }git+https://github.com/Stew\PYGZhy{}McD/WasteAndMaterialFootprint.git
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Or for an editable install (good for development and testing):
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+git\PYG{+w}{ }clone\PYG{+w}{ }https://github.com/Stew\PYGZhy{}McD/WasteAndMaterialFootprint.git
+\PYG{n+nb}{cd}\PYG{+w}{ }WasteAndMaterialFootprint
+pip\PYG{+w}{ }install\PYG{+w}{ }\PYGZhy{}e\PYG{+w}{ }.
+\end{sphinxVerbatim}
+
 \sphinxstepscope
 
 
 \chapter{Usage}
 \label{\detokenize{usage:usage}}\label{\detokenize{usage::doc}}
+\sphinxAtStartPar
+The program can be used directly from the command line, or imported as a Python module. This will run the program using the default settings. See the \DUrole{xref,std,std-ref}{configuration} section for more information on how to change the settings.
+
+
+\section{Command Line}
+\label{\detokenize{usage:command-line}}
+\sphinxAtStartPar
+You should clone the repo, navigate to the \sphinxcode{\sphinxupquote{WasteAndMaterialFootprint}} folder, and then run the program using:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+python\PYG{+w}{ }src/WasteAndMaterialFootprint/main.py
+\end{sphinxVerbatim}
+
+
+\section{Python Module}
+\label{\detokenize{usage:python-module}}
+\sphinxAtStartPar
+The program can be imported as a Python module:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{WasteAndMaterialFootprint} \PYG{k}{as} \PYG{n+nn}{wmf}
+\PYG{n}{wmf}\PYG{o}{.}\PYG{n}{run}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\sphinxstepscope
+
+
+\chapter{Configuration}
+\label{\detokenize{configuration:configuration}}\label{\detokenize{configuration::doc}}
+\sphinxAtStartPar
+By default, the program will create a folder \sphinxcode{\sphinxupquote{config}} in the current working directory containing the default configuration files:
+
+
+\section{General Settings: \sphinxstyleliteralintitle{\sphinxupquote{user\_settings.py}}}
+\label{\detokenize{configuration:general-settings-user-settings-py}}
+\sphinxAtStartPar
+This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named \sphinxcode{\sphinxupquote{default}} and copy that to a new project named \sphinxcode{\sphinxupquote{SSP\sphinxhyphen{}cutoff}}, which is then copied to a new project named \sphinxcode{\sphinxupquote{WMFootprint\sphinxhyphen{}SSP\sphinxhyphen{}cutoff}}.
+
+\sphinxAtStartPar
+Doing it this way isolates the components and allows you to keep your original brightway2 project as it was. If space is an issue, you can set all of the project names to be the same.
+
+\sphinxAtStartPar
+If you are happy with the default settings, you can just run the program and it will create the databases for you. If you want to change the settings, you can edit the \sphinxcode{\sphinxupquote{user\_settings.py}} file that you can find in the \sphinxcode{\sphinxupquote{config}} directory of your working directory.
+
+\sphinxAtStartPar
+These are some extracts from \sphinxcode{\sphinxupquote{user\_settings.py}} with the most important settings (the ones you might want to change) and their default values:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Choose whether to use premise to create future scenario databases}
+\PYG{n}{use\PYGZus{}premise} \PYG{o}{=} \PYG{k+kc}{True}
+\PYG{c+c1}{\PYGZsh{} Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)}
+\PYG{n}{use\PYGZus{}wmf} \PYG{o}{=} \PYG{k+kc}{True}
+
+\PYG{c+c1}{\PYGZsh{} Choose the names of the projects to use}
+\PYG{n}{project\PYGZus{}premise\PYGZus{}base} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{default}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{project\PYGZus{}premise} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{SSP\PYGZhy{}cutoff}\PYG{l+s+s2}{\PYGZdq{}}
+\PYG{n}{project\PYGZus{}base} \PYG{o}{=} \PYG{n}{project\PYGZus{}premise}
+\PYG{n}{project\PYGZus{}wmf} \PYG{o}{=} \PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{WMFootprint\PYGZhy{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{project\PYGZus{}base}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)}
+\PYG{n}{database\PYGZus{}name} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ecoinvent\PYGZhy{}3.9.1\PYGZhy{}cutoff}\PYG{l+s+s2}{\PYGZdq{}}
+
+\PYG{c+c1}{\PYGZsh{} if you want to use a fresh project}
+\PYG{n}{delete\PYGZus{}existing\PYGZus{}premise\PYGZus{}project} \PYG{o}{=} \PYG{k+kc}{False}
+\PYG{n}{delete\PYGZus{}existing\PYGZus{}wmf\PYGZus{}project} \PYG{o}{=} \PYG{k+kc}{False}
+
+\PYG{c+c1}{\PYGZsh{} Choose the premise scenarios to generate (see FutureScenarios.py for more details)}
+\PYG{c+c1}{\PYGZsh{} Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible}
+\PYG{c+c1}{\PYGZsh{} the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100}
+
+\PYG{n}{models} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{remind}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+\PYG{n}{ssps} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{SSP2}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+\PYG{n}{rcps} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Base}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PkBudg500}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{]}
+\PYG{n}{years} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{2030}\PYG{p}{,}\PYG{l+m+mi}{2065}\PYG{p}{,}\PYG{l+m+mi}{2100}\PYG{p}{,}\PYG{p}{]}
+\end{sphinxVerbatim}
+
+
+\section{Waste Search Settings: \sphinxstyleliteralintitle{\sphinxupquote{queries\_waste.py}}}
+\label{\detokenize{configuration:waste-search-settings-queries-waste-py}}
+\sphinxAtStartPar
+This file sets up search parameters for different waste and material flow categories, crucial for the \sphinxcode{\sphinxupquote{SearchWaste.py}} script. It leverages a \sphinxcode{\sphinxupquote{.pickle}} file created by \sphinxcode{\sphinxupquote{ExplodeDatabase.py}}.
+
+
+\subsection{Categories}
+\label{\detokenize{configuration:categories}}
+\sphinxAtStartPar
+Handles various categories like digestion, composting, incineration, recycling, landfill, etc.
+
+
+\subsection{Query Types}
+\label{\detokenize{configuration:query-types}}
+\sphinxAtStartPar
+Two sets of queries are created:
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{queries\_kg}} for waste flows in kilograms.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{queries\_m3}} for waste flows in cubic meters.
+
+\end{enumerate}
+
+
+\subsection{Adjusting Search Terms}
+\label{\detokenize{configuration:adjusting-search-terms}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Search Keywords}: Tweak the \sphinxcode{\sphinxupquote{AND}}, \sphinxcode{\sphinxupquote{OR}}, \sphinxcode{\sphinxupquote{NOT}} lists to refine your search.
+
+\end{itemize}
+
+
+\subsection{Category\sphinxhyphen{}Specific Changes}
+\label{\detokenize{configuration:category-specific-changes}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Adding Categories}: You can add new categories to the \sphinxcode{\sphinxupquote{names}} list.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Modifying Queries}: Update the query parameters for each category based on your requirements.
+
+\end{itemize}
+
+
+\subsection{Optimizing Search Efficiency}
+\label{\detokenize{configuration:optimizing-search-efficiency}}
+\sphinxAtStartPar
+You can choose to include or exclude whatever you want. For instance, “non\sphinxhyphen{}hazardous” is not included as it’s derivable from other categories and slows down the process.
+
+
+\subsection{Validating Search Terms}
+\label{\detokenize{configuration:validating-search-terms}}
+\sphinxAtStartPar
+Isolate the function of \sphinxcode{\sphinxupquote{SearchWaste.py}} to validate your search terms. That means, turning off the other functions in \sphinxcode{\sphinxupquote{user\_settings.py}}, or running the module directly. You can achieve this by setting the following in \sphinxcode{\sphinxupquote{user\_settings.py}}:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{use\PYGZus{}premise} \PYG{o}{=} \PYG{k+kc}{False}
+\PYG{n}{do\PYGZus{}search} \PYG{o}{=} \PYG{k+kc}{True}
+\PYG{n}{do\PYGZus{}methods} \PYG{o}{=} \PYG{k+kc}{False}
+\PYG{n}{do\PYGZus{}edit} \PYG{o}{=} \PYG{k+kc}{False}
+\end{sphinxVerbatim}
+
+
+\section{Material Search Settings: \sphinxstyleliteralintitle{\sphinxupquote{queries\_materials.py}}}
+\label{\detokenize{configuration:material-search-settings-queries-materials-py}}
+\sphinxAtStartPar
+The \sphinxcode{\sphinxupquote{queries\_materials}} module creates demand methods in the WasteAndMaterialFootprint tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.
+
+\sphinxAtStartPar
+This function uses the string tests \sphinxcode{\sphinxupquote{startswith}} in \sphinxcode{\sphinxupquote{SearchMaterial.py}} to identify activities beginning with the specified material name. This allows one to be more specific with the search terms (the \sphinxcode{\sphinxupquote{,}} can be critical sometimes).
+
+
+\subsection{Structure and Customisation}
+\label{\detokenize{configuration:structure-and-customisation}}
+
+\subsubsection{Tuple Structure}
+\label{\detokenize{configuration:tuple-structure}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{First Part (Activity Name)}: Specifies the exact activity in the database (e.g., \sphinxcode{\sphinxupquote{market for chromium}}).
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Second Part (Material Category)}: Aggregates related activities under a common category (e.g., \sphinxcode{\sphinxupquote{chromium}}), enhancing data processing efficiency.
+
+\end{itemize}
+
+
+\subsubsection{Customisation Options}
+\label{\detokenize{configuration:customisation-options}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Add or Remove Materials}: Adapt the tuple list by including new materials or removing irrelevant ones.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Refine Search Terms}: Update material categories for a better fit with your database, ensuring precision in naming, especially with the use of commas.
+
+\end{itemize}
+
+
+\subsection{Usage Considerations}
+\label{\detokenize{configuration:usage-considerations}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Material Quantity}: The current list comprises over 40 materials. Modify this count to suit your project’s scope.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Database Alignment}: Check that the material names correspond with your specific database version, like ecoinvent v3.9.1.
+
+\end{itemize}
+
+
+\subsubsection{Example Tuples}
+\label{\detokenize{configuration:example-tuples}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for chromium", "chromium")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for coal", "coal")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for cobalt", "cobalt")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for coke", "coke")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for copper", "copper")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for tap water", "water")}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{("market for water,", "water")}}
+
+\end{itemize}
+
 \sphinxstepscope
 
 
@@ -136,34 +428,682 @@ The folder \sphinxtitleref{batteries} contains a small case study using the pack
 \label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-package}}\label{\detokenize{WasteAndMaterialFootprint::doc}}
 
 \subsection{WasteAndMaterialFootprint.main module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-main-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.main}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-main-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.main@\spxentry{WasteAndMaterialFootprint.main}}\index{WasteAndMaterialFootprint.main@\spxentry{WasteAndMaterialFootprint.main}!module@\spxentry{module}}
+
+\subsubsection{main Module}
+\label{\detokenize{WasteAndMaterialFootprint:main-module}}
+\sphinxAtStartPar
+Main module of the \sphinxtitleref{WasteAndMaterialFootprint} tool.
+
+\sphinxAtStartPar
+This script serves as the entry point for the \sphinxtitleref{WasteAndMaterialFootprint} tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges.
+
+\sphinxAtStartPar
+The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.
+
+
+\paragraph{Customisation:}
+\label{\detokenize{WasteAndMaterialFootprint:customisation}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Project and database names, and other settings can be edited in \sphinxtitleref{config/user\_settings.py}.
+
+\item {} 
+\sphinxAtStartPar
+Waste search query terms can be customised in \sphinxtitleref{config/queries\_waste.py}.
+
+\item {} 
+\sphinxAtStartPar
+The list of materials can be modified in \sphinxtitleref{config/queries\_materials.py}.
+
+\end{itemize}
+
+
+\paragraph{Usage:}
+\label{\detokenize{WasteAndMaterialFootprint:usage}}
+\sphinxAtStartPar
+To use the default settings, run the script with \sphinxtitleref{python main.py}. 
+Arguments can be provided to change project/database names or to delete the project before running.
+\index{EditExchanges() (in module WasteAndMaterialFootprint.main)@\spxentry{EditExchanges()}\spxextra{in module WasteAndMaterialFootprint.main}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.main.EditExchanges}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.main.}}\sphinxbfcode{\sphinxupquote{EditExchanges}}}{\sphinxparam{\DUrole{n}{args}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Edit exchanges in the database.
+
+\sphinxAtStartPar
+This function adds waste and material flows to the activities and verifies the database.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{args}} \textendash{} Dictionary containing database and project settings.
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{ExplodeAndSearch() (in module WasteAndMaterialFootprint.main)@\spxentry{ExplodeAndSearch()}\spxextra{in module WasteAndMaterialFootprint.main}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.main.ExplodeAndSearch}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.main.}}\sphinxbfcode{\sphinxupquote{ExplodeAndSearch}}}{\sphinxparam{\DUrole{n}{args}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Exploding the database into separate exchanges, searching for waste and
+material flows, and processing these results.
+\begin{description}
+\sphinxlineitem{This includes:}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+ExplodeDatabase.py
+
+\item {} 
+\sphinxAtStartPar
+SearchWaste.py
+
+\item {} 
+\sphinxAtStartPar
+SearchMaterial.py
+
+\end{itemize}
+
+\end{description}
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{args}} \textendash{} Dictionary containing database and project settings.
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{run() (in module WasteAndMaterialFootprint.main)@\spxentry{run()}\spxextra{in module WasteAndMaterialFootprint.main}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.main.run}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.main.}}\sphinxbfcode{\sphinxupquote{run}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
+\begin{description}
+\sphinxlineitem{This function coordinates the various components of the tool, including:}
+\sphinxAtStartPar
+creating future scenario databases,
+setting up and processing each database for waste and material footprinting,
+and combining results into a custom database.
+adding LCIA methods to the project for each of the waste/material flows.
+
+\end{description}
+
+\sphinxAtStartPar
+The function supports various modes of operation based on the settings in \sphinxtitleref{config/user\_settings.py}.
+Specifications for material and waste searches can be customised in \sphinxtitleref{queries\_materials}.
+
+\end{fulllineitems}
+
+
 
 \subsection{Submodules}
 \label{\detokenize{WasteAndMaterialFootprint:submodules}}
 
 \subsection{WasteAndMaterialFootprint.ExchangeEditor module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-exchangeeditor-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.ExchangeEditor}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-exchangeeditor-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.ExchangeEditor@\spxentry{WasteAndMaterialFootprint.ExchangeEditor}}\index{WasteAndMaterialFootprint.ExchangeEditor@\spxentry{WasteAndMaterialFootprint.ExchangeEditor}!module@\spxentry{module}}
+
+\subsubsection{ExchangeEditor Module}
+\label{\detokenize{WasteAndMaterialFootprint:exchangeeditor-module}}
+\sphinxAtStartPar
+This module is responsible for editing exchanges with wurst and Brightway2.
+It appends relevant exchanges from the \sphinxtitleref{db\_wmf} (database containing waste and material exchange details) 
+to activities identified by \sphinxtitleref{WasteAndMaterialSearch()} in the specified project’s database (\sphinxtitleref{db\_name}).
+Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
+\index{ExchangeEditor() (in module WasteAndMaterialFootprint.ExchangeEditor)@\spxentry{ExchangeEditor()}\spxextra{in module WasteAndMaterialFootprint.ExchangeEditor}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.ExchangeEditor.ExchangeEditor}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.ExchangeEditor.}}\sphinxbfcode{\sphinxupquote{ExchangeEditor}}}{\sphinxparam{\DUrole{n}{project\_wmf}}\sphinxparamcomma \sphinxparam{\DUrole{n}{db\_name}}\sphinxparamcomma \sphinxparam{\DUrole{n}{db\_wmf\_name}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Append relevant exchanges from \sphinxtitleref{db\_wmf} to each activity in \sphinxtitleref{db\_name} identified by \sphinxtitleref{WasteAndMaterialSearch()}.
+
+\sphinxAtStartPar
+This function modifies the specified project’s database by appending exchanges from the \sphinxtitleref{db\_wmf} to activities identified by \sphinxtitleref{WasteAndMaterialSearch()}. The appended exchanges mirror the quantity and unit of the original technosphere waste and material exchange.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_wmf}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Name of the Brightway2 project to be modified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Name of the database within the project where activities and exchanges are stored.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_wmf\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Name of the database containing waste and material exchange details.
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None. Modifies the given Brightway2 project by appending exchanges and logs statistics about the added exchanges.
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+None
+
+\sphinxlineitem{Raises}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{Exception}} \textendash{} If any specified process or exchange is not found in the database.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.ExplodeDatabase module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-explodedatabase-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.ExplodeDatabase}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-explodedatabase-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.ExplodeDatabase@\spxentry{WasteAndMaterialFootprint.ExplodeDatabase}}\index{WasteAndMaterialFootprint.ExplodeDatabase@\spxentry{WasteAndMaterialFootprint.ExplodeDatabase}!module@\spxentry{module}}
+
+\subsubsection{ExplodeDatabase Module}
+\label{\detokenize{WasteAndMaterialFootprint:explodedatabase-module}}
+\sphinxAtStartPar
+This module is responsible for exploding a Brightway2 database into a single\sphinxhyphen{}level list of all exchanges.
+It utilizes the wurst package to unpack the database, explode it to a list of all exchanges, and save this data 
+in a DataFrame as a .pickle binary file.
+\index{ExplodeDatabase() (in module WasteAndMaterialFootprint.ExplodeDatabase)@\spxentry{ExplodeDatabase()}\spxextra{in module WasteAndMaterialFootprint.ExplodeDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.ExplodeDatabase.ExplodeDatabase}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.ExplodeDatabase.}}\sphinxbfcode{\sphinxupquote{ExplodeDatabase}}}{\sphinxparam{\DUrole{n}{db\_name}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Explode a Brightway2 database into a single\sphinxhyphen{}level list of all exchanges using wurst.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} Name of the Brightway2 database to be exploded.
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+The function saves the output to a file and logs the operation, but does not return any value.
+
+\sphinxlineitem{Return type}
+\sphinxAtStartPar
+None
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.FutureScenarios module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-futurescenarios-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.FutureScenarios}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-futurescenarios-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.FutureScenarios@\spxentry{WasteAndMaterialFootprint.FutureScenarios}}\index{WasteAndMaterialFootprint.FutureScenarios@\spxentry{WasteAndMaterialFootprint.FutureScenarios}!module@\spxentry{module}}
+
+\subsubsection{FutureScenarios Module}
+\label{\detokenize{WasteAndMaterialFootprint:futurescenarios-module}}
+\sphinxAtStartPar
+This module is responsible for creating future databases with premise.
+\index{FutureScenarios() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{FutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.FutureScenarios}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{FutureScenarios}}}{\sphinxparam{\DUrole{n}{scenario\_list}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Create future databases with premise.
+
+\sphinxAtStartPar
+This function processes scenarios and creates new databases based on the premise module. It configures and uses user\sphinxhyphen{}defined settings and parameters for database creation and scenario processing.
+\begin{quote}\begin{description}
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+The function does not return any value but performs operations to create and configure databases in Brightway2 based on specified scenarios.
+
+\sphinxlineitem{Raises}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{Exception}} \textendash{} If an error occurs during the processing of scenarios or database creation.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{MakeFutureScenarios() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{MakeFutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{MakeFutureScenarios}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Main function to run the FutureScenarios module.
+Only activated if \sphinxtitleref{use\_premise} is set to True in \sphinxtitleref{user\_settings.py}.
+
+\sphinxAtStartPar
+Calls the \sphinxtitleref{FutureScenarios} function to create new databases based on the list of scenarios and settings specified in \sphinxtitleref{user\_settings.py}.
+
+\end{fulllineitems}
+
+\index{check\_existing() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{check\_existing()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.check_existing}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{check\_existing}}}{\sphinxparam{\DUrole{n}{desired\_scenarios}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Check the project to see if the desired scenarios already exist, and if so, remove them from the list of scenarios to be created.
+Quite useful when running many scenarios, as it can take a long time to create them all, sometimes crashes, etc.
+
+\sphinxAtStartPar
+args: desired\_scenarios (list): list of dictionaries with scenario details
+
+\sphinxAtStartPar
+returns: new\_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
+
+\end{fulllineitems}
+
+\index{grouper() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{grouper()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.grouper}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{grouper}}}{\sphinxparam{\DUrole{n}{iterable}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fillvalue}\DUrole{o}{=}\DUrole{default_value}{None}}}{}
+\pysigstopsignatures
+\end{fulllineitems}
+
+\index{make\_possible\_scenario\_list() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{make\_possible\_scenario\_list}}}{\sphinxparam{\DUrole{n}{filenames}}\sphinxparamcomma \sphinxparam{\DUrole{n}{desired\_scenarios}}\sphinxparamcomma \sphinxparam{\DUrole{n}{years}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Make a list of dictionaries with scenario details based on the available scenarios and the desired scenarios.
+
+\sphinxAtStartPar
+args: filenames (list): list of filenames of available scenarios
+desired\_scenarios (list): list of dictionaries with scenario details
+years (list): list of years to be used
+
+\sphinxAtStartPar
+returns: scenarios (list): list of dictionaries with scenario details that are available and desired
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.MakeCustomDatabase module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-makecustomdatabase-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.MakeCustomDatabase}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-makecustomdatabase-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.MakeCustomDatabase@\spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}}\index{WasteAndMaterialFootprint.MakeCustomDatabase@\spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}!module@\spxentry{module}}
+
+\subsubsection{MakeCustomDatabase Module}
+\label{\detokenize{WasteAndMaterialFootprint:makecustomdatabase-module}}
+\sphinxAtStartPar
+This module contains functions for creating an xlsx representation of a Brightway2 database 
+and importing it into Brightway2.
+
+\sphinxAtStartPar
+Main functions:
+\sphinxhyphen{} dbWriteExcel: Creates an xlsx file representing a custom Brightway2 database.
+\sphinxhyphen{} dbExcel2BW: Imports the custom database (created by dbWriteExcel) into Brightway2.
+\index{dbExcel2BW() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{dbExcel2BW()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MakeCustomDatabase.dbExcel2BW}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MakeCustomDatabase.}}\sphinxbfcode{\sphinxupquote{dbExcel2BW}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Import the custom database (created by dbWriteExcel) into Brightway2.
+
+\sphinxAtStartPar
+This function imports a custom Brightway2 database from an Excel file into the Brightway2 software,
+making it available for further environmental impact analysis.
+\begin{quote}\begin{description}
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{dbWriteExcel() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{dbWriteExcel()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MakeCustomDatabase.dbWriteExcel}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MakeCustomDatabase.}}\sphinxbfcode{\sphinxupquote{dbWriteExcel}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Create an xlsx file representing a custom Brightway2 database.
+
+\sphinxAtStartPar
+This function generates an Excel file which represents a custom database for Brightway2,
+using predefined directory and database settings.
+\begin{quote}\begin{description}
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Path to the generated xlsx file.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{determine\_unit\_from\_name() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{determine\_unit\_from\_name()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MakeCustomDatabase.determine_unit_from_name}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MakeCustomDatabase.}}\sphinxbfcode{\sphinxupquote{determine\_unit\_from\_name}}}{\sphinxparam{\DUrole{n}{name}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Determine the unit based on the name.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{name}} \textendash{} The name from which to infer the unit.
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+The inferred unit as a string.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{get\_files\_from\_tree() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{get\_files\_from\_tree()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MakeCustomDatabase.get_files_from_tree}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MakeCustomDatabase.}}\sphinxbfcode{\sphinxupquote{get\_files\_from\_tree}}}{\sphinxparam{\DUrole{n}{dir\_searchmaterial\_results}}\sphinxparamcomma \sphinxparam{\DUrole{n}{dir\_searchwaste\_results}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Collects filenames from the SearchMaterial and SearchWasteResults directories.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dir\_searchmaterial\_results}} \textendash{} Directory path for SearchMaterial results.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{dir\_searchwaste\_results}} \textendash{} Directory path for SearchWasteResults.
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Sorted list of filenames.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.MethodEditor module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-methodeditor-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.MethodEditor}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-methodeditor-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.MethodEditor@\spxentry{WasteAndMaterialFootprint.MethodEditor}}\index{WasteAndMaterialFootprint.MethodEditor@\spxentry{WasteAndMaterialFootprint.MethodEditor}!module@\spxentry{module}}
+
+\subsubsection{MethodEditor Module}
+\label{\detokenize{WasteAndMaterialFootprint:methodeditor-module}}
+\sphinxAtStartPar
+This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.
+
+
+\paragraph{Function Summary:}
+\label{\detokenize{WasteAndMaterialFootprint:function-summary}}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{AddMethods}: Adds new methods to a project based on a custom biosphere database.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{DeleteMethods}: Removes specific methods from a project, particularly those related to waste and material footprints.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxtitleref{CheckMethods}: Lists and checks the methods in a project, focusing on those associated with waste and material footprints.
+
+\end{itemize}
+\index{AddMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{AddMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MethodEditor.AddMethods}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MethodEditor.}}\sphinxbfcode{\sphinxupquote{AddMethods}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Add methods to the specified project based on entries in the custom biosphere database.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_wmf}} \textendash{} Name of the project.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_wmf\_name}} \textendash{} Name of the database.
+
+\end{itemize}
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{CheckMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{CheckMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MethodEditor.CheckMethods}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MethodEditor.}}\sphinxbfcode{\sphinxupquote{CheckMethods}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Check methods associated with the “WasteAndMaterial Footprint” in the specified project.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_wmf}} \textendash{} Name of the project.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+\index{DeleteMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{DeleteMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.MethodEditor.DeleteMethods}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.MethodEditor.}}\sphinxbfcode{\sphinxupquote{DeleteMethods}}}{}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Delete methods associated with the “WasteAndMaterial Footprint” in the specified project.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_wmf}} \textendash{} Name of the project.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.SearchMaterial module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-searchmaterial-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.SearchMaterial}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-searchmaterial-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.SearchMaterial@\spxentry{WasteAndMaterialFootprint.SearchMaterial}}\index{WasteAndMaterialFootprint.SearchMaterial@\spxentry{WasteAndMaterialFootprint.SearchMaterial}!module@\spxentry{module}}
+
+\subsubsection{SearchMaterial Module}
+\label{\detokenize{WasteAndMaterialFootprint:searchmaterial-module}}
+\sphinxAtStartPar
+This script loads data from ‘\textless{}db name\textgreater{}\_exploded.pickle’, runs search queries, 
+and produces a CSV to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords\_AND, 
+keywords\_OR, and keywords\_NOT. These queries are defined in \sphinxtitleref{config/queries\_waste.py}.
+\index{SearchMaterial() (in module WasteAndMaterialFootprint.SearchMaterial)@\spxentry{SearchMaterial()}\spxextra{in module WasteAndMaterialFootprint.SearchMaterial}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.SearchMaterial.SearchMaterial}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.SearchMaterial.}}\sphinxbfcode{\sphinxupquote{SearchMaterial}}}{\sphinxparam{\DUrole{n}{db\_name}}\sphinxparamcomma \sphinxparam{\DUrole{n}{project\_wmf}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Search for materials in a specified database and extract related information.
+
+\sphinxAtStartPar
+This function takes a database name as input, sets the project to the respective database,
+and looks for activities involving a predefined list of materials. It extracts relevant details
+of these activities, such as ISIC and CPC classifications, and saves the details to a CSV file.
+It also extracts related material exchanges and saves them to another CSV file.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_name}} \textendash{} The name of the database to search in.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_wmf}} \textendash{} The Brightway2 project to set as current for the search.
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+None
+
+\sphinxlineitem{Raises}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{Exception}} \textendash{} If there is any error in reading the materials list from the file.
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.SearchWaste module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-searchwaste-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.SearchWaste}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-searchwaste-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.SearchWaste@\spxentry{WasteAndMaterialFootprint.SearchWaste}}\index{WasteAndMaterialFootprint.SearchWaste@\spxentry{WasteAndMaterialFootprint.SearchWaste}!module@\spxentry{module}}
+
+\subsubsection{SearchWaste Module}
+\label{\detokenize{WasteAndMaterialFootprint:searchwaste-module}}
+\sphinxAtStartPar
+This script loads data from ‘\textless{}db name\textgreater{}\_exploded.pickle’, runs search queries, 
+and produces CSV files to store the results and a log entry. The search queries are 
+formatted as dictionaries with fields NAME, CODE, and search terms keywords\_AND, 
+keywords\_OR, and keywords\_NOT. These queries are defined in \sphinxtitleref{config/queries\_waste.py}.
+
+
+\paragraph{Functionality}
+\label{\detokenize{WasteAndMaterialFootprint:functionality}}
+\sphinxAtStartPar
+Provides a function, {\hyperref[\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.SearchWaste.SearchWaste}]{\sphinxcrossref{\sphinxcode{\sphinxupquote{SearchWaste()}}}}}, that loads data from ‘\textless{}db name\textgreater{}\_exploded.pickle’,
+runs search queries, and produces result CSVs and log entries.
+\index{SearchWaste() (in module WasteAndMaterialFootprint.SearchWaste)@\spxentry{SearchWaste()}\spxextra{in module WasteAndMaterialFootprint.SearchWaste}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.SearchWaste.SearchWaste}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.SearchWaste.}}\sphinxbfcode{\sphinxupquote{SearchWaste}}}{\sphinxparam{\DUrole{n}{db\_name}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Load data from ‘\textless{}db name\textgreater{}\_exploded.pickle’, run search queries, and produce
+result CSVs and log entries.
+
+\sphinxAtStartPar
+This function processes waste\sphinxhyphen{}related data from a given database and runs
+predefined queries to identify relevant waste exchanges. The results are
+saved in CSV files and log entries are created for each search operation.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{db\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} The database name to be used in the search operation.
+
+\end{description}\end{quote}
+
+\sphinxAtStartPar
+Note:
+The queries are defined in \sphinxtitleref{config/queries\_waste.py}.
+
+\end{fulllineitems}
+
+
 
 \subsection{WasteAndMaterialFootprint.VerifyDatabase module}
-\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-verifydatabase-module}}
+\label{\detokenize{WasteAndMaterialFootprint:module-WasteAndMaterialFootprint.VerifyDatabase}}\label{\detokenize{WasteAndMaterialFootprint:wasteandmaterialfootprint-verifydatabase-module}}\index{module@\spxentry{module}!WasteAndMaterialFootprint.VerifyDatabase@\spxentry{WasteAndMaterialFootprint.VerifyDatabase}}\index{WasteAndMaterialFootprint.VerifyDatabase@\spxentry{WasteAndMaterialFootprint.VerifyDatabase}!module@\spxentry{module}}
+
+\subsubsection{VerifyDatabase Module}
+\label{\detokenize{WasteAndMaterialFootprint:verifydatabase-module}}
+\sphinxAtStartPar
+This module contains a function to verify a (WasteAndMaterialFootprint) database 
+within a given project in Brightway2. It performs a verification by calculating LCA scores 
+for random activities within the specified database using selected methods.
+\index{VerifyDatabase() (in module WasteAndMaterialFootprint.VerifyDatabase)@\spxentry{VerifyDatabase()}\spxextra{in module WasteAndMaterialFootprint.VerifyDatabase}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.VerifyDatabase.VerifyDatabase}}
+\pysigstartsignatures
+\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.VerifyDatabase.}}\sphinxbfcode{\sphinxupquote{VerifyDatabase}}}{\sphinxparam{\DUrole{n}{project\_name}}\sphinxparamcomma \sphinxparam{\DUrole{n}{database\_name}}\sphinxparamcomma \sphinxparam{\DUrole{n}{check\_material}\DUrole{o}{=}\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{check\_waste}\DUrole{o}{=}\DUrole{default_value}{True}}\sphinxparamcomma \sphinxparam{\DUrole{n}{log}\DUrole{o}{=}\DUrole{default_value}{True}}}{}
+\pysigstopsignatures
+\sphinxAtStartPar
+Verifies a database within a given project in Brightway2 by calculating LCA scores
+for random activities using selected methods.
+
+\sphinxAtStartPar
+This function assesses the integrity and validity of a specified database within a Brightway2 project.
+It performs LCA calculations on random activities using Waste Footprint and Material Demand Footprint methods,
+and logs the results.
+\begin{quote}\begin{description}
+\sphinxlineitem{Parameters}\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{project\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} The name of the Brightway2 project.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{database\_name}} (\sphinxstyleliteralemphasis{\sphinxupquote{str}}) \textendash{} The name of the database to be verified.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{check\_material}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True, checks for Material Demand Footprint methods.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{check\_waste}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True, checks for Waste Footprint methods.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstyleliteralstrong{\sphinxupquote{log}} (\sphinxstyleliteralemphasis{\sphinxupquote{bool}}) \textendash{} If True, logs the results.
+
+\end{itemize}
+
+\sphinxlineitem{Returns}
+\sphinxAtStartPar
+Exit code (0 for success, 1 for failure).
+
+\end{description}\end{quote}
+
+\end{fulllineitems}
+
+
 
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
@@ -182,6 +1122,20 @@ The folder \sphinxtitleref{batteries} contains a small case study using the pack
 \end{itemize}
 
 
+\renewcommand{\indexname}{Python Module Index}
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\bigletter{w}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.ExchangeEditor}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.ExchangeEditor}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.ExplodeDatabase}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.ExplodeDatabase}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.FutureScenarios}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.FutureScenarios}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.main}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.main}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.MakeCustomDatabase}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.MakeCustomDatabase}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.MethodEditor}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.MethodEditor}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.SearchMaterial}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.SearchMaterial}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.SearchWaste}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.SearchWaste}}
+\item\relax\sphinxstyleindexentry{WasteAndMaterialFootprint.VerifyDatabase}\sphinxstyleindexpageref{WasteAndMaterialFootprint:\detokenize{module-WasteAndMaterialFootprint.VerifyDatabase}}
+\end{sphinxtheindex}
 
 \renewcommand{\indexname}{Index}
 \printindex

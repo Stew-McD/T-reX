@@ -60,12 +60,7 @@ cwd = Path.cwd()
 sys.path.insert(0, str(cwd))
 
 # Add the config dir to the Python path
-from . import CUSTOM_CONFIG_DIR
-
-if CUSTOM_CONFIG_DIR.exists():
-    dir_config = CUSTOM_CONFIG_DIR
-else:
-    dir_config = cwd.parents[1] / "config"
+dir_config = cwd / "config"
 
 sys.path.insert(0, str(dir_config))
 
@@ -80,7 +75,7 @@ from SearchWaste import SearchWaste
 from VerifyDatabase import VerifyDatabase
 
 # import configuration from config/user_settings.py
-from user_settings import (
+from config.user_settings import (
     custom_bw2_dir,
     db_wmf_name,
     delete_wmf_project,
@@ -146,7 +141,7 @@ def run():
 
     # Make new project, delete previous project if you want to start over, or use existing project
     bd.projects.purge_deleted_directories()
-    if project_wmf in bd.projects and delete:
+    if project_wmf in bd.projects and delete_wmf_project:
         print(f"\n* Deleting previous project {project_wmf}")
         bd.projects.delete_project(project_wmf, True)
         bd.projects.purge_deleted_directories()

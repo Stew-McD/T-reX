@@ -3,18 +3,52 @@
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Limitations}{1}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Installation}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Dependencies}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Installation Instructions}{3}{section.2.2}%
 \contentsline {chapter}{\numberline {3}Usage}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Examples}{7}{chapter.4}%
-\contentsline {chapter}{\numberline {5}API Reference}{9}{chapter.5}%
-\contentsline {section}{\numberline {5.1}WasteAndMaterialFootprint package}{9}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}WasteAndMaterialFootprint.main module}{9}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Submodules}{9}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}WasteAndMaterialFootprint.ExchangeEditor module}{9}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}WasteAndMaterialFootprint.ExplodeDatabase module}{9}{subsection.5.1.4}%
-\contentsline {subsection}{\numberline {5.1.5}WasteAndMaterialFootprint.FutureScenarios module}{9}{subsection.5.1.5}%
-\contentsline {subsection}{\numberline {5.1.6}WasteAndMaterialFootprint.MakeCustomDatabase module}{9}{subsection.5.1.6}%
-\contentsline {subsection}{\numberline {5.1.7}WasteAndMaterialFootprint.MethodEditor module}{9}{subsection.5.1.7}%
-\contentsline {subsection}{\numberline {5.1.8}WasteAndMaterialFootprint.SearchMaterial module}{9}{subsection.5.1.8}%
-\contentsline {subsection}{\numberline {5.1.9}WasteAndMaterialFootprint.SearchWaste module}{9}{subsection.5.1.9}%
-\contentsline {subsection}{\numberline {5.1.10}WasteAndMaterialFootprint.VerifyDatabase module}{9}{subsection.5.1.10}%
-\contentsline {chapter}{\numberline {6}Indices and tables}{11}{chapter.6}%
+\contentsline {section}{\numberline {3.1}Command Line}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Python Module}{5}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Configuration}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}General Settings: \sphinxstyleliteralintitle {\sphinxupquote {user\_settings.py}}}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Waste Search Settings: \sphinxstyleliteralintitle {\sphinxupquote {queries\_waste.py}}}{8}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Categories}{8}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Query Types}{8}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Adjusting Search Terms}{8}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Category\sphinxhyphen {}Specific Changes}{8}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Optimizing Search Efficiency}{8}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Validating Search Terms}{9}{subsection.4.2.6}%
+\contentsline {section}{\numberline {4.3}Material Search Settings: \sphinxstyleliteralintitle {\sphinxupquote {queries\_materials.py}}}{9}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Structure and Customisation}{9}{subsection.4.3.1}%
+\contentsline {subsubsection}{Tuple Structure}{9}{subsubsection*.3}%
+\contentsline {subsubsection}{Customisation Options}{9}{subsubsection*.4}%
+\contentsline {subsection}{\numberline {4.3.2}Usage Considerations}{9}{subsection.4.3.2}%
+\contentsline {subsubsection}{Example Tuples}{10}{subsubsection*.5}%
+\contentsline {chapter}{\numberline {5}Examples}{11}{chapter.5}%
+\contentsline {chapter}{\numberline {6}API Reference}{13}{chapter.6}%
+\contentsline {section}{\numberline {6.1}WasteAndMaterialFootprint package}{13}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}WasteAndMaterialFootprint.main module}{13}{subsection.6.1.1}%
+\contentsline {subsubsection}{main Module}{13}{subsubsection*.6}%
+\contentsline {paragraph}{Customisation:}{13}{paragraph*.7}%
+\contentsline {paragraph}{Usage:}{13}{paragraph*.8}%
+\contentsline {subsection}{\numberline {6.1.2}Submodules}{14}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}WasteAndMaterialFootprint.ExchangeEditor module}{14}{subsection.6.1.3}%
+\contentsline {subsubsection}{ExchangeEditor Module}{14}{subsubsection*.12}%
+\contentsline {subsection}{\numberline {6.1.4}WasteAndMaterialFootprint.ExplodeDatabase module}{15}{subsection.6.1.4}%
+\contentsline {subsubsection}{ExplodeDatabase Module}{15}{subsubsection*.14}%
+\contentsline {subsection}{\numberline {6.1.5}WasteAndMaterialFootprint.FutureScenarios module}{15}{subsection.6.1.5}%
+\contentsline {subsubsection}{FutureScenarios Module}{15}{subsubsection*.16}%
+\contentsline {subsection}{\numberline {6.1.6}WasteAndMaterialFootprint.MakeCustomDatabase module}{16}{subsection.6.1.6}%
+\contentsline {subsubsection}{MakeCustomDatabase Module}{16}{subsubsection*.22}%
+\contentsline {subsection}{\numberline {6.1.7}WasteAndMaterialFootprint.MethodEditor module}{17}{subsection.6.1.7}%
+\contentsline {subsubsection}{MethodEditor Module}{17}{subsubsection*.27}%
+\contentsline {paragraph}{Function Summary:}{17}{paragraph*.28}%
+\contentsline {subsection}{\numberline {6.1.8}WasteAndMaterialFootprint.SearchMaterial module}{17}{subsection.6.1.8}%
+\contentsline {subsubsection}{SearchMaterial Module}{17}{subsubsection*.32}%
+\contentsline {subsection}{\numberline {6.1.9}WasteAndMaterialFootprint.SearchWaste module}{18}{subsection.6.1.9}%
+\contentsline {subsubsection}{SearchWaste Module}{18}{subsubsection*.34}%
+\contentsline {paragraph}{Functionality}{18}{paragraph*.35}%
+\contentsline {subsection}{\numberline {6.1.10}WasteAndMaterialFootprint.VerifyDatabase module}{18}{subsection.6.1.10}%
+\contentsline {subsubsection}{VerifyDatabase Module}{18}{subsubsection*.37}%
+\contentsline {chapter}{\numberline {7}Indices and tables}{21}{chapter.7}%
+\contentsline {chapter}{Python Module Index}{23}{section*.39}%
+\contentsline {chapter}{Index}{25}{section*.40}%

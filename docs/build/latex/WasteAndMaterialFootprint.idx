@@ -1,0 +1,38 @@
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.main@\spxentry{WasteAndMaterialFootprint.main}|hyperpage}{13}
+\indexentry{WasteAndMaterialFootprint.main@\spxentry{WasteAndMaterialFootprint.main}!module@\spxentry{module}|hyperpage}{13}
+\indexentry{EditExchanges() (in module WasteAndMaterialFootprint.main)@\spxentry{EditExchanges()}\spxextra{in module WasteAndMaterialFootprint.main}|hyperpage}{13}
+\indexentry{ExplodeAndSearch() (in module WasteAndMaterialFootprint.main)@\spxentry{ExplodeAndSearch()}\spxextra{in module WasteAndMaterialFootprint.main}|hyperpage}{13}
+\indexentry{run() (in module WasteAndMaterialFootprint.main)@\spxentry{run()}\spxextra{in module WasteAndMaterialFootprint.main}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.ExchangeEditor@\spxentry{WasteAndMaterialFootprint.ExchangeEditor}|hyperpage}{14}
+\indexentry{WasteAndMaterialFootprint.ExchangeEditor@\spxentry{WasteAndMaterialFootprint.ExchangeEditor}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{ExchangeEditor() (in module WasteAndMaterialFootprint.ExchangeEditor)@\spxentry{ExchangeEditor()}\spxextra{in module WasteAndMaterialFootprint.ExchangeEditor}|hyperpage}{14}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.ExplodeDatabase@\spxentry{WasteAndMaterialFootprint.ExplodeDatabase}|hyperpage}{15}
+\indexentry{WasteAndMaterialFootprint.ExplodeDatabase@\spxentry{WasteAndMaterialFootprint.ExplodeDatabase}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{ExplodeDatabase() (in module WasteAndMaterialFootprint.ExplodeDatabase)@\spxentry{ExplodeDatabase()}\spxextra{in module WasteAndMaterialFootprint.ExplodeDatabase}|hyperpage}{15}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.FutureScenarios@\spxentry{WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{15}
+\indexentry{WasteAndMaterialFootprint.FutureScenarios@\spxentry{WasteAndMaterialFootprint.FutureScenarios}!module@\spxentry{module}|hyperpage}{15}
+\indexentry{FutureScenarios() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{FutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{15}
+\indexentry{MakeFutureScenarios() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{MakeFutureScenarios()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{15}
+\indexentry{check\_existing() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{check\_existing()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{15}
+\indexentry{grouper() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{grouper()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{16}
+\indexentry{make\_possible\_scenario\_list() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}|hyperpage}{16}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.MakeCustomDatabase@\spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}|hyperpage}{16}
+\indexentry{WasteAndMaterialFootprint.MakeCustomDatabase@\spxentry{WasteAndMaterialFootprint.MakeCustomDatabase}!module@\spxentry{module}|hyperpage}{16}
+\indexentry{dbExcel2BW() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{dbExcel2BW()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}|hyperpage}{16}
+\indexentry{dbWriteExcel() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{dbWriteExcel()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}|hyperpage}{16}
+\indexentry{determine\_unit\_from\_name() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{determine\_unit\_from\_name()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}|hyperpage}{16}
+\indexentry{get\_files\_from\_tree() (in module WasteAndMaterialFootprint.MakeCustomDatabase)@\spxentry{get\_files\_from\_tree()}\spxextra{in module WasteAndMaterialFootprint.MakeCustomDatabase}|hyperpage}{16}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.MethodEditor@\spxentry{WasteAndMaterialFootprint.MethodEditor}|hyperpage}{17}
+\indexentry{WasteAndMaterialFootprint.MethodEditor@\spxentry{WasteAndMaterialFootprint.MethodEditor}!module@\spxentry{module}|hyperpage}{17}
+\indexentry{AddMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{AddMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}|hyperpage}{17}
+\indexentry{CheckMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{CheckMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}|hyperpage}{17}
+\indexentry{DeleteMethods() (in module WasteAndMaterialFootprint.MethodEditor)@\spxentry{DeleteMethods()}\spxextra{in module WasteAndMaterialFootprint.MethodEditor}|hyperpage}{17}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.SearchMaterial@\spxentry{WasteAndMaterialFootprint.SearchMaterial}|hyperpage}{17}
+\indexentry{WasteAndMaterialFootprint.SearchMaterial@\spxentry{WasteAndMaterialFootprint.SearchMaterial}!module@\spxentry{module}|hyperpage}{17}
+\indexentry{SearchMaterial() (in module WasteAndMaterialFootprint.SearchMaterial)@\spxentry{SearchMaterial()}\spxextra{in module WasteAndMaterialFootprint.SearchMaterial}|hyperpage}{17}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.SearchWaste@\spxentry{WasteAndMaterialFootprint.SearchWaste}|hyperpage}{18}
+\indexentry{WasteAndMaterialFootprint.SearchWaste@\spxentry{WasteAndMaterialFootprint.SearchWaste}!module@\spxentry{module}|hyperpage}{18}
+\indexentry{SearchWaste() (in module WasteAndMaterialFootprint.SearchWaste)@\spxentry{SearchWaste()}\spxextra{in module WasteAndMaterialFootprint.SearchWaste}|hyperpage}{18}
+\indexentry{module@\spxentry{module}!WasteAndMaterialFootprint.VerifyDatabase@\spxentry{WasteAndMaterialFootprint.VerifyDatabase}|hyperpage}{18}
+\indexentry{WasteAndMaterialFootprint.VerifyDatabase@\spxentry{WasteAndMaterialFootprint.VerifyDatabase}!module@\spxentry{module}|hyperpage}{18}
+\indexentry{VerifyDatabase() (in module WasteAndMaterialFootprint.VerifyDatabase)@\spxentry{VerifyDatabase()}\spxextra{in module WasteAndMaterialFootprint.VerifyDatabase}|hyperpage}{18}

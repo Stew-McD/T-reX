@@ -14,6 +14,37 @@ The documentation is still under development, but the code is well documented an
 
 The following sections should be enough to go on with.
 
+## Contents
+
+- [WasteAndMaterialFootprint](#wasteandmaterialfootprint)
+  - [Documentation](#documentation)
+  - [Contents](#contents)
+  - [Installation](#installation)
+    - [Dependencies](#dependencies)
+    - [Installation instructions](#installation-instructions)
+  - [Usage](#usage)
+    - [Command line](#command-line)
+    - [Python module](#python-module)
+  - [Configuration](#configuration)
+    - [General settings: `user_settings.py`](#general-settings-user_settingspy)
+    - [Waste search settings: `queries_waste.py`](#waste-search-settings-queries_wastepy)
+      - [Adjusting Search Terms](#adjusting-search-terms)
+        - [Category-Specific Changes](#category-specific-changes)
+        - [Optimizing Search Efficiency](#optimizing-search-efficiency)
+      - [Validating Search Terms](#validating-search-terms)
+    - [Material Search Settings: `queries_materials.py`](#material-search-settings-queries_materialspy)
+      - [Structure and Customisation](#structure-and-customisation)
+        - [Tuple Structure](#tuple-structure)
+        - [Customisation Options](#customisation-options)
+      - [Usage Considerations](#usage-considerations)
+        - [Example Tuples](#example-tuples)
+    - [Examples](#examples)
+    - [Contributing](#contributing)
+    - [License](#license)
+    - [Citation](#citation)
+
+
+
 ## Installation
 
 ### Dependencies

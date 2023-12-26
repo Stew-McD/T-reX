@@ -18,37 +18,22 @@ from pathlib import Path
 import bw2data as bd
 
 # Import user settings or set defaults
-try:
-    from user_settings import (
-        batch_size,
-        database_name,
-        delete_existing_premise_project,
-        dir_data,
-        dir_logs,
-        premise_key,
-        premise_quiet,
-        project_premise,
-        project_premise_base,
-        desired_scenarios,
-        use_mp,
-        use_premise,
-        verbose,
-        years,
-    )
-
-
-except ImportError:
-    print("No user_settings.py file found, using defaults")
-    premise_key = None
-    project_premise_base = "default"
-    project_premise = "premise_default"
-    database_name = "ecoinvent-3.9.1-cutoff"
-    delete_existing_premise_project = True
-    batch_size = 3
-    desired_scenarios = [{"model": "remind", "pathway": "SSP2-Base", "year": 2050}]
-    dir_logs = Path.cwd()
-    verbose = False
-    use_mp = False
+from config.user_settings import (
+    batch_size,
+    database_name,
+    delete_existing_premise_project,
+    dir_data,
+    dir_logs,
+    premise_key,
+    premise_quiet,
+    project_premise,
+    project_premise_base,
+    desired_scenarios,
+    use_mp,
+    use_premise,
+    verbose,
+    years,
+)
 
 if use_premise:
     # easiest way to stop premise from making a mess in the main directory
@@ -121,6 +106,10 @@ def check_existing(desired_scenarios):
     returns: new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
 
     """
+    if use_premise and delete_existing_premise_project:
+        new_scenarios = desired_scenarios
+        return new_scenarios
+    
     if use_premise:
         bd.projects.set_current(project_premise)
         databases = list(bd.databases)
@@ -264,7 +253,7 @@ def FutureScenarios(scenario_list):
     logging.info("Done!")
 
     # change back to the original directory
-    os.chdir(Path(__file__).parent)
+    os.chdir(dir_data.parent)
 
 
 def MakeFutureScenarios():
