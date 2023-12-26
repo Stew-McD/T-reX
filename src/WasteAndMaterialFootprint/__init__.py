@@ -1,6 +1,6 @@
 # src/WasteAndMaterialFootprint/__init__.py
 
-
+import os
 from pathlib import Path
 import sys
 
@@ -22,7 +22,7 @@ else:
 from .CustomConfig import config_setup, config_reload
 
 # this will create the config directory in the cwd if it does not exist
-config_setup()
+# config_setup()
 
 if CUSTOM_DATA_DIR.is_dir():
     print(f"\n* Using data directory: \n{CUSTOM_DATA_DIR}.\n")
@@ -32,7 +32,7 @@ import user_settings
 import queries_waste
 import queries_materials
 
-__version__ = "0.1.1"
+__version__ = "0.1.11"
 __author__ = "Stewart Charles McDowall | Stew-McD"
 
 

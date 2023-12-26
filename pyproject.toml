@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "WasteAndMaterialFootprint"
-version = "0.1.1"
+version = "0.1.11"
 description = "A tool for analysing waste and material footprints in Life Cycle Assessment (LCA) databases"
 authors = ["Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>"]
 license = "LICENCE"
