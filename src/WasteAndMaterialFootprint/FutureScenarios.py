@@ -48,7 +48,10 @@ if use_premise:
     # Initialize logging with timestamp
     if not os.path.exists(dir_logs):
         os.makedirs(dir_logs)
-    log_filename = datetime.today().strftime(f"{dir_logs}/%Y%m%d_FutureScenarios.log")
+
+    log_filename = (
+        dir_logs / f'{datetime.now().strftime("%Y-%m-%d")}_FutureScenarios.log'
+    )
     logging.basicConfig(filename=log_filename, level=logging.INFO)
 
     # Function to split scenarios into smaller groups (for batch processing)
@@ -110,7 +113,7 @@ def check_existing(desired_scenarios):
     if use_premise and delete_existing_premise_project:
         new_scenarios = desired_scenarios
         return new_scenarios
-    
+
     if use_premise:
         bd.projects.set_current(project_premise)
         databases = list(bd.databases)

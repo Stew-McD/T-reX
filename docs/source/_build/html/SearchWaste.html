@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SearchWaste &mdash; WasteAndMaterialFootprint 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/documentation_options.js?v=92734c54"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SearchMaterial" href="SearchMaterial.html" />
+    <link rel="prev" title="ExplodeDatabase" href="ExplodeDatabase.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">WMF Program Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html">ExplodeDatabase</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SearchWaste</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MethodEditor.html">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExchangeEditor.html">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html">VerifyDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#futurescenarios">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#explodedatabase">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchwaste">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchmaterial">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#makecustomdatabase">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#methodeditor">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#exchangeeditor">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#verifydatabase">VerifyDatabase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">WMF Program Modules</a></li>
+      <li class="breadcrumb-item active">SearchWaste</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/SearchWaste.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="searchwaste">
+<h1>SearchWaste<a class="headerlink" href="#searchwaste" title="Link to this heading"></a></h1>
+<p class="linemarker linemarker-4">The SearchWaste module is a part of the WasteAndMaterialFootprint tool, dedicated to processing waste-related data.
+It loads data from a specified ‘&lt; db name &gt;_exploded.pickle’ file, executes predefined search queries on this data,
+and generates CSV files containing the results along with corresponding log entries. The search queries are
+structured as dictionaries, specified in the <cite>config/queries_waste.py</cite> file, and include fields such as NAME,
+CODE, and search terms like keywords_AND, keywords_OR, and keywords_NOT.</p>
+<section id="functionality">
+<h2>Functionality<a class="headerlink" href="#functionality" title="Link to this heading"></a></h2>
+<p class="linemarker linemarker-13">The module provides the <code class="xref py py-func docutils literal notranslate"><span class="pre">SearchWaste()</span></code> function, which is responsible for three main actions:</p>
+<ol class="arabic simple">
+<li><p class="linemarker linemarker-15">Loading data from the ‘&lt; db name &gt;_exploded.pickle’ file.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pickle_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_tmp</span><span class="p">,</span> <span class="n">db_name</span> <span class="o">+</span> <span class="s2">&quot;_exploded.pickle&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_pickle</span><span class="p">(</span><span class="n">pickle_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="linemarker linemarker-22">Running the specified search queries on this data. These queries are designed to filter and identify
+relevant waste exchanges based on specific criteria.</p>
+<p class="linemarker linemarker-25">This functionality is implemented in the <code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code> function, which is a subfunction of the <code class="xref py py-func docutils literal notranslate"><span class="pre">SearchWaste()</span></code> function.
+The <code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code> function takes one argument, a search query from the list that is produced by the configuration module <cite>queries_waste.py</cite>.</p>
+<p class="linemarker linemarker-28">The search function is applied as follows, where <cite>df</cite> is the dataframe of the exploded database and <cite>query</cite> is a dictionary:</p>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NAME_BASE</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">UNIT</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">]</span>
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">NAME_BASE</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">UNIT</span>
+<span class="n">CODE</span> <span class="o">=</span> <span class="n">NAME</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">query</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">NAME</span><span class="p">,</span> <span class="s2">&quot;db_name&quot;</span><span class="p">:</span> <span class="n">db_name</span><span class="p">})</span>
+<span class="n">AND</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;AND&quot;</span><span class="p">]</span>
+<span class="n">OR</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;OR&quot;</span><span class="p">]</span>
+<span class="n">NOT</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;NOT&quot;</span><span class="p">]</span>
+<span class="n">DBNAME</span> <span class="o">=</span> <span class="n">query</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]</span>
+
+<span class="c1"># Apply the search terms to the dataframe</span>
+<span class="n">df_results</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ex_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">all</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">AND</span><span class="p">)))</span>
+    <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ex_unit&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UNIT</span><span class="p">)</span>
+    <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ex_amount&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># &amp; (df[&quot;ex_amount&quot;] != -1)</span>
+<span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Apply OR and NOT search filters</span>
+<span class="k">if</span> <span class="n">OR</span><span class="p">:</span>
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">df_results</span><span class="p">[</span>
+        <span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;ex_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">OR</span><span class="p">))</span>
+    <span class="p">]</span>
+<span class="k">if</span> <span class="n">NOT</span><span class="p">:</span>
+    <span class="n">df_results</span> <span class="o">=</span> <span class="n">df_results</span><span class="p">[</span>
+        <span class="n">df_results</span><span class="p">[</span><span class="s2">&quot;ex_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">NOT</span><span class="p">))</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p class="linemarker linemarker-61">Producing CSV files to store the results of these queries and creating log entries for each search operation. When customising the search configuration, it is important to check these files to see that the correct exchanges are being captured. The files are used by the subsequent modules to edit the exchanges and to produce LCIA methods.</p></li>
+</ol>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wmf</span><span class="o">.</span><span class="n">SearchWaste</span><span class="p">(</span><span class="n">db_name</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="linemarker linemarker-71">The <code class="xref py py-func docutils literal notranslate"><span class="pre">SearchWaste()</span></code> function is invoked with two arguments: the name of the Brightway2 database to be processed and the name of the directory to store the results. The search queries are specified in the <cite>config/queries_waste.py</cite> file. The function is designed for internal use within the WMF tool and does not return a value but rather saves the output for subsequent use. It could be used separately, if you would have a .pickle file with exploded database as well as the config files in the right locations.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ExplodeDatabase.html" class="btn btn-neutral float-left" title="ExplodeDatabase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SearchMaterial.html" class="btn btn-neutral float-right" title="SearchMaterial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MethodEditor &mdash; WasteAndMaterialFootprint 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/documentation_options.js?v=92734c54"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ExchangeEditor" href="ExchangeEditor.html" />
+    <link rel="prev" title="MakeCustomDatabase" href="MakeCustomDatabase.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">WMF Program Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchWaste.html">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html">MakeCustomDatabase</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MethodEditor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#function-summary">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#important-code-snippets">Important Code Snippets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ExchangeEditor.html">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html">VerifyDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#futurescenarios">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#explodedatabase">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchwaste">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchmaterial">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#makecustomdatabase">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#methodeditor">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#exchangeeditor">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#verifydatabase">VerifyDatabase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">WMF Program Modules</a></li>
+      <li class="breadcrumb-item active">MethodEditor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/MethodEditor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="methodeditor">
+<h1>MethodEditor<a class="headerlink" href="#methodeditor" title="Link to this heading"></a></h1>
+<p class="linemarker linemarker-4">The MethodEditor module is a key component of the WasteAndMaterialFootprint tool, offering functionalities
+to manage methods related to waste and material footprints in a project. This module is instrumental in
+adding, deleting, and checking methods within the context of environmental impact assessments.</p>
+<section id="function-summary">
+<h2>Function Summary<a class="headerlink" href="#function-summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p class="linemarker linemarker-10"><strong>`AddMethods`</strong>: This function adds new methods to a project based on entries in a custom biosphere database.
+It is useful for incorporating specific waste and material footprint methodologies into the project’s analysis framework.</p></li>
+<li><p class="linemarker linemarker-12"><strong>`DeleteMethods`</strong>: This function removes specific methods from a project, particularly those associated with
+waste and material footprints, aiding in maintaining the relevance and accuracy of the project’s methodological toolbox.</p></li>
+<li><p class="linemarker linemarker-14"><strong>`CheckMethods`</strong>: This function lists and checks the methods in a project, focusing on those linked to waste
+and material footprints, ensuring that the methods are correctly implemented and aligned with the project’s objectives.</p></li>
+</ul>
+</section>
+<section id="important-code-snippets">
+<h2>Important Code Snippets<a class="headerlink" href="#important-code-snippets" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p class="linemarker linemarker-19"><strong>Function to Add Methods to a Project</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">AddMethods</span><span class="p">():</span>
+    <span class="c1"># ... snippet to show structure of method keys added ...</span>
+
+    <span class="c1"># Assign characterization factor based on type</span>
+    <span class="n">ch_factor</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span> <span class="k">if</span> <span class="n">m_type</span> <span class="o">==</span> <span class="s2">&quot;waste&quot;</span> <span class="k">else</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Assign method key and description based on type</span>
+    <span class="k">if</span> <span class="n">m_type</span> <span class="o">==</span> <span class="s2">&quot;waste&quot;</span><span class="p">:</span>
+        <span class="n">name_combined</span> <span class="o">=</span> <span class="n">m_code</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; combined&quot;</span>
+        <span class="n">method_key</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;WasteAndMaterialFootprint&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Waste: &quot;</span> <span class="o">+</span> <span class="n">name_combined</span><span class="p">,</span>
+            <span class="n">m_code</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;For estimating the waste footprint of an activity&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">method_key</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;WasteAndMaterialFootprint&quot;</span><span class="p">,</span> <span class="s2">&quot;Demand: &quot;</span> <span class="o">+</span> <span class="n">m_code</span><span class="p">,</span> <span class="n">m_code</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;For estimating the material demand footprint of an activity&quot;</span>
+
+    <span class="c1"># ... end snippet ...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="linemarker linemarker-47"><strong>Function to Delete Methods from a Project</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">DeleteMethods</span><span class="p">():</span>
+    <span class="c1"># Implementation of the function</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p class="linemarker linemarker-56"><strong>Function to Check Methods in a Project</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">CheckMethods</span><span class="p">():</span>
+    <span class="c1"># ... snippet to show how methods are accessed ...</span>
+
+    <span class="n">methods_wasteandmaterial</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">bd</span><span class="o">.</span><span class="n">methods</span><span class="p">)</span> <span class="k">if</span> <span class="s2">&quot;WasteAndMaterial Footprint&quot;</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">methods_wasteandmaterial</span><span class="p">:</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">Method</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">load</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">methods_wasteandmaterial</span><span class="p">))</span>
+
+    <span class="c1"># ... end snippet ...</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MakeCustomDatabase.html" class="btn btn-neutral float-left" title="MakeCustomDatabase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ExchangeEditor.html" class="btn btn-neutral float-right" title="ExchangeEditor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

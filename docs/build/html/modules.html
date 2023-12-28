@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; WasteAndMaterialFootprint 0.1.2 documentation</title>
+  <title>WasteAndMaterialFootprint Modules &mdash; WasteAndMaterialFootprint 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="WasteAndMaterialFootprint package" href="WasteAndMaterialFootprint.html" />
-    <link rel="prev" title="Examples" href="examples.html" /> 
+    <link rel="next" title="FutureScenarios" href="FutureScenarios.html" />
+    <link rel="prev" title="Configuration modules" href="configuration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,12 +49,29 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html">WasteAndMaterialFootprint package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration modules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">WasteAndMaterialFootprint Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchWaste.html">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MethodEditor.html">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExchangeEditor.html">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html">VerifyDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#futurescenarios">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#explodedatabase">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searchwaste">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searchmaterial">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#makecustomdatabase">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#methodeditor">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exchangeeditor">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verifydatabase">VerifyDatabase</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
 </ul>
 
         </div>
@@ -71,7 +88,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
+      <li class="breadcrumb-item active">WasteAndMaterialFootprint Modules</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/modules.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -81,33 +98,104 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+  <section id="wasteandmaterialfootprint-modules">
+<h1>WasteAndMaterialFootprint Modules<a class="headerlink" href="#wasteandmaterialfootprint-modules" title="Link to this heading"></a></h1>
+<p>This section provides an overview of the various modules within the WasteAndMaterialFootprint (WMF) program, each with a brief description and a link to its detailed documentation.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="WasteAndMaterialFootprint.html">WasteAndMaterialFootprint package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.main">WasteAndMaterialFootprint.main module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.ExchangeEditor">WasteAndMaterialFootprint.ExchangeEditor module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.ExplodeDatabase">WasteAndMaterialFootprint.ExplodeDatabase module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.FutureScenarios">WasteAndMaterialFootprint.FutureScenarios module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.MakeCustomDatabase">WasteAndMaterialFootprint.MakeCustomDatabase module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.MethodEditor">WasteAndMaterialFootprint.MethodEditor module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.SearchMaterial">WasteAndMaterialFootprint.SearchMaterial module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.SearchWaste">WasteAndMaterialFootprint.SearchWaste module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="WasteAndMaterialFootprint.html#module-WasteAndMaterialFootprint.VerifyDatabase">WasteAndMaterialFootprint.VerifyDatabase module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FutureScenarios.html">FutureScenarios</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FutureScenarios.html#configuring-projects-and-premise-settings">Configuring Projects and Premise Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FutureScenarios.html#selecting-scenarios">Selecting Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html#implementation">Implementation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="FutureScenarios.html#module-overview">Module Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FutureScenarios.html#key-functions">Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FutureScenarios.html#process-flow">Process Flow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ExplodeDatabase.html">ExplodeDatabase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html#primary-function">Primary Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html#process-overview">Process Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SearchWaste.html">SearchWaste</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SearchWaste.html#functionality">Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchWaste.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SearchMaterial.html">SearchMaterial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html#functionality">Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html#search-queries">Search queries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MakeCustomDatabase.html">MakeCustomDatabase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html#main-functions">Main Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html#important-code-snippets">Important Code Snippets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MethodEditor.html">MethodEditor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MethodEditor.html#function-summary">Function Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MethodEditor.html#important-code-snippets">Important Code Snippets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ExchangeEditor.html">ExchangeEditor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ExchangeEditor.html#function-summary">Function Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExchangeEditor.html#important-code-snippets">Important Code Snippets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VerifyDatabase.html">VerifyDatabase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html#function-summary">Function Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html#usage">Usage</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<section id="futurescenarios">
+<h2>FutureScenarios<a class="headerlink" href="#futurescenarios" title="Link to this heading"></a></h2>
+<p>Contains scenarios for future environmental impact assessments.</p>
+</section>
+<section id="explodedatabase">
+<h2>ExplodeDatabase<a class="headerlink" href="#explodedatabase" title="Link to this heading"></a></h2>
+<p>Responsible for expanding a Brightway2 database into detailed exchange lists.</p>
+</section>
+<section id="searchwaste">
+<h2>SearchWaste<a class="headerlink" href="#searchwaste" title="Link to this heading"></a></h2>
+<p>Provides functions for searching and categorizing waste-related data.</p>
+</section>
+<section id="searchmaterial">
+<h2>SearchMaterial<a class="headerlink" href="#searchmaterial" title="Link to this heading"></a></h2>
+<p>Enables detailed search and categorization of material-related data within a database.</p>
+</section>
+<section id="makecustomdatabase">
+<h2>MakeCustomDatabase<a class="headerlink" href="#makecustomdatabase" title="Link to this heading"></a></h2>
+<p>Facilitates the creation of custom databases for use in environmental impact assessments.</p>
+</section>
+<section id="methodeditor">
+<h2>MethodEditor<a class="headerlink" href="#methodeditor" title="Link to this heading"></a></h2>
+<p>Manages methods within the WMF program for waste and material footprint calculations.</p>
+</section>
+<section id="exchangeeditor">
+<h2>ExchangeEditor<a class="headerlink" href="#exchangeeditor" title="Link to this heading"></a></h2>
+<p>Handles the editing and appending of exchanges in Brightway2 databases.</p>
+</section>
+<section id="verifydatabase">
+<h2>VerifyDatabase<a class="headerlink" href="#verifydatabase" title="Link to this heading"></a></h2>
+<p>Performs verification of databases by calculating LCA scores for random activities.</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="WasteAndMaterialFootprint.html" class="btn btn-neutral float-right" title="WasteAndMaterialFootprint package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FutureScenarios.html" class="btn btn-neutral float-right" title="FutureScenarios" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

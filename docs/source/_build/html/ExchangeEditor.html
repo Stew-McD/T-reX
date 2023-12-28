@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExchangeEditor &mdash; WasteAndMaterialFootprint 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/documentation_options.js?v=92734c54"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="VerifyDatabase" href="VerifyDatabase.html" />
+    <link rel="prev" title="MethodEditor" href="MethodEditor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">WMF Program Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FutureScenarios.html">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExplodeDatabase.html">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchWaste.html">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SearchMaterial.html">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MakeCustomDatabase.html">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MethodEditor.html">MethodEditor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ExchangeEditor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#function-summary">Function Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#important-code-snippets">Important Code Snippets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VerifyDatabase.html">VerifyDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#futurescenarios">FutureScenarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#explodedatabase">ExplodeDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchwaste">SearchWaste</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#searchmaterial">SearchMaterial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#makecustomdatabase">MakeCustomDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#methodeditor">MethodEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#exchangeeditor">ExchangeEditor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#verifydatabase">VerifyDatabase</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">WMF Program Modules</a></li>
+      <li class="breadcrumb-item active">ExchangeEditor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ExchangeEditor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="exchangeeditor">
+<h1>ExchangeEditor<a class="headerlink" href="#exchangeeditor" title="Link to this heading"></a></h1>
+<p class="linemarker linemarker-4">The ExchangeEditor module is the final major part of the WasteAndMaterialFootprint tool, responsible for editing exchanges
+with wurst and Brightway2. It appends relevant exchanges from the <cite>db_wmf</cite> (a database containing waste and material
+exchange details) to activities identified by <cite>WasteAndMaterialSearch()</cite> in a specified project’s database (<cite>db_name</cite>).</p>
+<p class="linemarker linemarker-8">This module takes the longest time to run, as it iterates over each exchange that was found by the search modules, which can be &gt;200,000 exchanges. For each database, this can take around 15-20 minutes to run.</p>
+<section id="function-summary">
+<h2>Function Summary<a class="headerlink" href="#function-summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p class="linemarker linemarker-13"><strong>`ExchangeEditor`</strong>: This function modifies the specified project’s database by appending exchanges from the
+<cite>db_wmf</cite> to activities identified by <cite>WasteAndMaterialSearch()</cite>. Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.</p></li>
+</ul>
+</section>
+<section id="important-code-snippets">
+<h2>Important Code Snippets<a class="headerlink" href="#important-code-snippets" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p class="linemarker linemarker-18"><strong>Function to Append Exchanges to Activities in a Database</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ExchangeEditor</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">,</span> <span class="n">db_name</span><span class="p">,</span> <span class="n">db_wmf_name</span><span class="p">):</span>
+    <span class="c1"># ... snippet to show addition of the custom exchange ...</span>
+
+    <span class="c1"># Iterate over each category (NAME)</span>
+    <span class="k">for</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">file_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">countNAME</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">progress_db</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">countNAME</span><span class="si">:</span><span class="s2">2</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># For each exchange in the current category&#39;s DataFrame</span>
+        <span class="k">for</span> <span class="n">exc</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">&quot;records&quot;</span><span class="p">),</span>
+            <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot; - </span><span class="si">{</span><span class="n">progress_db</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">NAME</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">,</span>
+            <span class="n">bar_format</span><span class="o">=</span><span class="n">bar_format</span><span class="p">,</span>
+            <span class="n">colour</span><span class="o">=</span><span class="s2">&quot;magenta&quot;</span><span class="p">,</span>
+            <span class="n">smoothing</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="c1"># Extract details of the exchange</span>
+            <span class="n">code</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">ex_name</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">ex_location</span><span class="p">,</span> <span class="n">database</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;ex_name&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;ex_amount&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;ex_unit&quot;</span><span class="p">],</span>
+                <span class="n">exc</span><span class="p">[</span><span class="s2">&quot;ex_location&quot;</span><span class="p">],</span>
+                <span class="n">db_name</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">KEY</span> <span class="o">=</span> <span class="p">(</span><span class="n">database</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+            <span class="n">WMF_KEY</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">db_wmf_name</span><span class="p">,</span>
+                <span class="n">NAME</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;kilogram&quot;</span><span class="p">,</span> <span class="s2">&quot;(kg)&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;cubicmeter&quot;</span><span class="p">,</span> <span class="s2">&quot;(m3)&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="c1"># Retrieve the process and wasteandmaterial exchange from the databases</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">process</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">get_activity</span><span class="p">(</span><span class="n">KEY</span><span class="p">)</span>
+                <span class="n">wasteandmaterial_ex</span> <span class="o">=</span> <span class="n">bd</span><span class="o">.</span><span class="n">get_activity</span><span class="p">(</span><span class="n">WMF_KEY</span><span class="p">)</span>
+                <span class="n">before</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">exchanges</span><span class="p">())</span>
+
+                <span class="n">process</span><span class="o">.</span><span class="n">new_exchange</span><span class="p">(</span>
+                    <span class="nb">input</span><span class="o">=</span><span class="n">wasteandmaterial_ex</span><span class="p">,</span>
+                    <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+                    <span class="n">unit</span><span class="o">=</span><span class="n">unit</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;biosphere&quot;</span><span class="p">,</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">after</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">process</span><span class="o">.</span><span class="n">exchanges</span><span class="p">())</span>
+
+        <span class="c1"># ... end of snippet ...</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MethodEditor.html" class="btn btn-neutral float-left" title="MethodEditor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="VerifyDatabase.html" class="btn btn-neutral float-right" title="VerifyDatabase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

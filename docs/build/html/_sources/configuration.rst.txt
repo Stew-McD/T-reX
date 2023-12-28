@@ -1,5 +1,5 @@
-Configuration
-=============
+Configuration modules
+=====================
 
 By default, the program will create a folder ``config`` in the current working directory containing the default configuration files:
 
@@ -72,7 +72,7 @@ Category-Specific Changes
 - **Adding Categories**: You can add new categories to the ``names`` list.
 - **Modifying Queries**: Update the query parameters for each category based on your requirements.
 
-Optimizing Search Efficiency
+Optimising Search Efficiency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can choose to include or exclude whatever you want. For instance, "non-hazardous" is not included as it's derivable from other categories and slows down the process.

@@ -22,7 +22,7 @@ from config.queries_waste import queries_waste
 from config.user_settings import dir_logs, dir_searchwaste_results, dir_tmp
 
 
-def SearchWaste(db_name):
+def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
     """
     Load data from '<db name>_exploded.pickle', run search queries, and produce
     result CSVs and log entries.
@@ -37,13 +37,7 @@ def SearchWaste(db_name):
     The queries are defined in `config/queries_waste.py`.
     """
 
-    import os
-    import shutil
-    from datetime import datetime
 
-    import pandas as pd
-    from config.queries_waste import queries_waste
-    from config.user_settings import dir_logs, dir_searchwaste_results, dir_tmp
 
     print("\n*** Starting SearchWaste ***")
 

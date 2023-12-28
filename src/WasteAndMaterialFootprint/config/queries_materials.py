@@ -8,9 +8,6 @@ Note:
 -----
 - The search function in `SearchMaterial.py` uses 'startswith', so it will catch all activities that start with the material name.
 - The comma in material names is important for filtering specific activities in the database.
-- If an intermediate product is included, the inputs and outputs might cancel out, resulting in a zero result.
-
-
 
 queries_materials
 -----------------

@@ -399,7 +399,7 @@ def EditExchanges(args):
 
     with open(f"{dir_logs / 'main_log.txt'}", "a") as log:
         log.write(
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            datetime.now().strftime("%Y-%m-%d")
             + "\t Duration:"
             + str(duration).split(".")[0]
             + " "

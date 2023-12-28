@@ -47,9 +47,11 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">WasteAndMaterialFootprint Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
 </ul>
 
         </div>
@@ -76,50 +78,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>(wmf) <a class="reference external" href="mailto:stew&#37;&#52;&#48;SC-McD">stew<span>&#64;</span>SC-McD</a>:~/WMF-test$ python
-Python 3.10.8 (main, Oct  6 2023, 11:32:51) [GCC 12.3.0] on linux
-Type “help”, “copyright”, “credits” or “license” for more information.
-&gt;&gt;&gt; import WasteAndMaterialFootprint as wmf
-Configuration directory added to Python path: /home/stew/WMF-test/config
-Using environment variable BRIGHTWAY2_DIR for data directory:
-/home/stew/brightway2data
-&gt;&gt;&gt; wmf.run()</p>
-<blockquote>
-<div><blockquote>
-<div><p>** Starting the WasteAndMaterialFootprint tool **</p>
-</div></blockquote>
-</div></blockquote>
-<dl class="simple">
-<dt>Creating 2 new future databases…</dt><dd><p>{‘model’: ‘remind’, ‘pathway’: ‘SSP2-Base’, ‘year’: 2030}
-{‘model’: ‘remind’, ‘pathway’: ‘SSP2-Base’, ‘year’: 2100}</p>
-</dd>
-<dt><strong>* Starting FutureScenarios.py *</strong></dt><dd><p>Using premise version (1, 8, 1)</p>
-</dd>
-</dl>
-<p>Deleted existing project SSP-cutoff-test
-Created new project SSP-cutoff-test from default</p>
-<p>** Using: ecoinvent-3.9.1-cutoff**</p>
-<blockquote>
-<div><p>** Processing scenario set 1 of 2, batch size 1 **</p>
-</div></blockquote>
-<p>//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
-Cannot find cached database. Will create one now for next time…
-Getting activity data
-100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21238/21238 [00:00&lt;00:00, 200349.58it/s]
-Adding exchange data to activities
-100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 674593/674593 [00:23&lt;00:00, 28539.27it/s]
-Filling out exchange data
-100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 21238/21238 [00:01&lt;00:00, 12916.65it/s]
-Set missing location of datasets to global scope.
-Set missing location of production exchanges to scope of dataset.
-Correct missing location of technosphere exchanges.
-Correct missing flow categories for biosphere exchanges
-Remove empty exchanges.
-Done!</p>
-<p>////////////////// IMPORTING DEFAULT INVENTORIES ///////////////////
-Cannot find cached inventories. Will create them now for next time…
-Importing default inventories…</p>
-
+  
 
            </div>
           </div>

@@ -41,6 +41,7 @@ def AddMethods():
         # Assign characterization factor based on type
         ch_factor = -1.0 if m_type == "waste" else 1.0
 
+        # Assign method key and description based on type
         if m_type == "waste":
             name_combined = m_code.split(" ")[0] + " combined"
             method_key = (

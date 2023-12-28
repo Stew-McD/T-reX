@@ -12,7 +12,7 @@ The documentation is available as a [website](https://wasteandmaterialfootprint.
 
 The documentation is still under development, but the code is well documented and there is a full API reference.
 
-The following sections should be enough to go on with.
+The following readme provides a brief introduction to the program, how to install it, and how to use it.
 
 ## Contents
 
@@ -30,7 +30,7 @@ The following sections should be enough to go on with.
     - [Waste search settings: `queries_waste.py`](#waste-search-settings-queries_wastepy)
       - [Adjusting Search Terms](#adjusting-search-terms)
         - [Category-Specific Changes](#category-specific-changes)
-        - [Optimizing Search Efficiency](#optimizing-search-efficiency)
+        - [Optimising Search Efficiency](#optimising-search-efficiency)
       - [Validating Search Terms](#validating-search-terms)
     - [Material Search Settings: `queries_materials.py`](#material-search-settings-queries_materialspy)
       - [Structure and Customisation](#structure-and-customisation)
@@ -53,7 +53,7 @@ The program is written in Python and the required packages are listed in the `re
 
 The main dependencies are:
 
-- [brightway2](https://docs.brightway.dev)
+- [brightway2 components: bw2io, bw2data, bw2calc](https://docs.brightway.dev)
 - [premise](https://premise.readthedocs.io)
 - [wurst](https://wurst.readthedocs.io)
 
@@ -172,7 +172,7 @@ This file sets up search parameters for different waste and material flow catego
 - **Adding Categories**: You can add new categories to the `names` list.
 - **Modifying Queries**: Update the query parameters for each category based on your requirements.
 
-##### Optimizing Search Efficiency
+##### Optimising Search Efficiency
 
 You can choose to include or exclude whatever you want.
 For instance, "non-hazardous" is not included as it's derivable from other categories and slows down the process.

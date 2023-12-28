@@ -53,9 +53,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">WasteAndMaterialFootprint Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
 </ul>
 
         </div>
@@ -89,7 +91,7 @@
 <p>The program is written in Python and the required packages are listed in the <cite>requirements.txt</cite> file. These should be installed automatically when installing the program.</p>
 <p>The main dependencies are:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.brightway.dev">brightway2</a></p></li>
+<li><p><a class="reference external" href="https://docs.brightway.dev">brightway2 components: bw2io, bw2data, bw2calc</a></p></li>
 <li><p><a class="reference external" href="https://premise.readthedocs.io">premise</a></p></li>
 <li><p><a class="reference external" href="https://wurst.readthedocs.io">wurst</a></p></li>
 </ul>
@@ -97,16 +99,21 @@
 <section id="installation-instructions">
 <h2>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Link to this heading"></a></h2>
 <p><strong>It is recommended to use a fresh virtual environment to install the program.</strong></p>
-<p>You can simply clone the repo and run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/WasteAndMaterialFootprint/main.py
+<p>You can simply clone or download the repo and run it without installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>venv<span class="w"> </span>-m<span class="w"> </span>&lt;name&gt;
+<span class="nb">source</span><span class="w"> </span>&lt;name&gt;/bin/activate
 </pre></div>
 </div>
 <p>This will not install any of the dependencies, so you will need to install them manually if you don’t already have them.</p>
-<p>A better option: the program can be installed using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>Alternatively: the program can be installed using pip:</p>
+<p>Either from PyPI:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>WasteAndMaterialFootprint
 </pre></div>
 </div>
-<p>Or, if you want to install the latest version from GitHub:</p>
+<p>Or, probably best to install the latest version from GitHub:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
 </pre></div>
 </div>

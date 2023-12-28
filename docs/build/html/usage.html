@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="next" title="Configuration modules" href="configuration.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
@@ -53,9 +53,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#python-module">Python Module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">WasteAndMaterialFootprint Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_api.html#configuration">Configuration</a></li>
 </ul>
 
         </div>
@@ -91,12 +93,64 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>src/WasteAndMaterialFootprint/main.py
 </pre></div>
 </div>
+<p>Configuration files can be found in <cite>src/WasteAndMaterialFootprint/config/</cite>. These can be edited before running the main script.</p>
 </section>
 <section id="python-module">
 <h2>Python Module<a class="headerlink" href="#python-module" title="Link to this heading"></a></h2>
-<p>The program can be imported as a Python module:</p>
+<p>The program can be imported as a Python module if it has been installed with pip. The main function can then be run using:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">WasteAndMaterialFootprint</span> <span class="k">as</span> <span class="nn">wmf</span>
 <span class="n">wmf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As with the command line, the configuration files can be found in <cite>src/WasteAndMaterialFootprint/config/</cite>. These can be edited before running the main script.
+It is also possible to edit the configuration settings directly in the Python script, and accessed in interactive terminal sessions like iPython and Jupyter.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">WasteAndMaterialFootprint</span> <span class="k">as</span> <span class="nn">wmf</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">use_premise</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">use_wmf</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">use_wmf</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">use_wmf</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">project_base</span>
+<span class="go">&#39;SSP-cutoff&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">project_base</span> <span class="o">=</span> <span class="s2">&quot;other project&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">project_base</span>
+<span class="go">&#39;other project&#39;</span>
+</pre></div>
+</div>
+<p>The individual modules can also be imported and used separately. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">WasteAndMaterialFootprint</span> <span class="k">as</span> <span class="nn">wmf</span>
+
+<span class="c1"># only use premise</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">FutureScenarios</span><span class="o">.</span><span class="n">MakeFutureScenarios</span><span class="p">()</span>
+
+<span class="c1"># only do waste or material searches</span>
+<span class="n">database</span> <span class="o">=</span> <span class="s1">&#39;my database&#39;</span>
+<span class="n">project</span> <span class="o">=</span> <span class="s1">&#39;my project&#39;</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">ExplodeDatabase</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">SearchWaste</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">SearchMaterial</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+
+<span class="c1"># check databases</span>
+
+<span class="n">wmf</span><span class="o">.</span><span class="n">VerifyDatabase</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+
+<span class="c1"># or with the internal settings:</span>
+
+<span class="n">database</span> <span class="o">=</span> <span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">database_name</span>
+
+<span class="c1"># check original database</span>
+<span class="n">project_base</span> <span class="o">=</span> <span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">project_base</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">VerifyDatabase</span><span class="p">(</span><span class="n">project_base</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+<span class="c1"># (this will return &#39;0&#39;, because it was not edited)</span>
+
+<span class="c1"># check final database</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">wmf</span><span class="o">.</span><span class="n">user_settings</span><span class="o">.</span><span class="n">project_wmf</span>
+<span class="n">wmf</span><span class="o">.</span><span class="n">VerifyDatabase</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">database</span><span class="p">)</span>
+<span class="c1"># (this will return &#39;1&#39;, if it was edited correctly)</span>
 </pre></div>
 </div>
 </section>
@@ -107,7 +161,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

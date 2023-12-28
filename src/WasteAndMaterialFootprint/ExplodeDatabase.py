@@ -95,7 +95,7 @@ def ExplodeDatabase(db_name):
         + bd.projects.current
     )
 
-    log_file = dir_logs / "ExplodeDatabase.log"
+    log_file = dir_logs / f'{datetime.now().strftime("%Y-%m-%d")}_ExplodeDatabase.log'
     with open(log_file, "a") as l:
         l.write(str(log_entry) + "\n")
 

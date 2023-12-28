@@ -178,7 +178,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
             str(duration),
         )
         log_file = os.path.join(
-            dir_logs, f'{datetime.now().strftime("%m%d%Y")}_ExchangeEditor.txt'
+            dir_logs, f'{datetime.now().strftime("%Y-%m-%d")}_ExchangeEditor.txt'
         )
         with open(log_file, "a") as l:
             l.write(str(log_entry) + "\n")
