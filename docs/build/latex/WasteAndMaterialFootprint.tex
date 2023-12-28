@@ -64,7 +64,7 @@
 
 
 \title{WasteAndMaterialFootprint Documentation}
-\date{Dec 26, 2023}
+\date{Dec 28, 2023}
 \release{0.1.2}
 \author{Stewart Charles McDowall}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -91,7 +91,7 @@
 \chapter{Introduction}
 \label{\detokenize{intro:introduction}}\label{\detokenize{intro::doc}}
 \sphinxAtStartPar
-The WasteAndMaterialFootprint tool is a python package that allows one to calculate the waste and material footprint of any product or service inside of the life cycle assessment database ecoinvent. The tool is based on the paper
+The WasteAndMaterialFootprint tool is a python package that allows one to calculate the waste and material footprint of any product or service inside of life cycle assessment (LCA) databases.
 
 \sphinxAtStartPar
 \sphinxstylestrong{* THESE DOCUMENTS ARE STILL UNDER CONSTRUCTION *}
@@ -178,7 +178,7 @@ pip\PYG{+w}{ }install\PYG{+w}{ }\PYGZhy{}e\PYG{+w}{ }.
 \chapter{Usage}
 \label{\detokenize{usage:usage}}\label{\detokenize{usage::doc}}
 \sphinxAtStartPar
-The program can be used directly from the command line, or imported as a Python module. This will run the program using the default settings. See the \DUrole{xref,std,std-ref}{configuration} section for more information on how to change the settings.
+The program can be used directly from the command line, or imported as a Python module. This will run the program using the default settings. See the configuration section for more information on how to change the settings.
 
 
 \section{Command Line}
@@ -719,15 +719,6 @@ args: desired\_scenarios (list): list of dictionaries with scenario details
 \sphinxAtStartPar
 returns: new\_scenarios (list): list of dictionaries with scenario details that do not already exist in the project
 
-\end{fulllineitems}
-
-\index{grouper() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{grouper()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}
-
-\begin{fulllineitems}
-\phantomsection\label{\detokenize{WasteAndMaterialFootprint:WasteAndMaterialFootprint.FutureScenarios.grouper}}
-\pysigstartsignatures
-\pysiglinewithargsret{\sphinxcode{\sphinxupquote{WasteAndMaterialFootprint.FutureScenarios.}}\sphinxbfcode{\sphinxupquote{grouper}}}{\sphinxparam{\DUrole{n}{iterable}}\sphinxparamcomma \sphinxparam{\DUrole{n}{n}}\sphinxparamcomma \sphinxparam{\DUrole{n}{fillvalue}\DUrole{o}{=}\DUrole{default_value}{None}}}{}
-\pysigstopsignatures
 \end{fulllineitems}
 
 \index{make\_possible\_scenario\_list() (in module WasteAndMaterialFootprint.FutureScenarios)@\spxentry{make\_possible\_scenario\_list()}\spxextra{in module WasteAndMaterialFootprint.FutureScenarios}}

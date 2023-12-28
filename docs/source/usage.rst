@@ -1,7 +1,7 @@
 Usage
 =====
 
-The program can be used directly from the command line, or imported as a Python module. This will run the program using the default settings. See the :ref:`configuration` section for more information on how to change the settings.
+The program can be used directly from the command line, or imported as a Python module. This will run the program using the default settings. See the configuration section for more information on how to change the settings.
 
 Command Line
 ------------

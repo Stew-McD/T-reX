@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  26 DEC 2023 18:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.11.19)  28 DEC 2023 10:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -902,7 +902,7 @@ Chapter 7.
 [21] [22
 
 ]
-Overfull \hbox (3.62183pt too wide) in paragraph at lines 1133--1134
+Overfull \hbox (3.62183pt too wide) in paragraph at lines 1124--1125
 []\T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase\T1/qtm/m/n/10 ,
  []
 
@@ -937,61 +937,55 @@ Waste-And-Ma-te-ri-al-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--51
-[]\T1/txtt/m/n/10 grouper() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Waste-An
-d-Ma-te-ri-al-Foot-
- []
-
-
-Overfull \hbox (2.62189pt too wide) in paragraph at lines 59--60
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 57--58
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.ExchangeEditor\T1/qtm/m/n/10 ,
  []
 
 
-Overfull \hbox (7.87187pt too wide) in paragraph at lines 60--61
+Overfull \hbox (7.87187pt too wide) in paragraph at lines 58--59
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.ExplodeDatabase\T1/qtm/m/n/10 ,
  []
 
 
-Overfull \hbox (7.87187pt too wide) in paragraph at lines 61--62
+Overfull \hbox (7.87187pt too wide) in paragraph at lines 59--60
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.FutureScenarios\T1/qtm/m/n/10 ,
  []
 
 
-Overfull \hbox (23.62183pt too wide) in paragraph at lines 63--64
+Overfull \hbox (23.62183pt too wide) in paragraph at lines 61--62
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase\T1/qtm/m/n/10 
 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 62--63
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.MethodEditor\T1/qtm/m/n/10 ,
  []
 
 
-Overfull \hbox (2.62189pt too wide) in paragraph at lines 65--66
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 63--64
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.SearchMaterial\T1/qtm/m/n/10 ,
  []
 
 
-Overfull \hbox (2.62189pt too wide) in paragraph at lines 67--68
+Overfull \hbox (2.62189pt too wide) in paragraph at lines 65--66
 []| \T1/txtt/m/n/10 WasteAndMaterialFootprint.VerifyDatabase\T1/qtm/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 77--79
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 []\T1/txtt/m/n/10 SearchWaste() \T1/qtm/m/n/10 (\T1/qtm/m/it/10 in mod-ule Wast
 e-And-Ma-te-ri-al-Foot-
  []
 
-[25
 
-]
-Overfull \hbox (1.12183pt too wide) in paragraph at lines 95--96
+Overfull \hbox (1.12183pt too wide) in paragraph at lines 93--94
 []\T1/txtt/m/n/10 WasteAndMaterialFootprint.MakeCustomDatabase 
  []
 
-[26
+[25
+
+] [26
 
 ]) (./WasteAndMaterialFootprint.aux)
  ***********
@@ -1000,13 +994,13 @@ L3 programming layer <2023-11-09>
  ***********
 Package rerunfilecheck Info: File `WasteAndMaterialFootprint.out' has not chang
 ed.
-(rerunfilecheck)             Checksum: AF400C7915670A14512FA8A315681944;9336.
+(rerunfilecheck)             Checksum: 0F1BB25ECD82C215411BFF63CC5F542C;9336.
  ) 
 Here is how much of TeX's memory you used:
- 16493 strings out of 475387
- 276409 string characters out of 5769436
+ 16491 strings out of 475387
+ 276321 string characters out of 5769436
  1962555 words of memory out of 5000000
- 38055 multiletter control sequences out of 15000+600000
+ 38054 multiletter control sequences out of 15000+600000
  612530 words of font info for 79 fonts, out of 8000000 for 9000
  431 hyphenation exceptions out of 8191
  72i,12n,79p,602b,743s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1021,10 +1015,10 @@ dist/fonts/type1/public/tex-gyre/qtmri.pfb></usr/local/texlive/2023/texmf-dist/
 fonts/type1/public/txfonts/t1xbtt.pfb></usr/local/texlive/2023/texmf-dist/fonts
 /type1/public/txfonts/t1xtt.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1
 /public/txfonts/t1xtt.pfb>
-Output written on WasteAndMaterialFootprint.pdf (30 pages, 225587 bytes).
+Output written on WasteAndMaterialFootprint.pdf (30 pages, 224949 bytes).
 PDF statistics:
- 517 PDF objects out of 1000 (max. 8388607)
- 464 compressed objects within 5 object streams
- 106 named destinations out of 1000 (max. 500000)
+ 515 PDF objects out of 1000 (max. 8388607)
+ 462 compressed objects within 5 object streams
+ 105 named destinations out of 1000 (max. 500000)
  433 words of extra memory for PDF output out of 10000 (max. 10000000)
 

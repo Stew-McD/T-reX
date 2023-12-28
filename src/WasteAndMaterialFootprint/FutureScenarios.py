@@ -35,6 +35,7 @@ from config.user_settings import (
     years,
 )
 
+
 if use_premise:
     # easiest way to stop premise from making a mess in the main directory
     dir_premise = dir_data / "premise"

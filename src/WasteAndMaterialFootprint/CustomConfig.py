@@ -11,7 +11,7 @@ def config_setup():
     """
     # Path to the config directory in the package
     # package_root = Path(__file__).resolve().parents[0]
-    src = Path(__file__).resolve().parents[1]
+    src = Path(__file__).resolve().parents[0]
     source_config_dir = src / "config"
 
     # Path to the target config directory in the CWD
