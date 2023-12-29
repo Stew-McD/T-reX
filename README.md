@@ -1,6 +1,6 @@
 # WasteAndMaterialFootprint
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10431181.svg)](https://doi.org/10.5281/zenodo.10431181)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10431181.svg)](https://doi.org/10.5281/zenodo.10431180)
 
 A program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints.
 

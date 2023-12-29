@@ -4,4 +4,7 @@
 !/.readthedocs.yaml
 data/tmp/
 poetry.lock
+dist/
+docs/build/
+
 __pycache__/
