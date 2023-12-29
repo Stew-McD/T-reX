@@ -63,30 +63,30 @@ The main dependencies are:
 
 You can simply clone the repo and run:
 
-    ```bash
-    python src/WasteAndMaterialFootprint/main.py
-    ```
+  ```bash
+  python src/WasteAndMaterialFootprint/main.py
+  ```
 This will not install any of the dependencies, so you will need to install them manually if you don't already have them.
 
 Better option: the program can be installed using pip:
 
-    ```bash
-    pip install WasteAndMaterialFootprint
-    ```
+  ```bash
+  pip install WasteAndMaterialFootprint
+  ```
 
 Or, if you want to install the latest version from GitHub:
 
-    ```bash
-    pip install git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
-    ```
+  ```bash
+  pip install git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+  ```
 
 or for an editable install (good for development and testing):
 
-    ```bash
-    git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
-    cd WasteAndMaterialFootprint
-    pip install -e .
-    ```
+  ```bash
+  git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+  cd WasteAndMaterialFootprint
+  pip install -e .
+  ```
 
 ## Usage
 
@@ -96,18 +96,18 @@ The program can be used directly from the command line, or imported as a Python 
 
 You should clone the repo, navigate to the `WasteAndMaterialFootprint` folder, and then run the program using:
 
-    ```bash
-        python src/WasteAndMaterialFootprint/main.py
-    ```
+  ```bash
+      python src/WasteAndMaterialFootprint/main.py
+  ```
 
 ### Python module
 
 The program can be imported as a Python module:
 
-    ```python
-        import WasteAndMaterialFootprint as wmf
-        wmf.run()
-    ```
+  ```python
+      import WasteAndMaterialFootprint as wmf
+      wmf.run()
+  ```
 
 ## Configuration
 
@@ -123,36 +123,36 @@ If you are happy with the default settings, you can just run the program and it 
 
 **These are some extracts from `user_settings.py` with the most important settings (the ones you might want to change) and their default values:**
 
-    ```python
+  ```python
 
-        # Choose whether to use premise to create future scenario databases 
-        use_premise = True
-        # Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
-        use_wmf = True
+      # Choose whether to use premise to create future scenario databases 
+      use_premise = True
+      # Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
+      use_wmf = True
 
-        # Choose the names of the projects to use
-        project_premise_base = "default"
-        project_premise = "SSP-cutoff"
-        project_base = project_premise
-        project_wmf = f"WMFootprint-{project_base}"
+      # Choose the names of the projects to use
+      project_premise_base = "default"
+      project_premise = "SSP-cutoff"
+      project_base = project_premise
+      project_wmf = f"WMFootprint-{project_base}"
 
-        # Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)
-        database_name = "ecoinvent-3.9.1-cutoff"
+      # Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)
+      database_name = "ecoinvent-3.9.1-cutoff"
 
-        # if you want to use a fresh project
-        delete_existing_premise_project = False
-        delete_existing_wmf_project = False
+      # if you want to use a fresh project
+      delete_existing_premise_project = False
+      delete_existing_wmf_project = False
 
-        # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
-        # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
-        # the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100
+      # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
+      # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
+      # the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100
 
-        models = ["remind"]
-        ssps = ["SSP2"]
-        rcps = ["Base","PkBudg500"]
-        years = [2030,2065,2100,]
+      models = ["remind"]
+      ssps = ["SSP2"]
+      rcps = ["Base","PkBudg500"]
+      years = [2030,2065,2100,]
 
-    ```
+  ```
 
 ### Waste search settings: `queries_waste.py`
 
@@ -183,12 +183,12 @@ Isolate the function of `SearchWaste.py` to validate your search terms. That mea
 
 You can achieve this by setting the following in `user_settings.py`:
 
-    ```python
-        use_premise = False
-        do_search = True
-        do_methods = False
-        do_edit = False
-    ```
+  ```python
+      use_premise = False
+      do_search = True
+      do_methods = False
+      do_edit = False
+  ```
 
 ### Material Search Settings: `queries_materials.py`
 
