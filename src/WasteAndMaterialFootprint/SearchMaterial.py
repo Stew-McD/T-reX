@@ -84,23 +84,24 @@ def SearchMaterial(db_name, project_wmf):
         ]
     ]
 
-    # Load the materials list
-    try:
-        with open(dir_config / "list_materials.txt") as f:
-            materials = [
-                line.strip() for line in f if line.strip() and not line.startswith("#")
-            ]
-            print(
-                f"\nLoaded materials list from file: {dir_config / 'list_materials.txt'}"
-            )
-    except Exception:
-        print("Using the default material list")
-        materials = queries_materials
+
+    materials = queries_materials
 
     # Display loaded materials
     print(f"\n** Materials ({len(materials)}) | (activity, group)\n", end="\t")
     print(*materials, sep="\n\t")
-
+    
+    # Filter activities based on the materials list
+    materials_df = pd.DataFrame(queries_materials, columns=["name", "group"])
+    materials_dict = dict(materials)
+    
+    # changed search criteria to include all activities that contain the material name, because future databases have different naming conventions
+    acts = acts_all[
+        acts_all["name"].apply(
+            lambda x: any(x.startswith(material) for material in materials_df.name)
+        )
+    ].reset_index(drop=True)
+    
     def map_materials(name):
         for key, value in materials_dict.items():
             if name.startswith(key):

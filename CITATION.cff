@@ -1,16 +1,16 @@
-cff-version: 0.0.1
+cff-version: 0.1.21
 message: "If you use this software, please cite it as below."
 authors:
 - family-names: "McDowall"
   given-names: "Stewart Charles"
   orcid: "https://orcid.org/0000-0002-5688-1279"
-- family-names: "Elizabeth"
-  given-names: "Lanphere"
+- family-names: "Lanphere"
+  given-names: "Elizabeth"
   # orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "WasteAndMaterialFootprint"
 version: 0.1.21
-doi: 10.5281/zenodo.10431181
-date-released: 2023-12-25
+doi: 10.5281/zenodo.10431180
+date-released: 2023-12-29
 url: "https://github.com/Stew-McD/WasteAndMaterialFootprint"
 # preferred-citation:
 #   type: article
