@@ -1,0 +1,57 @@
+:py:mod:`WasteAndMaterialFootprint.MethodEditor`
+================================================
+
+.. py:module:: WasteAndMaterialFootprint.MethodEditor
+
+.. autoapi-nested-parse::
+
+   MethodEditor Module
+   ===================
+
+   This module provides functions for adding, deleting, and checking methods related to waste and material footprints in a project.
+
+   Function Summary:
+   -----------------
+   - `AddMethods`: Adds new methods to a project based on a custom biosphere database.
+   - `DeleteMethods`: Removes specific methods from a project, particularly those related to waste and material footprints.
+   - `CheckMethods`: Lists and checks the methods in a project, focusing on those associated with waste and material footprints.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.MethodEditor.AddMethods
+   WasteAndMaterialFootprint.MethodEditor.DeleteMethods
+   WasteAndMaterialFootprint.MethodEditor.CheckMethods
+
+
+
+.. py:function:: AddMethods()
+
+   Add methods to the specified project based on entries in the custom biosphere database.
+
+   :param project_wmf: Name of the project.
+   :param db_wmf_name: Name of the database.
+
+
+.. py:function:: DeleteMethods()
+
+   Delete methods associated with the "WasteAndMaterial Footprint" in the specified project.
+
+   :param project_wmf: Name of the project.
+
+
+.. py:function:: CheckMethods()
+
+   Check methods associated with the "WasteAndMaterial Footprint" in the specified project.
+
+   :param project_wmf: Name of the project.
+
+

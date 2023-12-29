@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteAndMaterialFootprint.config.queries_materials &mdash; WasteAndMaterialFootprint 0.1.21 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b3d22ae5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">WasteAndMaterialFootprint Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source_code.html">Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WasteAndMaterialFootprint.config.queries_materials</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WasteAndMaterialFootprint.config.queries_materials</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">queries_materials Module</span>
+<span class="sd">========================</span>
+
+<span class="sd">This module contains the list of materials that will be used to create demand methods in the WasteAndMaterialFootprint tool. The materials are specifically chosen to match with the activities in the ecoinvent v3.9.1 database (and the future databases made with premise) and to align with the EU CRM list 2023. Additional strategic materials are also included, as well as other materials of interest.</span>
+
+<span class="sd">Note:</span>
+<span class="sd">-----</span>
+<span class="sd">- The search function in `SearchMaterial.py` uses &#39;startswith&#39;, so it will catch all activities that start with the material name.</span>
+<span class="sd">- The comma in material names is important for filtering specific activities in the database.</span>
+
+<span class="sd">queries_materials</span>
+<span class="sd">-----------------</span>
+<span class="sd">List of tuples where each tuple contains the activity name (as appears in the database) and its corresponding material category. This list is used for creating demand methods in the WasteAndMaterialFootprint tool.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">list_materials</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;market for aluminium&quot;</span><span class="p">,</span> <span class="s2">&quot;aluminium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for antimony&quot;</span><span class="p">,</span> <span class="s2">&quot;antimony&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for bauxite&quot;</span><span class="p">,</span> <span class="s2">&quot;bauxite&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for beryllium&quot;</span><span class="p">,</span> <span class="s2">&quot;beryllium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for bismuth&quot;</span><span class="p">,</span> <span class="s2">&quot;bismuth&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for cadmium&quot;</span><span class="p">,</span> <span class="s2">&quot;cadmium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for calcium borates&quot;</span><span class="p">,</span> <span class="s2">&quot;borates&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for cement&quot;</span><span class="p">,</span> <span class="s2">&quot;cement&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for cerium&quot;</span><span class="p">,</span> <span class="s2">&quot;cerium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for chromium&quot;</span><span class="p">,</span> <span class="s2">&quot;chromium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for coal&quot;</span><span class="p">,</span> <span class="s2">&quot;coal&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for cobalt&quot;</span><span class="p">,</span> <span class="s2">&quot;cobalt&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for coke&quot;</span><span class="p">,</span> <span class="s2">&quot;coke&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for copper&quot;</span><span class="p">,</span> <span class="s2">&quot;copper&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for dysprosium&quot;</span><span class="p">,</span> <span class="s2">&quot;dysprosium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for erbium&quot;</span><span class="p">,</span> <span class="s2">&quot;erbium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for europium&quot;</span><span class="p">,</span> <span class="s2">&quot;europium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for electricity,&quot;</span><span class="p">,</span> <span class="s2">&quot;electricity&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for ferroniobium,&quot;</span><span class="p">,</span> <span class="s2">&quot;niobium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for fluorspar,&quot;</span><span class="p">,</span> <span class="s2">&quot;fluorspar&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for gadolinium&quot;</span><span class="p">,</span> <span class="s2">&quot;gadolinium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for gallium&quot;</span><span class="p">,</span> <span class="s2">&quot;gallium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for gold&quot;</span><span class="p">,</span> <span class="s2">&quot;gold&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for graphite&quot;</span><span class="p">,</span> <span class="s2">&quot;graphite&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for hafnium&quot;</span><span class="p">,</span> <span class="s2">&quot;hafnium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for helium&quot;</span><span class="p">,</span> <span class="s2">&quot;helium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for holmium&quot;</span><span class="p">,</span> <span class="s2">&quot;holmium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for hydrogen,&quot;</span><span class="p">,</span> <span class="s2">&quot;hydrogen&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for indium&quot;</span><span class="p">,</span> <span class="s2">&quot;indium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for latex&quot;</span><span class="p">,</span> <span class="s2">&quot;latex&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for lithium&quot;</span><span class="p">,</span> <span class="s2">&quot;lithium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for magnesium&quot;</span><span class="p">,</span> <span class="s2">&quot;magnesium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for natural gas,&quot;</span><span class="p">,</span> <span class="s2">&quot;natural gas&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for nickel&quot;</span><span class="p">,</span> <span class="s2">&quot;nickel&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for palladium&quot;</span><span class="p">,</span> <span class="s2">&quot;palladium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for petroleum&quot;</span><span class="p">,</span> <span class="s2">&quot;petroleum&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for phosphate&quot;</span><span class="p">,</span> <span class="s2">&quot;phosphate rock&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for platinum&quot;</span><span class="p">,</span> <span class="s2">&quot;platinum&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for rare earth&quot;</span><span class="p">,</span> <span class="s2">&quot;rare earth&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for rhodium&quot;</span><span class="p">,</span> <span class="s2">&quot;rhodium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for sand&quot;</span><span class="p">,</span> <span class="s2">&quot;sand&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for selenium&quot;</span><span class="p">,</span> <span class="s2">&quot;selenium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for scandium&quot;</span><span class="p">,</span> <span class="s2">&quot;scandium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for silicon&quot;</span><span class="p">,</span> <span class="s2">&quot;silicon&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for silver&quot;</span><span class="p">,</span> <span class="s2">&quot;silver&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for sodium borates&quot;</span><span class="p">,</span> <span class="s2">&quot;borates&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for strontium&quot;</span><span class="p">,</span> <span class="s2">&quot;strontium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for tantalum&quot;</span><span class="p">,</span> <span class="s2">&quot;tantalum&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for tellurium&quot;</span><span class="p">,</span> <span class="s2">&quot;tellurium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for tin&quot;</span><span class="p">,</span> <span class="s2">&quot;tin&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for titanium&quot;</span><span class="p">,</span> <span class="s2">&quot;titanium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for uranium&quot;</span><span class="p">,</span> <span class="s2">&quot;uranium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for tungsten&quot;</span><span class="p">,</span> <span class="s2">&quot;tungsten&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for vanadium&quot;</span><span class="p">,</span> <span class="s2">&quot;vanadium&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for vegetable oil,&quot;</span><span class="p">,</span> <span class="s2">&quot;vegetable oil&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for tap water&quot;</span><span class="p">,</span> <span class="s2">&quot;water&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for water,&quot;</span><span class="p">,</span> <span class="s2">&quot;water&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for zinc&quot;</span><span class="p">,</span> <span class="s2">&quot;zinc&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;market for zirconium&quot;</span><span class="p">,</span> <span class="s2">&quot;zirconium&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<div class="viewcode-block" id="get_queries_materials">
+<a class="viewcode-back" href="../../../autoapi/WasteAndMaterialFootprint/config/queries_materials/index.html#WasteAndMaterialFootprint.config.queries_materials.get_queries_materials">[docs]</a>
+<span class="k">def</span> <span class="nf">get_queries_materials</span><span class="p">(</span><span class="n">list_materials</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Just a wrapper to return the list of materials</span>
+<span class="sd">    </span>
+<span class="sd">    args: list_materials</span>
+<span class="sd">    returns: list queries_materials</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">list_materials</span></div>
+
+
+
+<span class="n">queries_materials</span> <span class="o">=</span> <span class="n">get_queries_materials</span><span class="p">(</span><span class="n">list_materials</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

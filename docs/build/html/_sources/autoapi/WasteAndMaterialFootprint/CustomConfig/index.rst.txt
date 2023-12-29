@@ -1,0 +1,45 @@
+:py:mod:`WasteAndMaterialFootprint.CustomConfig`
+================================================
+
+.. py:module:: WasteAndMaterialFootprint.CustomConfig
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.CustomConfig.config_setup
+   WasteAndMaterialFootprint.CustomConfig.config_reload
+   WasteAndMaterialFootprint.CustomConfig.config_reset
+
+
+
+.. py:function:: config_setup()
+
+   Copies the config files to the current working directory and adds the config directory to sys.path
+   args: None
+   returns: None
+
+
+.. py:function:: config_reload()
+
+   Copies the config files back to the package directory. The user will need to restart the python session to reload the WasteAndMaterialFootprint module with the updated configuration files
+
+   args: None
+   returns: None
+
+
+
+.. py:function:: config_reset()
+
+   Reset config to defaults that are stored in the root directory of the package
+
+   args: None
+   returns: None
+
+

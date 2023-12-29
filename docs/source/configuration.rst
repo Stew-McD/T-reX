@@ -1,7 +1,31 @@
 Configuration modules
 =====================
 
-By default, the program will create a folder ``config`` in the current working directory containing the default configuration files:
+CustomConfig Module
+-------------------
+
+This module provides functions for managing the configuration of the WasteAndMaterialFootprint package.
+This is only needed if you have installed the package from PyPi, if you have cloned the repository you can just edit the configuration files directly.
+
+By running the following command, the program will create a folder ``config`` in the current working directory containing the default configuration files:
+
+.. code-block:: python
+
+    wmf.config.config_setup()
+
+You can then edit these files to match your project structure and your needs. And then run the following command to reload the configuration:
+
+.. code-block:: python
+
+    wmf.config.config_reload()
+
+You will then need to restart your python session for the changes to take effect.
+If you want to reset the configuration to the default values, you can run:
+
+.. code-block:: python
+
+    wmf.config.config_reset()
+
 
 General Settings: ``user_settings.py``
 ---------------------------------------

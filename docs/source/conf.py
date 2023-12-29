@@ -9,22 +9,37 @@ import sys
 # Set an environment variable to indicate that we're running a Sphinx build
 # os.environ["SPHINX_BUILD"] = "1"
 
-# sys.path.insert(0, os.path.abspath("../../src"))
-# sys.path.insert(0, os.path.abspath("config"))
+sys.path.insert(0, os.path.abspath("../../src/WasteAndMaterialFootprint/"))
+sys.path.insert(0, os.path.abspath("../../src/WasteAndMaterialFootprint/config"))
 # sys.path.insert(0, os.path.abspath("../../data"))
 # sys.path.insert(0, os.path.abspath("../../examples"))
 
 project = "WasteAndMaterialFootprint"
 copyright = "2023, Stewart Charles McDowall | Stew-McD"
 author = "Stewart Charles McDowall | Stew-McD"
-release = "0.1.2"
+release = "0.1.21"
 
 html_theme = "sphinx_rtd_theme"
-# html_static_path = ['_static']
-
-extensions = ["sphinx.ext.autodoc"]
-# templates_path = ['_templates']
+html_static_path = ["_static"]
+templates_path = ["_templates"]
 exclude_patterns = []
+
+extensions = [
+    "autoapi.extension",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    "sphinx_copybutton",
+]
+autoapi_dirs = [
+    "../../src/WasteAndMaterialFootprint/",
+]
+
+autosectionlabel_prefix_document = True
+autosummary_generate = True
 
 master_doc = "index"
 latex_documents = [

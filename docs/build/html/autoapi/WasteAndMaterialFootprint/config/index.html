@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteAndMaterialFootprint.config &mdash; WasteAndMaterialFootprint 0.1.21 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=b3d22ae5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="WasteAndMaterialFootprint.config.queries_materials" href="queries_materials/index.html" />
+    <link rel="prev" title="WasteAndMaterialFootprint" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">WasteAndMaterialFootprint Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source_code.html">Source code</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint</span></code></a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint</span></code></a></li>
+      <li class="breadcrumb-item active"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/WasteAndMaterialFootprint/config/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-WasteAndMaterialFootprint.config">
+<span id="wasteandmaterialfootprint-config"></span><h1><a class="reference internal" href="#module-WasteAndMaterialFootprint.config" title="WasteAndMaterialFootprint.config"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config</span></code></a><a class="headerlink" href="#module-WasteAndMaterialFootprint.config" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="queries_materials/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config.queries_materials</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="queries_waste/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config.queries_waste</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_settings/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">WasteAndMaterialFootprint.config.user_settings</span></code></a></li>
+</ul>
+</div>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.generate_args_list" title="WasteAndMaterialFootprint.config.generate_args_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_args_list</span></code></a>([single_database])</p></td>
+<td><p>Generate a list of argument dictionaries for processing multiple projects and databases.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.custom_bw2_dir" title="WasteAndMaterialFootprint.config.custom_bw2_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">custom_bw2_dir</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.db_wmf_name" title="WasteAndMaterialFootprint.config.db_wmf_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">db_wmf_name</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.delete_wmf_project" title="WasteAndMaterialFootprint.config.delete_wmf_project"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_wmf_project</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.dir_logs" title="WasteAndMaterialFootprint.config.dir_logs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dir_logs</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.dir_tmp" title="WasteAndMaterialFootprint.config.dir_tmp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dir_tmp</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.project_base" title="WasteAndMaterialFootprint.config.project_base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_base</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.project_premise" title="WasteAndMaterialFootprint.config.project_premise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_premise</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.project_wmf" title="WasteAndMaterialFootprint.config.project_wmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">project_wmf</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.use_multiprocessing" title="WasteAndMaterialFootprint.config.use_multiprocessing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_multiprocessing</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.use_premise" title="WasteAndMaterialFootprint.config.use_premise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_premise</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.use_wmf" title="WasteAndMaterialFootprint.config.use_wmf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_wmf</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.do_search" title="WasteAndMaterialFootprint.config.do_search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_search</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.do_methods" title="WasteAndMaterialFootprint.config.do_methods"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_methods</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.do_edit" title="WasteAndMaterialFootprint.config.do_edit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_edit</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#WasteAndMaterialFootprint.config.single_database" title="WasteAndMaterialFootprint.config.single_database"><code class="xref py py-obj docutils literal notranslate"><span class="pre">single_database</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="queries_waste/index.html#module-WasteAndMaterialFootprint.config.queries_waste" title="WasteAndMaterialFootprint.config.queries_waste"><code class="xref py py-obj docutils literal notranslate"><span class="pre">queries_waste</span></code></a></p></td>
+<td><p>queries_waste Module</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="queries_materials/index.html#module-WasteAndMaterialFootprint.config.queries_materials" title="WasteAndMaterialFootprint.config.queries_materials"><code class="xref py py-obj docutils literal notranslate"><span class="pre">queries_materials</span></code></a></p></td>
+<td><p>queries_materials Module</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.custom_bw2_dir">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">custom_bw2_dir</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.custom_bw2_dir" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.db_wmf_name">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">db_wmf_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'WasteAndMaterialFootprint'</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.db_wmf_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.delete_wmf_project">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">delete_wmf_project</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.delete_wmf_project" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.dir_logs">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">dir_logs</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.dir_logs" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.dir_tmp">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">dir_tmp</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.dir_tmp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.generate_args_list">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">generate_args_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">single_database</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/WasteAndMaterialFootprint/config/user_settings.html#generate_args_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WasteAndMaterialFootprint.config.generate_args_list" title="Link to this definition"></a></dt>
+<dd><p>Generate a list of argument dictionaries for processing multiple projects and databases.</p>
+<p>This function is used when the tool is set to operate in multiple projects/databases mode.
+It generates a list of argument dictionaries, each containing project and database settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries with project and database settings for batch processing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.project_base">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">project_base</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.project_base" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.project_premise">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">project_premise</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SSP-cutoff'</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.project_premise" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.project_wmf">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">project_wmf</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.project_wmf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.use_multiprocessing">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">use_multiprocessing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.use_multiprocessing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.use_premise">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">use_premise</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.use_premise" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.use_wmf">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">use_wmf</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.use_wmf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.do_search">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">do_search</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.do_search" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.do_methods">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">do_methods</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.do_methods" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.do_edit">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">do_edit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.do_edit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.single_database">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">single_database</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ecoinvent_cutoff_3.9_remind_SSP5-Base_2050'</span></em><a class="headerlink" href="#WasteAndMaterialFootprint.config.single_database" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.queries_waste">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">queries_waste</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.queries_waste" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="WasteAndMaterialFootprint.config.queries_materials">
+<span class="sig-prename descclassname"><span class="pre">WasteAndMaterialFootprint.config.</span></span><span class="sig-name descname"><span class="pre">queries_materials</span></span><a class="headerlink" href="#WasteAndMaterialFootprint.config.queries_materials" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="WasteAndMaterialFootprint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="queries_materials/index.html" class="btn btn-neutral float-right" title="WasteAndMaterialFootprint.config.queries_materials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

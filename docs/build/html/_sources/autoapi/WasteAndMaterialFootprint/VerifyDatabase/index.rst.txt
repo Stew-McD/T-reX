@@ -1,0 +1,59 @@
+:py:mod:`WasteAndMaterialFootprint.VerifyDatabase`
+==================================================
+
+.. py:module:: WasteAndMaterialFootprint.VerifyDatabase
+
+.. autoapi-nested-parse::
+
+   VerifyDatabase Module
+   =====================
+
+   This module contains a function to verify a (WasteAndMaterialFootprint) database
+   within a given project in Brightway2. It performs a verification by calculating LCA scores
+   for random activities within the specified database using selected methods.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.VerifyDatabase.VerifyDatabase
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.VerifyDatabase.project_name
+
+
+.. py:function:: VerifyDatabase(project_name, database_name, check_material=True, check_waste=True, log=True)
+
+   Verifies a database within a given project in Brightway2 by calculating LCA scores
+   for random activities using selected methods.
+
+   This function assesses the integrity and validity of a specified database within a Brightway2 project.
+   It performs LCA calculations on random activities using Waste Footprint and Material Demand Footprint methods,
+   and logs the results.
+
+   :param str project_name: The name of the Brightway2 project.
+   :param str database_name: The name of the database to be verified.
+   :param bool check_material: If True, checks for Material Demand Footprint methods.
+   :param bool check_waste: If True, checks for Waste Footprint methods.
+   :param bool log: If True, logs the results.
+   :return: Exit code (0 for success, 1 for failure).
+
+
+.. py:data:: project_name
+   :value: 'WMF-default'
+
+   
+

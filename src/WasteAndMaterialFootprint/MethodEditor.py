@@ -12,7 +12,7 @@ Function Summary:
 """
 
 import bw2data as bd
-from config.user_settings import db_wmf_name, project_wmf
+from .config.user_settings import db_wmf_name, project_wmf
 
 
 def AddMethods():

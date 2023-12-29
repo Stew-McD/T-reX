@@ -1,22 +1,17 @@
 # src/WasteAndMaterialFootprint/__init__.py
 
-# Import user settings
-from .CustomConfig import config_setup, config_reload
 
-config_setup()
-
-from config import user_settings
-from config import queries_waste
-from config import queries_materials
-
-__version__ = "0.1.2"
+__version__ = "0.1.21"
 __author__ = "Stewart Charles McDowall | Stew-McD"
 
 
 #! Some work should be done here to decide what to make available in the various namespaces
 
+from . import config 
+
 # Import modules here
 from .main import run
+from .CustomConfig import config_setup, config_reload, config_reset
 from .ExchangeEditor import ExchangeEditor
 from .ExplodeDatabase import ExplodeDatabase
 from .FutureScenarios import MakeFutureScenarios
@@ -28,11 +23,10 @@ from .VerifyDatabase import VerifyDatabase
 
 
 __all__ = [
-    "user_settings",
-    "queries_waste",
-    "queries_materials",
+    "config",
     "config_setup",
     "config_reload",
+    "config_reset",
     "run",
     "MakeFutureScenarios",
     "ExplodeDatabase",

@@ -1,0 +1,274 @@
+:py:mod:`WasteAndMaterialFootprint.config.user_settings`
+========================================================
+
+.. py:module:: WasteAndMaterialFootprint.config.user_settings
+
+.. autoapi-nested-parse::
+
+   user_settings Module
+   ====================
+
+   Configure Project and Database Settings for WasteAndMaterialFootprint tool.
+
+   This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
+
+   The script allows for two modes of operation:
+       1. Single Mode (`single` is True): Set the project and database names to a single specified value.
+       2. Multiple projects/databases mode (`single` is False): Facilitates batch processing of multiple projects and databases.
+
+   Additionally, the script allows for the use of multiprocessing (`use_multiprocessing` is True).
+
+   Premise can also be used to make future databases (`use_premise` is True).
+
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.config.user_settings.generate_args_list
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.config.user_settings.custom_bw2_dir
+   WasteAndMaterialFootprint.config.user_settings.project_premise_base
+   WasteAndMaterialFootprint.config.user_settings.project_premise
+   WasteAndMaterialFootprint.config.user_settings.project_base
+   WasteAndMaterialFootprint.config.user_settings.project_wmf
+   WasteAndMaterialFootprint.config.user_settings.use_wmf
+   WasteAndMaterialFootprint.config.user_settings.db_wmf_name
+   WasteAndMaterialFootprint.config.user_settings.single
+   WasteAndMaterialFootprint.config.user_settings.single_database
+   WasteAndMaterialFootprint.config.user_settings.delete_wmf_project
+   WasteAndMaterialFootprint.config.user_settings.use_multiprocessing
+   WasteAndMaterialFootprint.config.user_settings.verbose
+   WasteAndMaterialFootprint.config.user_settings.do_search
+   WasteAndMaterialFootprint.config.user_settings.do_methods
+   WasteAndMaterialFootprint.config.user_settings.do_edit
+   WasteAndMaterialFootprint.config.user_settings.use_premise
+   WasteAndMaterialFootprint.config.user_settings.database_name
+   WasteAndMaterialFootprint.config.user_settings.delete_existing_premise_project
+   WasteAndMaterialFootprint.config.user_settings.use_mp
+   WasteAndMaterialFootprint.config.user_settings.batch_size
+   WasteAndMaterialFootprint.config.user_settings.premise_quiet
+   WasteAndMaterialFootprint.config.user_settings.project_wmf
+   WasteAndMaterialFootprint.config.user_settings.premise_key
+   WasteAndMaterialFootprint.config.user_settings.key_path
+   WasteAndMaterialFootprint.config.user_settings.models
+   WasteAndMaterialFootprint.config.user_settings.ssps
+   WasteAndMaterialFootprint.config.user_settings.rcps
+   WasteAndMaterialFootprint.config.user_settings.years
+   WasteAndMaterialFootprint.config.user_settings.desired_scenarios
+   WasteAndMaterialFootprint.config.user_settings.cwd
+   WasteAndMaterialFootprint.config.user_settings.dir_config
+   WasteAndMaterialFootprint.config.user_settings.list_materials
+   WasteAndMaterialFootprint.config.user_settings.dir_data
+   WasteAndMaterialFootprint.config.user_settings.dir_tmp
+   WasteAndMaterialFootprint.config.user_settings.dir_logs
+   WasteAndMaterialFootprint.config.user_settings.dir_searchwaste_results
+   WasteAndMaterialFootprint.config.user_settings.dir_searchmaterial_results
+   WasteAndMaterialFootprint.config.user_settings.dir_databases_wasteandmaterial
+   WasteAndMaterialFootprint.config.user_settings.dir_wmf
+
+
+.. py:data:: custom_bw2_dir
+
+   
+
+.. py:data:: project_premise_base
+   :value: 'default'
+
+   
+
+.. py:data:: project_premise
+   :value: 'SSP-cutoff'
+
+   
+
+.. py:data:: project_base
+
+   
+
+.. py:data:: project_wmf
+
+   
+
+.. py:data:: use_wmf
+   :value: True
+
+   
+
+.. py:data:: db_wmf_name
+   :value: 'WasteAndMaterialFootprint'
+
+   
+
+.. py:data:: single
+   :value: False
+
+   
+
+.. py:data:: single_database
+   :value: 'ecoinvent_cutoff_3.9_remind_SSP5-Base_2050'
+
+   
+
+.. py:data:: delete_wmf_project
+   :value: False
+
+   
+
+.. py:data:: use_multiprocessing
+   :value: False
+
+   
+
+.. py:data:: verbose
+   :value: False
+
+   
+
+.. py:data:: do_search
+   :value: True
+
+   
+
+.. py:data:: do_methods
+   :value: True
+
+   
+
+.. py:data:: do_edit
+   :value: True
+
+   
+
+.. py:data:: use_premise
+   :value: False
+
+   
+
+.. py:data:: database_name
+   :value: 'ecoinvent-3.9.1-cutoff'
+
+   
+
+.. py:data:: delete_existing_premise_project
+   :value: False
+
+   
+
+.. py:data:: use_mp
+   :value: True
+
+   
+
+.. py:data:: batch_size
+   :value: 1
+
+   
+
+.. py:data:: premise_quiet
+   :value: True
+
+   
+
+.. py:data:: project_wmf
+
+   
+
+.. py:data:: premise_key
+   :value: 'tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo='
+
+   
+
+.. py:data:: key_path
+
+   
+
+.. py:data:: models
+   :value: ['remind']
+
+   
+
+.. py:data:: ssps
+   :value: ['SSP2']
+
+   
+
+.. py:data:: rcps
+   :value: ['Base', 'PkBudg500']
+
+   
+
+.. py:data:: years
+   :value: [2030, 2065, 2100]
+
+   
+
+.. py:data:: desired_scenarios
+   :value: []
+
+   
+
+.. py:function:: generate_args_list(single_database=None)
+
+   Generate a list of argument dictionaries for processing multiple projects and databases.
+
+   This function is used when the tool is set to operate in multiple projects/databases mode.
+   It generates a list of argument dictionaries, each containing project and database settings.
+
+   :returns: A list of dictionaries with project and database settings for batch processing.
+
+
+.. py:data:: cwd
+
+   
+
+.. py:data:: dir_config
+
+   
+
+.. py:data:: list_materials
+
+   
+
+.. py:data:: dir_data
+
+   
+
+.. py:data:: dir_tmp
+
+   
+
+.. py:data:: dir_logs
+
+   
+
+.. py:data:: dir_searchwaste_results
+
+   
+
+.. py:data:: dir_searchmaterial_results
+
+   
+
+.. py:data:: dir_databases_wasteandmaterial
+
+   
+
+.. py:data:: dir_wmf
+
+   
+

@@ -1,78 +1,76 @@
-WMFootprint package
-===================
+.. WMFootprint package
+.. ===================
 
-WasteAndMaterialFootprint.main module
--------------------------------------
+.. WasteAndMaterialFootprint.main module
+.. -------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.main
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.main
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-Submodules
-----------
 
-WasteAndMaterialFootprint.ExchangeEditor module
------------------------------------------------
+.. WasteAndMaterialFootprint.ExchangeEditor module
+.. -----------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.ExchangeEditor
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.ExchangeEditor
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.ExplodeDatabase module
-------------------------------------------------
+.. WasteAndMaterialFootprint.ExplodeDatabase module
+.. ------------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.ExplodeDatabase
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.ExplodeDatabase
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.FutureScenarios module
-------------------------------------------------
+.. WasteAndMaterialFootprint.FutureScenarios module
+.. ------------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.FutureScenarios
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.FutureScenarios
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.MakeCustomDatabase module
----------------------------------------------------
+.. WasteAndMaterialFootprint.MakeCustomDatabase module
+.. ---------------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.MakeCustomDatabase
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.MakeCustomDatabase
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.MethodEditor module
----------------------------------------------
+.. WasteAndMaterialFootprint.MethodEditor module
+.. ---------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.MethodEditor
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.MethodEditor
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.SearchMaterial module
------------------------------------------------
+.. WasteAndMaterialFootprint.SearchMaterial module
+.. -----------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.SearchMaterial
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.SearchMaterial
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.SearchWaste module
---------------------------------------------
+.. WasteAndMaterialFootprint.SearchWaste module
+.. --------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.SearchWaste
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.SearchWaste
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 
-WasteAndMaterialFootprint.VerifyDatabase module
------------------------------------------------
+.. WasteAndMaterialFootprint.VerifyDatabase module
+.. -----------------------------------------------
 
-.. automodule:: WasteAndMaterialFootprint.VerifyDatabase
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. .. automodule:: WasteAndMaterialFootprint.VerifyDatabase
+..    :members:
+..    :undoc-members:
+..    :show-inheritance:
 

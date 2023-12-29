@@ -35,7 +35,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
     """
 
     # Import user settings and directory paths
-    from config.user_settings import (
+    from .config.user_settings import (
         dir_logs,
         dir_searchmaterial_results,
         dir_searchwaste_results,

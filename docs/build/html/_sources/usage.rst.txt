@@ -50,35 +50,35 @@ The individual modules can also be imported and used separately. For example:
 
 .. code-block:: python
 
-    import WasteAndMaterialFootprint as wmf
+    .. import WasteAndMaterialFootprint as wmf
     
-    # only use premise
-    wmf.FutureScenarios.MakeFutureScenarios()
+    .. # only use premise
+    .. wmf.FutureScenarios.MakeFutureScenarios()
 
-    # only do waste or material searches
-    database = 'my database'
-    project = 'my project'
-    wmf.ExplodeDatabase(project, database)
-    wmf.SearchWaste(project, database)
-    wmf.SearchMaterial(project, database)
+    .. # only do waste or material searches
+    .. database = 'my database'
+    .. project = 'my project'
+    .. wmf.ExplodeDatabase(project, database)
+    .. wmf.SearchWaste(project, database)
+    .. wmf.SearchMaterial(project, database)
 
-    # check databases
+    .. # check databases
 
-    wmf.VerifyDatabase(project, database)
+    .. wmf.VerifyDatabase(project, database)
 
-    # or with the internal settings:
+    .. # or with the internal settings:
 
-    database = wmf.user_settings.database_name
+    .. database = wmf.user_settings.database_name
     
-    # check original database
-    project_base = wmf.user_settings.project_base
-    wmf.VerifyDatabase(project_base, database)
-    # (this will return '0', because it was not edited)
+    .. # check original database
+    .. project_base = wmf.user_settings.project_base
+    .. wmf.VerifyDatabase(project_base, database)
+    .. # (this will return '0', because it was not edited)
     
-    # check final database
-    project = wmf.user_settings.project_wmf
-    wmf.VerifyDatabase(project, database)
-    # (this will return '1', if it was edited correctly)
+    .. # check final database
+    .. project = wmf.user_settings.project_wmf
+    .. wmf.VerifyDatabase(project, database)
+    .. # (this will return '1', if it was edited correctly)
 
     
 

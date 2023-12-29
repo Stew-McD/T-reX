@@ -1,0 +1,45 @@
+:py:mod:`WasteAndMaterialFootprint.SearchMaterial`
+==================================================
+
+.. py:module:: WasteAndMaterialFootprint.SearchMaterial
+
+.. autoapi-nested-parse::
+
+   SearchMaterial Module
+   =====================
+
+   This script loads data from '<db name>_exploded.pickle', runs search queries,
+   and produces a CSV to store the results and a log entry. The search queries are
+   formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND,
+   keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.SearchMaterial.SearchMaterial
+
+
+
+.. py:function:: SearchMaterial(db_name, project_wmf)
+
+   Search for materials in a specified database and extract related information.
+
+   This function takes a database name as input, sets the project to the respective database,
+   and looks for activities involving a predefined list of materials. It extracts relevant details
+   of these activities, such as ISIC and CPC classifications, and saves the details to a CSV file.
+   It also extracts related material exchanges and saves them to another CSV file.
+
+   :param db_name: The name of the database to search in.
+   :param project_wmf: The Brightway2 project to set as current for the search.
+   :return: None
+   :raises Exception: If there is any error in reading the materials list from the file.
+
+

@@ -18,8 +18,8 @@ import shutil
 from datetime import datetime
 
 import pandas as pd
-from config.queries_waste import queries_waste
-from config.user_settings import dir_logs, dir_searchwaste_results, dir_tmp
+from .config.queries_waste import queries_waste
+from .config.user_settings import dir_logs, dir_searchwaste_results, dir_tmp
 
 
 def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
@@ -36,8 +36,6 @@ def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
     Note:
     The queries are defined in `config/queries_waste.py`.
     """
-
-
 
     print("\n*** Starting SearchWaste ***")
 

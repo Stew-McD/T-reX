@@ -1,0 +1,50 @@
+:py:mod:`WasteAndMaterialFootprint.SearchWaste`
+===============================================
+
+.. py:module:: WasteAndMaterialFootprint.SearchWaste
+
+.. autoapi-nested-parse::
+
+   SearchWaste Module
+   ==================
+
+   This script loads data from '<db name>_exploded.pickle', runs search queries,
+   and produces CSV files to store the results and a log entry. The search queries are
+   formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND,
+   keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
+
+   Functionality
+   -------------
+   Provides a function, :func:`SearchWaste`, that loads data from '<db name>_exploded.pickle',
+   runs search queries, and produces result CSVs and log entries.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.SearchWaste.SearchWaste
+
+
+
+.. py:function:: SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results)
+
+   Load data from '<db name>_exploded.pickle', run search queries, and produce
+   result CSVs and log entries.
+
+   This function processes waste-related data from a given database and runs
+   predefined queries to identify relevant waste exchanges. The results are
+   saved in CSV files and log entries are created for each search operation.
+
+   :param str db_name: The database name to be used in the search operation.
+
+   Note:
+   The queries are defined in `config/queries_waste.py`.
+
+

@@ -1,0 +1,46 @@
+:py:mod:`WasteAndMaterialFootprint.ExchangeEditor`
+==================================================
+
+.. py:module:: WasteAndMaterialFootprint.ExchangeEditor
+
+.. autoapi-nested-parse::
+
+   ExchangeEditor Module
+   =====================
+
+   This module is responsible for editing exchanges with wurst and Brightway2.
+   It appends relevant exchanges from the `db_wmf` (database containing waste and material exchange details)
+   to activities identified by `WasteAndMaterialSearch()` in the specified project's database (`db_name`).
+   Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.ExchangeEditor.ExchangeEditor
+
+
+
+.. py:function:: ExchangeEditor(project_wmf, db_name, db_wmf_name)
+
+   Append relevant exchanges from `db_wmf` to each activity in `db_name` identified by `WasteAndMaterialSearch()`.
+
+   This function modifies the specified project's database by appending exchanges from the `db_wmf` to activities identified by `WasteAndMaterialSearch()`. The appended exchanges mirror the quantity and unit of the original technosphere waste and material exchange.
+
+   :param str project_wmf: Name of the Brightway2 project to be modified.
+   :param str db_name: Name of the database within the project where activities and exchanges are stored.
+   :param str db_wmf_name: Name of the database containing waste and material exchange details.
+
+   :returns: None. Modifies the given Brightway2 project by appending exchanges and logs statistics about the added exchanges.
+   :rtype: None
+
+   :raises Exception: If any specified process or exchange is not found in the database.
+
+

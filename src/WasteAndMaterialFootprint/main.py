@@ -51,36 +51,34 @@ num_cpus = int(
     )
 )
 
-# Set the working directory to the location of this script
 script_dir = os.path.dirname(os.path.abspath(__file__))
-os.chdir(script_dir)
+# # Set the working directory to the location of this script
+# os.chdir(script_dir)
+# sys.path.insert(0, str(cwd))
 
-# Add the cwd to the Python path
-cwd = Path.cwd()
-sys.path.insert(0, str(cwd))
+# # Add the config dir to the Python path
+# dir_config = cwd / "config"
 
-# Add the config dir to the Python path
-dir_config = cwd / "config"
-
-sys.path.insert(0, str(dir_config))
+# sys.path.insert(0, str(dir_config))
 
 # import custom modules (from root dir)
-from ExchangeEditor import ExchangeEditor
-from ExplodeDatabase import ExplodeDatabase
-from FutureScenarios import MakeFutureScenarios
-from MakeCustomDatabase import dbExcel2BW, dbWriteExcel
-from MethodEditor import AddMethods
-from SearchMaterial import SearchMaterial
-from SearchWaste import SearchWaste
-from VerifyDatabase import VerifyDatabase
+from .ExchangeEditor import ExchangeEditor
+from .ExplodeDatabase import ExplodeDatabase
+from .FutureScenarios import MakeFutureScenarios
+from .MakeCustomDatabase import dbExcel2BW, dbWriteExcel
+from .MethodEditor import AddMethods
+from .SearchMaterial import SearchMaterial
+from .SearchWaste import SearchWaste
+from .VerifyDatabase import VerifyDatabase
 
-# import configuration from config/user_settings.py
-from config.user_settings import (
+# import configuration from .config/user_settings.py
+from .config.user_settings import (
     custom_bw2_dir,
     db_wmf_name,
     delete_wmf_project,
     dir_logs,
     dir_tmp,
+    dir_config,
     generate_args_list,
     project_base,
     project_premise,
@@ -287,7 +285,7 @@ def run():
         print(f'\n{"-"*80}\n')
 
     try:
-        playsound(cwd.parents[1] / "misc/success.mp3")
+        playsound(script_dir.parents[1] / "misc/success.mp3")
     except:
         pass
 

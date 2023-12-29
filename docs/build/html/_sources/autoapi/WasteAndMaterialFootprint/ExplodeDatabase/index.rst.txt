@@ -1,0 +1,40 @@
+:py:mod:`WasteAndMaterialFootprint.ExplodeDatabase`
+===================================================
+
+.. py:module:: WasteAndMaterialFootprint.ExplodeDatabase
+
+.. autoapi-nested-parse::
+
+   ExplodeDatabase Module
+   ======================
+
+   This module is responsible for exploding a Brightway2 database into a single-level list of all exchanges.
+   It utilizes the wurst package to unpack the database, explode it to a list of all exchanges, and save this data
+   in a DataFrame as a .pickle binary file.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.ExplodeDatabase.ExplodeDatabase
+
+
+
+.. py:function:: ExplodeDatabase(db_name)
+
+   Explode a Brightway2 database into a single-level list of all exchanges using wurst.
+
+   :param str db_name: Name of the Brightway2 database to be exploded.
+
+   :returns: None
+       The function saves the output to a file and logs the operation, but does not return any value.
+   :rtype: None
+
+

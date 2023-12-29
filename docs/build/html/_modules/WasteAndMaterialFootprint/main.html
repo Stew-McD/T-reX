@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteAndMaterialFootprint.main &mdash; WasteAndMaterialFootprint 0.1.21 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b3d22ae5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">WasteAndMaterialFootprint Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source_code.html">Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WasteAndMaterialFootprint.main</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WasteAndMaterialFootprint.main</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">main Module</span>
+<span class="sd">===========</span>
+
+<span class="sd">Main module of the `WasteAndMaterialFootprint` tool.</span>
+
+<span class="sd">This script serves as the entry point for the `WasteAndMaterialFootprint` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges. </span>
+
+<span class="sd">The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.</span>
+
+<span class="sd">Customisation:</span>
+<span class="sd">--------------</span>
+<span class="sd">- Project and database names, and other settings can be edited in `config/user_settings.py`.</span>
+<span class="sd">- Waste search query terms can be customised in `config/queries_waste.py`.</span>
+<span class="sd">- The list of materials can be modified in `config/queries_materials.py`.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">------</span>
+<span class="sd">To use the default settings, run the script with `python main.py`. </span>
+<span class="sd">Arguments can be provided to change project/database names or to delete the project before running.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># %%  0. Imports and configuration</span>
+
+<span class="c1"># Import standard modules</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">cpu_count</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">bw2data</span> <span class="k">as</span> <span class="nn">bd</span>
+
+
+<span class="c1"># not necessary (but fun), so in a try/except block</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">cowsay</span>
+    <span class="kn">import</span> <span class="nn">logging</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;playsound&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">playsound</span> <span class="kn">import</span> <span class="n">playsound</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="c1"># If running on a cluster, get the number of CPUs available</span>
+<span class="n">num_cpus</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="s2">&quot;SLURM_CPUS_PER_TASK&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SLURM_JOB_CPUS_PER_NODE&quot;</span><span class="p">,</span> <span class="n">cpu_count</span><span class="p">())</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">script_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="c1"># # Set the working directory to the location of this script</span>
+<span class="c1"># os.chdir(script_dir)</span>
+<span class="c1"># sys.path.insert(0, str(cwd))</span>
+
+<span class="c1"># # Add the config dir to the Python path</span>
+<span class="c1"># dir_config = cwd / &quot;config&quot;</span>
+
+<span class="c1"># sys.path.insert(0, str(dir_config))</span>
+
+<span class="c1"># import custom modules (from root dir)</span>
+<span class="kn">from</span> <span class="nn">.ExchangeEditor</span> <span class="kn">import</span> <span class="n">ExchangeEditor</span>
+<span class="kn">from</span> <span class="nn">.ExplodeDatabase</span> <span class="kn">import</span> <span class="n">ExplodeDatabase</span>
+<span class="kn">from</span> <span class="nn">.FutureScenarios</span> <span class="kn">import</span> <span class="n">MakeFutureScenarios</span>
+<span class="kn">from</span> <span class="nn">.MakeCustomDatabase</span> <span class="kn">import</span> <span class="n">dbExcel2BW</span><span class="p">,</span> <span class="n">dbWriteExcel</span>
+<span class="kn">from</span> <span class="nn">.MethodEditor</span> <span class="kn">import</span> <span class="n">AddMethods</span>
+<span class="kn">from</span> <span class="nn">.SearchMaterial</span> <span class="kn">import</span> <span class="n">SearchMaterial</span>
+<span class="kn">from</span> <span class="nn">.SearchWaste</span> <span class="kn">import</span> <span class="n">SearchWaste</span>
+<span class="kn">from</span> <span class="nn">.VerifyDatabase</span> <span class="kn">import</span> <span class="n">VerifyDatabase</span>
+
+<span class="c1"># import configuration from .config/user_settings.py</span>
+<span class="kn">from</span> <span class="nn">.config.user_settings</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">custom_bw2_dir</span><span class="p">,</span>
+    <span class="n">db_wmf_name</span><span class="p">,</span>
+    <span class="n">delete_wmf_project</span><span class="p">,</span>
+    <span class="n">dir_logs</span><span class="p">,</span>
+    <span class="n">dir_tmp</span><span class="p">,</span>
+    <span class="n">dir_config</span><span class="p">,</span>
+    <span class="n">generate_args_list</span><span class="p">,</span>
+    <span class="n">project_base</span><span class="p">,</span>
+    <span class="n">project_premise</span><span class="p">,</span>
+    <span class="n">project_wmf</span><span class="p">,</span>
+    <span class="n">use_multiprocessing</span><span class="p">,</span>
+    <span class="n">use_premise</span><span class="p">,</span>
+    <span class="n">use_wmf</span><span class="p">,</span>
+    <span class="n">do_search</span><span class="p">,</span>
+    <span class="n">do_methods</span><span class="p">,</span>
+    <span class="n">do_edit</span><span class="p">,</span>
+    <span class="n">single_database</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Check from the settings if a custom datadir is declared</span>
+<span class="k">if</span> <span class="n">custom_bw2_dir</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;BRIGHTWAY2_DIR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">custom_bw2_dir</span>
+
+
+<span class="c1"># %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()</span>
+<div class="viewcode-block" id="run">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/main/index.html#WasteAndMaterialFootprint.run">[docs]</a>
+<span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function serving as the wrapper for the WasteAndMaterialFootprint tool.</span>
+
+<span class="sd">    This function coordinates the various components of the tool, including:</span>
+<span class="sd">        creating future scenario databases,</span>
+<span class="sd">        setting up and processing each database for waste and material footprinting,</span>
+<span class="sd">        and combining results into a custom database.</span>
+<span class="sd">        adding LCIA methods to the project for each of the waste/material flows.</span>
+
+<span class="sd">    The function supports various modes of operation based on the settings in `config/user_settings.py`.</span>
+<span class="sd">    Specifications for material and waste searches can be customised in `queries_materials`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;~&#39;</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;** Starting the WasteAndMaterialFootprint tool **&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;~&#39;</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;=&#39;</span><span class="si">}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># create future scenario databases</span>
+    <span class="k">if</span> <span class="n">use_premise</span><span class="p">:</span>
+        <span class="n">MakeFutureScenarios</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">use_wmf</span><span class="p">,</span> <span class="s2">&quot;use_wmf is False, so WasteAndMaterialFootprint will not run&quot;</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">args_list</span> <span class="o">=</span> <span class="n">generate_args_list</span><span class="p">(</span><span class="n">single_database</span><span class="o">=</span><span class="n">single_database</span><span class="p">)</span>
+    <span class="n">total_databases</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args_list</span><span class="p">)</span>
+    <span class="n">all_databases</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">bd</span><span class="o">.</span><span class="n">databases</span><span class="p">)</span> <span class="o">-</span> <span class="p">{</span><span class="s2">&quot;biosphere3&quot;</span><span class="p">})</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Starting WasteAndMaterialFootprint for </span><span class="si">{</span><span class="n">total_databases</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">all_databases</span><span class="p">)</span><span class="si">}</span><span class="s2"> databases in project </span><span class="si">{</span><span class="n">project_base</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args_list</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">arg</span><span class="p">[</span><span class="s1">&#39;db_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make new project, delete previous project if you want to start over, or use existing project</span>
+    <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">purge_deleted_directories</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">project_wmf</span> <span class="ow">in</span> <span class="n">bd</span><span class="o">.</span><span class="n">projects</span> <span class="ow">and</span> <span class="n">delete_wmf_project</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">* Deleting previous project </span><span class="si">{</span><span class="n">project_wmf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">delete_project</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">purge_deleted_directories</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">project_wmf</span> <span class="ow">in</span> <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* WasteAndMaterial project already exists: </span><span class="si">{</span><span class="n">project_wmf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">project_wmf</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">* Project </span><span class="si">{</span><span class="n">project_base</span><span class="si">}</span><span class="s2"> will be copied to a new project: </span><span class="si">{</span><span class="n">project_wmf</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_base</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">copy_project</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">)</span>
+
+    <span class="c1"># %% 1.1 Run the initial steps for each database in the project</span>
+    <span class="k">def</span> <span class="nf">process_db_setup</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process initial setup for a given database within the project.</span>
+
+<span class="sd">        This function is responsible for setting up each database by running the ExplodeAndSearch process.</span>
+<span class="sd">        It handles any exceptions during the process and logs errors.</span>
+
+<span class="sd">        :param dict args: Arguments containing database and project settings.</span>
+<span class="sd">        :param int db_number: The current database number in the processing sequence.</span>
+<span class="sd">        :param int total_databases: Total number of databases to be processed.</span>
+<span class="sd">        :return: int: Returns 1 if successful, 0 if an error occurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">** Pre-processing database (</span><span class="si">{</span><span class="n">db_number</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_databases</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;db_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">**</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">do_search</span><span class="p">:</span>
+                <span class="n">ExplodeAndSearch</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># successfully processed</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;@&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="se">\n\t</span><span class="s2">Error pre-processing database </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;db_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">! </span><span class="se">\n\n\t</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;@&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># error occurred</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">use_multiprocessing</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_cpus</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args_list</span><span class="p">):</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span>
+                    <span class="n">process_db_setup</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">),</span>
+                    <span class="n">callback</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args_list</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">process_db_setup</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="n">successful_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="k">if</span> <span class="n">do_methods</span><span class="p">:</span>
+        <span class="c1"># %% 1.2 MakeCustomDatabase.py: Make the custom database from the combined search results</span>
+        <span class="n">dbWriteExcel</span><span class="p">()</span>
+        <span class="n">dbExcel2BW</span><span class="p">()</span>
+        <span class="c1"># %% 1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows</span>
+        <span class="n">AddMethods</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;-&#39;</span><span class="si">}</span>
+<span class="s2">    *** Preprocessing completed ***</span>
+
+<span class="s2">    </span><span class="se">\t</span><span class="s2"> Total databases:          </span><span class="si">{</span><span class="n">total_databases</span><span class="si">}</span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2"> Successfully processed:   </span><span class="si">{</span><span class="n">successful_count</span><span class="si">}</span>
+<span class="s2">    </span><span class="se">\t</span><span class="s2"> Duration:                 </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (h:m:s)</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="o">*</span><span class="s1">&#39;-&#39;</span><span class="si">}</span>
+<span class="s2">    </span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">process_db</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process the database by editing exchanges</span>
+
+<span class="sd">        :param dict args: Arguments containing database and project settings.</span>
+<span class="sd">        :param int db_number: The current database number in the processing sequence.</span>
+<span class="sd">        :param int total_databases: Total number of databases to be processed.</span>
+
+<span class="sd">        :return: int: Returns 1 if successful, 0 if an error occurred.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">** Processing database (</span><span class="si">{</span><span class="n">db_number</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_databases</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;db_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">**&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arguments:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">do_edit</span><span class="p">:</span>
+                <span class="n">EditExchanges</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># successfully processed</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;@&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="se">\n\t</span><span class="s2">Error processing database </span><span class="si">{</span><span class="n">args</span><span class="p">[</span><span class="s1">&#39;db_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">! </span><span class="se">\n\n\t</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;@&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># error occurred</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">db_number</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">use_multiprocessing</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_cpus</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args_list</span><span class="p">:</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span>
+                    <span class="n">process_db</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">),</span>
+                    <span class="n">callback</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">args_list</span><span class="p">:</span>
+            <span class="n">db_number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">process_db</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">db_number</span><span class="p">,</span> <span class="n">total_databases</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="n">successful_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1"># %% 1.4 VerifyDatabase.py: Verify the database</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">*** Verifying all databases in the project **&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args_list</span><span class="p">:</span>
+        <span class="n">db_name</span> <span class="o">=</span> <span class="n">arg</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]</span>
+        <span class="n">VerifyDatabase</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">,</span> <span class="n">db_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">playsound</span><span class="p">(</span><span class="n">script_dir</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;misc/success.mp3&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="s1">&#39;~&#39;</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="mi">80</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="s1">&#39;=&#39;</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;WasteAndMaterialFootprint Completed&#39;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;~&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span>
+
+<span class="s2">    Project:                  </span><span class="si">{</span><span class="n">project_wmf</span><span class="si">}</span>
+<span class="s2">    Total Databases:          </span><span class="si">{</span><span class="n">total_databases</span><span class="si">}</span>
+<span class="s2">    Successfully Processed:   </span><span class="si">{</span><span class="n">successful_count</span><span class="si">}</span>
+<span class="s2">    Duration:                 </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (h:m:s)</span>
+
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="s1">&#39;~&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">80</span><span class="si">}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">animate_cowsay</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+            <span class="n">cow</span> <span class="o">=</span> <span class="n">cowsay</span><span class="o">.</span><span class="n">get_output_string</span><span class="p">(</span><span class="s2">&quot;cow&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">cow</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+            <span class="n">playsound</span><span class="p">(</span><span class="n">cwd</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="s2">&quot;misc/moo.mp3&quot;</span><span class="p">)</span>
+
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Let&#39;s moooooo</span><span class="se">\n</span><span class="s2"> some LCA!</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">animate_cowsay</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;~&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ExplodeAndSearch">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/main/index.html#WasteAndMaterialFootprint.ExplodeAndSearch">[docs]</a>
+<span class="k">def</span> <span class="nf">ExplodeAndSearch</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exploding the database into separate exchanges, searching for waste and</span>
+<span class="sd">    material flows, and processing these results.</span>
+
+<span class="sd">    This includes:</span>
+<span class="sd">        - ExplodeDatabase.py</span>
+<span class="sd">        - SearchWaste.py</span>
+<span class="sd">        - SearchMaterial.py</span>
+
+<span class="sd">    :param args: Dictionary containing database and project settings.</span>
+<span class="sd">    :returns: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">project_wmf</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;project_wmf&quot;</span><span class="p">]</span>
+    <span class="n">db_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="se">\n\t</span><span class="s2"> Starting WasteAndMaterialFootprint for </span><span class="si">{</span><span class="n">db_name</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">100</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># %% 1.2 Explode the database into separate exchanges</span>
+    <span class="n">existing_file</span> <span class="o">=</span> <span class="n">dir_tmp</span> <span class="o">/</span> <span class="p">(</span><span class="n">db_name</span> <span class="o">+</span> <span class="s2">&quot;_exploded.pickle&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">existing_file</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">* Existing exploded database found: </span><span class="si">{</span><span class="n">existing_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">* Existing data will be reused for the current run&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ExplodeDatabase</span><span class="p">(</span><span class="n">db_name</span><span class="p">)</span>
+
+    <span class="c1"># %% 1.3 Search the exploded database for waste and material flows</span>
+    <span class="n">SearchWaste</span><span class="p">(</span><span class="n">db_name</span><span class="p">)</span>
+    <span class="n">SearchMaterial</span><span class="p">(</span><span class="n">db_name</span><span class="p">,</span> <span class="n">project_wmf</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="EditExchanges">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/main/index.html#WasteAndMaterialFootprint.EditExchanges">[docs]</a>
+<span class="k">def</span> <span class="nf">EditExchanges</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Edit exchanges in the database.</span>
+
+<span class="sd">    This function adds waste and material flows to the activities and verifies the database.</span>
+
+<span class="sd">    :param args: Dictionary containing database and project settings.</span>
+<span class="sd">    :returns: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">db_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;db_name&quot;</span><span class="p">]</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="c1"># Add waste and material flows to the activities, check that it worked</span>
+
+    <span class="n">ExchangeEditor</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">,</span> <span class="n">db_name</span><span class="p">,</span> <span class="n">db_wmf_name</span><span class="p">)</span>
+    <span class="n">exit_code</span> <span class="o">=</span> <span class="n">VerifyDatabase</span><span class="p">(</span><span class="n">project_wmf</span><span class="p">,</span> <span class="n">db_name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">exit_code</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;** Database verified successfully! **</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;** Error occurred during verification! **&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> Look in the logfile for details. exit_code = </span><span class="si">{</span><span class="n">exit_code</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Final message and log</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">90</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">*** Finished WasteAndMaterialFootprint for </span><span class="si">{</span><span class="n">db_name</span><span class="si">}</span><span class="s2"> ***</span><span class="se">\n\t\t\t</span><span class="s2">Duration: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> (h:m:s)&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">*** Woah woah wee waa, great success!! ***&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">90</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dir_logs</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;main_log.txt&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">log</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> Duration:&quot;</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+            <span class="o">+</span> <span class="n">db_name</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<span class="c1"># %% 2. RUN MAIN FUNCTION</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -46,7 +46,7 @@ project_wmf = f"WMFootprint-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-use_wmf = False
+use_wmf = True
 db_wmf_name = "WasteAndMaterialFootprint"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
@@ -66,7 +66,7 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = True
+use_premise = False
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"

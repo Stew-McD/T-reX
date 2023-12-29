@@ -1,0 +1,142 @@
+:py:mod:`WasteAndMaterialFootprint.config`
+==========================================
+
+.. py:module:: WasteAndMaterialFootprint.config
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   queries_materials/index.rst
+   queries_waste/index.rst
+   user_settings/index.rst
+
+
+Package Contents
+----------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.config.generate_args_list
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   WasteAndMaterialFootprint.config.custom_bw2_dir
+   WasteAndMaterialFootprint.config.db_wmf_name
+   WasteAndMaterialFootprint.config.delete_wmf_project
+   WasteAndMaterialFootprint.config.dir_logs
+   WasteAndMaterialFootprint.config.dir_tmp
+   WasteAndMaterialFootprint.config.project_base
+   WasteAndMaterialFootprint.config.project_premise
+   WasteAndMaterialFootprint.config.project_wmf
+   WasteAndMaterialFootprint.config.use_multiprocessing
+   WasteAndMaterialFootprint.config.use_premise
+   WasteAndMaterialFootprint.config.use_wmf
+   WasteAndMaterialFootprint.config.do_search
+   WasteAndMaterialFootprint.config.do_methods
+   WasteAndMaterialFootprint.config.do_edit
+   WasteAndMaterialFootprint.config.single_database
+   WasteAndMaterialFootprint.config.queries_waste
+   WasteAndMaterialFootprint.config.queries_materials
+
+
+.. py:data:: custom_bw2_dir
+
+   
+
+.. py:data:: db_wmf_name
+   :value: 'WasteAndMaterialFootprint'
+
+   
+
+.. py:data:: delete_wmf_project
+   :value: False
+
+   
+
+.. py:data:: dir_logs
+
+   
+
+.. py:data:: dir_tmp
+
+   
+
+.. py:function:: generate_args_list(single_database=None)
+
+   Generate a list of argument dictionaries for processing multiple projects and databases.
+
+   This function is used when the tool is set to operate in multiple projects/databases mode.
+   It generates a list of argument dictionaries, each containing project and database settings.
+
+   :returns: A list of dictionaries with project and database settings for batch processing.
+
+
+.. py:data:: project_base
+
+   
+
+.. py:data:: project_premise
+   :value: 'SSP-cutoff'
+
+   
+
+.. py:data:: project_wmf
+
+   
+
+.. py:data:: use_multiprocessing
+   :value: False
+
+   
+
+.. py:data:: use_premise
+   :value: False
+
+   
+
+.. py:data:: use_wmf
+   :value: True
+
+   
+
+.. py:data:: do_search
+   :value: True
+
+   
+
+.. py:data:: do_methods
+   :value: True
+
+   
+
+.. py:data:: do_edit
+   :value: True
+
+   
+
+.. py:data:: single_database
+   :value: 'ecoinvent_cutoff_3.9_remind_SSP5-Base_2050'
+
+   
+
+.. py:data:: queries_waste
+
+   
+
+.. py:data:: queries_materials
+
+   
+

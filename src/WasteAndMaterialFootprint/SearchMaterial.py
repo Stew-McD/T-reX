@@ -14,8 +14,8 @@ import shutil
 
 import bw2data as bd
 import pandas as pd
-from config.queries_materials import queries_materials
-from config.user_settings import (
+from .config.queries_materials import queries_materials
+from .config.user_settings import (
     dir_config,
     dir_logs,
     dir_searchmaterial_results,
@@ -100,8 +100,6 @@ def SearchMaterial(db_name, project_wmf):
     # Display loaded materials
     print(f"\n** Materials ({len(materials)}) | (activity, group)\n", end="\t")
     print(*materials, sep="\n\t")
-
-
 
     def map_materials(name):
         for key, value in materials_dict.items():

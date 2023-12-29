@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WasteAndMaterialFootprint.FutureScenarios &mdash; WasteAndMaterialFootprint 0.1.21 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=b3d22ae5"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            WasteAndMaterialFootprint
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration.html">Configuration modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">WasteAndMaterialFootprint Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source_code.html">Source code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">WasteAndMaterialFootprint</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WasteAndMaterialFootprint.FutureScenarios</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WasteAndMaterialFootprint.FutureScenarios</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">FutureScenarios Module</span>
+<span class="sd">======================</span>
+
+<span class="sd">This module is responsible for creating future databases with premise.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Imports</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">zip_longest</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">bw2data</span> <span class="k">as</span> <span class="nn">bd</span>
+
+<span class="c1"># Import user settings or set defaults</span>
+<span class="kn">from</span> <span class="nn">.config.user_settings</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">database_name</span><span class="p">,</span>
+    <span class="n">delete_existing_premise_project</span><span class="p">,</span>
+    <span class="n">dir_data</span><span class="p">,</span>
+    <span class="n">dir_logs</span><span class="p">,</span>
+    <span class="n">premise_key</span><span class="p">,</span>
+    <span class="n">premise_quiet</span><span class="p">,</span>
+    <span class="n">project_premise</span><span class="p">,</span>
+    <span class="n">project_premise_base</span><span class="p">,</span>
+    <span class="n">desired_scenarios</span><span class="p">,</span>
+    <span class="n">use_mp</span><span class="p">,</span>
+    <span class="n">use_premise</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">,</span>
+    <span class="n">years</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">use_premise</span><span class="p">:</span>
+    <span class="c1"># easiest way to stop premise from making a mess in the main directory</span>
+    <span class="n">dir_premise</span> <span class="o">=</span> <span class="n">dir_data</span> <span class="o">/</span> <span class="s2">&quot;premise&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_premise</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">dir_premise</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">premise</span> <span class="k">as</span> <span class="nn">pm</span>
+    <span class="kn">from</span> <span class="nn">premise_gwp</span> <span class="kn">import</span> <span class="n">add_premise_gwp</span>
+
+    <span class="c1"># Initialize logging with timestamp</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_logs</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_logs</span><span class="p">)</span>
+
+    <span class="n">log_filename</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">dir_logs</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">_FutureScenarios.log&#39;</span>
+    <span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">log_filename</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="c1"># Function to split scenarios into smaller groups (for batch processing)</span>
+    <span class="k">def</span> <span class="nf">grouper</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">zip_longest</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fillvalue</span><span class="o">=</span><span class="n">fillvalue</span><span class="p">)</span>
+
+    <span class="c1"># ---------------------------------------------------------------------------------</span>
+    <span class="c1"># FILTER OUT SCENARIOS THAT ARE NOT AVAILABLE</span>
+    <span class="c1"># ---------------------------------------------------------------------------------</span>
+
+    <span class="n">SCENARIO_DIR</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">filesystem_constants</span><span class="o">.</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;iam_output_files&quot;</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">SCENARIO_DIR</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">)])</span>
+
+    <span class="c1"># Split the string and extract the version number</span>
+    <span class="c1"># parts = database_name.split(&quot;_&quot;)</span>
+    <span class="c1"># source_version = parts[1] if &quot;.&quot; in parts[1] else parts[1].split(&quot;.&quot;)[0]</span>
+    <span class="c1"># source_systemmodel = parts[-1]</span>
+
+
+<span class="c1"># function to make arguments for &quot;new database -- pm.nbd&quot; based on possible scenarios</span>
+<div class="viewcode-block" id="make_possible_scenario_list">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/FutureScenarios/index.html#WasteAndMaterialFootprint.FutureScenarios.make_possible_scenario_list">[docs]</a>
+<span class="k">def</span> <span class="nf">make_possible_scenario_list</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span> <span class="n">desired_scenarios</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a list of dictionaries with scenario details based on the available scenarios and the desired scenarios.</span>
+
+<span class="sd">    args: filenames (list): list of filenames of available scenarios</span>
+<span class="sd">    desired_scenarios (list): list of dictionaries with scenario details</span>
+<span class="sd">    years (list): list of years to be used</span>
+
+<span class="sd">    returns: scenarios (list): list of dictionaries with scenario details that are available and desired</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">possible_scenarios</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+        <span class="n">climate_model</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ssp</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rcp</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">possible_scenarios</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">climate_model</span><span class="p">,</span> <span class="s2">&quot;pathway&quot;</span><span class="p">:</span> <span class="n">ssp</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">rcp</span><span class="p">})</span>
+
+    <span class="c1"># scenarios = overlap of desired_scenarios and possible_scenarios</span>
+    <span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">desired_scenarios</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">possible_scenarios</span><span class="p">]</span>
+
+    <span class="c1"># now add the years</span>
+    <span class="n">scenarios</span> <span class="o">=</span> <span class="p">[{</span><span class="o">**</span><span class="n">scenario</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="n">year</span><span class="p">}</span> <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">scenarios</span> <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">scenarios</span></div>
+
+
+
+<div class="viewcode-block" id="check_existing">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/FutureScenarios/index.html#WasteAndMaterialFootprint.FutureScenarios.check_existing">[docs]</a>
+<span class="k">def</span> <span class="nf">check_existing</span><span class="p">(</span><span class="n">desired_scenarios</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check the project to see if the desired scenarios already exist, and if so, remove them from the list of scenarios to be created.</span>
+<span class="sd">    Quite useful when running many scenarios, as it can take a long time to create them all, sometimes crashes, etc.</span>
+
+<span class="sd">    args: desired_scenarios (list): list of dictionaries with scenario details</span>
+
+<span class="sd">    returns: new_scenarios (list): list of dictionaries with scenario details that do not already exist in the project</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">use_premise</span> <span class="ow">and</span> <span class="n">delete_existing_premise_project</span><span class="p">:</span>
+        <span class="n">new_scenarios</span> <span class="o">=</span> <span class="n">desired_scenarios</span>
+        <span class="k">return</span> <span class="n">new_scenarios</span>
+
+    <span class="k">if</span> <span class="n">use_premise</span><span class="p">:</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_premise</span><span class="p">)</span>
+        <span class="n">databases</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bd</span><span class="o">.</span><span class="n">databases</span><span class="p">)</span>
+
+        <span class="n">db_parts</span> <span class="o">=</span> <span class="n">database_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">db_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">db_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;3.9.1&quot;</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;3.9&quot;</span>
+
+        <span class="n">new_scenarios</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">desired_scenarios</span><span class="p">:</span>
+            <span class="n">db_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ecoinvent_</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;pathway&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="k">if</span> <span class="n">db_name</span> <span class="ow">in</span> <span class="n">databases</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping existing </span><span class="si">{</span><span class="n">db_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_scenarios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">new_scenarios</span><span class="p">)</span><span class="si">}</span><span class="s2"> new future databases...&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">new_scenarios</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_scenarios</span></div>
+
+
+
+<span class="c1"># Main function</span>
+<div class="viewcode-block" id="FutureScenarios">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/FutureScenarios/index.html#WasteAndMaterialFootprint.FutureScenarios.FutureScenarios">[docs]</a>
+<span class="k">def</span> <span class="nf">FutureScenarios</span><span class="p">(</span><span class="n">scenario_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create future databases with premise.</span>
+
+<span class="sd">    This function processes scenarios and creates new databases based on the premise module. It configures and uses user-defined settings and parameters for database creation and scenario processing.</span>
+
+<span class="sd">    :returns: None</span>
+<span class="sd">        The function does not return any value but performs operations to create and configure databases in Brightway2 based on specified scenarios.</span>
+
+<span class="sd">    :raises Exception: If an error occurs during the processing of scenarios or database creation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** Starting FutureScenarios.py ***&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Using premise version </span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Delete existing project if specified</span>
+    <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">purge_deleted_directories</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">project_premise</span> <span class="ow">in</span> <span class="n">bd</span><span class="o">.</span><span class="n">projects</span> <span class="ow">and</span> <span class="n">delete_existing_premise_project</span><span class="p">:</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">delete_project</span><span class="p">(</span><span class="n">project_premise</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deleted existing project </span><span class="si">{</span><span class="n">project_premise</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_premise_base</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">copy_project</span><span class="p">(</span><span class="n">project_premise</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created new project </span><span class="si">{</span><span class="n">project_premise</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">project_premise_base</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Use existing project if available and deletion not required</span>
+    <span class="k">elif</span> <span class="n">project_premise</span> <span class="ow">in</span> <span class="n">bd</span><span class="o">.</span><span class="n">projects</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">delete_existing_premise_project</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project </span><span class="si">{</span><span class="n">project_premise</span><span class="si">}</span><span class="s2"> already exists, we will use it&quot;</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_premise</span><span class="p">)</span>
+
+    <span class="c1"># Create new project</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">set_current</span><span class="p">(</span><span class="n">project_premise_base</span><span class="p">)</span>
+        <span class="n">bd</span><span class="o">.</span><span class="n">projects</span><span class="o">.</span><span class="n">copy_project</span><span class="p">(</span><span class="n">project_premise</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created new project </span><span class="si">{</span><span class="n">project_premise</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">project_premise_base</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using database </span><span class="si">{</span><span class="n">database_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Removing unneeded databases..&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">db</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">bd</span><span class="o">.</span><span class="n">databases</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">db</span> <span class="o">!=</span> <span class="n">database_name</span> <span class="ow">and</span> <span class="s2">&quot;biosphere&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">bd</span><span class="o">.</span><span class="n">databases</span><span class="p">[</span><span class="n">db</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed </span><span class="si">{</span><span class="n">db</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Clear cache if deletion is required (may not be necessary, but can help overcome errors sometimes)</span>
+    <span class="c1"># if delete_existing_premise_project:</span>
+    <span class="c1">#     pm.clear_cache()</span>
+
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">db_parts</span> <span class="o">=</span> <span class="n">database_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">db_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">db_parts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">** Using: </span><span class="si">{</span><span class="n">database_name</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Loop through scenario batches</span>
+    <span class="k">for</span> <span class="n">scenarios_set</span> <span class="ow">in</span> <span class="n">grouper</span><span class="p">(</span><span class="n">scenario_list</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">scenario_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">batch_size</span><span class="p">:</span>
+            <span class="n">total_batches</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">scenarios_set</span> <span class="o">=</span> <span class="n">scenario_list</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total_batches</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scenario_list</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch_size</span><span class="p">)</span>
+
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> ** Processing scenario set </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">total_batches</span><span class="si">}</span><span class="s2">, batch size </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2"> **&quot;</span>
+        <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> ** Processing scenario set </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">total_batches</span><span class="si">}</span><span class="s2">, batch size </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2"> **&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">model_args</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;range time&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;foresight&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># vs. myopic. shoul match the scenario, IMAGE = False, REMIND = True</span>
+            <span class="s2">&quot;lead time&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># otherwise market average is used</span>
+            <span class="s2">&quot;capital replacement rate&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># otherwise, baseline is used</span>
+            <span class="s2">&quot;measurement&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># [slope, linear, area, weighted-slope, split]</span>
+            <span class="s2">&quot;weighted slope start&quot;</span><span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>  <span class="c1"># only for method 3</span>
+            <span class="s2">&quot;weighted slope end&quot;</span><span class="p">:</span> <span class="mf">1.00</span><span class="p">,</span>  <span class="c1"># only for method 3</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Create new database based on scenario details</span>
+        <span class="n">ndb</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">NewDatabase</span><span class="p">(</span>
+            <span class="n">scenarios</span><span class="o">=</span><span class="n">scenarios_set</span><span class="p">,</span>
+            <span class="n">source_db</span><span class="o">=</span><span class="n">database_name</span><span class="p">,</span>
+            <span class="n">source_version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">system_model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">premise_key</span><span class="p">,</span>
+            <span class="n">use_multiprocessing</span><span class="o">=</span><span class="n">use_mp</span><span class="p">,</span>
+            <span class="n">system_args</span><span class="o">=</span><span class="n">model_args</span><span class="p">,</span>
+            <span class="n">quiet</span><span class="o">=</span><span class="n">premise_quiet</span><span class="p">,</span>
+            <span class="n">keep_uncertainty_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ndb</span><span class="o">.</span><span class="n">update_all</span><span class="p">()</span>
+            <span class="n">ndb</span><span class="o">.</span><span class="n">update_cars</span><span class="p">()</span>
+            <span class="n">ndb</span><span class="o">.</span><span class="n">update_buses</span><span class="p">()</span>
+            <span class="c1"># ndb.update_trucks()</span>
+            <span class="c1"># ndb.update_two_wheelers()</span>
+            <span class="c1"># ndb.update_electricity()</span>
+            <span class="c1"># ndb.update_cement()</span>
+            <span class="c1"># ndb.update_steel()</span>
+            <span class="c1"># ndb.update_fuels()</span>
+            <span class="c1"># ndb.update_emissions()</span>
+            <span class="c1"># ndb.update_dac()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Write the new database to brightway</span>
+        <span class="n">ndb</span><span class="o">.</span><span class="n">write_db_to_brightway</span><span class="p">()</span>
+
+    <span class="c1"># Add GWP factors to the project</span>
+    <span class="n">add_premise_gwp</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** Done! *****&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
+
+    <span class="c1"># change back to the original directory</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">dir_data</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="MakeFutureScenarios">
+<a class="viewcode-back" href="../../autoapi/WasteAndMaterialFootprint/index.html#WasteAndMaterialFootprint.FutureScenarios.MakeFutureScenarios">[docs]</a>
+<span class="k">def</span> <span class="nf">MakeFutureScenarios</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to run the FutureScenarios module.</span>
+<span class="sd">    Only activated if `use_premise` is set to True in `user_settings.py`.</span>
+
+<span class="sd">    Calls the `FutureScenarios` function to create new databases based on the list of scenarios and settings specified in `user_settings.py`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">use_premise</span><span class="p">:</span>
+        <span class="n">available_scenarios</span> <span class="o">=</span> <span class="n">make_possible_scenario_list</span><span class="p">(</span>
+            <span class="n">filenames</span><span class="p">,</span> <span class="n">desired_scenarios</span><span class="p">,</span> <span class="n">years</span>
+        <span class="p">)</span>
+        <span class="n">scenario_list</span> <span class="o">=</span> <span class="n">check_existing</span><span class="p">(</span><span class="n">available_scenarios</span><span class="p">)</span>
+        <span class="n">FutureScenarios</span><span class="p">(</span><span class="n">scenario_list</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Premise not called for, continuing...&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Run the main function</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">MakeFutureScenarios</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Stewart Charles McDowall | Stew-McD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
