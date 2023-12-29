@@ -315,7 +315,7 @@ def run():
             for line in cow.split("\n"):
                 print(line.center(80, " "))
                 sleep(delay)
-            playsound(cwd.parents[1] / "misc/moo.mp3")
+            playsound(script_dir.parents[1] / "misc/moo.mp3")
 
         message = "\nLet's moooooo\n some LCA!\n"
         animate_cowsay(message)
