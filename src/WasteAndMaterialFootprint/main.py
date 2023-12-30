@@ -22,7 +22,7 @@ Arguments can be provided to change project/database names or to delete the proj
 """
 
 
-# %%  0. Imports and configuration
+#  0. Imports and configuration
 
 # Import standard modules
 import os
@@ -52,6 +52,7 @@ num_cpus = int(
 )
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, script_dir)
 # # Set the working directory to the location of this script
 # os.chdir(script_dir)
 # sys.path.insert(0, str(cwd))
@@ -62,17 +63,17 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # sys.path.insert(0, str(dir_config))
 
 # import custom modules (from root dir)
-from .ExchangeEditor import ExchangeEditor
-from .ExplodeDatabase import ExplodeDatabase
-from .FutureScenarios import MakeFutureScenarios
-from .MakeCustomDatabase import dbExcel2BW, dbWriteExcel
-from .MethodEditor import AddMethods
-from .SearchMaterial import SearchMaterial
-from .SearchWaste import SearchWaste
-from .VerifyDatabase import VerifyDatabase
+from ExchangeEditor import ExchangeEditor
+from ExplodeDatabase import ExplodeDatabase
+from FutureScenarios import MakeFutureScenarios
+from MakeCustomDatabase import dbExcel2BW, dbWriteExcel
+from MethodEditor import AddMethods
+from SearchMaterial import SearchMaterial
+from SearchWaste import SearchWaste
+from VerifyDatabase import VerifyDatabase
 
-# import configuration from .config/user_settings.py
-from .config.user_settings import (
+# import configuration from config/user_settings.py
+from config.user_settings import (
     custom_bw2_dir,
     db_wmf_name,
     delete_wmf_project,
@@ -97,7 +98,7 @@ if custom_bw2_dir:
     os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
 
 
-# %% 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
+# 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
 def run():
     """
     Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
@@ -156,7 +157,7 @@ def run():
         bd.projects.copy_project(project_wmf)
         bd.projects.set_current(project_wmf)
 
-    # %% 1.1 Run the initial steps for each database in the project
+    # 1.1 Run the initial steps for each database in the project
     def process_db_setup(args, db_number, total_databases):
         """
         Process initial setup for a given database within the project.
@@ -207,10 +208,10 @@ def run():
     duration = end_time - start_time
 
     if do_methods:
-        # %% 1.2 MakeCustomDatabase.py: Make the custom database from the combined search results
+        #  1.2 MakeCustomDatabase.py: Make the custom database from the combined search results
         dbWriteExcel()
         dbExcel2BW()
-        # %% 1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows
+        #  1.3 MethodEditor.py: adds LCIA methods to the project for each of the waste/material flows
         AddMethods()
 
     print(
@@ -276,7 +277,7 @@ def run():
     end_time = datetime.now()
     duration = end_time - start_time
 
-    # %% 1.4 VerifyDatabase.py: Verify the database
+    # 1.4 VerifyDatabase.py: Verify the database
     print(f'\n{"-"*80}')
     print("\t*** Verifying all databases in the project **")
     for arg in args_list:
@@ -348,7 +349,7 @@ def ExplodeAndSearch(args):
         f"\n{'='*100}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*100}"
     )
 
-    # %% 1.2 Explode the database into separate exchanges
+    # 1.2 Explode the database into separate exchanges
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
     if os.path.isfile(existing_file):
         print(f"\n* Existing exploded database found: {existing_file}")
@@ -356,7 +357,7 @@ def ExplodeAndSearch(args):
     else:
         ExplodeDatabase(db_name)
 
-    # %% 1.3 Search the exploded database for waste and material flows
+    # 1.3 Search the exploded database for waste and material flows
     SearchWaste(db_name)
     SearchMaterial(db_name, project_wmf)
 
@@ -408,6 +409,6 @@ def EditExchanges(args):
     return None
 
 
-# %% 2. RUN MAIN FUNCTION
+# 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
     run()

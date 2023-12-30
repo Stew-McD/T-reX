@@ -39,7 +39,7 @@ import bw2data as bd
 # set project name and other things here
 
 project_premise_base = "default"
-project_premise = "SSP-cutoff"
+project_premise = "SSP-cutoff_test"
 project_base = project_premise
 # if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
 project_wmf = f"WMFootprint-{project_base}"
@@ -66,19 +66,19 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = False
+use_premise = True
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = False
+delete_existing_premise_project = True
 
 # if you want to use multiprocessing (some people have reported problems with this)
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
-batch_size = 1
+batch_size = 2
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
@@ -134,7 +134,7 @@ rcps = [
 years = [
     # 2020,
     # 2025,
-    2030,
+    # 2030,
     # 2035,
     # 2040,
     # 2045,
@@ -200,11 +200,7 @@ def generate_args_list(single_database=None):
 cwd = Path.cwd()
 # Set the paths
 dir_config = cwd / "config"
-
-list_materials = dir_config / "list_materials.txt"
-
 dir_data = cwd / "data"
-
 dir_tmp = dir_data / "tmp"
 dir_logs = dir_data / "logs"
 

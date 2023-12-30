@@ -18,7 +18,7 @@ from pathlib import Path
 import bw2data as bd
 
 # Import user settings or set defaults
-from .config.user_settings import (
+from config.user_settings import (
     batch_size,
     database_name,
     delete_existing_premise_project,

@@ -1,7 +1,8 @@
 .secrets/
 .vscode/
 .*
-data/tmp/
+!.readthedocs.yaml
+data/
 poetry.lock
 dist/
 docs/build/

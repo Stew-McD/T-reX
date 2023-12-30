@@ -17,7 +17,7 @@ import os
 import bw2data as bd
 import bw2io as bi
 from openpyxl import Workbook, load_workbook
-from .config.user_settings import (
+from config.user_settings import (
     db_wmf_name,
     dir_databases_wasteandmaterial,
     dir_searchmaterial_results,
