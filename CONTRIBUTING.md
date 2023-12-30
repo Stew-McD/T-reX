@@ -28,6 +28,9 @@ At the very least, you can contribute by reporting bugs or suggesting improvemen
    ```bash
    python -m venv wmf-env
    source wmf-env/bin/activate
+   git clone http://github.com/Stew-McD/WasteAndMaterialFootprint.git
+   cd WasteAndMaterialFootprint
+   pip install -e .
    ```
 
 ### Making Changes
@@ -55,6 +58,7 @@ At the very least, you can contribute by reporting bugs or suggesting improvemen
 2. **Push to Your Fork**: Push your changes to your fork on GitHub.
 
    ```bash
+   git merge upstream
    git push origin [your-branch-name]
    ```
 
