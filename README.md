@@ -14,6 +14,8 @@ The documentation is still under development, but the code is well documented an
 
 The following readme provides a brief introduction to the program, how to install it, and how to use it.
 
+See the example output [here](
+
 ## Contents
 
 - [WasteAndMaterialFootprint](#wasteandmaterialfootprint)
@@ -43,8 +45,6 @@ The following readme provides a brief introduction to the program, how to instal
     - [License](#license)
     - [Citation](#citation)
 
-
-
 ## Installation
 
 ### Dependencies
@@ -61,14 +61,42 @@ The main dependencies are:
 
 **It is recommended to use a fresh virtual environment to install the program.**
 
-You can simply clone the repo and run:
+For example:
 
   ```bash
+  python -m venv wmf
+  source wmf/bin/activate
+  ```
+
+You can then clone the repo with the command:
+
+  ```bash
+  git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+  ```
+
+The easiest way is to install the program as an editable package. This will install the program and all of the dependencies, and allow you to easily edit the code and the configuration and run it without having to reinstall it.
+
+  ```bash
+  cd WasteAndMaterialFootprint
+  pip install -e .
+  ```
+
+ and then run:
+
+  ```bash
+  cd WasteAndMaterialFootprint
   python src/WasteAndMaterialFootprint/main.py
   ```
-This will not install any of the dependencies, so you will need to install them manually if you don't already have them.
 
-Better option: the program can be installed using pip:
+If you only clone or download the repo without installing it, this will not install any of the dependencies, so you will need to install them manually if you don't already have them.
+
+You can do that with this command:
+
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+Another option: the program can be installed using pip:
 
   ```bash
   pip install WasteAndMaterialFootprint
@@ -80,7 +108,7 @@ Or, if you want to install the latest version from GitHub:
   pip install git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
   ```
 
-or for an editable install (good for development and testing):
+or for an editable install from GitHub:
 
   ```bash
   git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
@@ -111,7 +139,36 @@ The program can be imported as a Python module:
 
 ## Configuration
 
-By default, the program will create a folder `config` in the current working directory containing the default configuration files:
+You can find the configuration files in the `config` folder (`src/WasteAndMaterialFootprint/config`). Or if you install it with pip, you can find the config folder in the `site-packages/WasteAndMaterialFootprint/config` folder of your Python venv installation.
+
+If you have installed via pip, or want to have things separate, you can create a new folder somewhere and then run some built-in functions to create and reload the config files.
+
+  ```python
+      import WasteAndMaterialFootprint as wmf
+      wmf.create_config()
+  ```
+
+This will create a folder `config` in the current working directory containing the default configuration files (see below).
+
+You can then edit these files with some kind of text editor, and run:
+
+  ```python
+      wmf.reload_config()
+  ```
+
+Note that you will need to close the Python session and start a new one to reload the config files.
+
+If you want to revert to the default config files, you can run:
+
+  ```python
+      wmf.reset_config()
+  ```
+
+And then close and restart the Python session.
+
+If you are running the program as an editable package, you can edit the config files directly in the `src/WasteAndMaterialFootprint/config` folder.
+
+Details of the configuration files are given below.
 
 ### General settings: `user_settings.py`
 
