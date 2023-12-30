@@ -290,7 +290,9 @@ There is a basic case study about batteries in there.
 
 ### Contributing
 
-Contributions are welcome, test the code, report bugs, suggest features, etc. If you want to contribute code, please fork the repo and make a pull request.
+Contributions are very welcome! Test the code, report bugs, suggest features, etc. If you want to contribute code, please fork the repo and make a pull request. 
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
 
 ### License
 
@@ -300,6 +302,6 @@ WasteAndMaterialFootprint by Stewart Charles McDowall is marked with CC0 1.0 Uni
 
 If you use this code, please cite it as described in the [CITATION.cff](CITATION.cff) file (see the sidebar on the right).
 
-Each version will have a different DOI, so please cite the version you used.
-
 When the paper is published, a citation for that will be added to the CITATION file.
+
+
