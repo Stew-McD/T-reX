@@ -87,20 +87,37 @@ def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
         df_results = df[
             (df["ex_name"].apply(lambda x: all(i in x for i in AND)))
             & (df["ex_unit"] == UNIT)
-            & (df["ex_amount"] != 0)
-            # & (df["ex_amount"] != -1)
+            # & (df["ex_amount"] != 1)
+            # & (df["ex_type"].isin(['technosphere', 'production']))
         ].copy()
 
-        # Apply OR and NOT search filters
+        if df_results.shape[0] == 0:
+            print(f"\t\t** No results for {NAME}")
+            return
+            
         if OR:
             df_results = df_results[
                 df_results["ex_name"].apply(lambda x: any(i in x for i in OR))
             ]
+            
+        if df_results.shape[0] == 0:
+            print(f"\t\t** No results for {NAME}")
+            return
+        
         if NOT:
             df_results = df_results[
                 df_results["ex_name"].apply(lambda x: not any(i in x for i in NOT))
             ]
 
+        if df_results.shape[0] == 0:
+            print(f"\t\t** No results for {NAME}")
+            return
+
+        if 'carbon dioxide' in NAME_BASE:
+            df_results = df_results[df_results['ex_amount'] > 0]
+            df_results['ex_amount'] = -df_results['ex_amount']
+        else:
+            df_results = df_results[df_results['ex_amount'] < 0]
         # Save results to CSV
         wasteandmaterial_file_name = NAME.replace(" ", "")
         wasteandmaterial_file = os.path.join(

@@ -39,7 +39,10 @@ def AddMethods():
         m_type = value["type"]
 
         # Assign characterization factor based on type
-        ch_factor = -1.0 if m_type == "waste" else 1.0
+        if m_type == "waste" and 'carbon dioxide' not in m_name.lower():
+            ch_factor = -1.0
+        else:
+            ch_factor = 1.0
 
         # Assign method key and description based on type
         if m_type == "waste":

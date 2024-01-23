@@ -181,8 +181,8 @@ def FutureScenarios(scenario_list):
                 print(f"Removed {db}")
 
     # Clear cache if deletion is required (may not be necessary, but can help overcome errors sometimes)
-    # if delete_existing_premise_project:
-    #     pm.clear_cache()
+    if delete_existing_premise_project:
+        pm.clear_cache()
 
     count = 0
     db_parts = database_name.split("-")
@@ -237,14 +237,14 @@ def FutureScenarios(scenario_list):
             ndb.update_all()
             ndb.update_cars()
             ndb.update_buses()
-            # ndb.update_trucks()
-            # ndb.update_two_wheelers()
-            # ndb.update_electricity()
-            # ndb.update_cement()
-            # ndb.update_steel()
-            # ndb.update_fuels()
-            # ndb.update_emissions()
-            # ndb.update_dac()
+            ndb.update_emissions()
+            ndb.update_dac()
+            ndb.update_trucks()
+            ndb.update_two_wheelers()
+            ndb.update_electricity()
+            ndb.update_cement()
+            ndb.update_steel()
+            ndb.update_fuels()
         except Exception as e:
             print(f"Error: {e}")
 

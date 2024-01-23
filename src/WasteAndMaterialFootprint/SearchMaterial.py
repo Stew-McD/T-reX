@@ -20,10 +20,11 @@ from config.user_settings import (
     dir_logs,
     dir_searchmaterial_results,
     dir_tmp,
+    project_wmf,
 )
 
 
-def SearchMaterial(db_name, project_wmf):
+def SearchMaterial(db_name, project_wmf=project_wmf):
     """
     Search for materials in a specified database and extract related information.
 
@@ -80,7 +81,6 @@ def SearchMaterial(db_name, project_wmf):
             "reference product",
             "classifications",
             "database",
-            "production amount",
         ]
     ]
 
@@ -178,6 +178,7 @@ def SearchMaterial(db_name, project_wmf):
     df.pop("classifications")
 
     hits = df[df["ex_name"].isin(acts["name"].values)].copy()
+    hits = hits[hits["ex_amount"] != 0]
     hits["database"] = db_name
     hits["material_group"] = hits["ex_name"].apply(map_materials)
 

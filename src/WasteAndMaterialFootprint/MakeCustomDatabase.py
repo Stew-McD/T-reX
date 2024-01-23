@@ -201,3 +201,8 @@ def dbExcel2BW():
     print("\n*** Great success! ***")
 
     return None
+
+
+if __name__ == "__main__":
+    dbWriteExcel()
+    dbExcel2BW()

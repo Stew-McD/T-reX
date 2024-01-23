@@ -39,7 +39,7 @@ import bw2data as bd
 # set project name and other things here
 
 project_premise_base = "default"
-project_premise = "SSP-cutoff_test"
+project_premise = "SSP2LT-cutoff"
 project_base = project_premise
 # if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
 project_wmf = f"WMFootprint-{project_base}"
@@ -51,10 +51,10 @@ db_wmf_name = "WasteAndMaterialFootprint"  # name of the database that will be c
 
 # if you only want to run one database, set single to True and choose the database name here
 single = False
-single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"
+single_database = "ecoinvent_cutoff_3.9_remind_SSP2-Base_2065"
 
 # if you want to use a fresh project
-delete_wmf_project = False
+delete_wmf_project = True
 use_multiprocessing = False
 verbose = False
 
@@ -66,19 +66,19 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = True
+use_premise = False
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = True
+delete_existing_premise_project = False
 
-# if you want to use multiprocessing (some people have reported problems with this)
+# if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
-batch_size = 2
+batch_size = 1
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
@@ -132,18 +132,18 @@ rcps = [
 # If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
-    # 2020,
+    2020,
     # 2025,
-    # 2030,
+    2030,
     # 2035,
-    # 2040,
+    2040,
     # 2045,
-    # 2050,
-    # 2060,
-    2065,
-    # 2070,
-    # 2080,
-    # 2090,
+    2050,
+    2060,
+    # 2065,
+    2070,
+    2080,
+    2090,
     2100,
 ]
 

@@ -10,21 +10,20 @@ import bw2analyzer as bwa
 
 ca = bwa.ContributionAnalysis()
 
-PROJECT = "WMFootprint-SSP-cutoff"
+PROJECT = "WMFootprint-SSP2LT-cutoff"
 KEY = "market for battery, Li-ion, rechargeable"
 
 KEYWORDS_METHODS = [
     "ReCiPe 2016 v1.03, midpoint (I)",
-    "EF v3.0 no LT",
+    "EF v3.1 EN15804",
     "EDIP 2003 no LT",
-    "Crustal Scarcity",
-    "Waste Footprint",
-    "Material Demand Footprint",
+    "Crustal Scarcity Indicator 2020",
+    "WasteAndMaterialFootprint",
 ]
 
-SEARCH_ACTIVITIES = 1
-SEARCH_METHODS = 1
-GET_RESULTS = 1
+SEARCH_ACTIVITIES = 0
+SEARCH_METHODS = 0
+GET_RESULTS = 0
 GET_SUPPLY_CHAIN_RESULTS = 1
 
 CWD = Path.cwd()
@@ -126,13 +125,13 @@ def search_activities(KEY):
 def search_methods(KEYWORDS_METHODS):
     print("\t== Searching for methods ==")
 
-    KEYWORDS_METHODS = [
-        "ReCiPe 2016 v1.03, midpoint (I)",
-        "EF v3.0 no LT",
-        "EDIP 2003 no LT",
-        "Crustal Scarcity",
-        "WasteAndMaterialFootprint",
-    ]
+    # KEYWORDS_METHODS = [
+    #     "ReCiPe 2016 v1.03, midpoint (I)",
+    #     "EF v3.1 EN15804",
+    #     "EDIP 2003 no LT",
+    #     'Crustal Scarcity Indicator 2020',
+    #     "WasteAndMaterialFootprint",
+    # ]
 
     methods = [x for x in bd.methods if any(y in x for y in KEYWORDS_METHODS)]
 
@@ -178,9 +177,9 @@ def get_results():
     )
     print(f'\n\n{"-"*80}\n')
     dbs = activities.database.unique()
-    
-    print(f"\tDatabases: ", end='\n\t')
-    print(*dbs, sep='\n\t', end="\n")
+
+    print(f"\tDatabases: ", end="\n\t")
+    print(*dbs, sep="\n\t", end="\n")
 
     progress_format = "{l_bar} {bar} | {n_fmt}/{total_fmt} | {elapsed}<{remaining}"
 
@@ -340,9 +339,10 @@ def get_supply_chain_results():
                     df_result = bwa.compare_activities_by_grouped_leaves(
                         df_acts.activity_object,
                         method,
-                        max_level=6,
+                        max_level=5,
                         output_format="pandas",
-                        cutoff=0.005,
+                        cutoff=0.025,
+                        
                     )
 
                 df_single = df_act.join(df_result)

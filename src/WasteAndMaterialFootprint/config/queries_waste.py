@@ -14,15 +14,16 @@ These queries are combined into the `queries_waste` list, which is then used by 
 
 """
 
+
 def make_queries_waste():
-    '''
+    """
     This function creates the queries_waste list, which is used by SearchWaste.py for filtering and extracting relevant data from the database.
-    
+
     The queries are set up for different waste flow categories like digestion, composting, incineration, recycling, and landfill, among others. Each query is a dictionary containing search terms for the respective category.
-    
+
     args: None
     returns: list queries_waste
-    '''
+    """
     names = [
         "digestion",
         "composting",
@@ -31,6 +32,7 @@ def make_queries_waste():
         "recycling",
         "landfill",
         "hazardous",
+        "radioactive",
         # "non-hazardous", # not really needed, as it is just "total" - "hazardous", and it makes the process slower (20k+ more exchanges)
         "carbon dioxide",  # in prospective databases, carbon capture and storage is included
         "total",
@@ -84,13 +86,12 @@ def make_queries_waste():
                 {
                     "OR": [
                         "carbon dioxide storage",
-                        "carbon dioxide capture",
                         "carbon dioxide, captured",
                     ]
                 }
             )
             query.update({"NOT": ["methane"]})
-            query.update({"AND": ""})
+            query.update({"AND": [""]})
 
         # add the query to the list of queries
         queries_kg.append(query)
@@ -103,8 +104,7 @@ def make_queries_waste():
         queries_m3.append(q)
 
     queries_waste = queries_kg + queries_m3
-    
-    
+
     return queries_waste
 
 
