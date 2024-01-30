@@ -214,7 +214,7 @@ for method in methods_full:
 
             # Create figure for each activity, method, scenario combination
 
-            bar_width = 12  # Increase this value to make bars wider
+            bar_width = 12 
             years = df_scenario["db_year"].unique()
             for year in years:
                 single_bar = df_scenario[df_scenario["db_year"] == year].reset_index(
@@ -266,7 +266,7 @@ for method in methods_full:
 
             # Plotting setup (title, labels, legend, etc.)
             title_raw = f"Contribution by sector for Li-ion battery `{activity}'"
-            method_text = f"Pathway of SSP2 scenario (RCP): {scenario}\nLCIA Method: ({method[0]}, {method[2]})"
+            method_text = f"Pathway of SSP2 scenario (RCP): {scenario}\nLCA Method: ({method[0]}, {method[2]})"
             ax.text(
                 0.01,
                 1.02,  # x, y coordinates in axes fraction

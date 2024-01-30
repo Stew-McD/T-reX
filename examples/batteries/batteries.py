@@ -23,8 +23,8 @@ KEYWORDS_METHODS = [
 
 SEARCH_ACTIVITIES = 0
 SEARCH_METHODS = 0
-GET_RESULTS = 0
-GET_SUPPLY_CHAIN_RESULTS = 1
+GET_RESULTS = 1
+GET_SUPPLY_CHAIN_RESULTS = 0
 
 CWD = Path.cwd()
 DIR_DATA = CWD / "data"
@@ -156,12 +156,11 @@ def get_results():
 
     activities = pd.read_csv(FILE_ACTIVITIES, sep=";")
     # activity objects are not serializable, so we need to re-create them
-    activities["activity_object"] = activities.key.apply(
-        lambda x: bd.get_activity(ast.literal_eval(x))
-    )
+    activities["activity_object"] = activities.key.apply(lambda x: bd.get_activity(ast.literal_eval(x)))
 
     methods = pd.read_csv(FILE_METHODS, sep=";")
     methods = methods["tuple"].apply(ast.literal_eval).to_list()
+    # methods = [methods[0]]
 
     total_calculations = len(activities) * len(methods)
     width_activity = 20
@@ -172,11 +171,10 @@ def get_results():
     width_bar = 100
 
     print(f'\n{"-"*80}\n')
-    print(
-        f"\t== Calculating {total_calculations} LCIAs --- {len(activities)} activities and {len(methods)} methods =="
-    )
+    print(f"\t== Calculating {total_calculations} LCIAs --- {len(activities)} activities and {len(methods)} methods ==")
     print(f'\n\n{"-"*80}\n')
     dbs = activities.database.unique()
+    # dbs = [dbs[0]]
 
     print(f"\tDatabases: ", end="\n\t")
     print(*dbs, sep="\n\t", end="\n")
@@ -215,7 +213,9 @@ def get_results():
                 lca.switch_method(method)
                 lca.redo_lcia()
 
-                top = ca.annotated_top_processes(lca, limit=10)
+                top_raw = ca.annotated_top_processes(lca, limit=10)
+
+                top = [(t[0], t[1], t[2].as_dict()["name"], t[2].as_dict()["location"]) for t in top_raw]
 
                 results_dict = {
                     "name": act_name,
@@ -265,9 +265,7 @@ def get_supply_chain_results():
 
     activities = pd.read_csv(FILE_ACTIVITIES, sep=";")
     # activity objects are not serializable, so we need to re-create them, after first converting the string to a tuple
-    activities["activity_object"] = activities.key.apply(
-        lambda x: bd.get_activity(ast.literal_eval(x))
-    )
+    activities["activity_object"] = activities.key.apply(lambda x: bd.get_activity(ast.literal_eval(x)))
 
     methods = pd.read_csv(FILE_METHODS, sep=";")
     methods = methods["tuple"].apply(ast.literal_eval).to_list()
@@ -313,9 +311,7 @@ def get_supply_chain_results():
 
         for iii, method in enumerate(methods_selection):
             # Pad and format the strings to the desired width
-            p_db = (
-                f'{i+1:02}/{len(dbs):02} - {" ".join(db.split("_")[-2:]):<{width_db}}'
-            )
+            p_db = f'{i+1:02}/{len(dbs):02} - {" ".join(db.split("_")[-2:]):<{width_db}}'
             # p_act = f'{ii+1:02}/{len(df_acts):02} - {",".join(row["name"].split(",")[1:3])[:20]:<{width_activity}}'
             p_method = f"{iii+1:03}/{len(methods_selection):03} - {method[2][:width_method]:<{width_method}}"
             # p_score = f'{lca.score:.2e}'.rjust(width_score)
@@ -342,7 +338,6 @@ def get_supply_chain_results():
                         max_level=5,
                         output_format="pandas",
                         cutoff=0.025,
-                        
                     )
 
                 df_single = df_act.join(df_result)
@@ -357,9 +352,7 @@ def get_supply_chain_results():
 
     progress.close()
     print(f'\n\n{"-"*80}\n')
-    print(
-        f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAINRESULTS}"'
-    )
+    print(f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAINRESULTS}"')
     print(f'\n{"-"*80}\n')
 
     return None

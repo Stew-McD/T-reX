@@ -8,7 +8,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
 # Register Libertine font
-font_path = "LinLibertine_Rah.ttf"  # Change as needed
+font_path = "misc/LinLibertine_Rah.ttf"  # Change as needed
 pdfmetrics.registerFont(TTFont("Libertine", font_path))
 
 # Directory containing SVG files
@@ -18,7 +18,7 @@ print(f"Reading SVG files from directory: {svg_dir}")
 print(f'{"*"*50}')
 
 # Define the layout and title
-filename = "combined_methods_supply-chain.pdf"
+filename = "visualisation/combined_methods_supply-chain.pdf"
 title = "WasteAndMaterialFootprint: Individual Contributions by CPC sector"
 columns = 5
 figures = sorted([f for f in os.listdir(svg_dir) if f.endswith('.svg')], reverse=True)
