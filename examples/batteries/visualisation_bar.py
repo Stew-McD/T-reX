@@ -9,10 +9,10 @@ import seaborn as sns
 import random
 
 # Set a fixed figure size to match your largest plot (274x343 pixels)
-fixed_figsize = (250 / 100, 500 / 100)  # Convert pixels to inches
+# fixed_figsize = (250 / 100, 500 / 100)  # Convert pixels to inches
 
-plt.rcParams["figure.figsize"] = fixed_figsize
-plt.rcParams["figure.autolayout"] = False
+# plt.rcParams["figure.figsize"] = fixed_figsize
+# plt.rcParams["figure.autolayout"] = False
 
 
 # set global formatting options
@@ -165,7 +165,7 @@ for method in methods_full:
         df_activity = df_method[df_method["name"] == activity]
 
         for scenario in scenarios:
-            fig, ax = plt.subplots(figsize=fixed_figsize)
+            fig, ax = plt.subplots() #(figsize=fixed_figsize)
 
             df_scenario = df_activity[df_activity["db_target"] == scenario].reset_index(
                 drop=True
@@ -214,7 +214,7 @@ for method in methods_full:
 
             # Create figure for each activity, method, scenario combination
 
-            bar_width = 12 
+            bar_width = 19 
             years = df_scenario["db_year"].unique()
             for year in years:
                 single_bar = df_scenario[df_scenario["db_year"] == year].reset_index(
@@ -227,19 +227,19 @@ for method in methods_full:
                     .reset_index(drop=True)
                     .loc[0]
                     .sort_values(ascending=False)
-                )
+                )*100
 
                 for c in contributions.index:
                     if contributions[c] == 0.0:
                         contributions.drop(c, inplace=True)
 
-                other = 1 - contributions.sum()
+                other = 100 - contributions.sum()
                 contributions["other"] = other
 
                 # Assert statement to ensure the total sum is 1.0
-                assert (
-                    abs(contributions.sum() - 1.0) < 1e-6
-                ), f"Contributions do not sum to 1.0: {contributions.sum()}"
+                # assert (
+                #     abs(contributions.sum() - 1.0) < 1e-6
+                # ), f"Contributions do not sum to 1.0: {contributions.sum()}"
                 bottom = 0
                 for name, contribution in contributions.items():
                     ax.bar(
@@ -257,34 +257,35 @@ for method in methods_full:
             # Modify x-axis scale or range as needed
             # For example, if years are evenly spaced, you can adjust the xlim to reduce gaps
             ax.set_xlim(
-                [min(df_scenario["db_year"]) - 10, max(df_scenario["db_year"]) + 10]
+                [min(df_scenario["db_year"]) - 15, max(df_scenario["db_year"]) + 15]
             )
-            ax.set_ylim([0, 1.0])
+            ax.set_ylim([0, 100])
 
             ax.set_xticks(df_scenario["db_year"].unique(), minor=False)
             ax.set_xticklabels(df_scenario["db_year"].unique())
 
             # Plotting setup (title, labels, legend, etc.)
-            title_raw = f"Contribution by sector for Li-ion battery `{activity}'"
-            method_text = f"Pathway of SSP2 scenario (RCP): {scenario}\nLCA Method: ({method[0]}, {method[2]})"
+            title_raw = f"Contribution to total by sector for Li-ion battery `{activity}'"
+            method_text = f"LCA Method: ({method[0]}, {method[2]})"
             ax.text(
                 0.01,
                 1.02,  # x, y coordinates in axes fraction
                 method_text,  # text to display
                 horizontalalignment="left",
-                fontsize=5,
+                fontsize=7,
                 fontweight="normal",
                 transform=ax.transAxes,
             )
 
             title = replace_strings_in_string(title_raw, term_replacements)
-            ax.set_title(title, fontsize=6, y=1.05, ha='left', x=0.01, fontweight="bold")
-            ax.set_ylabel("Normalised score", fontsize=5)
-            ax.set_xlabel("Year", fontsize=6)
+            ax.set_title(title, fontsize=8, y=1.05, ha='left', x=0.01, fontweight="bold")
+            ax.set_ylabel("Contribution to total (\%)", fontsize=7)
+            ax.set_xlabel(f"Scenario year in SSP2 (RCP: {scenario})", fontsize=7)
             ax.tick_params(axis="x", which="both", length=0)
 
-            ax.xaxis.set_tick_params(labelsize=4)
-            ax.yaxis.set_tick_params(labelsize=4)
+            ax.xaxis.set_tick_params(labelsize=6)
+            ax.yaxis.set_tick_params(labelsize=6)
+            # ax.set_aspect(adjustable='box')  
 
             # Create the legend
             legend = ax.legend(
@@ -292,13 +293,13 @@ for method in methods_full:
                 loc="upper left",
                 bbox_to_anchor=(
                     0.0,
-                    -0.07,
+                    -0.12,
                 ),  # Adjust the vertical position of the legend
-                fontsize=4,
+                fontsize=5,
                 title="Legend: CPC Classification",
                 ncol=1,
                 frameon=False,
-                title_fontsize=5,
+                title_fontsize=6,
                 borderpad=2,
                 handletextpad=1,
                 handlelength=0.5,
@@ -310,18 +311,18 @@ for method in methods_full:
             filepath = os.path.join(fig_dir, filename)
             
             # adjust the figure size
-            plt.gcf().set_size_inches(fixed_figsize[0], fixed_figsize[1])
+            # plt.gcf().set_size_inches(fixed_figsize[0], fixed_figsize[1])
 
             # Get current axes position in figure fraction
-            current_axes_position = plt.gca().get_position()
+            # current_axes_position = plt.gca().get_position()
 
-            # Adjust bottom margin if needed
-            canvas_width, canvas_height = plt.gcf().get_size_inches()
-            if canvas_height < fixed_figsize[1]:
-                diff = (fixed_figsize[1] - canvas_height) / fixed_figsize[1]
-                new_bottom_position = current_axes_position.y0 - diff
-                plt.gca().set_position([current_axes_position.x0, new_bottom_position,
-                                        current_axes_position.width, current_axes_position.height])
+            # # Adjust bottom margin if needed
+            # canvas_width, canvas_height = plt.gcf().get_size_inches()
+            # if canvas_height < fixed_figsize[1]:
+            #     diff = (fixed_figsize[1] - canvas_height) / fixed_figsize[1]
+            #     new_bottom_position = current_axes_position.y0 - diff
+            #     plt.gca().set_position([current_axes_position.x0, new_bottom_position,
+            #                             current_axes_position.width, current_axes_position.height])
 
             plt.savefig(filepath, format="svg", bbox_inches='tight')
             plt.close(fig)

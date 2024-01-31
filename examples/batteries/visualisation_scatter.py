@@ -86,7 +86,7 @@ width_3on2 = 140  # mm
 width_2 = 190  # mm
 
 markers = ["o", "x", "^", "D", "*", "s"]  # Add more markers as needed
-marker_weight = 0.5
+marker_weight = 1
 
 colorblind_friendly_palette = ['#377eb8', '#ff7f00', '#4daf4a',
                   '#e41a1c','#984ea3', '#a65628', 
@@ -95,10 +95,10 @@ colorblind_friendly_palette = ['#377eb8', '#ff7f00', '#4daf4a',
 
 colors = colorblind_friendly_palette
 
-loosely_dotted = (0, (1, 10))
-loosely_dashed = (0, (5, 10))
+loosely_dotted = (0, (1, 3))
+loosely_dashed = (0, (3, 5))
 line_styles = [loosely_dotted, loosely_dashed, "-.", "-"]  # Add more line styles as needed
-line_width = 0.2  # Line width
+line_width = 0.8  # Line width
 
 # Create a directory for the saved plots if it doesn't already exist
 os.makedirs("visualisation/individual-methods", exist_ok=True)
@@ -121,16 +121,16 @@ for a, method_0 in enumerate(methods_0):
                 continue
 
             fig, ax = plt.subplots()
-            title_raw = f"{df_methods_2['method_0'].iloc[0]}\n{df_methods_2['method_1'].iloc[0]}\n{method_2}"
+            title_raw = f"{df_methods_2['method_0'].iloc[0]}\n{method_2}"
             
             title = replace_strings_in_string(title_raw, term_replacements)
     
-            plt.title(title, fontsize=6)
-            ax.set_xlabel("Year", fontsize=5)
-            ax.set_ylabel(f"{df_methods_2['unit'].iloc[0]} / kg", fontsize=5)
+            plt.title(title, fontsize=8)
+            ax.set_xlabel("Year", fontsize=7)
+            ax.set_ylabel(f"{df_methods_2['unit'].iloc[0]} / kg (battery)", fontsize=7)
             ax.set_xticks(years)
-            ax.set_xticklabels(years, fontsize=4)
-            ax.yaxis.set_tick_params(labelsize=4)
+            ax.set_xticklabels(years, fontsize=6)
+            ax.yaxis.set_tick_params(labelsize=6)
 
             for d, activity in enumerate(activities):
                 for e, scenario in enumerate(scenarios):
@@ -186,22 +186,22 @@ for a, method_0 in enumerate(methods_0):
             # Add the legends to the plot outside the plot area
             legend_activities = ax.legend(
                 handles=legend_elements_activities,
-                title="Activities",
-                title_fontsize=4,
-                fontsize=3,
-                bbox_to_anchor=(1.02, 1),
-                loc="upper left",
+                title="Activity:",
+                title_fontsize=7,
+                fontsize=5,
+                bbox_to_anchor=(1.02, 0.5),
+                loc="lower left",
             )
             ax.add_artist(
                 legend_activities
             )  # Add the first legend manually to the current Axes.
             legend_scenarios = ax.legend(
                 handles=legend_elements_scenarios,
-                title="Scenarios",
-                title_fontsize=4,
-                fontsize=3,
-                bbox_to_anchor=(1.02, 0.65),
-                loc="center left",
+                title="Scenario:\n(SSP2)",
+                title_fontsize=7,
+                fontsize=5,
+                bbox_to_anchor=(1.02, 0.5),
+                loc="upper left",
             )
 
             # Define filename and save plot

@@ -15,6 +15,7 @@ pairs = {
     "EDIP 2003 no LT-non-renewable resources no LT-nickel no LT": "WasteAndMaterialFootprint-Demand: Nickel-Nickel",
     "EDIP 2003 no LT-non-renewable resources no LT-oil no LT": "WasteAndMaterialFootprint-Demand: Petroleum-Petroleum",
     "EDIP 2003 no LT-non-renewable resources no LT-zinc no LT": "WasteAndMaterialFootprint-Demand: Zinc-Zinc",
+    
 }
 
 # Register Libertine font

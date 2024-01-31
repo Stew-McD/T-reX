@@ -4,7 +4,7 @@
 
 A program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints.
 
-Soon to be a paper, hopefully.
+Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/WasteAndMaterialFootprint-publication)
 
 ## Documentation
 
@@ -14,7 +14,7 @@ The documentation is still under development, but the code is well documented an
 
 The following readme provides a brief introduction to the program, how to install it, and how to use it.
 
-See the example output [here](
+See the example output [here](examples/package_test/example-output.pdf)
 
 ## Contents
 
@@ -290,7 +290,7 @@ There is a basic case study about batteries in there.
 
 ### Contributing
 
-Contributions are very welcome! Test the code, report bugs, suggest features, etc. If you want to contribute code, please fork the repo and make a pull request. 
+Contributions are very welcome! Test the code, report bugs, suggest features, etc. If you want to contribute code, please fork the repo and make a pull request.
 
 See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
 
@@ -303,5 +303,3 @@ WasteAndMaterialFootprint by Stewart Charles McDowall is marked with CC0 1.0 Uni
 If you use this code, please cite it as described in the [CITATION.cff](CITATION.cff) file (see the sidebar on the right).
 
 When the paper is published, a citation for that will be added to the CITATION file.
-
-

@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import matplotlib as mpl
 from matplotlib.lines import Line2D
+import matplotlib.ticker as mticker
 import scienceplots
 from tqdm import tqdm
 import seaborn as sns
@@ -10,6 +11,18 @@ import random
 
 
 print("Generating figures for top processes...")
+
+
+# Create a custom formatter
+class CustomFormatter(mticker.ScalarFormatter):
+    def __init__(self, fmt="%1.1f"):
+        super().__init__(useOffset=False, useMathText=True)
+        self.fmt = fmt
+
+    def _set_format(self):
+        self.format = self.fmt
+
+
 
 # Set a fixed figure size to match your largest plot (274x343 pixels)
 # fixed_figsize = (250 / 100, 500 / 100)  # Convert pixels to inches
@@ -100,6 +113,16 @@ for method in methods_full:
 
 print("Maximum number of unique names in any set:", max_lines)
 
+# After creating your axes (ax), modify the y-axis formatter
+formatter = mticker.ScalarFormatter(useMathText=True)  # useMathText for LaTeX styled exponents
+plt.gca().yaxis.set_major_formatter(formatter)
+
+# This line sets the size of the offset text (the exponent)
+plt.gcf().get_axes()[0].yaxis.get_offset_text().set_fontsize(3)
+
+# To move the offset text (the exponent) to the left of the y-axis
+plt.gcf().get_axes()[0].yaxis.get_offset_text().set_verticalalignment('bottom')
+plt.gcf().get_axes()[0].yaxis.get_offset_text().set_horizontalalignment('left')
 # Define the colour set, given the length of the max number of lines
 
 colors = sns.color_palette("deep", max_lines)
@@ -139,8 +162,10 @@ for method in methods_full:
                     )
                     bottom += tp_score
 
+
+
             # Modify x-axis scale or range as needed
-            ax.set_xlim([min(df_scenario["db_year"]) - 10, max(df_scenario["db_year"]) + 10])
+            ax.set_xlim([min(df_scenario["db_year"]) - 12, max(df_scenario["db_year"]) + 12])
 
             ax.set_xticks(df_scenario["db_year"].unique(), minor=False)
             ax.set_xticklabels(df_scenario["db_year"].unique())
@@ -159,12 +184,12 @@ for method in methods_full:
             )
             unit = df_scenario["unit"].iloc[0]
             title = replace_strings_in_string(title_raw, term_replacements)
-            ax.set_title(title, fontsize=7, y=1.06, ha="left", x=0.01, fontweight="bold")
-            ax.set_ylabel(f"Score: {unit} / kg", fontsize=5)
-            ax.set_xlabel("Year", fontsize=6)
+            ax.set_title(title, fontsize=8, y=1.06, ha="left", x=0.01, fontweight="bold")
+            ax.set_ylabel(f"Score: {unit} / kg (battery)", fontsize=7)
+            ax.set_xlabel(f"Scenario year in SSP2 (RCP: {scenario})", fontsize=7)
             ax.tick_params(axis="x", which="both", length=0)
-            ax.xaxis.set_tick_params(labelsize=4)
-            ax.yaxis.set_tick_params(labelsize=4)
+            ax.xaxis.set_tick_params(labelsize=6)
+            ax.yaxis.set_tick_params(labelsize=6)
 
             unique_names = set()
             for i in range(1, 6):  # Assuming 5 top processes
@@ -180,11 +205,11 @@ for method in methods_full:
                 handles=legend_handles,
                 loc="upper left",
                 bbox_to_anchor=(0.0, -0.05),
-                fontsize=4,
+                fontsize=5,
                 title="Legend: Top Processes",
                 ncol=1,
                 frameon=False,
-                title_fontsize=5,
+                title_fontsize=6,
                 borderpad=2,
                 handletextpad=1,
                 handlelength=0.5,
