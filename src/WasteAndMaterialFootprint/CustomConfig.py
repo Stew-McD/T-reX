@@ -19,7 +19,7 @@ def config_setup():
     if not target_config_dir.exists():
         shutil.copytree(source_config_dir, target_config_dir)
         print(f"Configuration files copied to {target_config_dir}")
-        
+
     else:
         print(f"Configuration files already exist in {target_config_dir}")
 
@@ -30,7 +30,7 @@ def config_setup():
 
 
 def config_reload():
-    """Copies the config files back to the package directory. The user will need to restart the python session to reload the WasteAndMaterialFootprint module with the updated configuration files
+    """Copies the config files back to the package directory. The user will need to restart the python session to reload the T-reX module with the updated configuration files
 
     args: None
     returns: None
@@ -49,35 +49,37 @@ def config_reload():
     if source_config_dir == target_config_dir:
         print("Local and package config directories are the same")
         return
-    
+
     # Copy the edited config files back to the package directory
     if target_config_dir.exists():
         shutil.copytree(source_config_dir, target_config_dir, dirs_exist_ok=True)
-        print(f"Updated configuration files copied from {source_config_dir} to {target_config_dir}")
+        print(
+            f"Updated configuration files copied from {source_config_dir} to {target_config_dir}"
+        )
 
-    # Reload the WasteAndMaterialFootprint module
+    # Reload the T-reX module
 
     print(
-        f"\n {80*'*'} \n\tRestart the python session to reload the WasteAndMaterialFootprint module\n\twith the updated configuration files\n{80*'*'}\n"
+        f"\n {80*'*'} \n\tRestart the python session to reload the T-reX module\n\twith the updated configuration files\n{80*'*'}\n"
     )
 
 
 def config_reset():
-    '''
+    """
     Reset config to defaults that are stored in the root directory of the package
-    
+
     args: None
     returns: None
-    '''
-    
+    """
+
     print("Resetting configuration files to defaults")
-    
+
     backup_dir = Path(__file__).resolve().parents[1] / "config_backup"
-    
+
     config_dir = Path.cwd() / "config"
 
     shutil.copytree(backup_dir, config_dir, dirs_exist_ok=True)
-        
+
     print(
-        f"\n {80*'*'} \n\tRestart the python session to reload the WasteAndMaterialFootprint module\n\twith the updated configuration files\n{80*'*'}\n"
+        f"\n {80*'*'} \n\tRestart the python session to reload the T-reX module\n\twith the updated configuration files\n{80*'*'}\n"
     )

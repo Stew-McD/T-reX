@@ -37,19 +37,19 @@ Either from PyPI:
 
 .. code-block:: bash
 
-    pip install WasteAndMaterialFootprint
+    pip install T-reX
 
 Or, probably best to install the latest version from GitHub:
 
 .. code-block:: bash
 
-    pip install git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+    pip install git+https://github.com/Stew-McD/T-reX.git
 
 Or for an editable install (good for development and testing):
 
 .. code-block:: bash
 
-    git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
-    cd WasteAndMaterialFootprint
+    git clone https://github.com/Stew-McD/T-reX.git
+    cd T-reX
     pip install -e .
 

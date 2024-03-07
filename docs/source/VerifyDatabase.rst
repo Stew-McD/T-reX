@@ -1,7 +1,7 @@
 VerifyDatabase
 ==============
 
-The VerifyDatabase module contains functionality for verifying an edited WMF database within a given project in Brightway2. It performs this verification by calculating LCA scores for random activities within the specified database using selected methods.
+The VerifyDatabase module contains functionality for verifying an edited T-reX database within a given project in Brightway2. It performs this verification by calculating LCA scores for random activities within the specified database using selected methods.
 
 Function Summary
 ----------------
@@ -69,7 +69,7 @@ This function is called automatically after each database is processed, and agai
 
 .. code-block:: python
 
-    wmf.VerifyDatabase(project_name, database_name, check_material=True, check_waste=True, log=True)
+    T-reX.VerifyDatabase(project_name, database_name, check_material=True, check_waste=True, log=True)
 
     
 

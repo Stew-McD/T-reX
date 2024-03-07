@@ -1,7 +1,7 @@
 # import custom modules (from root dir)
 import sys
 
-sys.path.insert(0, "../src/WasteAndMaterialFootprint")
+sys.path.insert(0, "../src/T-reX")
 
 from ExchangeEditor import ExchangeEditor
 from ExplodeDatabase import ExplodeDatabase
@@ -15,18 +15,18 @@ from VerifyDatabase import VerifyDatabase
 # import configuration from config/user_settings.py
 from config.user_settings import (
     custom_bw2_dir,
-    db_wmf_name,
-    delete_wmf_project,
+    db_T_reX_name,
+    delete_T_reX_project,
     dir_logs,
     dir_tmp,
     dir_config,
     generate_args_list,
     project_base,
     project_premise,
-    project_wmf,
+    project_T_reX,
     use_multiprocessing,
     use_premise,
-    use_wmf,
+    use_T_reX,
     do_search,
     do_methods,
     do_edit,

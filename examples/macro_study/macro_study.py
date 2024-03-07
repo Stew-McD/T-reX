@@ -10,15 +10,15 @@ import bw2analyzer as bwa
 
 ca = bwa.ContributionAnalysis()
 
-PROJECT = "WMFootprint-SSP2LT-cutoff"
-KEY = "" # not needed
+PROJECT = "T_reX-SSP2LT-cutoff"
+KEY = ""  # not needed
 
 KEYWORDS_METHODS = [
     "ReCiPe 2016 v1.03, midpoint (I)",
     "EF v3.1 EN15804",
     "EDIP 2003 no LT",
     "Crustal Scarcity Indicator 2020",
-    "WasteAndMaterialFootprint",
+    "T-reX",
 ]
 
 SEARCH_ACTIVITIES = 1
@@ -130,7 +130,7 @@ def search_methods(KEYWORDS_METHODS):
     #     "EF v3.1 EN15804",
     #     "EDIP 2003 no LT",
     #     'Crustal Scarcity Indicator 2020',
-    #     "WasteAndMaterialFootprint",
+    #     "T-reX",
     # ]
 
     methods = [x for x in bd.methods if any(y in x for y in KEYWORDS_METHODS)]

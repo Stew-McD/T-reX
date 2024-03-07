@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "WasteAndMaterialFootprint"
+name = "T-reX"
 version = "0.1.21"
 description = "A tool for analysing waste and material footprints in Life Cycle Assessment (LCA) databases"
 authors = ["Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>"]
@@ -38,7 +38,7 @@ git = "https://github.com/taconi/playsound.git"
 Sphinx = "^7.2.6"
 
 [[tool.poetry.packages]]
-include = "WasteAndMaterialFootprint"
+include = "T-reX"
 from = "src"
 
 [build-system]
@@ -46,7 +46,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [project]
-name = "WasteAndMaterialFootprint"
+name = "T-reX"
 version = "0.1.21"
 authors = [
   { name="Stewart Charles McDowall", email="s.c.mcdowall@cml.leidenuniv.nl" },
@@ -79,5 +79,5 @@ premise-gwp = "^0.9.6"
 dev = ["Sphinx ^7.2.6"]
 
 [project.urls]
-Homepage = "https://github.com/Stew-McD/WasteAndMaterialFootprint"
-Documentation = "https://WasteAndMaterialFootprint.readthedocs.io/en/latest/"
+Homepage = "https://github.com/Stew-McD/T-reX"
+Documentation = "https://T-reX.readthedocs.io/en/latest/"

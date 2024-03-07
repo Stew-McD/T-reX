@@ -1,4 +1,4 @@
-# src/WasteAndMaterialFootprint/__init__.py
+# src/T-reX/__init__.py
 
 
 __version__ = "0.1.21"
@@ -7,7 +7,7 @@ __author__ = "Stewart Charles McDowall | Stew-McD"
 
 #! Some work should be done here to decide what to make available in the various namespaces
 
-from . import config 
+from . import config
 
 # Import modules here
 from .main import run

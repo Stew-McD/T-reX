@@ -3,7 +3,7 @@ ExchangeEditor Module
 =====================
 
 This module is responsible for editing exchanges with wurst and Brightway2.
-It appends relevant exchanges from the `db_wmf` (database containing waste and material exchange details) 
+It appends relevant exchanges from the `db_T_reX` (database containing waste and material exchange details)
 to activities identified by `WasteAndMaterialSearch()` in the specified project's database (`db_name`).
 Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
 
@@ -18,15 +18,15 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def ExchangeEditor(project_wmf, db_name, db_wmf_name):
+def ExchangeEditor(project_T_reX, db_name, db_T_reX_name):
     """
-    Append relevant exchanges from `db_wmf` to each activity in `db_name` identified by `WasteAndMaterialSearch()`.
+    Append relevant exchanges from `db_T_reX` to each activity in `db_name` identified by `WasteAndMaterialSearch()`.
 
-    This function modifies the specified project's database by appending exchanges from the `db_wmf` to activities identified by `WasteAndMaterialSearch()`. The appended exchanges mirror the quantity and unit of the original technosphere waste and material exchange.
+    This function modifies the specified project's database by appending exchanges from the `db_T_reX` to activities identified by `WasteAndMaterialSearch()`. The appended exchanges mirror the quantity and unit of the original technosphere waste and material exchange.
 
-    :param str project_wmf: Name of the Brightway2 project to be modified.
+    :param str project_T_reX: Name of the Brightway2 project to be modified.
     :param str db_name: Name of the database within the project where activities and exchanges are stored.
-    :param str db_wmf_name: Name of the database containing waste and material exchange details.
+    :param str db_T_reX_name: Name of the database containing waste and material exchange details.
 
     :returns: None. Modifies the given Brightway2 project by appending exchanges and logs statistics about the added exchanges.
     :rtype: None
@@ -41,12 +41,12 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
         dir_searchwaste_results,
     )
 
-    # Set the current project to project_wmf
-    bd.projects.set_current(project_wmf)
+    # Set the current project to project_T_reX
+    bd.projects.set_current(project_T_reX)
 
     # Get database objects
     db = bd.Database(db_name)
-    db_wmf = bd.Database(db_wmf_name)
+    db_T_reX = bd.Database(db_T_reX_name)
 
     # Define directories
     dir_searchwaste_results = dir_searchwaste_results / db_name
@@ -89,7 +89,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
 
     # Start adding exchanges
     print("\n\n*** ExchangeEditor() is running for " + db_name + " ***\n")
-    print(f"* Appending waste and material exchanges in {db_wmf_name}\n ")
+    print(f"* Appending waste and material exchanges in {db_T_reX_name}\n ")
     countNAME = 0
     # Calculate the maximum length of NAME
     max_name_length = max(len(name) for name in file_dict.keys())
@@ -131,7 +131,7 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
 
             KEY = (database, code)
             WMF_KEY = (
-                db_wmf_name,
+                db_T_reX_name,
                 NAME.split("_")[1]
                 .capitalize()
                 .replace("_", " ")
@@ -139,16 +139,16 @@ def ExchangeEditor(project_wmf, db_name, db_wmf_name):
                 .replace("kilogram", "(kg)")
                 .replace("cubicmeter", "(m3)"),
             )
-            # Retrieve the process and wasteandmaterial exchange from the databases
+            # Retrieve the process and T_reX exchange from the databases
             try:
                 process = bd.get_activity(KEY)
-                wasteandmaterial_ex = bd.get_activity(WMF_KEY)
+                T_reX_ex = bd.get_activity(WMF_KEY)
                 before = len(process.exchanges())
 
                 #! TODO: Check if the exchange already exists in the process, and if so, skip it
                 # Create a new exchange in the process
                 process.new_exchange(
-                    input=wasteandmaterial_ex,
+                    input=T_reX_ex,
                     amount=amount,
                     unit=unit,
                     type="biosphere",

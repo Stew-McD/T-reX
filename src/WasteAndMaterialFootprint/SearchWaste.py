@@ -2,9 +2,9 @@
 SearchWaste Module
 ==================
 
-This script loads data from '<db name>_exploded.pickle', runs search queries, 
-and produces CSV files to store the results and a log entry. The search queries are 
-formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+This script loads data from '<db name>_exploded.pickle', runs search queries,
+and produces CSV files to store the results and a log entry. The search queries are
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND,
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
 Functionality
@@ -94,16 +94,16 @@ def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
         if df_results.shape[0] == 0:
             print(f"\t\t** No results for {NAME}")
             return
-            
+
         if OR:
             df_results = df_results[
                 df_results["ex_name"].apply(lambda x: any(i in x for i in OR))
             ]
-            
+
         if df_results.shape[0] == 0:
             print(f"\t\t** No results for {NAME}")
             return
-        
+
         if NOT:
             df_results = df_results[
                 df_results["ex_name"].apply(lambda x: not any(i in x for i in NOT))
@@ -113,19 +113,17 @@ def SearchWaste(db_name, dir_searchwaste_results=dir_searchwaste_results):
             print(f"\t\t** No results for {NAME}")
             return
 
-        if 'carbon dioxide' in NAME_BASE:
-            df_results = df_results[df_results['ex_amount'] > 0]
-            df_results['ex_amount'] = -df_results['ex_amount']
+        if "carbon dioxide" in NAME_BASE:
+            df_results = df_results[df_results["ex_amount"] > 0]
+            df_results["ex_amount"] = -df_results["ex_amount"]
         else:
-            df_results = df_results[df_results['ex_amount'] < 0]
+            df_results = df_results[df_results["ex_amount"] < 0]
         # Save results to CSV
-        wasteandmaterial_file_name = NAME.replace(" ", "")
-        wasteandmaterial_file = os.path.join(
-            dir_searchwaste_results, wasteandmaterial_file_name
-        )
+        T_reX_file_name = NAME.replace(" ", "")
+        T_reX_file = os.path.join(dir_searchwaste_results, T_reX_file_name)
         df_results["database"] = DBNAME
         if df_results.shape[0] != 0:
-            df_results.to_csv(wasteandmaterial_file + ".csv", sep=";")
+            df_results.to_csv(T_reX_file + ".csv", sep=";")
 
         # Log the results
         log_entry = (

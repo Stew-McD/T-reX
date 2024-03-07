@@ -1,14 +1,14 @@
-# WasteAndMaterialFootprint
+# T-reX: tracking 'waste' and other materials to try to advance the 'circular economy' (formerly "WasteAndMaterialFootprint)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10431181.svg)](https://doi.org/10.5281/zenodo.10431180)
 
 A program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints.
 
-Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/WasteAndMaterialFootprint-publication)
+Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX-publication)
 
 ## Documentation
 
-The documentation is available as a [website](https://wasteandmaterialfootprint.readthedocs.io/en/latest/). Also, as a  [pdf](https://wasteandmaterialfootprint.readthedocs.io/_/downloads/en/latest/pdf/).
+The documentation is available as a [website](https://T-reX.readthedocs.io/en/latest/). Also, as a  [pdf](https://T-reX.readthedocs.io/_/downloads/en/latest/pdf/).
 
 The documentation is still under development, but the code is well documented and there is a full API reference.
 
@@ -18,7 +18,7 @@ See the example output [here](examples/package_test/example-output.pdf)
 
 ## Contents
 
-- [WasteAndMaterialFootprint](#wasteandmaterialfootprint)
+- [T-reX: tracking 'waste' and other materials to try to advance the 'circular economy' (formerly "WasteAndMaterialFootprint)](#t-rex-tracking-waste-and-other-materials-to-try-to-advance-the-circular-economy-formerly-wasteandmaterialfootprint)
   - [Documentation](#documentation)
   - [Contents](#contents)
   - [Installation](#installation)
@@ -64,28 +64,28 @@ The main dependencies are:
 For example:
 
   ```bash
-  python -m venv wmf
-  source wmf/bin/activate
+  python -m venv T-reX
+  source T-reX/bin/activate
   ```
 
 You can then clone the repo with the command:
 
   ```bash
-  git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+  git clone https://github.com/Stew-McD/T-reX.git
   ```
 
 The easiest way is to install the program as an editable package. This will install the program and all of the dependencies, and allow you to easily edit the code and the configuration and run it without having to reinstall it.
 
   ```bash
-  cd WasteAndMaterialFootprint
+  cd T-reX
   pip install -e .
   ```
 
  and then run:
 
   ```bash
-  cd WasteAndMaterialFootprint
-  python src/WasteAndMaterialFootprint/main.py
+  cd T-reX
+  python src/T-reX/main.py
   ```
 
 If you only clone or download the repo without installing it, this will not install any of the dependencies, so you will need to install them manually if you don't already have them.
@@ -99,20 +99,20 @@ You can do that with this command:
 Another option: the program can be installed using pip:
 
   ```bash
-  pip install WasteAndMaterialFootprint
+  pip install T-reX
   ```
 
 Or, if you want to install the latest version from GitHub:
 
   ```bash
-  pip install git+https://github.com/Stew-McD/WasteAndMaterialFootprint.git
+  pip install git+https://github.com/Stew-McD/T-reX.git
   ```
 
 or for an editable install from GitHub:
 
   ```bash
-  git clone https://github.com/Stew-McD/WasteAndMaterialFootprint.git
-  cd WasteAndMaterialFootprint
+  git clone https://github.com/Stew-McD/T-reX.git
+  cd T-reX
   pip install -e .
   ```
 
@@ -122,10 +122,10 @@ The program can be used directly from the command line, or imported as a Python 
 
 ### Command line
 
-You should clone the repo, navigate to the `WasteAndMaterialFootprint` folder, and then run the program using:
+You should clone the repo, navigate to the `T-reX` folder, and then run the program using:
 
   ```bash
-      python src/WasteAndMaterialFootprint/main.py
+      python src/T-reX/main.py
   ```
 
 ### Python module
@@ -133,19 +133,19 @@ You should clone the repo, navigate to the `WasteAndMaterialFootprint` folder, a
 The program can be imported as a Python module:
 
   ```python
-      import WasteAndMaterialFootprint as wmf
-      wmf.run()
+      import T-reX as T-reX
+      T-reX.run()
   ```
 
 ## Configuration
 
-You can find the configuration files in the `config` folder (`src/WasteAndMaterialFootprint/config`). Or if you install it with pip, you can find the config folder in the `site-packages/WasteAndMaterialFootprint/config` folder of your Python venv installation.
+You can find the configuration files in the `config` folder (`src/T-reX/config`). Or if you install it with pip, you can find the config folder in the `site-packages/T-reX/config` folder of your Python venv installation.
 
 If you have installed via pip, or want to have things separate, you can create a new folder somewhere and then run some built-in functions to create and reload the config files.
 
   ```python
-      import WasteAndMaterialFootprint as wmf
-      wmf.create_config()
+      import T-reX as T-reX
+      T-reX.create_config()
   ```
 
 This will create a folder `config` in the current working directory containing the default configuration files (see below).
@@ -153,7 +153,7 @@ This will create a folder `config` in the current working directory containing t
 You can then edit these files with some kind of text editor, and run:
 
   ```python
-      wmf.reload_config()
+      T-reX.reload_config()
   ```
 
 Note that you will need to close the Python session and start a new one to reload the config files.
@@ -161,18 +161,18 @@ Note that you will need to close the Python session and start a new one to reloa
 If you want to revert to the default config files, you can run:
 
   ```python
-      wmf.reset_config()
+      T-reX.reset_config()
   ```
 
 And then close and restart the Python session.
 
-If you are running the program as an editable package, you can edit the config files directly in the `src/WasteAndMaterialFootprint/config` folder.
+If you are running the program as an editable package, you can edit the config files directly in the `src/T-reX/config` folder.
 
 Details of the configuration files are given below.
 
 ### General settings: `user_settings.py`
 
-This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named `default` and copy that to a new project named `SSP-cutoff`, which is then copied to a new project named `WMFootprint-SSP-cutoff`.
+This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named `default` and copy that to a new project named `SSP-cutoff`, which is then copied to a new project named `T_reXootprint-SSP-cutoff`.
 
 Doing it this way isolates the components and allows you to keep your original brightway2 project as it was. If space is an issue, you can set all of the project names to be the same.
 
@@ -184,21 +184,21 @@ If you are happy with the default settings, you can just run the program and it 
 
       # Choose whether to use premise to create future scenario databases 
       use_premise = True
-      # Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
-      use_wmf = True
+      # Choose whether to use T-reX to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
+      use_T_reX = True
 
       # Choose the names of the projects to use
       project_premise_base = "default"
       project_premise = "SSP-cutoff"
       project_base = project_premise
-      project_wmf = f"WMFootprint-{project_base}"
+      project_T_reX = f"T_reXootprint-{project_base}"
 
-      # Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)
+      # Choose the name of the database to use (needed for premise only, the T-reX tool will run all databases except the biospheres)
       database_name = "ecoinvent-3.9.1-cutoff"
 
       # if you want to use a fresh project
       delete_existing_premise_project = False
-      delete_existing_wmf_project = False
+      delete_existing_T_reX_project = False
 
       # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
       # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
@@ -249,7 +249,7 @@ You can achieve this by setting the following in `user_settings.py`:
 
 ### Material Search Settings: `queries_materials.py`
 
-The `queries_materials` module creates demand methods in the WasteAndMaterialFootprint tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.
+The `queries_materials` module creates demand methods in the T-reX tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.
 
 This function uses the string tests `startswith` in `SearchMaterial.py` to identify activities beginning with the specified material name. This allows one to be more specific with the search terms (the `,` can be critical sometimes).
 
@@ -296,7 +296,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
 
 ### License
 
-WasteAndMaterialFootprint by Stewart Charles McDowall is marked with CC0 1.0 Universal, do whatever you want with it - see the [LICENSE](LICENSE) file for details
+T-reX by Stewart Charles McDowall is marked with CC0 1.0 Universal, do whatever you want with it - see the [LICENSE](LICENSE) file for details
 
 ### Citation
 

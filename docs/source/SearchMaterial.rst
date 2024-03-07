@@ -12,7 +12,7 @@ classifications, and saves this information in CSV format. It also extracts and 
 Search queries
 --------------
 
-The module `queries_material.py` contains the list of materials used to create demand methods in the WasteAndMaterialFootprint tool. 
+The module `queries_material.py` contains the list of materials used to create demand methods in the T-reX tool. 
 The materials are chosen to match activities in the ecoinvent v3.9.1 database and future databases made with 
 premise, and to align with the EU CRM list 2023. Additional strategic materials are included, along with some other 
 materials of interest.

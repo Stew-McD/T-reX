@@ -17,9 +17,9 @@ print(f"Reading SVG files from directory: {svg_dir}")
 print(f'{"*"*50}')
 
 # Define the layout and title
-title = "WasteAndMaterialFootprint --- Scatter plots of individual methods"
+title = "T-reX --- Scatter plots of individual methods"
 columns = 3
-figures = [f for f in os.listdir(svg_dir) if f.endswith('.svg')]
+figures = [f for f in os.listdir(svg_dir) if f.endswith(".svg")]
 figures = sorted(figures, reverse=True)
 figures_count = len(figures)
 rows = figures_count // columns + (1 if figures_count % columns else 0)
@@ -39,7 +39,9 @@ print(f"Each SVG size: {round(img_width, 2)}x{round(img_height, 2)} units.")
 title_height = 50  # Adjust as needed
 page_width = columns * img_width
 page_height = rows * img_height + title_height
-print(f"Creating a single-page PDF with size: {round(page_width,2)}x{round(page_height,2)} units.")
+print(
+    f"Creating a single-page PDF with size: {round(page_width,2)}x{round(page_height,2)} units."
+)
 
 # Create a PDF file
 c = canvas.Canvas("combined_methods.pdf", pagesize=(page_width, page_height))
@@ -47,16 +49,16 @@ c = canvas.Canvas("combined_methods.pdf", pagesize=(page_width, page_height))
 # Add the title
 c.setFont("Libertine", 16)  # Set Libertine font and size for the title
 title_width = c.stringWidth(title, "Libertine", 16)
-c.drawString((page_width - title_width) / 2, page_height - 35, title)  # Center the title
+c.drawString(
+    (page_width - title_width) / 2, page_height - 35, title
+)  # Center the title
 
 # Add metadata
-c.setTitle("WasteAndMaterialFootprint: Scatter Plots of Individual Methods")  # PDF Title
+c.setTitle("T-reX: Scatter Plots of Individual Methods")  # PDF Title
 c.setAuthor("Stewart Charles McDowall")  # Author's name
 
 
-
 print("Starting to add SVG files to the PDF...")
-
 
 
 count_figures = len(figures)

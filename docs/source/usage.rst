@@ -6,13 +6,13 @@ The program can be used directly from the command line, or imported as a Python 
 Command Line
 ------------
 
-You should clone the repo, navigate to the ``WasteAndMaterialFootprint`` folder, and then run the program using:
+You should clone the repo, navigate to the ``T-reX`` folder, and then run the program using:
 
 .. code-block:: bash
 
-    python src/WasteAndMaterialFootprint/main.py
+    python src/T-reX/main.py
 
-Configuration files can be found in `src/WasteAndMaterialFootprint/config/`. These can be edited before running the main script.
+Configuration files can be found in `src/T-reX/config/`. These can be edited before running the main script.
 
 Python Module
 -------------
@@ -21,28 +21,28 @@ The program can be imported as a Python module if it has been installed with pip
 
 .. code-block:: python
 
-    import WasteAndMaterialFootprint as wmf
-    wmf.run()
+    import T-reX as T-reX
+    T-reX.run()
 
-As with the command line, the configuration files can be found in `src/WasteAndMaterialFootprint/config/`. These can be edited before running the main script.
+As with the command line, the configuration files can be found in `src/T-reX/config/`. These can be edited before running the main script.
 It is also possible to edit the configuration settings directly in the Python script, and accessed in interactive terminal sessions like iPython and Jupyter.
 For example:
 
 .. code-block:: python
 
-    >>> import WasteAndMaterialFootprint as wmf
+    >>> import T-reX as T-reX
     
-    >>> wmf.user_settings.use_premise
+    >>> T-reX.user_settings.use_premise
     True
-    >>> wmf.user_settings.use_wmf
+    >>> T-reX.user_settings.use_T_reX
     False
-    >>> wmf.user_settings.use_wmf = True
-    >>> wmf.user_settings.use_wmf
+    >>> T-reX.user_settings.use_T_reX = True
+    >>> T-reX.user_settings.use_T_reX
     True
-    >>> wmf.user_settings.project_base
+    >>> T-reX.user_settings.project_base
     'SSP-cutoff'
-    >>> wmf.user_settings.project_base = "other project"
-    >>> wmf.user_settings.project_base
+    >>> T-reX.user_settings.project_base = "other project"
+    >>> T-reX.user_settings.project_base
     'other project'
 
 
@@ -50,34 +50,34 @@ The individual modules can also be imported and used separately. For example:
 
 .. code-block:: python
 
-    .. import WasteAndMaterialFootprint as wmf
+    .. import T-reX as T-reX
     
     .. # only use premise
-    .. wmf.FutureScenarios.MakeFutureScenarios()
+    .. T-reX.FutureScenarios.MakeFutureScenarios()
 
     .. # only do waste or material searches
     .. database = 'my database'
     .. project = 'my project'
-    .. wmf.ExplodeDatabase(project, database)
-    .. wmf.SearchWaste(project, database)
-    .. wmf.SearchMaterial(project, database)
+    .. T-reX.ExplodeDatabase(project, database)
+    .. T-reX.SearchWaste(project, database)
+    .. T-reX.SearchMaterial(project, database)
 
     .. # check databases
 
-    .. wmf.VerifyDatabase(project, database)
+    .. T-reX.VerifyDatabase(project, database)
 
     .. # or with the internal settings:
 
-    .. database = wmf.user_settings.database_name
+    .. database = T-reX.user_settings.database_name
     
     .. # check original database
-    .. project_base = wmf.user_settings.project_base
-    .. wmf.VerifyDatabase(project_base, database)
+    .. project_base = T-reX.user_settings.project_base
+    .. T-reX.VerifyDatabase(project_base, database)
     .. # (this will return '0', because it was not edited)
     
     .. # check final database
-    .. project = wmf.user_settings.project_wmf
-    .. wmf.VerifyDatabase(project, database)
+    .. project = T-reX.user_settings.project_T_reX
+    .. T-reX.VerifyDatabase(project, database)
     .. # (this will return '1', if it was edited correctly)
 
     

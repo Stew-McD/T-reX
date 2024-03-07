@@ -2,8 +2,8 @@
 VerifyDatabase Module
 =====================
 
-This module contains a function to verify a (WasteAndMaterialFootprint) database 
-within a given project in Brightway2. It performs a verification by calculating LCA scores 
+This module contains a function to verify a (T-reX) database
+within a given project in Brightway2. It performs a verification by calculating LCA scores
 for random activities within the specified database using selected methods.
 """
 
@@ -52,11 +52,9 @@ def VerifyDatabase(
         exit_code = 1
         return exit_code
 
-    # screen for biosphere and WasteAndMaterialFootprint databases
+    # screen for biosphere and T-reX databases
 
-    if any(
-        word in database_name for word in ["biosphere", "WasteAndMaterialFootprint"]
-    ):
+    if any(word in database_name for word in ["biosphere", "T-reX"]):
         print(f"Skipping {database_name}...")
         exit_code = 0
         return exit_code
@@ -132,9 +130,7 @@ def VerifyDatabase(
 
 
 if __name__ == "__main__":
-    project_name = (
-        "WMF-default"  # change this to the name of your project to run it independently
-    )
+    project_name = "T-reX-default"  # change this to the name of your project to run it independently
     database_name = "ecoinvent-3.9.1-cutoff"  # also this
     exit_code = VerifyDatabase(
         project_name, database_name, check_material=True, check_waste=True, log=True

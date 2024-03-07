@@ -2,9 +2,9 @@
 SearchMaterial Module
 =====================
 
-This script loads data from '<db name>_exploded.pickle', runs search queries, 
-and produces a CSV to store the results and a log entry. The search queries are 
-formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND, 
+This script loads data from '<db name>_exploded.pickle', runs search queries,
+and produces a CSV to store the results and a log entry. The search queries are
+formatted as dictionaries with fields NAME, CODE, and search terms keywords_AND,
 keywords_OR, and keywords_NOT. These queries are defined in `config/queries_waste.py`.
 
 """
@@ -20,11 +20,11 @@ from config.user_settings import (
     dir_logs,
     dir_searchmaterial_results,
     dir_tmp,
-    project_wmf,
+    project_T_reX,
 )
 
 
-def SearchMaterial(db_name, project_wmf=project_wmf):
+def SearchMaterial(db_name, project_T_reX=project_T_reX):
     """
     Search for materials in a specified database and extract related information.
 
@@ -34,7 +34,7 @@ def SearchMaterial(db_name, project_wmf=project_wmf):
     It also extracts related material exchanges and saves them to another CSV file.
 
     :param db_name: The name of the database to search in.
-    :param project_wmf: The Brightway2 project to set as current for the search.
+    :param project_T_reX: The Brightway2 project to set as current for the search.
     :return: None
     :raises Exception: If there is any error in reading the materials list from the file.
     """
@@ -62,12 +62,12 @@ def SearchMaterial(db_name, project_wmf=project_wmf):
         return
 
     # Set the current project
-    bd.projects.set_current(project_wmf)
+    bd.projects.set_current(project_T_reX)
 
     # Load the database
     db = bd.Database(db_name)
     print(
-        f"\n*** Loading activities \nfrom database: {db.name} \nin project: {project_wmf}"
+        f"\n*** Loading activities \nfrom database: {db.name} \nin project: {project_T_reX}"
     )
 
     # Extracting activities from the database

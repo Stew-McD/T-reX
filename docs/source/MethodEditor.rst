@@ -1,7 +1,7 @@
 MethodEditor
 ============
 
-The MethodEditor module is a key component of the WasteAndMaterialFootprint tool, offering functionalities 
+The MethodEditor module is a key component of the T-reX tool, offering functionalities 
 to manage methods related to waste and material footprints in a project. This module is instrumental in 
 adding, deleting, and checking methods within the context of environmental impact assessments.
 
@@ -30,13 +30,13 @@ Important Code Snippets
         if m_type == "waste":
             name_combined = m_code.split(" ")[0] + " combined"
             method_key = (
-                "WasteAndMaterialFootprint",
+                "T-reX",
                 "Waste: " + name_combined,
                 m_code,
             )
             description = "For estimating the waste footprint of an activity"
         else:
-            method_key = ("WasteAndMaterialFootprint", "Demand: " + m_code, m_code)
+            method_key = ("T-reX", "Demand: " + m_code, m_code)
             description = "For estimating the material demand footprint of an activity"
 
         # ... end snippet ...
@@ -60,16 +60,16 @@ Important Code Snippets
     def CheckMethods():
         # ... snippet to show how methods are accessed ...
 
-        methods_wasteandmaterial = [
+        methods_T_reX = [
             x for x in list(bd.methods) if "WasteAndMaterial Footprint" == x[0]
         ]
 
-        for m in methods_wasteandmaterial:
+        for m in methods_T_reX:
             method = bd.Method(m)
             print(method.load())
             print(method.metadata)
 
-        print(len(methods_wasteandmaterial))
+        print(len(methods_T_reX))
 
         # ... end snippet ...
 

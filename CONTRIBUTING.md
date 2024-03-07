@@ -1,8 +1,8 @@
-# Contributing to WasteAndMaterialFootprint
+# Contributing to T-reX
 
-We welcome contributions to the WasteAndMaterialFootprint project. This document outlines the process for contributing to the project's development. Your input is valuable, and we appreciate your support in making this tool more effective and accessible.
+We welcome contributions to the T-reX project. This document outlines the process for contributing to the project's development. Your input is valuable, and we appreciate your support in making this tool more effective and accessible.
 
-At the very least, you can contribute by reporting bugs or suggesting improvements in the issues section of the repository. If you're interested in contributing code, please read the following guidelines. It can be intimidating at first, it was for me, but it's not as hard as it seems. If you have any questions, please feel free to reach out to me at [wmf@scmcd.ch](wmf@scmcd.ch)
+At the very least, you can contribute by reporting bugs or suggesting improvements in the issues section of the repository. If you're interested in contributing code, please read the following guidelines. It can be intimidating at first, it was for me, but it's not as hard as it seems. If you have any questions, please feel free to reach out to me at [T-reX@scmcd.ch](T-reX@scmcd.ch)
 
 ## Types of Contributions
 
@@ -15,21 +15,21 @@ At the very least, you can contribute by reporting bugs or suggesting improvemen
 
 ### Setting Up Your Environment
 
-1. **Fork the Repository**: Start by forking the [WasteAndMaterialFootprint repository](https://github.com/Stew-McD/WasteAndMaterialFootprint.git) on GitHub.
+1. **Fork the Repository**: Start by forking the [T-reX repository](https://github.com/Stew-McD/T-reX.git) on GitHub.
 
 2. **Clone Your Fork**: Clone your fork to your local machine using the command:
 
    ```bash
-   git clone https://github.com/[your-username]/WasteAndMaterialFootprint.git
+   git clone https://github.com/[your-username]/T-reX.git
    ```
 
 3. **Set Up a Development Environment**: We recommend using a virtual environment. For example:
 
    ```bash
-   python -m venv wmf-env
-   source wmf-env/bin/activate
-   git clone http://github.com/Stew-McD/WasteAndMaterialFootprint.git
-   cd WasteAndMaterialFootprint
+   python -m venv T-reX-env
+   source T-reX-env/bin/activate
+   git clone http://github.com/Stew-McD/T-reX.git
+   cd T-reX
    pip install -e .
    ```
 

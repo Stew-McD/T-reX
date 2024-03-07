@@ -2,7 +2,7 @@
 queries_materials Module
 ========================
 
-This module contains the list of materials that will be used to create demand methods in the WasteAndMaterialFootprint tool. The materials are specifically chosen to match with the activities in the ecoinvent v3.9.1 database (and the future databases made with premise) and to align with the EU CRM list 2023. Additional strategic materials are also included, as well as other materials of interest.
+This module contains the list of materials that will be used to create demand methods in the T-reX tool. The materials are specifically chosen to match with the activities in the ecoinvent v3.9.1 database (and the future databases made with premise) and to align with the EU CRM list 2023. Additional strategic materials are also included, as well as other materials of interest.
 
 Note:
 -----
@@ -11,7 +11,7 @@ Note:
 
 queries_materials
 -----------------
-List of tuples where each tuple contains the activity name (as appears in the database) and its corresponding material category. This list is used for creating demand methods in the WasteAndMaterialFootprint tool.
+List of tuples where each tuple contains the activity name (as appears in the database) and its corresponding material category. This list is used for creating demand methods in the T-reX tool.
 """
 
 list_materials = [
@@ -78,13 +78,14 @@ list_materials = [
     ("market for zirconium", "zirconium"),
 ]
 
+
 def get_queries_materials(list_materials):
-    """ Just a wrapper to return the list of materials
-    
+    """Just a wrapper to return the list of materials
+
     args: list_materials
     returns: list queries_materials
     """
-    
+
     return list_materials
 
 

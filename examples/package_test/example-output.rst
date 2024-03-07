@@ -4,9 +4,9 @@
     main Module
     ===========
     
-    Main module of the `WasteAndMaterialFootprint` tool.
+    Main module of the `T-reX` tool.
     
-    This script serves as the entry point for the `WasteAndMaterialFootprint` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges. 
+    This script serves as the entry point for the `T-reX` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges. 
     
     The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.
     
@@ -77,18 +77,18 @@
     # import configuration from config/user_settings.py
     from config.user_settings import (
         custom_bw2_dir,
-        db_wmf_name,
-        delete_wmf_project,
+        db_T_reX_name,
+        delete_T_reX_project,
         dir_logs,
         dir_tmp,
         dir_config,
         generate_args_list,
         project_base,
         project_premise,
-        project_wmf,
+        project_T_reX,
         use_multiprocessing,
         use_premise,
-        use_wmf,
+        use_T_reX,
         do_search,
         do_methods,
         do_edit,
@@ -100,14 +100,14 @@
         os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
     
     
-    # 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
+    # 1. DEFINE MAIN FUNCTION: T-reX()
     def run():
         """
-        Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
+        Main function serving as the wrapper for the T-reX tool.
     
         This function coordinates the various components of the tool, including:
             creating future scenario databases,
-            setting up and processing each database for waste and material footprinting,
+            setting up and processing each database for T-reX footprinting,
             and combining results into a custom database.
             adding LCIA methods to the project for each of the waste/material flows.
     
@@ -118,7 +118,7 @@
             f"""
         {80*'='}
         {80*'~'}
-        {'** Starting the WasteAndMaterialFootprint tool **'.center(80, ' ')}
+        {'** Starting the T-reX tool **'.center(80, ' ')}
         {80*'~'}
         {80*'='}
         """
@@ -127,7 +127,7 @@
         if use_premise:
             MakeFutureScenarios()
     
-        assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
+        assert use_T_reX, "use_T_reX is False, so T-reX will not run"
     
         start_time = datetime.now()
         args_list = generate_args_list(single_database=single_database)
@@ -135,29 +135,29 @@
         all_databases = list(set(bd.databases) - {"biosphere3"})
     
         print(
-            f"\nStarting WasteAndMaterialFootprint for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
+            f"\nStarting T-reX for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
         )
         for arg in args_list:
             print(f"\t{arg['db_name']}")
     
         # Make new project, delete previous project if you want to start over, or use existing project
         bd.projects.purge_deleted_directories()
-        if project_wmf in bd.projects and delete_wmf_project:
-            print(f"\n* Deleting previous project {project_wmf}")
-            bd.projects.delete_project(project_wmf, True)
+        if project_T_reX in bd.projects and delete_T_reX_project:
+            print(f"\n* Deleting previous project {project_T_reX}")
+            bd.projects.delete_project(project_T_reX, True)
             bd.projects.purge_deleted_directories()
     
-        if project_wmf in bd.projects:
-            print(f"* WasteAndMaterial project already exists: {project_wmf}")
-            bd.projects.set_current(project_wmf)
+        if project_T_reX in bd.projects:
+            print(f"* WasteAndMaterial project already exists: {project_T_reX}")
+            bd.projects.set_current(project_T_reX)
     
-        if project_wmf not in bd.projects:
+        if project_T_reX not in bd.projects:
             print(
-                f"\n* Project {project_base} will be copied to a new project: {project_wmf}"
+                f"\n* Project {project_base} will be copied to a new project: {project_T_reX}"
             )
             bd.projects.set_current(project_base)
-            bd.projects.copy_project(project_wmf)
-            bd.projects.set_current(project_wmf)
+            bd.projects.copy_project(project_T_reX)
+            bd.projects.set_current(project_T_reX)
     
         # 1.1 Run the initial steps for each database in the project
         def process_db_setup(args, db_number, total_databases):
@@ -284,7 +284,7 @@
         print("\t*** Verifying all databases in the project **")
         for arg in args_list:
             db_name = arg["db_name"]
-            VerifyDatabase(project_wmf, db_name)
+            VerifyDatabase(project_T_reX, db_name)
             print(f'\n{"-"*80}\n')
     
         try:
@@ -296,10 +296,10 @@
             f"""
         {80 * '~'}
         {80 * '='}
-        {'WasteAndMaterialFootprint Completed'.center(80, ' ')}
+        {'T-reX Completed'.center(80, ' ')}
         {'~' * 80}
     
-        Project:                  {project_wmf}
+        Project:                  {project_T_reX}
         Total Databases:          {total_databases}
         Successfully Processed:   {successful_count}
         Duration:                 {str(duration).split('.')[0]} (h:m:s)
@@ -344,11 +344,11 @@
         :returns: None
         """
     
-        project_wmf = args["project_wmf"]
+        project_T_reX = args["project_T_reX"]
         db_name = args["db_name"]
     
         print(
-            f"\n{'='*100}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*100}"
+            f"\n{'='*100}\n\t Starting T-reX for {db_name}\n{'='*100}"
         )
     
         # 1.2 Explode the database into separate exchanges
@@ -359,9 +359,9 @@
         else:
             ExplodeDatabase(db_name)
     
-        # 1.3 Search the exploded database for waste and material flows
+        # 1.3 Search the exploded database for T-reX flows
         SearchWaste(db_name)
-        SearchMaterial(db_name, project_wmf)
+        SearchMaterial(db_name, project_T_reX)
     
         return None
     
@@ -370,7 +370,7 @@
         """
         Edit exchanges in the database.
     
-        This function adds waste and material flows to the activities and verifies the database.
+        This function adds T-reX flows to the activities and verifies the database.
     
         :param args: Dictionary containing database and project settings.
         :returns: None
@@ -378,10 +378,10 @@
     
         db_name = args["db_name"]
         start = datetime.now()
-        # Add waste and material flows to the activities, check that it worked
+        # Add T-reX flows to the activities, check that it worked
     
-        ExchangeEditor(project_wmf, db_name, db_wmf_name)
-        exit_code = VerifyDatabase(project_wmf, db_name)
+        ExchangeEditor(project_T_reX, db_name, db_T_reX_name)
+        exit_code = VerifyDatabase(project_T_reX, db_name)
     
         if exit_code == 0:
             print("** Database verified successfully! **\n")
@@ -393,7 +393,7 @@
         duration = datetime.now() - start
         print(f"{'='*90}")
         print(
-            f"\t*** Finished WasteAndMaterialFootprint for {db_name} ***\n\t\t\tDuration: {str(duration).split('.')[0]} (h:m:s)"
+            f"\t*** Finished T-reX for {db_name} ***\n\t\t\tDuration: {str(duration).split('.')[0]} (h:m:s)"
         )
         print("\t*** Woah woah wee waa, great success!! ***")
         print(f"{'='*90}")
@@ -423,7 +423,7 @@
     
         ================================================================================
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                       ** Starting the WasteAndMaterialFootprint tool **                
+                       ** Starting the T-reX tool **                
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ================================================================================
         
@@ -825,9 +825,9 @@
       Memory %: 29.72
     Created database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2100
     Generate scenario report.
-    Report saved under /home/stew/code/gh/WasteAndMaterialFootprint/data/premise/export/scenario_report.
+    Report saved under /home/stew/code/gh/T-reX/data/premise/export/scenario_report.
     Generate change report.
-    Report saved under /home/stew/code/gh/WasteAndMaterialFootprint/data/premise.
+    Report saved under /home/stew/code/gh/T-reX/data/premise.
     
      ** Processing scenario set 2 of 2, batch size 2 **
     
@@ -884,9 +884,9 @@
       Memory %: 31.00
     Created database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100
     Generate scenario report.
-    Report saved under /home/stew/code/gh/WasteAndMaterialFootprint/data/premise/export/scenario_report.
+    Report saved under /home/stew/code/gh/T-reX/data/premise/export/scenario_report.
     Generate change report.
-    Report saved under /home/stew/code/gh/WasteAndMaterialFootprint/data/premise.
+    Report saved under /home/stew/code/gh/T-reX/data/premise.
     Adding ('IPCC 2021', 'climate change', 'GWP 20a, incl. H')
     Applying strategy: csv_restore_tuples
     Applying strategy: csv_numerize
@@ -933,7 +933,7 @@
     Wrote 1 LCIA methods with 248 characterization factors
     ***** Done! *****
     
-    Starting WasteAndMaterialFootprint for 5/5 databases in project SSP-cutoff_test
+    Starting T-reX for 5/5 databases in project SSP-cutoff_test
     --------------------------------------------------
     	ecoinvent-3.9.1-cutoff
     	ecoinvent_cutoff_3.9_remind_SSP2-Base_2065
@@ -941,22 +941,22 @@
     	ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065
     	ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100
     
-    * Project SSP-cutoff_test will be copied to a new project: WMFootprint-SSP-cutoff_test
+    * Project SSP-cutoff_test will be copied to a new project: T_reXootprint-SSP-cutoff_test
     
     --------------------------------------------------------------------------------
     
     ** Pre-processing database (1/5): ecoinvent-3.9.1-cutoff**
     
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_T_reX_name': 'T-reX'}
     
     ====================================================================================================
-    	 Starting WasteAndMaterialFootprint for ecoinvent-3.9.1-cutoff
+    	 Starting T-reX for ecoinvent-3.9.1-cutoff
     ====================================================================================================
     
     *** Starting ExplodeDatabase ***
     ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
     
-    ** db: ecoinvent-3.9.1-cutoff, in project: WMFootprint-SSP-cutoff_test will be processed
+    ** db: ecoinvent-3.9.1-cutoff, in project: T_reXootprint-SSP-cutoff_test will be processed
     
     ** Opening the sausage...
     Getting activity data
@@ -1028,7 +1028,7 @@
     
     *** Loading activities 
     from database: ecoinvent-3.9.1-cutoff 
-    in project: WMFootprint-SSP-cutoff_test
+    in project: T_reXootprint-SSP-cutoff_test
     
     ** Materials (59) | (activity, group)
     	('market for aluminium', 'aluminium')
@@ -1124,7 +1124,7 @@
     
     
     Saved activities list to csv: 
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_activities.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_activities.csv
     
     *** Searching for material exchanges in ecoinvent-3.9.1-cutoff ***
     
@@ -1133,7 +1133,7 @@
     There were 50387 matching exchanges found in ecoinvent-3.9.1-cutoff
     
     Saved material exchanges to csv:
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_exchanges.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_exchanges.csv
     
     *** Grouping material exchanges by material group 
     
@@ -1197,16 +1197,16 @@
     
     ** Pre-processing database (2/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2065**
     
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2065', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2065', 'db_T_reX_name': 'T-reX'}
     
     ====================================================================================================
-    	 Starting WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-Base_2065
+    	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2065
     ====================================================================================================
     
     *** Starting ExplodeDatabase ***
     ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
     
-    ** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2065, in project: WMFootprint-SSP-cutoff_test will be processed
+    ** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2065, in project: T_reXootprint-SSP-cutoff_test will be processed
     
     ** Opening the sausage...
     Getting activity data
@@ -1278,7 +1278,7 @@
     
     *** Loading activities 
     from database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 
-    in project: WMFootprint-SSP-cutoff_test
+    in project: T_reXootprint-SSP-cutoff_test
     
     ** Materials (59) | (activity, group)
     	('market for aluminium', 'aluminium')
@@ -1367,7 +1367,7 @@
     		Inferring from reference product base: "graphite", from reference product "graphite, battery grade"
     
     Saved activities list to csv: 
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2065/material_activities.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2065/material_activities.csv
     
     *** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 ***
     
@@ -1376,7 +1376,7 @@
     There were 51396 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-Base_2065
     
     Saved material exchanges to csv:
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2065/material_exchanges.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2065/material_exchanges.csv
     
     *** Grouping material exchanges by material group 
     
@@ -1440,16 +1440,16 @@
     
     ** Pre-processing database (3/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2100**
     
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2100', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2100', 'db_T_reX_name': 'T-reX'}
     
     ====================================================================================================
-    	 Starting WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-Base_2100
+    	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2100
     ====================================================================================================
     
     *** Starting ExplodeDatabase ***
     ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
     
-    ** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2100, in project: WMFootprint-SSP-cutoff_test will be processed
+    ** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2100, in project: T_reXootprint-SSP-cutoff_test will be processed
     
     ** Opening the sausage...
     Getting activity data
@@ -1521,7 +1521,7 @@
     
     *** Loading activities 
     from database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 
-    in project: WMFootprint-SSP-cutoff_test
+    in project: T_reXootprint-SSP-cutoff_test
     
     ** Materials (59) | (activity, group)
     	('market for aluminium', 'aluminium')
@@ -1610,7 +1610,7 @@
     		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
     
     Saved activities list to csv: 
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2100/material_activities.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2100/material_activities.csv
     
     *** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 ***
     
@@ -1619,7 +1619,7 @@
     There were 51396 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-Base_2100
     
     Saved material exchanges to csv:
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2100/material_exchanges.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2100/material_exchanges.csv
     
     *** Grouping material exchanges by material group 
     
@@ -1683,16 +1683,16 @@
     
     ** Pre-processing database (4/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065**
     
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065', 'db_T_reX_name': 'T-reX'}
     
     ====================================================================================================
-    	 Starting WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065
+    	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065
     ====================================================================================================
     
     *** Starting ExplodeDatabase ***
     ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
     
-    ** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065, in project: WMFootprint-SSP-cutoff_test will be processed
+    ** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065, in project: T_reXootprint-SSP-cutoff_test will be processed
     
     ** Opening the sausage...
     Getting activity data
@@ -1764,7 +1764,7 @@
     
     *** Loading activities 
     from database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 
-    in project: WMFootprint-SSP-cutoff_test
+    in project: T_reXootprint-SSP-cutoff_test
     
     ** Materials (59) | (activity, group)
     	('market for aluminium', 'aluminium')
@@ -1866,7 +1866,7 @@
     		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
     
     Saved activities list to csv: 
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065/material_activities.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065/material_activities.csv
     
     *** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 ***
     
@@ -1875,7 +1875,7 @@
     There were 51396 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065
     
     Saved material exchanges to csv:
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065/material_exchanges.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065/material_exchanges.csv
     
     *** Grouping material exchanges by material group 
     
@@ -1939,16 +1939,16 @@
     
     ** Pre-processing database (5/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100**
     
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100', 'db_T_reX_name': 'T-reX'}
     
     ====================================================================================================
-    	 Starting WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100
+    	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100
     ====================================================================================================
     
     *** Starting ExplodeDatabase ***
     ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
     
-    ** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100, in project: WMFootprint-SSP-cutoff_test will be processed
+    ** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100, in project: T_reXootprint-SSP-cutoff_test will be processed
     
     ** Opening the sausage...
     Getting activity data
@@ -2020,7 +2020,7 @@
     
     *** Loading activities 
     from database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 
-    in project: WMFootprint-SSP-cutoff_test
+    in project: T_reXootprint-SSP-cutoff_test
     
     ** Materials (59) | (activity, group)
     	('market for aluminium', 'aluminium')
@@ -2109,7 +2109,7 @@
     		Inferring from reference product base: "lithium hydroxide", from reference product "lithium hydroxide, battery grade"
     
     Saved activities list to csv: 
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100/material_activities.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100/material_activities.csv
     
     *** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 ***
     
@@ -2118,7 +2118,7 @@
     There were 51396 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100
     
     Saved material exchanges to csv:
-    /home/stew/code/gh/WasteAndMaterialFootprint/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100/material_exchanges.csv
+    /home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100/material_exchanges.csv
     
     *** Grouping material exchanges by material group 
     
@@ -2179,11 +2179,11 @@
     --------------------------------------------------------------------------------
     
     
-    *** Writing custom database file: WasteAndMaterialFootprint
+    *** Writing custom database file: T-reX
     
     
     
-    *** Appending to existing custom database file: WasteAndMaterialFootprint
+    *** Appending to existing custom database file: T-reX
     
     	 Appending: MaterialFootprint_aluminium
     	 Appending: MaterialFootprint_antimony
@@ -2253,11 +2253,11 @@
     	 Appending: WasteFootprint_total-cubicmeter
     	 Appending: WasteFootprint_total-kilogram
     
-     ** Added 67 entries to the xlsx for the custom waste and material database:
-    	WasteAndMaterialFootprint
+     ** Added 67 entries to the xlsx for the custom T-reX database:
+    	T-reX
     
-    ** Importing the custom database WasteAndMaterialFootprint**
-    	 to the brightway2 project: WMFootprint-SSP-cutoff_test
+    ** Importing the custom database T-reX**
+    	 to the brightway2 project: T_reXootprint-SSP-cutoff_test
     
     ** Running BW2io ExcelImporter **
     
@@ -2290,7 +2290,7 @@
       Total time elapsed: 00:00:00
       CPU %: 0.00
       Memory %: 35.15
-    Created database: WasteAndMaterialFootprint
+    Created database: T-reX
     
     ** Database metadata **
     format: Excel
@@ -2305,73 +2305,73 @@
     
     *** Running AddMethods() ***
     
-    	 ('WasteAndMaterialFootprint', 'Demand: Aluminium', 'Aluminium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Antimony', 'Antimony')
-    	 ('WasteAndMaterialFootprint', 'Demand: Bauxite', 'Bauxite')
-    	 ('WasteAndMaterialFootprint', 'Demand: Beryllium', 'Beryllium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Borates', 'Borates')
-    	 ('WasteAndMaterialFootprint', 'Demand: Cadmium', 'Cadmium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Cement', 'Cement')
-    	 ('WasteAndMaterialFootprint', 'Demand: Cerium', 'Cerium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Chromium', 'Chromium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Coal', 'Coal')
-    	 ('WasteAndMaterialFootprint', 'Demand: Cobalt', 'Cobalt')
-    	 ('WasteAndMaterialFootprint', 'Demand: Coke', 'Coke')
-    	 ('WasteAndMaterialFootprint', 'Demand: Copper', 'Copper')
-    	 ('WasteAndMaterialFootprint', 'Demand: Dysprosium', 'Dysprosium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Electricity', 'Electricity')
-    	 ('WasteAndMaterialFootprint', 'Demand: Erbium', 'Erbium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Europium', 'Europium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Fluorspar', 'Fluorspar')
-    	 ('WasteAndMaterialFootprint', 'Demand: Gadolinium', 'Gadolinium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Gallium', 'Gallium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Gold', 'Gold')
-    	 ('WasteAndMaterialFootprint', 'Demand: Graphite', 'Graphite')
-    	 ('WasteAndMaterialFootprint', 'Demand: Helium', 'Helium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Holmium', 'Holmium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Hydrogen', 'Hydrogen')
-    	 ('WasteAndMaterialFootprint', 'Demand: Indium', 'Indium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Latex', 'Latex')
-    	 ('WasteAndMaterialFootprint', 'Demand: Lithium', 'Lithium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Magnesium', 'Magnesium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Natural gas', 'Natural gas')
-    	 ('WasteAndMaterialFootprint', 'Demand: Nickel', 'Nickel')
-    	 ('WasteAndMaterialFootprint', 'Demand: Palladium', 'Palladium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Petroleum', 'Petroleum')
-    	 ('WasteAndMaterialFootprint', 'Demand: Phosphate rock', 'Phosphate rock')
-    	 ('WasteAndMaterialFootprint', 'Demand: Platinum', 'Platinum')
-    	 ('WasteAndMaterialFootprint', 'Demand: Rare earth', 'Rare earth')
-    	 ('WasteAndMaterialFootprint', 'Demand: Rhodium', 'Rhodium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Sand', 'Sand')
-    	 ('WasteAndMaterialFootprint', 'Demand: Scandium', 'Scandium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Selenium', 'Selenium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Silicon', 'Silicon')
-    	 ('WasteAndMaterialFootprint', 'Demand: Silver', 'Silver')
-    	 ('WasteAndMaterialFootprint', 'Demand: Strontium', 'Strontium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Tantalum', 'Tantalum')
-    	 ('WasteAndMaterialFootprint', 'Demand: Tellurium', 'Tellurium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Tin', 'Tin')
-    	 ('WasteAndMaterialFootprint', 'Demand: Titanium', 'Titanium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Tungsten', 'Tungsten')
-    	 ('WasteAndMaterialFootprint', 'Demand: Uranium', 'Uranium')
-    	 ('WasteAndMaterialFootprint', 'Demand: Vegetable oil', 'Vegetable oil')
-    	 ('WasteAndMaterialFootprint', 'Demand: Water', 'Water')
-    	 ('WasteAndMaterialFootprint', 'Demand: Zinc', 'Zinc')
-    	 ('WasteAndMaterialFootprint', 'Demand: Zirconium', 'Zirconium')
-    	 ('WasteAndMaterialFootprint', 'Waste: Carbondioxide combined', 'Carbondioxide (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Composting combined', 'Composting (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Digestion combined', 'Digestion (m3)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Digestion combined', 'Digestion (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Hazardous combined', 'Hazardous (m3)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Hazardous combined', 'Hazardous (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Incineration combined', 'Incineration (m3)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Incineration combined', 'Incineration (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Landfill combined', 'Landfill (m3)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Landfill combined', 'Landfill (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Openburning combined', 'Openburning (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Recycling combined', 'Recycling (kg)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Total combined', 'Total (m3)')
-    	 ('WasteAndMaterialFootprint', 'Waste: Total combined', 'Total (kg)')
+    	 ('T-reX', 'Demand: Aluminium', 'Aluminium')
+    	 ('T-reX', 'Demand: Antimony', 'Antimony')
+    	 ('T-reX', 'Demand: Bauxite', 'Bauxite')
+    	 ('T-reX', 'Demand: Beryllium', 'Beryllium')
+    	 ('T-reX', 'Demand: Borates', 'Borates')
+    	 ('T-reX', 'Demand: Cadmium', 'Cadmium')
+    	 ('T-reX', 'Demand: Cement', 'Cement')
+    	 ('T-reX', 'Demand: Cerium', 'Cerium')
+    	 ('T-reX', 'Demand: Chromium', 'Chromium')
+    	 ('T-reX', 'Demand: Coal', 'Coal')
+    	 ('T-reX', 'Demand: Cobalt', 'Cobalt')
+    	 ('T-reX', 'Demand: Coke', 'Coke')
+    	 ('T-reX', 'Demand: Copper', 'Copper')
+    	 ('T-reX', 'Demand: Dysprosium', 'Dysprosium')
+    	 ('T-reX', 'Demand: Electricity', 'Electricity')
+    	 ('T-reX', 'Demand: Erbium', 'Erbium')
+    	 ('T-reX', 'Demand: Europium', 'Europium')
+    	 ('T-reX', 'Demand: Fluorspar', 'Fluorspar')
+    	 ('T-reX', 'Demand: Gadolinium', 'Gadolinium')
+    	 ('T-reX', 'Demand: Gallium', 'Gallium')
+    	 ('T-reX', 'Demand: Gold', 'Gold')
+    	 ('T-reX', 'Demand: Graphite', 'Graphite')
+    	 ('T-reX', 'Demand: Helium', 'Helium')
+    	 ('T-reX', 'Demand: Holmium', 'Holmium')
+    	 ('T-reX', 'Demand: Hydrogen', 'Hydrogen')
+    	 ('T-reX', 'Demand: Indium', 'Indium')
+    	 ('T-reX', 'Demand: Latex', 'Latex')
+    	 ('T-reX', 'Demand: Lithium', 'Lithium')
+    	 ('T-reX', 'Demand: Magnesium', 'Magnesium')
+    	 ('T-reX', 'Demand: Natural gas', 'Natural gas')
+    	 ('T-reX', 'Demand: Nickel', 'Nickel')
+    	 ('T-reX', 'Demand: Palladium', 'Palladium')
+    	 ('T-reX', 'Demand: Petroleum', 'Petroleum')
+    	 ('T-reX', 'Demand: Phosphate rock', 'Phosphate rock')
+    	 ('T-reX', 'Demand: Platinum', 'Platinum')
+    	 ('T-reX', 'Demand: Rare earth', 'Rare earth')
+    	 ('T-reX', 'Demand: Rhodium', 'Rhodium')
+    	 ('T-reX', 'Demand: Sand', 'Sand')
+    	 ('T-reX', 'Demand: Scandium', 'Scandium')
+    	 ('T-reX', 'Demand: Selenium', 'Selenium')
+    	 ('T-reX', 'Demand: Silicon', 'Silicon')
+    	 ('T-reX', 'Demand: Silver', 'Silver')
+    	 ('T-reX', 'Demand: Strontium', 'Strontium')
+    	 ('T-reX', 'Demand: Tantalum', 'Tantalum')
+    	 ('T-reX', 'Demand: Tellurium', 'Tellurium')
+    	 ('T-reX', 'Demand: Tin', 'Tin')
+    	 ('T-reX', 'Demand: Titanium', 'Titanium')
+    	 ('T-reX', 'Demand: Tungsten', 'Tungsten')
+    	 ('T-reX', 'Demand: Uranium', 'Uranium')
+    	 ('T-reX', 'Demand: Vegetable oil', 'Vegetable oil')
+    	 ('T-reX', 'Demand: Water', 'Water')
+    	 ('T-reX', 'Demand: Zinc', 'Zinc')
+    	 ('T-reX', 'Demand: Zirconium', 'Zirconium')
+    	 ('T-reX', 'Waste: Carbondioxide combined', 'Carbondioxide (kg)')
+    	 ('T-reX', 'Waste: Composting combined', 'Composting (kg)')
+    	 ('T-reX', 'Waste: Digestion combined', 'Digestion (m3)')
+    	 ('T-reX', 'Waste: Digestion combined', 'Digestion (kg)')
+    	 ('T-reX', 'Waste: Hazardous combined', 'Hazardous (m3)')
+    	 ('T-reX', 'Waste: Hazardous combined', 'Hazardous (kg)')
+    	 ('T-reX', 'Waste: Incineration combined', 'Incineration (m3)')
+    	 ('T-reX', 'Waste: Incineration combined', 'Incineration (kg)')
+    	 ('T-reX', 'Waste: Landfill combined', 'Landfill (m3)')
+    	 ('T-reX', 'Waste: Landfill combined', 'Landfill (kg)')
+    	 ('T-reX', 'Waste: Openburning combined', 'Openburning (kg)')
+    	 ('T-reX', 'Waste: Recycling combined', 'Recycling (kg)')
+    	 ('T-reX', 'Waste: Total combined', 'Total (m3)')
+    	 ('T-reX', 'Waste: Total combined', 'Total (kg)')
     
     *** Added 67  new methods ***
     
@@ -2389,12 +2389,12 @@
     
     ** Processing database (1/5): ecoinvent-3.9.1-cutoff**
     Arguments:
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_T_reX_name': 'T-reX'}
     
     
     *** ExchangeEditor() is running for ecoinvent-3.9.1-cutoff ***
     
-    * Appending waste and material exchanges in WasteAndMaterialFootprint
+    * Appending T-reX exchanges in T-reX
      
 
 
@@ -2476,7 +2476,7 @@
     
     ****************************************************************************************************
     
-    ** Verifying database ecoinvent-3.9.1-cutoff in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent-3.9.1-cutoff in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 4.66e-11 
     	Method: Indium 
@@ -2486,7 +2486,7 @@
     ** Database verified successfully! **
     
     ==========================================================================================
-    	*** Finished WasteAndMaterialFootprint for ecoinvent-3.9.1-cutoff ***
+    	*** Finished T-reX for ecoinvent-3.9.1-cutoff ***
     			Duration: 0:20:27 (h:m:s)
     	*** Woah woah wee waa, great success!! ***
     ==========================================================================================
@@ -2497,12 +2497,12 @@
     
     ** Processing database (2/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2065**
     Arguments:
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2065', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2065', 'db_T_reX_name': 'T-reX'}
     
     
     *** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 ***
     
-    * Appending waste and material exchanges in WasteAndMaterialFootprint
+    * Appending T-reX exchanges in T-reX
      
 
 
@@ -2585,7 +2585,7 @@
     
     ****************************************************************************************************
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 6.89e-01 
     	Method: Silver 
@@ -2595,7 +2595,7 @@
     ** Database verified successfully! **
     
     ==========================================================================================
-    	*** Finished WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 ***
+    	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 ***
     			Duration: 0:24:54 (h:m:s)
     	*** Woah woah wee waa, great success!! ***
     ==========================================================================================
@@ -2606,12 +2606,12 @@
     
     ** Processing database (3/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2100**
     Arguments:
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2100', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2100', 'db_T_reX_name': 'T-reX'}
     
     
     *** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 ***
     
-    * Appending waste and material exchanges in WasteAndMaterialFootprint
+    * Appending T-reX exchanges in T-reX
      
 
 
@@ -2694,7 +2694,7 @@
     
     ****************************************************************************************************
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 5.39e-02 
     	Method: Total (kg) 
@@ -2704,7 +2704,7 @@
     ** Database verified successfully! **
     
     ==========================================================================================
-    	*** Finished WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 ***
+    	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 ***
     			Duration: 0:23:53 (h:m:s)
     	*** Woah woah wee waa, great success!! ***
     ==========================================================================================
@@ -2715,12 +2715,12 @@
     
     ** Processing database (4/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065**
     Arguments:
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065', 'db_T_reX_name': 'T-reX'}
     
     
     *** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 ***
     
-    * Appending waste and material exchanges in WasteAndMaterialFootprint
+    * Appending T-reX exchanges in T-reX
      
 
 
@@ -2803,7 +2803,7 @@
     
     ****************************************************************************************************
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 4.74e-13 
     	Method: Landfill (m3) 
@@ -2813,7 +2813,7 @@
     ** Database verified successfully! **
     
     ==========================================================================================
-    	*** Finished WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 ***
+    	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 ***
     			Duration: 0:23:43 (h:m:s)
     	*** Woah woah wee waa, great success!! ***
     ==========================================================================================
@@ -2824,12 +2824,12 @@
     
     ** Processing database (5/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100**
     Arguments:
-    {'project_base': 'SSP-cutoff_test', 'project_wmf': 'WMFootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100', 'db_wmf_name': 'WasteAndMaterialFootprint'}
+    {'project_base': 'SSP-cutoff_test', 'project_T_reX': 'T_reXootprint-SSP-cutoff_test', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100', 'db_T_reX_name': 'T-reX'}
     
     
     *** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 ***
     
-    * Appending waste and material exchanges in WasteAndMaterialFootprint
+    * Appending T-reX exchanges in T-reX
      
 
 
@@ -2912,7 +2912,7 @@
     
     ****************************************************************************************************
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 6.92e-10 
     	Method: Indium 
@@ -2922,7 +2922,7 @@
     ** Database verified successfully! **
     
     ==========================================================================================
-    	*** Finished WasteAndMaterialFootprint for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 ***
+    	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 ***
     			Duration: 0:23:58 (h:m:s)
     	*** Woah woah wee waa, great success!! ***
     ==========================================================================================
@@ -2932,7 +2932,7 @@
     --------------------------------------------------------------------------------
     	*** Verifying all databases in the project **
     
-    ** Verifying database ecoinvent-3.9.1-cutoff in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent-3.9.1-cutoff in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 1.81e-01 
     	Method: Cement 
@@ -2943,7 +2943,7 @@
     --------------------------------------------------------------------------------
     
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2065 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 3.20e-04 
     	Method: Indium 
@@ -2954,7 +2954,7 @@
     --------------------------------------------------------------------------------
     
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2100 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 2.31e-06 
     	Method: Fluorspar 
@@ -2965,7 +2965,7 @@
     --------------------------------------------------------------------------------
     
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2065 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 0.00e+00 
     	Method: Chromium 
@@ -2981,7 +2981,7 @@
     --------------------------------------------------------------------------------
     
     
-    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 in project WMFootprint-SSP-cutoff_test **
+    ** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2100 in project T_reXootprint-SSP-cutoff_test **
     
     	Score: 2.82e+02 
     	Method: Electricity 
@@ -2994,10 +2994,10 @@
     
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         ================================================================================
-                              WasteAndMaterialFootprint Completed                       
+                              T-reX Completed                       
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
-        Project:                  WMFootprint-SSP-cutoff_test
+        Project:                  T_reXootprint-SSP-cutoff_test
         Total Databases:          5
         Successfully Processed:   5
         Duration:                 2:01:32 (h:m:s)

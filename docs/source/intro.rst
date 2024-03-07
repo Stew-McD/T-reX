@@ -1,7 +1,7 @@
 Introduction
 ============
 
-The WasteAndMaterialFootprint tool is a python package that allows one to calculate the waste and material footprint of any product or service inside of life cycle assessment (LCA) databases. Currently is has been tested with ecoinvent 3.8, 3.9, 3.9.1 and 3.10.
+The T-reX tool is a python package that allows one to calculate the waste and material footprint of any product or service inside of life cycle assessment (LCA) databases. Currently is has been tested with ecoinvent 3.8, 3.9, 3.9.1 and 3.10.
 
 .. Motivation
 .. **********

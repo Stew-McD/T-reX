@@ -12,21 +12,21 @@ Function Summary:
 """
 
 import bw2data as bd
-from config.user_settings import db_wmf_name, project_wmf
+from config.user_settings import db_T_reX_name, project_T_reX
 
 
 def AddMethods():
     """
     Add methods to the specified project based on entries in the custom biosphere database.
 
-    :param project_wmf: Name of the project.
-    :param db_wmf_name: Name of the database.
+    :param project_T_reX: Name of the project.
+    :param db_T_reX_name: Name of the database.
     """
     print("\n*** Running AddMethods() ***\n")
 
-    bd.projects.set_current(project_wmf)
-    db_wmf = bd.Database(db_wmf_name)
-    dic = db_wmf.load()
+    bd.projects.set_current(project_T_reX)
+    db_T_reX = bd.Database(db_T_reX_name)
+    dic = db_T_reX.load()
     sorted_items = sorted(dic.items(), key=lambda item: item[1]["name"])
     dic = dict(sorted_items)
 
@@ -39,7 +39,7 @@ def AddMethods():
         m_type = value["type"]
 
         # Assign characterization factor based on type
-        if m_type == "waste" and 'carbon dioxide' not in m_name.lower():
+        if m_type == "waste" and "carbon dioxide" not in m_name.lower():
             ch_factor = -1.0
         else:
             ch_factor = 1.0
@@ -48,13 +48,13 @@ def AddMethods():
         if m_type == "waste":
             name_combined = m_code.split(" ")[0] + " combined"
             method_key = (
-                "WasteAndMaterialFootprint",
+                "T-reX",
                 "Waste: " + name_combined,
                 m_code,
             )
             description = "For estimating the waste footprint of an activity"
         else:
-            method_key = ("WasteAndMaterialFootprint", "Demand: " + m_code, m_code)
+            method_key = ("T-reX", "Demand: " + m_code, m_code)
             description = "For estimating the material demand footprint of an activity"
 
         m = bd.Method(method_key)
@@ -64,7 +64,7 @@ def AddMethods():
             continue
         else:
             m.register(description=description, unit=m_unit)
-            method_entry = [((db_wmf.name, m_code), ch_factor)]
+            method_entry = [((db_T_reX.name, m_code), ch_factor)]
             m.write(method_entry)
 
             print(f"\t {str(method_key)}")
@@ -79,10 +79,10 @@ def DeleteMethods():
     """
     Delete methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    :param project_wmf: Name of the project.
+    :param project_T_reX: Name of the project.
     """
 
-    bd.projects.set_current(project_wmf)
+    bd.projects.set_current(project_T_reX)
 
     initial_method_count = len(bd.methods)
     print("\nInitial # of methods:", initial_method_count, "\n")
@@ -103,20 +103,20 @@ def CheckMethods():
     """
     Check methods associated with the "WasteAndMaterial Footprint" in the specified project.
 
-    :param project_wmf: Name of the project.
+    :param project_T_reX: Name of the project.
     """
 
-    bd.projects.set_current(project_wmf)
+    bd.projects.set_current(project_T_reX)
 
-    methods_wasteandmaterial = [
+    methods_T_reX = [
         x for x in list(bd.methods) if "WasteAndMaterial Footprint" == x[0]
     ]
 
-    for m in methods_wasteandmaterial:
+    for m in methods_T_reX:
         method = bd.Method(m)
         print(method.load())
         print(method.metadata)
 
-    print(len(methods_wasteandmaterial))
+    print(len(methods_T_reX))
 
     return None

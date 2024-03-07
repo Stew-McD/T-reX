@@ -9,15 +9,15 @@ import sys
 # Set an environment variable to indicate that we're running a Sphinx build
 # os.environ["SPHINX_BUILD"] = "1"
 
-sys.path.insert(0, os.path.abspath("../../src/WasteAndMaterialFootprint/"))
-sys.path.insert(0, os.path.abspath("../../src/WasteAndMaterialFootprint/config"))
+sys.path.insert(0, os.path.abspath("../../src/T-reX/"))
+sys.path.insert(0, os.path.abspath("../../src/T-reX/config"))
 # sys.path.insert(0, os.path.abspath("../../data"))
 # sys.path.insert(0, os.path.abspath("../../examples"))
 
-project = "WasteAndMaterialFootprint"
-copyright = "2023, Stewart Charles McDowall | Stew-McD"
+project = "T-reX"
+copyright = "2024, Stewart Charles McDowall | Stew-McD"
 author = "Stewart Charles McDowall | Stew-McD"
-release = "0.1.21"
+release = "0.2.0"
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
@@ -35,7 +35,7 @@ extensions = [
     "sphinx_copybutton",
 ]
 autoapi_dirs = [
-    "../../src/WasteAndMaterialFootprint/",
+    "../../src/T-reX/",
 ]
 
 autosectionlabel_prefix_document = True
@@ -45,8 +45,8 @@ master_doc = "index"
 latex_documents = [
     (
         master_doc,
-        "WasteAndMaterialFootprint.tex",
-        "WasteAndMaterialFootprint Documentation",
+        "T-reX.tex",
+        "T-reX Documentation",
         "Stewart Charles McDowall",
         "manual",
     ),

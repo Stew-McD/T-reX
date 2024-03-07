@@ -2,6 +2,7 @@
 
 import os
 import pandas as pd
+
 # make sure of the correct working directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -18,7 +19,7 @@ df = df_raw.copy()
 
 print(f"Data set loaded. Shape: {df.shape}")
 print(f"Columns: \n{df.columns.values}")
-print('Processing data...')
+print("Processing data...")
 # filter out unnecessary columns
 df = df[df.database != "ecoinvent-3.9.1-cutoff"]
 drop = [
@@ -57,7 +58,7 @@ print(f'Saving results to {DATA_FILE_OUT}"')
 df_sig.to_csv(DATA_FILE_OUT, sep=";", index=False)
 
 
-## To separate the waste and material methods
+## To separate the T-reX methods
 
 # df_w = df_sig[df_sig.method_1.str.contains("Waste")]
 # df_m = df_sig[df_sig.method_1.str.contains("Demand")]

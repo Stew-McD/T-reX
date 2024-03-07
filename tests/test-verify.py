@@ -1,11 +1,11 @@
-import WasteAndMaterialFootprint as wmf
+import T-reX as T_reX
 import bw2data as bd
 
-PROJECT_NAME = "WMFootprint-SSP-cutoff"
+PROJECT_NAME = "T_reX-SSP-cutoff"
 bd.projects.set_current(PROJECT_NAME)
 
 
 for db in bd.databases:
-    e = wmf.VerifyDatabase(project_name=PROJECT_NAME, database_name=db)
+    e = T_reX.VerifyDatabase(project_name=PROJECT_NAME, database_name=db)
     print(e)
 print("\nDone!")

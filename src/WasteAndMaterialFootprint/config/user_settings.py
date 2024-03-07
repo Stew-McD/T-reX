@@ -2,7 +2,7 @@
 user_settings Module
 ====================
 
-Configure Project and Database Settings for WasteAndMaterialFootprint tool.
+Configure Project and Database Settings for T-reX tool.
 
 This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
 
@@ -10,7 +10,7 @@ The script allows for two modes of operation:
     1. Single Mode (`single` is True): Set the project and database names to a single specified value.
     2. Multiple projects/databases mode (`single` is False): Facilitates batch processing of multiple projects and databases.
 
-Additionally, the script allows for the use of multiprocessing (`use_multiprocessing` is True). 
+Additionally, the script allows for the use of multiprocessing (`use_multiprocessing` is True).
 
 Premise can also be used to make future databases (`use_premise` is True).
 
@@ -41,20 +41,20 @@ import bw2data as bd
 project_premise_base = "default"
 project_premise = "SSP2LT-cutoff"
 project_base = project_premise
-# if you want to use the same project for the wmf tool, change this to project_base, otherwise, it will create a new project
-project_wmf = f"WMFootprint-{project_base}"
+# if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
+project_T_reX = f"T_reX-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-use_wmf = True
-db_wmf_name = "WasteAndMaterialFootprint"  # name of the database that will be created (pseudobiosphere)
+use_T_reX = True
+db_T_reX_name = "T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
 single = False
 single_database = "ecoinvent_cutoff_3.9_remind_SSP2-Base_2065"
 
 # if you want to use a fresh project
-delete_wmf_project = True
+delete_T_reX_project = True
 use_multiprocessing = False
 verbose = False
 
@@ -84,7 +84,7 @@ batch_size = 1
 premise_quiet = True
 
 if use_premise and project_base != project_premise:
-    project_wmf = f"WMFootprint-{project_premise}"
+    project_T_reX = f"T_reX-{project_premise}"
 
 # Get the premise key (at the moment, it is stored in the code to make it easier for people, but it would be better to have it in a file)
 premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
@@ -154,7 +154,7 @@ for model, ssp, rcp in product(models, ssps, rcps):
     desired_scenarios.append({"model": model, "pathway": ssp + "-" + rcp})
 
 
-# Set the arguments list of projects and databases to be processed with the WMF tool
+# Set the arguments list of projects and databases to be processed with the T-reX tool
 def generate_args_list(single_database=None):
     """
     Generate a list of argument dictionaries for processing multiple projects and databases.
@@ -171,7 +171,7 @@ def generate_args_list(single_database=None):
     else:
         exclude = [
             "biosphere",
-            db_wmf_name,  # this is the database that will be created by the wmf tool
+            db_T_reX_name,  # this is the database that will be created by the T-reX tool
         ]
         databases = sorted(
             [x for x in bd.databases if not any(sub in x for sub in exclude)]
@@ -181,9 +181,9 @@ def generate_args_list(single_database=None):
     for database in databases:
         args = {
             "project_base": project_base,
-            "project_wmf": project_wmf,
+            "project_T_reX": project_T_reX,
             "db_name": database,
-            "db_wmf_name": db_wmf_name,
+            "db_T_reX_name": db_T_reX_name,
         }
         args_list.append(args)
 
@@ -206,19 +206,19 @@ dir_logs = dir_data / "logs"
 
 dir_searchwaste_results = dir_data / "SearchWasteResults"
 dir_searchmaterial_results = dir_data / "SearchMaterialResults"
-dir_databases_wasteandmaterial = dir_data / "DatabasesWasteAndMaterial"
+dir_databases_T_reX = dir_data / "DatabasesWasteAndMaterial"
 
-dir_wmf = [
+dir_T_reX = [
     dir_tmp,
     dir_logs,
     dir_searchwaste_results,
     dir_searchmaterial_results,
-    dir_databases_wasteandmaterial,
+    dir_databases_T_reX,
 ]
 
 # this will delete old results and logs
-if delete_wmf_project:
-    for dir in dir_wmf:
+if delete_T_reX_project:
+    for dir in dir_T_reX:
         if os.path.exists(dir):
             shutil.rmtree(dir)
 

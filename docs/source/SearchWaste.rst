@@ -1,7 +1,7 @@
 SearchWaste
 ===========
 
-The SearchWaste module is a part of the WasteAndMaterialFootprint tool, dedicated to processing waste-related data.
+The SearchWaste module is a part of the T-reX tool, dedicated to processing waste-related data.
 It loads data from a specified '< db name >_exploded.pickle' file, executes predefined search queries on this data,
 and generates CSV files containing the results along with corresponding log entries. The search queries are
 structured as dictionaries, specified in the `config/queries_waste.py` file, and include fields such as NAME,
@@ -65,7 +65,7 @@ Usage
 
 .. code-block:: python
 
-    wmf.SearchWaste(db_name, output_dir)
+    T-reX.SearchWaste(db_name, output_dir)
 
 
-The :func:`SearchWaste` function is invoked with two arguments: the name of the Brightway2 database to be processed and the name of the directory to store the results. The search queries are specified in the `config/queries_waste.py` file. The function is designed for internal use within the WMF tool and does not return a value but rather saves the output for subsequent use. It could be used separately, if you would have a .pickle file with exploded database as well as the config files in the right locations.
+The :func:`SearchWaste` function is invoked with two arguments: the name of the Brightway2 database to be processed and the name of the directory to store the results. The search queries are specified in the `config/queries_waste.py` file. The function is designed for internal use within the T-reX tool and does not return a value but rather saves the output for subsequent use. It could be used separately, if you would have a .pickle file with exploded database as well as the config files in the right locations.

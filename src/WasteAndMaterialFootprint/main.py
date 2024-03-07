@@ -2,9 +2,9 @@
 main Module
 ===========
 
-Main module of the `WasteAndMaterialFootprint` tool.
+Main module of the `T-reX` tool.
 
-This script serves as the entry point for the `WasteAndMaterialFootprint` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges. 
+This script serves as the entry point for the `T-reX` tool. It orchestrates the overall process, including the setup and execution of various subprocesses like database explosion, material and waste searches, and the editing of exchanges.
 
 The script supports both single and multiple project/database modes, as well as the option to use multiprocessing. It also facilitates the use of the premise module to generate future scenario databases.
 
@@ -16,7 +16,7 @@ Customisation:
 
 Usage:
 ------
-To use the default settings, run the script with `python main.py`. 
+To use the default settings, run the script with `python main.py`.
 Arguments can be provided to change project/database names or to delete the project before running.
 
 """
@@ -75,18 +75,18 @@ from VerifyDatabase import VerifyDatabase
 # import configuration from config/user_settings.py
 from config.user_settings import (
     custom_bw2_dir,
-    db_wmf_name,
-    delete_wmf_project,
+    db_T_reX_name,
+    delete_T_reX_project,
     dir_logs,
     dir_tmp,
     dir_config,
     generate_args_list,
     project_base,
     project_premise,
-    project_wmf,
+    project_T_reX,
     use_multiprocessing,
     use_premise,
-    use_wmf,
+    use_T_reX,
     do_search,
     do_methods,
     do_edit,
@@ -98,10 +98,10 @@ if custom_bw2_dir:
     os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
 
 
-# 1. DEFINE MAIN FUNCTION: WasteAndMaterialFootprint()
+# 1. DEFINE MAIN FUNCTION: T-reX()
 def run():
     """
-    Main function serving as the wrapper for the WasteAndMaterialFootprint tool.
+    Main function serving as the wrapper for the T-reX tool.
 
     This function coordinates the various components of the tool, including:
         creating future scenario databases,
@@ -116,7 +116,7 @@ def run():
         f"""
     {80*'='}
     {80*'~'}
-    {'** Starting the WasteAndMaterialFootprint tool **'.center(80, ' ')}
+    {'** Starting the T-reX tool **'.center(80, ' ')}
     {80*'~'}
     {80*'='}
     """
@@ -125,7 +125,7 @@ def run():
     if use_premise:
         MakeFutureScenarios()
 
-    assert use_wmf, "use_wmf is False, so WasteAndMaterialFootprint will not run"
+    assert use_T_reX, "use_T_reX is False, so T-reX will not run"
 
     start_time = datetime.now()
     args_list = generate_args_list(single_database=single_database)
@@ -133,29 +133,29 @@ def run():
     all_databases = list(set(bd.databases) - {"biosphere3"})
 
     print(
-        f"\nStarting WasteAndMaterialFootprint for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
+        f"\nStarting T-reX for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
     )
     for arg in args_list:
         print(f"\t{arg['db_name']}")
 
     # Make new project, delete previous project if you want to start over, or use existing project
     bd.projects.purge_deleted_directories()
-    if project_wmf in bd.projects and delete_wmf_project:
-        print(f"\n* Deleting previous project {project_wmf}")
-        bd.projects.delete_project(project_wmf, True)
+    if project_T_reX in bd.projects and delete_T_reX_project:
+        print(f"\n* Deleting previous project {project_T_reX}")
+        bd.projects.delete_project(project_T_reX, True)
         bd.projects.purge_deleted_directories()
 
-    if project_wmf in bd.projects:
-        print(f"* WasteAndMaterial project already exists: {project_wmf}")
-        bd.projects.set_current(project_wmf)
+    if project_T_reX in bd.projects:
+        print(f"* WasteAndMaterial project already exists: {project_T_reX}")
+        bd.projects.set_current(project_T_reX)
 
-    if project_wmf not in bd.projects:
+    if project_T_reX not in bd.projects:
         print(
-            f"\n* Project {project_base} will be copied to a new project: {project_wmf}"
+            f"\n* Project {project_base} will be copied to a new project: {project_T_reX}"
         )
         bd.projects.set_current(project_base)
-        bd.projects.copy_project(project_wmf)
-        bd.projects.set_current(project_wmf)
+        bd.projects.copy_project(project_T_reX)
+        bd.projects.set_current(project_T_reX)
 
     # 1.1 Run the initial steps for each database in the project
     def process_db_setup(args, db_number, total_databases):
@@ -282,7 +282,7 @@ def run():
     print("\t*** Verifying all databases in the project **")
     for arg in args_list:
         db_name = arg["db_name"]
-        VerifyDatabase(project_wmf, db_name)
+        VerifyDatabase(project_T_reX, db_name)
         print(f'\n{"-"*80}\n')
 
     try:
@@ -294,10 +294,10 @@ def run():
         f"""
     {80 * '~'}
     {80 * '='}
-    {'WasteAndMaterialFootprint Completed'.center(80, ' ')}
+    {'T-reX Completed'.center(80, ' ')}
     {'~' * 80}
 
-    Project:                  {project_wmf}
+    Project:                  {project_T_reX}
     Total Databases:          {total_databases}
     Successfully Processed:   {successful_count}
     Duration:                 {str(duration).split('.')[0]} (h:m:s)
@@ -342,12 +342,10 @@ def ExplodeAndSearch(args):
     :returns: None
     """
 
-    project_wmf = args["project_wmf"]
+    project_T_reX = args["project_T_reX"]
     db_name = args["db_name"]
 
-    print(
-        f"\n{'='*100}\n\t Starting WasteAndMaterialFootprint for {db_name}\n{'='*100}"
-    )
+    print(f"\n{'='*100}\n\t Starting T-reX for {db_name}\n{'='*100}")
 
     # 1.2 Explode the database into separate exchanges
     existing_file = dir_tmp / (db_name + "_exploded.pickle")
@@ -359,7 +357,7 @@ def ExplodeAndSearch(args):
 
     # 1.3 Search the exploded database for waste and material flows
     SearchWaste(db_name)
-    SearchMaterial(db_name, project_wmf)
+    SearchMaterial(db_name, project_T_reX)
 
     return None
 
@@ -378,8 +376,8 @@ def EditExchanges(args):
     start = datetime.now()
     # Add waste and material flows to the activities, check that it worked
 
-    ExchangeEditor(project_wmf, db_name, db_wmf_name)
-    exit_code = VerifyDatabase(project_wmf, db_name)
+    ExchangeEditor(project_T_reX, db_name, db_T_reX_name)
+    exit_code = VerifyDatabase(project_T_reX, db_name)
 
     if exit_code == 0:
         print("** Database verified successfully! **\n")
@@ -391,7 +389,7 @@ def EditExchanges(args):
     duration = datetime.now() - start
     print(f"{'='*90}")
     print(
-        f"\t*** Finished WasteAndMaterialFootprint for {db_name} ***\n\t\t\tDuration: {str(duration).split('.')[0]} (h:m:s)"
+        f"\t*** Finished T-reX for {db_name} ***\n\t\t\tDuration: {str(duration).split('.')[0]} (h:m:s)"
     )
     print("\t*** Woah woah wee waa, great success!! ***")
     print(f"{'='*90}")

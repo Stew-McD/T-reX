@@ -1,7 +1,7 @@
 ExplodeDatabase
 ===============
 
-The ExplodeDatabase module is the first fundamental component of the WasteAndMaterialFootprint (WMF) tool, designed for
+The ExplodeDatabase module is the first fundamental component of the T-reX  tool, designed for
 processing Brightway2 life cycle assessment (LCA) databases. It provides a mechanism to expand a given LCA database
 into a detailed list of all exchanges, facilitating subsequent analysis with the search modules.
 
@@ -27,5 +27,5 @@ Usage
 
 The ExplodeDatabase function is invoked with a single argument, the name of the Brightway2 database to be processed.
 It performs the exploding process, logs the operation, and saves the resulting DataFrame as a pickle file. The function
-is designed for internal use within the WMF tool and does not return a value but rather saves the output for subsequent
+is designed for internal use within the T-reX tool and does not return a value but rather saves the output for subsequent
 use.

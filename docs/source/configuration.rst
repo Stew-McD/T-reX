@@ -4,33 +4,33 @@ Configuration modules
 CustomConfig Module
 -------------------
 
-This module provides functions for managing the configuration of the WasteAndMaterialFootprint package.
+This module provides functions for managing the configuration of the T-reX package.
 This is only needed if you have installed the package from PyPi, if you have cloned the repository you can just edit the configuration files directly.
 
 By running the following command, the program will create a folder ``config`` in the current working directory containing the default configuration files:
 
 .. code-block:: python
 
-    wmf.config.config_setup()
+    T-reX.config.config_setup()
 
 You can then edit these files to match your project structure and your needs. And then run the following command to reload the configuration:
 
 .. code-block:: python
 
-    wmf.config.config_reload()
+    T-reX.config.config_reload()
 
 You will then need to restart your python session for the changes to take effect.
 If you want to reset the configuration to the default values, you can run:
 
 .. code-block:: python
 
-    wmf.config.config_reset()
+    T-reX.config.config_reset()
 
 
 General Settings: ``user_settings.py``
 ---------------------------------------
 
-This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named ``default`` and copy that to a new project named ``SSP-cutoff``, which is then copied to a new project named ``WMFootprint-SSP-cutoff``.
+This is the main configuration file, the one that you might want to edit to match your project structure and your needs. By default, the program will take a brightway2 project named ``default`` and copy that to a new project named ``SSP-cutoff``, which is then copied to a new project named ``T_reXootprint-SSP-cutoff``.
 
 Doing it this way isolates the components and allows you to keep your original brightway2 project as it was. If space is an issue, you can set all of the project names to be the same.
 
@@ -42,21 +42,21 @@ These are some extracts from ``user_settings.py`` with the most important settin
 
     # Choose whether to use premise to create future scenario databases 
     use_premise = True
-    # Choose whether to use WasteAndMaterialFootprint to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
-    use_wmf = True
+    # Choose whether to use T-reX to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
+    use_T_reX = True
 
     # Choose the names of the projects to use
     project_premise_base = "default"
     project_premise = "SSP-cutoff"
     project_base = project_premise
-    project_wmf = f"WMFootprint-{project_base}"
+    project_T_reX = f"T_reXootprint-{project_base}"
 
-    # Choose the name of the database to use (needed for premise only, the WMF tool will run all databases except the biospheres)
+    # Choose the name of the database to use (needed for premise only, the T-reX tool will run all databases except the biospheres)
     database_name = "ecoinvent-3.9.1-cutoff"
 
     # if you want to use a fresh project
     delete_existing_premise_project = False
-    delete_existing_wmf_project = False
+    delete_existing_T_reX_project = False
 
     # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
     # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
@@ -70,7 +70,7 @@ These are some extracts from ``user_settings.py`` with the most important settin
 Waste Search Settings: ``queries_waste.py``
 -------------------------------------------
 
-This file sets up search parameters for different waste and material flow categories, crucial for the ``SearchWaste.py`` script. It leverages a ``.pickle`` file created by ``ExplodeDatabase.py``.
+This file sets up search parameters for different T-reX flow categories, crucial for the ``SearchWaste.py`` script. It leverages a ``.pickle`` file created by ``ExplodeDatabase.py``.
 
 Categories
 ^^^^^^^^^^
@@ -116,7 +116,7 @@ Isolate the function of ``SearchWaste.py`` to validate your search terms. That m
 Material Search Settings: ``queries_materials.py``
 --------------------------------------------------
 
-The ``queries_materials`` module creates demand methods in the WasteAndMaterialFootprint tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.
+The ``queries_materials`` module creates demand methods in the T-reX tool. It aligns with the EU CRM list 2023 and the ecoinvent database, incorporating additional strategic materials for comprehensive analysis. More can be easily added, as wished by the user.
 
 This function uses the string tests ``startswith`` in ``SearchMaterial.py`` to identify activities beginning with the specified material name. This allows one to be more specific with the search terms (the ``,`` can be critical sometimes).
 

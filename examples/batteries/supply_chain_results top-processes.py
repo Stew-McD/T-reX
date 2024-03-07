@@ -14,7 +14,7 @@ pd.set_option("display.max_rows", 200)
 # load data set
 df_raw = pd.read_csv("data/results_significant.csv", sep=";", index_col=None)
 df = df_raw.copy().reset_index(drop=True)
-df = df[df.method_0 == "WasteAndMaterialFootprint"].reset_index(drop=True)
+df = df[df.method_0 == "T-reX"].reset_index(drop=True)
 
 
 df["top_processes"] = df["top_processes"].apply(ast.literal_eval)
@@ -44,4 +44,3 @@ cols_tp_name = [x for x in cols_tp if "name" in x]
 
 
 df.to_csv("data/top-processes.csv", sep=";", index=False)
-

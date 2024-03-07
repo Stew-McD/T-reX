@@ -2,8 +2,8 @@
 MakeCustomDatabase Module
 =========================
 
-This module contains functions for creating an xlsx representation of a Brightway2 database 
-and importing it into Brightway2. 
+This module contains functions for creating an xlsx representation of a Brightway2 database
+and importing it into Brightway2.
 
 Main functions:
 - dbWriteExcel: Creates an xlsx file representing a custom Brightway2 database.
@@ -18,11 +18,11 @@ import bw2data as bd
 import bw2io as bi
 from openpyxl import Workbook, load_workbook
 from config.user_settings import (
-    db_wmf_name,
-    dir_databases_wasteandmaterial,
+    db_T_reX_name,
+    dir_databases_T_reX,
     dir_searchmaterial_results,
     dir_searchwaste_results,
-    project_wmf,
+    project_T_reX,
 )
 
 
@@ -62,28 +62,28 @@ def dbWriteExcel():
     :return: Path to the generated xlsx file.
     """
 
-    if not os.path.isdir(dir_databases_wasteandmaterial):
-        os.makedirs(dir_databases_wasteandmaterial)
+    if not os.path.isdir(dir_databases_T_reX):
+        os.makedirs(dir_databases_T_reX)
 
-    xl_filename = dir_databases_wasteandmaterial / f"{db_wmf_name}.xlsx"
+    xl_filename = dir_databases_T_reX / f"{db_T_reX_name}.xlsx"
 
     # delete existing file if it exists
     if os.path.isfile(xl_filename):
         os.remove(xl_filename)
 
     # create new file and write header
-    print(f"\n\n*** Writing custom database file: {db_wmf_name}\n")
+    print(f"\n\n*** Writing custom database file: {db_T_reX_name}\n")
 
     xl = Workbook()
     xl_db = xl.active
     xl_db["A1"] = "Database"
-    xl_db["B1"] = db_wmf_name
+    xl_db["B1"] = db_T_reX_name
     xl_db["A2"] = ""
 
     xl.save(xl_filename)
 
     # open existing file and append to it
-    print(f"\n\n*** Appending to existing custom database file: {db_wmf_name}\n")
+    print(f"\n\n*** Appending to existing custom database file: {db_T_reX_name}\n")
 
     xl = load_workbook(xl_filename)
     xl_db = xl.active
@@ -126,7 +126,7 @@ def dbWriteExcel():
 
     xl.save(xl_filename)
     print(
-        f"\n ** Added {count} entries to the xlsx for the custom waste and material database:\n\t{db_wmf_name}"
+        f"\n ** Added {count} entries to the xlsx for the custom waste and material database:\n\t{db_T_reX_name}"
     )
 
     return
@@ -161,13 +161,13 @@ def dbExcel2BW():
     :return: None
     """
     print(
-        f"\n** Importing the custom database {db_wmf_name}**\n\t to the brightway2 project: {project_wmf}"
+        f"\n** Importing the custom database {db_T_reX_name}**\n\t to the brightway2 project: {project_T_reX}"
     )
 
-    xl_filename = dir_databases_wasteandmaterial / f"{db_wmf_name}.xlsx"
-    bd.projects.set_current(project_wmf)
+    xl_filename = dir_databases_T_reX / f"{db_T_reX_name}.xlsx"
+    bd.projects.set_current(project_T_reX)
 
-    if db_wmf_name not in bd.databases:
+    if db_T_reX_name not in bd.databases:
         # imports the custom database into BW2
         print("\n** Running BW2io ExcelImporter **\n")
         imp = bi.ExcelImporter(xl_filename)
@@ -176,27 +176,27 @@ def dbExcel2BW():
         imp.statistics()
         imp.write_database()
 
-        db_wmf = bd.Database(db_wmf_name)
-        db_wmf.register()
+        db_T_reX = bd.Database(db_T_reX_name)
+        db_T_reX.register()
 
-        db_dict = db_wmf.metadata
+        db_dict = db_T_reX.metadata
         print("\n** Database metadata **")
         for key, value in db_dict.items():
             print(f"{key}: {value}")
 
     else:
-        print(f"\n** Database {db_wmf_name} already exists **\n")
-        db_wmf = bd.Database(db_wmf_name)
+        print(f"\n** Database {db_T_reX_name} already exists **\n")
+        db_T_reX = bd.Database(db_T_reX_name)
         imp = bi.ExcelImporter(xl_filename)
 
         for act in imp:
-            if act["name"] not in db_wmf:
+            if act["name"] not in db_T_reX:
                 print(
-                    f"\t|-  Adding activity: {act['name']:<40} ----> \t '{db_wmf_name}'  -|"
+                    f"\t|-  Adding activity: {act['name']:<40} ----> \t '{db_T_reX_name}'  -|"
                 )
-                db_wmf.new_activity(act)
+                db_T_reX.new_activity(act)
             else:
-                print(f"\t {act['name']} already exists in {db_wmf_name}")
+                print(f"\t {act['name']} already exists in {db_T_reX_name}")
 
     print("\n*** Great success! ***")
 

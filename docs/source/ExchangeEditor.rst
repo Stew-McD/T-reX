@@ -1,8 +1,8 @@
 ExchangeEditor 
 ==============
 
-The ExchangeEditor module is the final major part of the WasteAndMaterialFootprint tool, responsible for editing exchanges 
-with wurst and Brightway2. It appends relevant exchanges from the `db_wmf` (a database containing waste and material 
+The ExchangeEditor module is the final major part of the T-reX tool, responsible for editing exchanges 
+with wurst and Brightway2. It appends relevant exchanges from the `db_T_reX` (a database containing T-reX 
 exchange details) to activities identified by `WasteAndMaterialSearch()` in a specified project's database (`db_name`).
 
 This module takes the longest time to run, as it iterates over each exchange that was found by the search modules, which can be >200,000 exchanges. For each database, this can take around 15-20 minutes to run.
@@ -11,7 +11,7 @@ This module takes the longest time to run, as it iterates over each exchange tha
 Function Summary
 ----------------
 - **`ExchangeEditor`**: This function modifies the specified project's database by appending exchanges from the 
-  `db_wmf` to activities identified by `WasteAndMaterialSearch()`. Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
+  `db_T_reX` to activities identified by `WasteAndMaterialSearch()`. Each appended exchange replicates the same amount and unit as the original technosphere waste and material exchange.
 
 Important Code Snippets
 -----------------------
@@ -19,7 +19,7 @@ Important Code Snippets
 
 .. code-block:: python
 
-    def ExchangeEditor(project_wmf, db_name, db_wmf_name):
+    def ExchangeEditor(project_T_reX, db_name, db_T_reX_name):
         # ... snippet to show addition of the custom exchange ...
 
         # Iterate over each category (NAME)
@@ -49,8 +49,8 @@ Important Code Snippets
                 )
 
                 KEY = (database, code)
-                WMF_KEY = (
-                    db_wmf_name,
+                T_reX_KEY = (
+                    db_T_reX_name,
                     NAME.split("_")[1]
                     .capitalize()
                     .replace("_", " ")
@@ -58,14 +58,14 @@ Important Code Snippets
                     .replace("kilogram", "(kg)")
                     .replace("cubicmeter", "(m3)"),
                 )
-                # Retrieve the process and wasteandmaterial exchange from the databases
+                # Retrieve the process and T_reX exchange from the databases
                 try:
                     process = bd.get_activity(KEY)
-                    wasteandmaterial_ex = bd.get_activity(WMF_KEY)
+                    T_reX_ex = bd.get_activity(T_reX_KEY)
                     before = len(process.exchanges())
 
                     process.new_exchange(
-                        input=wasteandmaterial_ex,
+                        input=T_reX_ex,
                         amount=amount,
                         unit=unit,
                         type="biosphere",

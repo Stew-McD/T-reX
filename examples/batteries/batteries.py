@@ -10,7 +10,7 @@ import bw2analyzer as bwa
 
 ca = bwa.ContributionAnalysis()
 
-PROJECT = "WMFootprint-SSP2LT-cutoff"
+PROJECT = "T_reX-SSP2LT-cutoff"
 KEY = "market for battery, Li-ion, rechargeable"
 
 KEYWORDS_METHODS = [
@@ -18,7 +18,7 @@ KEYWORDS_METHODS = [
     "EF v3.1 EN15804",
     "EDIP 2003 no LT",
     "Crustal Scarcity Indicator 2020",
-    "WasteAndMaterialFootprint",
+    "T-reX",
 ]
 
 SEARCH_ACTIVITIES = 0
@@ -130,7 +130,7 @@ def search_methods(KEYWORDS_METHODS):
     #     "EF v3.1 EN15804",
     #     "EDIP 2003 no LT",
     #     'Crustal Scarcity Indicator 2020',
-    #     "WasteAndMaterialFootprint",
+    #     "T-reX",
     # ]
 
     methods = [x for x in bd.methods if any(y in x for y in KEYWORDS_METHODS)]
@@ -156,7 +156,9 @@ def get_results():
 
     activities = pd.read_csv(FILE_ACTIVITIES, sep=";")
     # activity objects are not serializable, so we need to re-create them
-    activities["activity_object"] = activities.key.apply(lambda x: bd.get_activity(ast.literal_eval(x)))
+    activities["activity_object"] = activities.key.apply(
+        lambda x: bd.get_activity(ast.literal_eval(x))
+    )
 
     methods = pd.read_csv(FILE_METHODS, sep=";")
     methods = methods["tuple"].apply(ast.literal_eval).to_list()
@@ -171,7 +173,9 @@ def get_results():
     width_bar = 100
 
     print(f'\n{"-"*80}\n')
-    print(f"\t== Calculating {total_calculations} LCIAs --- {len(activities)} activities and {len(methods)} methods ==")
+    print(
+        f"\t== Calculating {total_calculations} LCIAs --- {len(activities)} activities and {len(methods)} methods =="
+    )
     print(f'\n\n{"-"*80}\n')
     dbs = activities.database.unique()
     # dbs = [dbs[0]]
@@ -215,7 +219,10 @@ def get_results():
 
                 top_raw = ca.annotated_top_processes(lca, limit=10)
 
-                top = [(t[0], t[1], t[2].as_dict()["name"], t[2].as_dict()["location"]) for t in top_raw]
+                top = [
+                    (t[0], t[1], t[2].as_dict()["name"], t[2].as_dict()["location"])
+                    for t in top_raw
+                ]
 
                 results_dict = {
                     "name": act_name,
@@ -265,7 +272,9 @@ def get_supply_chain_results():
 
     activities = pd.read_csv(FILE_ACTIVITIES, sep=";")
     # activity objects are not serializable, so we need to re-create them, after first converting the string to a tuple
-    activities["activity_object"] = activities.key.apply(lambda x: bd.get_activity(ast.literal_eval(x)))
+    activities["activity_object"] = activities.key.apply(
+        lambda x: bd.get_activity(ast.literal_eval(x))
+    )
 
     methods = pd.read_csv(FILE_METHODS, sep=";")
     methods = methods["tuple"].apply(ast.literal_eval).to_list()
@@ -311,7 +320,9 @@ def get_supply_chain_results():
 
         for iii, method in enumerate(methods_selection):
             # Pad and format the strings to the desired width
-            p_db = f'{i+1:02}/{len(dbs):02} - {" ".join(db.split("_")[-2:]):<{width_db}}'
+            p_db = (
+                f'{i+1:02}/{len(dbs):02} - {" ".join(db.split("_")[-2:]):<{width_db}}'
+            )
             # p_act = f'{ii+1:02}/{len(df_acts):02} - {",".join(row["name"].split(",")[1:3])[:20]:<{width_activity}}'
             p_method = f"{iii+1:03}/{len(methods_selection):03} - {method[2][:width_method]:<{width_method}}"
             # p_score = f'{lca.score:.2e}'.rjust(width_score)
@@ -352,7 +363,9 @@ def get_supply_chain_results():
 
     progress.close()
     print(f'\n\n{"-"*80}\n')
-    print(f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAINRESULTS}"')
+    print(
+        f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAINRESULTS}"'
+    )
     print(f'\n{"-"*80}\n')
 
     return None

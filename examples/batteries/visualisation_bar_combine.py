@@ -19,9 +19,9 @@ print(f'{"*"*50}')
 
 # Define the layout and title
 filename = "visualisation/combined_methods_supply-chain.pdf"
-title = "WasteAndMaterialFootprint: Individual Contributions by CPC sector"
+title = "T-reX: Individual Contributions by CPC sector"
 columns = 5
-figures = sorted([f for f in os.listdir(svg_dir) if f.endswith('.svg')], reverse=True)
+figures = sorted([f for f in os.listdir(svg_dir) if f.endswith(".svg")], reverse=True)
 figures_count = len(figures)
 rows = figures_count // columns + (1 if figures_count % columns else 0)
 
@@ -70,7 +70,9 @@ margin = 2  # You can adjust this value
 title_height = 60  # Adjust as needed
 page_width = columns * (max_width + 2 * margin)
 page_height = rows * (max_height + 2 * margin) + title_height
-print(f"Creating a single-page PDF with size: {round(page_width,2)}x{round(page_height,2)} units.")
+print(
+    f"Creating a single-page PDF with size: {round(page_width,2)}x{round(page_height,2)} units."
+)
 
 # Create a PDF file
 c = canvas.Canvas(filename, pagesize=(page_width, page_height))
@@ -81,7 +83,7 @@ title_width = c.stringWidth(title, "Libertine", 20)
 c.drawString((page_width - title_width) / 2, page_height - 35, title)
 
 # Add metadata
-c.setTitle("WasteAndMaterialFootprint: Individual Contributions by CPC sector")
+c.setTitle("T-reX: Individual Contributions by CPC sector")
 c.setAuthor("Stewart Charles McDowall")
 
 print("Starting to add SVG files to the PDF...")

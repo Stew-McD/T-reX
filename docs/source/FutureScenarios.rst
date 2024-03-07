@@ -1,7 +1,7 @@
 FutureScenarios
 ===============
 
-The `FutureScenarios` module is an integral part of the WasteAndMaterialFootprint project, enabling the creation of future scenario databases. It leverages the `premise <https://github.com/polca-project/premise>`_ Python package to generate future scenario databases based on integrated assessment models (IAMs) for brightway2 projects.
+The `FutureScenarios` module is an integral part of the T-reX project, enabling the creation of future scenario databases. It leverages the `premise <https://github.com/polca-project/premise>`_ Python package to generate future scenario databases based on integrated assessment models (IAMs) for brightway2 projects.
 
 Configuration
 -------------
