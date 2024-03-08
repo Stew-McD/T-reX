@@ -130,7 +130,7 @@ def ExchangeEditor(project_T_reX, db_name, db_T_reX_name):
             )
 
             KEY = (database, code)
-            T-reX_KEY = (
+            T_reX_KEY = (
                 db_T_reX_name,
                 NAME.split("_")[1]
                 .capitalize()
@@ -142,7 +142,7 @@ def ExchangeEditor(project_T_reX, db_name, db_T_reX_name):
             # Retrieve the process and T_reX exchange from the databases
             try:
                 process = bd.get_activity(KEY)
-                T_reX_ex = bd.get_activity(T-reX_KEY)
+                T_reX_ex = bd.get_activity(T_reX_KEY)
                 before = len(process.exchanges())
 
                 #! TODO: Check if the exchange already exists in the process, and if so, skip it
