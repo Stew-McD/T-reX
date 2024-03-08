@@ -22,8 +22,7 @@ See the example output [here](examples/package_test/example-output.pdf)
   - [Documentation](#documentation)
   - [Contents](#contents)
   - [Visual overview](#visual-overview)
-    - [Generalised flowchart](#generalised-flowchart)
-    - [Computational flowchart](#computational-flowchart)
+    - [Generalised and computational flowcharts](#generalised-and-computational-flowcharts)
   - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Installation instructions](#installation-instructions)
@@ -50,14 +49,9 @@ See the example output [here](examples/package_test/example-output.pdf)
 
 ## Visual overview
 
-### Generalised flowchart
+### Generalised and computational flowcharts
 
-![Generalised flowchart](docs/source/_static/T-reX_method.png)
-
-### Computational flowchart
-
-![Computational flowchart](docs/source/_static/T-reX_flowchart.png)
-
+<img src="docs/source/_static/T-reX_flowchart_combined.png" alt="T-reX flowcharts" width="500">
 
 ## Installation
 
