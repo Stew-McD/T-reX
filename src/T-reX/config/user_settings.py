@@ -42,12 +42,12 @@ project_premise_base = "default"
 project_premise = "SSP2LT-cutoff"
 project_base = project_premise
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
-project_T_reX = f"T_reX-{project_base}"
+project_T_reX = f"T-reX-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-use_T_reX = True
-db_T_reX_name = "T-reX"  # name of the database that will be created (pseudobiosphere)
+use_T_reX = False
+db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
 single = False
@@ -66,7 +66,7 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = False
+use_premise = True
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
@@ -78,13 +78,13 @@ delete_existing_premise_project = False
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
-batch_size = 1
+batch_size = 9
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
 
 if use_premise and project_base != project_premise:
-    project_T_reX = f"T_reX-{project_premise}"
+    project_T_reX = f"T-reX-{project_premise}"
 
 # Get the premise key (at the moment, it is stored in the code to make it easier for people, but it would be better to have it in a file)
 premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
@@ -133,17 +133,22 @@ rcps = [
 
 years = [
     2020,
-    #2030,
-    # 2035,
-    #2040,
-    # 2045,
-    #2050,
-    #2060,
-    # 2065,
-    #2070,
-    #2080,
-    #2090,
-    #2100,
+    2025,
+    2030,
+    2035,
+    2040,
+    2045,
+    2050,
+    2055,
+    2060,
+    2065,
+    2070,
+    2075,
+    2080,
+    2085,
+    2090,
+    2095,
+    2100,
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the will be filtered out later if they are not possible

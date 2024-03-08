@@ -47,7 +47,7 @@ project_T_reX = f"T_reX-{project_base}"
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
 use_T_reX = False
-db_T_reX_name = "T-reX"  # name of the database that will be created (pseudobiosphere)
+db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
 single = False
