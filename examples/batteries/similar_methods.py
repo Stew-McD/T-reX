@@ -32,9 +32,9 @@ page_height = 0
 title_height = 40  # Space for title
 
 # Calculate total page height based on pairs
-for edip, T - reX in pairs.items():
+for edip, T_reX in pairs.items():
     edip_file = next((f for f in os.listdir(svg_dir) if edip in f), None)
-    T_reX_file = next((f for f in os.listdir(svg_dir) if T - reX in f), None)
+    T_reX_file = next((f for f in os.listdir(svg_dir) if T_reX in f), None)
 
     if edip_file and T_reX_file:
         edip_svg = svg2rlg(os.path.join(svg_dir, edip_file))
@@ -69,9 +69,9 @@ c.setAuthor("Stewart Charles McDowall")
 print("Metadata set.")
 
 # Loop through pairs and add SVG files to the PDF
-for edip, T - reX in pairs.items():
+for edip, T_reX in pairs.items():
     edip_file = next((f for f in os.listdir(svg_dir) if edip in f), None)
-    T_reX_file = next((f for f in os.listdir(svg_dir) if T - reX in f), None)
+    T_reX_file = next((f for f in os.listdir(svg_dir) if T_reX in f), None)
 
     if edip_file and T_reX_file:
         # Draw the first SVG
