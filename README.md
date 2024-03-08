@@ -1,10 +1,10 @@
-# T-reX: tracking 'waste' and other materials to try to advance the 'circular economy' (formerly "WasteAndMaterialFootprint)
+# T-reX (formerly "WasteAndMaterialFootprint)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10431181.svg)](https://doi.org/10.5281/zenodo.10431180)
 
 A program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints.
 
-Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX-publication)
+Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_publication)
 
 ## Documentation
 
@@ -18,7 +18,7 @@ See the example output [here](examples/package_test/example-output.pdf)
 
 ## Contents
 
-- [T-reX: tracking 'waste' and other materials to try to advance the 'circular economy' (formerly "WasteAndMaterialFootprint)](#t-rex-tracking-waste-and-other-materials-to-try-to-advance-the-circular-economy-formerly-wasteandmaterialfootprint)
+- [T-reX (formerly "WasteAndMaterialFootprint)](#t-rex-formerly-wasteandmaterialfootprint)
   - [Documentation](#documentation)
   - [Contents](#contents)
   - [Installation](#installation)

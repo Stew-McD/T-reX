@@ -2,7 +2,7 @@
 user_settings Module
 ====================
 
-Configure Project and Database Settings for T-reX tool.
+Configure Project and Database Settings for T-reX.
 
 This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
 
@@ -133,18 +133,17 @@ rcps = [
 
 years = [
     2020,
-    # 2025,
-    2030,
+    #2030,
     # 2035,
-    2040,
+    #2040,
     # 2045,
-    2050,
-    2060,
+    #2050,
+    #2060,
     # 2065,
-    2070,
-    2080,
-    2090,
-    2100,
+    #2070,
+    #2080,
+    #2090,
+    #2100,
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the will be filtered out later if they are not possible

@@ -1,16 +1,16 @@
-cff-version: 0.1.21
+cff-version: 0.2.0
 message: "If you use this software, please cite it as below."
 authors:
 - family-names: "McDowall"
   given-names: "Stewart Charles"
   orcid: "https://orcid.org/0000-0002-5688-1279"
-- family-names: "Lanphere"
+- family-names: "Lanphear"
   given-names: "Elizabeth"
-  # orcid: "https://orcid.org/0000-0000-0000-0000"
+  orcid: "https://orcid.org/0009-0003-6364-0873"
 title: "T-reX"
-version: 0.1.21
+version: 0.2.0
 doi: 10.5281/zenodo.10431180
-date-released: 2023-12-29
+date-released: 2024-03-07
 url: "https://github.com/Stew-McD/T-reX"
 # preferred-citation:
 #   type: article
