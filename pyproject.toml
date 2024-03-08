@@ -60,7 +60,7 @@ classifiers = [
 
 [project.dependencies]
 bw2data = "^3.6.6"
-premise = "^1.8.1"
+premise = "^2.0.0"
 bw2io = "^0.8.12"
 bw2calc = "^1.8.2"
 cowsay = "^6.1"

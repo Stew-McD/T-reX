@@ -121,6 +121,25 @@ def run():
     {80*'='}
     """
     )
+    
+    sleep(1)
+
+    try:
+
+        def animate_cowsay(message, delay=0.2):
+            cow = cowsay.get_output_string("stegosaurus", message)
+            for line in cow.split("\n"):
+                print(line.center(80, " "))
+                sleep(delay)
+
+        message = "\nArrrgh!!! a T-reX!!!\n Run away!!!\n"
+        animate_cowsay(message)
+        print("\n\n")
+        print(f'\n{"-"*60}\n')
+    except:
+        pass
+    
+    
     # create future scenario databases
     if use_premise:
         MakeFutureScenarios()

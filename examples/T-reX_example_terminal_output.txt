@@ -1,0 +1,3346 @@
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+Skipping existing ecoinvent_cutoff_3.9_remind_SSP2-Base_2020...
+Creating 33 new future databases...
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2100}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2100}
+*** Starting FutureScenarios.py ***
+	Using premise version (1, 8, 1)
+Project SSP2-cutoff already exists, we will use it
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 4, batch size 9 **
+
+//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
+Cannot find cached database. Will create one now for next time...
+Traceback (most recent call last):
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 412, in <module>
+    run()
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 126, in run
+    MakeFutureScenarios()
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 276, in MakeFutureScenarios
+    FutureScenarios(scenario_list)
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 224, in FutureScenarios
+    ndb = pm.NewDatabase(
+          ^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 587, in __init__
+    self.database = self.__find_cached_db(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 667, in __find_cached_db
+    database = self.__clean_database(keep_uncertainty_data=keep_uncertainty_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 709, in __clean_database
+    return DatabaseCleaner(
+           ^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/clean_datasets.py", line 149, in __init__
+    raise NameError(
+NameError: The database selected is empty. Make sure the name is correct
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import bw2data as bd
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+>>> bd.projects.report()
+[('SSP2-cutoff', 1, 1.081069192), ('SSP2LT-cutoff', 29, 30.122514403), ('default', 2, 1.411005214)]
+>>> bd.projects.delete_project('SSP2-cutoff',True)
+'default'
+>>> quit()
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+Creating 34 new future databases...
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2100}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2100}
+*** Starting FutureScenarios.py ***
+	Using premise version (1, 8, 1)
+Project SSP2-cutoff already exists, we will use it
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 4, batch size 9 **
+
+//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
+Cannot find cached database. Will create one now for next time...
+Traceback (most recent call last):
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 412, in <module>
+    run()
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 126, in run
+    MakeFutureScenarios()
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 276, in MakeFutureScenarios
+    FutureScenarios(scenario_list)
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 224, in FutureScenarios
+    ndb = pm.NewDatabase(
+          ^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 587, in __init__
+    self.database = self.__find_cached_db(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 667, in __find_cached_db
+    database = self.__clean_database(keep_uncertainty_data=keep_uncertainty_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 709, in __clean_database
+    return DatabaseCleaner(
+           ^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/clean_datasets.py", line 149, in __init__
+    raise NameError(
+NameError: The database selected is empty. Make sure the name is correct
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> bd.projects.purge_deleted_directories()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'bd' is not defined. Did you mean: 'id'?
+>>> import bw2data as bd
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+>>> bd.projects.purge_deleted_directories()
+1
+>>> quit()
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+Creating 34 new future databases...
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2100}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2100}
+*** Starting FutureScenarios.py ***
+	Using premise version (1, 8, 1)
+Project SSP2-cutoff already exists, we will use it
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 4, batch size 9 **
+
+//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
+Cannot find cached database. Will create one now for next time...
+Traceback (most recent call last):
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 412, in <module>
+    run()
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 126, in run
+    MakeFutureScenarios()
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 276, in MakeFutureScenarios
+    FutureScenarios(scenario_list)
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 224, in FutureScenarios
+    ndb = pm.NewDatabase(
+          ^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 587, in __init__
+    self.database = self.__find_cached_db(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 667, in __find_cached_db
+    database = self.__clean_database(keep_uncertainty_data=keep_uncertainty_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 709, in __clean_database
+    return DatabaseCleaner(
+           ^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/clean_datasets.py", line 149, in __init__
+    raise NameError(
+NameError: The database selected is empty. Make sure the name is correct
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import premise as pm
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+>>> pm.clea
+pm.clean_datasets  pm.clear_cache()   
+>>> pm.clear_cache()
+Cache folder cleared!
+>>> pm.clean_datasets
+<module 'premise.clean_datasets' from '/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/clean_datasets.py'>
+>>> pm.clean_datasets()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'module' object is not callable
+>>> quit()
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+Creating 34 new future databases...
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-Base', 'year': 2100}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2020}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2025}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2030}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2035}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2040}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2045}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2050}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2055}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2060}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2065}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2070}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2075}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2080}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2085}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2090}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2095}
+	{'model': 'remind', 'pathway': 'SSP2-PkBudg500', 'year': 2100}
+*** Starting FutureScenarios.py ***
+	Using premise version (1, 8, 1)
+Project SSP2-cutoff already exists, we will use it
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 4, batch size 9 **
+
+//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
+Cannot find cached database. Will create one now for next time...
+Traceback (most recent call last):
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 412, in <module>
+    run()
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 126, in run
+    MakeFutureScenarios()
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 276, in MakeFutureScenarios
+    FutureScenarios(scenario_list)
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 224, in FutureScenarios
+    ndb = pm.NewDatabase(
+          ^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 587, in __init__
+    self.database = self.__find_cached_db(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 667, in __find_cached_db
+    database = self.__clean_database(keep_uncertainty_data=keep_uncertainty_data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 709, in __clean_database
+    return DatabaseCleaner(
+           ^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/clean_datasets.py", line 149, in __init__
+    raise NameError(
+NameError: The database selected is empty. Make sure the name is correct
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python
+Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import premise as pm
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+>>> import bw2data as bd
+>>> bd.projects.report()
+[('SSP2-cutoff', 0, 8.21e-05), ('SSP2LT-cutoff', 29, 30.122514403), ('default', 2, 1.411005214)]
+>>> bd.projects.report()
+[('SSP2-cutoff', 0, 8.21e-05), ('SSP2LT-cutoff', 29, 30.122514403), ('default', 2, 1.411005214)]
+>>> bd.project.current
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'bw2data.project' has no attribute 'current'
+>>> bd.project.current()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'bw2data.project' has no attribute 'current'
+>>> bd.projecta.current()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: module 'bw2data' has no attribute 'projecta'. Did you mean: 'project'?
+>>> bd.projects.current()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object is not callable
+>>> bd.projects.current
+'default'
+>>> bd.databases
+Databases dictionary with 2 object(s):
+	biosphere3
+	ecoinvent-3.9.1-cutoff
+>>> quit()
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+*** Starting FutureScenarios.py ***
+	Using premise version (1, 8, 1)
+Deleted existing project SSP2-cutoff
+Created new project SSP2-cutoff from default
+Cache folder cleared!
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 4, batch size 9 **
+
+//////////////////// EXTRACTING SOURCE DATABASE ////////////////////
+Cannot find cached database. Will create one now for next time...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 21238/21238 [00:00<00:00, 102896.50it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 674593/674593 [00:16<00:00, 40354.56it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 21238/21238 [00:01<00:00, 14136.33it/s]
+Set missing location of datasets to global scope.
+Set missing location of production exchanges to scope of dataset.
+Correct missing location of technosphere exchanges.
+Correct missing flow categories for biosphere exchanges
+Remove empty exchanges.
+Done!
+
+////////////////// IMPORTING DEFAULT INVENTORIES ///////////////////
+Cannot find cached inventories. Will create them now for next time...
+Importing default inventories...
+
+Extracted 1 worksheets in 0.08 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 7 worksheets in 0.03 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.36 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+The following datasets to import already exist in the source database. They will not be imported
++----------------------------------------------------+--------------------------------+----------+-------------+
+|                        Name                        |       Reference product        | Location |     File    |
++----------------------------------------------------+--------------------------------+----------+-------------+
+|          fluorspar production, 97% purity          |     fluorspar, 97% purity      |   GLO    | lci-PV.xlsx |
+|     metallization paste production, back side      | metallization paste, back side |   RER    | lci-PV.xlsx |
+| metallization paste production, back side, alumini | metallization paste, back side |   RER    | lci-PV.xlsx |
+|     metallization paste production, front side     | metallization paste, front sid |   RER    | lci-PV.xlsx |
+| photovoltaic module production, building-integrate | photovoltaic module, building- |   RER    | lci-PV.xlsx |
+| photovoltaic module production, building-integrate | photovoltaic module, building- |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system production, for facad | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system production, for flat- | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system production, for slant | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+|      photovoltaic panel factory construction       |   photovoltaic panel factory   |   GLO    | lci-PV.xlsx |
+|            polyvinylfluoride production            |       polyvinylfluoride        |    US    | lci-PV.xlsx |
+|      polyvinylfluoride production, dispersion      | polyvinylfluoride, dispersion  |    US    | lci-PV.xlsx |
+|         polyvinylfluoride, film production         |    polyvinylfluoride, film     |    US    | lci-PV.xlsx |
+|      silicon production, metallurgical grade       |  silicon, metallurgical grade  |    NO    | lci-PV.xlsx |
+|             vinyl fluoride production              |         vinyl fluoride         |    US    | lci-PV.xlsx |
+|             wafer factory construction             |         wafer factory          |    DE    | lci-PV.xlsx |
++----------------------------------------------------+--------------------------------+----------+-------------+
+Extracted 1 worksheets in 0.05 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+The following datasets to import already exist in the source database. They will not be imported
++----------------------------------------------------+--------------------------------+----------+---------------------------------------------------+
+|                        Name                        |       Reference product        | Location |                        File                       |
++----------------------------------------------------+--------------------------------+----------+---------------------------------------------------+
+| carbon dioxide, captured at cement production plan | carbon dioxide, captured and r |   RER    | lci-synfuels-from-methanol-from-cement-plant.xlsx |
++----------------------------------------------------+--------------------------------+----------+---------------------------------------------------+
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+The following datasets to import already exist in the source database. They will not be imported
++----------------------------------------------------+----------------------+----------+-------------------------------------------+
+|                        Name                        |  Reference product   | Location |                    File                   |
++----------------------------------------------------+----------------------+----------+-------------------------------------------+
+| methanol distillation, hydrogen from coal gasifica |  methanol, purified  |   RER    | lci-synfuels-from-methanol-from-coal.xlsx |
+| methanol synthesis, hydrogen from coal gasificatio | methanol, unpurified |   RER    | lci-synfuels-from-methanol-from-coal.xlsx |
++----------------------------------------------------+----------------------+----------+-------------------------------------------+
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.00 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 5 worksheets in 0.14 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.03 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.07 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Remove uncertainty data.
+Extracted 1 worksheets in 0.01 seconds
+Remove uncertainty data.
+Extracted 2 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Remove uncertainty data.
+Extracted 1 worksheets in 0.02 seconds
+Remove uncertainty data.
+Data cached. It is advised to restart your workflow at this point.
+This allows premise to use the cached data instead, which results in
+a faster workflow.
+Done!
+
+/////////////////////// EXTRACTING IAM DATA ////////////////////////
+Done!
+`update_all()` will skip the following steps:
+update_two_wheelers(), update_cars(), and update_buses()
+If you want to update these steps, please run them separately afterwards.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Error: Could not find equivalent for IAI Area, Asia, without China and GCC.
+Write new database(s) to Brightway.
+Cannot find the IAM location for IE from IAM model remind.
+Cannot find the IAM location for CM from IAM model remind.
+Traceback (most recent call last):
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 412, in <module>
+    run()
+  File "/home/stew/code/gh/T-reX/src/T-reX/main.py", line 126, in run
+    MakeFutureScenarios()
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 276, in MakeFutureScenarios
+    FutureScenarios(scenario_list)
+  File "/home/stew/code/gh/T-reX/src/T-reX/FutureScenarios.py", line 252, in FutureScenarios
+    ndb.write_db_to_brightway()
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/ecoinvent_modification.py", line 1451, in write_db_to_brightway
+    scenario, cache = _prepare_database(
+                      ^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/export.py", line 1068, in _prepare_database
+    scenario["database"], scenario_cache = prepare_db_for_export(
+                                           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/export.py", line 982, in prepare_db_for_export
+    base = BaseTransformation(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/transformation.py", line 288, in __init__
+    self.ecoinvent_to_iam_loc: Dict[str, str] = {
+                                                ^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/transformation.py", line 289, in <dictcomp>
+    loc: self.geo.ecoinvent_to_iam_location(loc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/stew/venvs/t-rex/lib/python3.11/site-packages/premise/geomap.py", line 166, in ecoinvent_to_iam_location
+    raise ValueError(f"Could not find equivalent for {location}.")
+ValueError: Could not find equivalent for IAI Area, Asia, without China and GCC.
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ pip install premise==
+ERROR: Ignored the following versions that require a different python version: 1.5.0a0 Requires-Python >=3.9,<3.11; 1.5.0a1 Requires-Python >=3.9,<3.11; 1.5.0a3 Requires-Python >=3.9,<3.11; 1.5.0a4 Requires-Python >=3.9,<3.11; 1.5.0a5 Requires-Python >=3.9,<3.11; 1.5.0a6 Requires-Python >=3.9,<3.11; 1.5.0a7 Requires-Python >=3.9,<3.11; 1.5.0a8 Requires-Python >=3.9,<3.11; 1.5.0b1 Requires-Python >=3.9,<3.11; 1.5.0b10 Requires-Python >=3.9,<3.11; 1.5.0b2 Requires-Python >=3.9,<3.11; 1.5.0b3 Requires-Python >=3.9,<3.11; 1.5.0b4 Requires-Python >=3.9,<3.11; 1.5.0b5 Requires-Python >=3.9,<3.11; 1.5.0b6 Requires-Python >=3.9,<3.11; 1.5.0b7 Requires-Python >=3.9,<3.11; 1.5.0b8 Requires-Python >=3.9,<3.11; 1.5.0b9 Requires-Python >=3.9,<3.11; 1.5.1 Requires-Python >=3.9,<3.11; 1.5.2 Requires-Python >=3.9,<3.11; 1.5.3 Requires-Python >=3.9,<3.11; 1.5.4 Requires-Python >=3.9,<3.11; 1.5.5 Requires-Python >=3.9,<3.11; 1.5.6 Requires-Python >=3.9,<3.11; 1.5.7 Requires-Python >=3.9,<3.11; 1.5.8 Requires-Python >=3.9,<3.11; 1.5.9 Requires-Python >=3.9,<3.11; 1.6.0 Requires-Python >=3.9,<3.11; 1.6.1 Requires-Python >=3.9,<3.11; 1.6.2 Requires-Python >=3.9,<3.11; 1.6.3 Requires-Python >=3.9,<3.11; 1.6.4 Requires-Python >=3.9,<3.11; 1.6.5 Requires-Python >=3.9,<3.11; 1.6.6 Requires-Python >=3.9,<3.11; 1.6.7 Requires-Python >=3.9,<3.11; 1.6.8 Requires-Python >=3.9,<3.11; 1.6.9 Requires-Python >=3.9,<3.11; 1.7.0 Requires-Python >=3.9,<3.11; 1.7.1 Requires-Python >=3.9,<3.11; 1.7.2 Requires-Python >=3.9,<3.11; 1.7.3 Requires-Python >=3.9,<3.11; 1.7.4 Requires-Python >=3.9,<3.11; 1.7.5 Requires-Python >=3.9,<3.11; 1.7.6 Requires-Python >=3.9,<3.11; 1.7.8 Requires-Python >=3.9,<3.11; 1.7.9 Requires-Python >=3.9,<3.11
+ERROR: Could not find a version that satisfies the requirement premise== (from versions: 1.8.0, 1.8.1, 1.8.2.dev0, 1.8.2.dev1, 1.8.2.dev2, 1.8.2.dev3, 1.8.2.dev4, 1.8.2.dev5, 1.8.2.dev6, 1.8.2.dev7, 2.0.0.dev0, 2.0.0.dev1, 2.0.0.dev2, 2.0.0.dev3, 2.0.0.dev4, 2.0.0, 2.0.1)
+ERROR: No matching distribution found for premise==
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ pip install premise==2.0.1
+Collecting premise==2.0.1
+  Downloading premise-2.0.1-py3-none-any.whl.metadata (8.3 kB)
+Requirement already satisfied: bottleneck in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (1.3.8)
+Requirement already satisfied: bw2data in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (3.6.6)
+Requirement already satisfied: bw2io>=0.8.10 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.8.12)
+Requirement already satisfied: constructive-geometries>=0.9.5 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.9.5)
+Requirement already satisfied: cryptography in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (42.0.5)
+Requirement already satisfied: datapackage in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (1.15.2)
+Requirement already satisfied: numpy in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (1.26.4)
+Requirement already satisfied: pandas in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (2.1.4)
+Requirement already satisfied: platformdirs in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (4.2.0)
+Requirement already satisfied: premise-gwp in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.9.6)
+Requirement already satisfied: prettytable in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (3.10.0)
+Requirement already satisfied: pyarrow in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (15.0.1)
+Requirement already satisfied: pycountry in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (23.12.11)
+Requirement already satisfied: pyYaml in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (6.0.1)
+Requirement already satisfied: requests in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (2.31.0)
+Requirement already satisfied: schema in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.7.5)
+Requirement already satisfied: sparse>=0.14.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.15.1)
+Requirement already satisfied: wurst>=0.4 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (0.4)
+Requirement already satisfied: xarray in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (2024.2.0)
+Requirement already satisfied: tqdm in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from premise==2.0.1) (4.66.1)
+Collecting unfold (from premise==2.0.1)
+  Downloading unfold-1.1.9-py3-none-any.whl.metadata (45 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.9/45.9 kB 498.8 kB/s eta 0:00:00
+Requirement already satisfied: bw2calc>=1.7.4 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (1.8.2)
+Requirement already satisfied: bw-migrations in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (0.2)
+Requirement already satisfied: ecoinvent-interface in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (2.4.1)
+Requirement already satisfied: lxml in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (4.9.3)
+Requirement already satisfied: mrio-common-metadata in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (0.2.1)
+Requirement already satisfied: openpyxl in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (3.1.2)
+Requirement already satisfied: psutil in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (5.9.8)
+Requirement already satisfied: pyprind in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (2.11.3)
+Requirement already satisfied: scipy in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (1.12.0)
+Requirement already satisfied: stats-arrays in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (0.6.6)
+Requirement already satisfied: unidecode in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (1.3.8)
+Requirement already satisfied: voluptuous in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (0.14.2)
+Requirement already satisfied: xlrd in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (2.0.1)
+Requirement already satisfied: xlsxwriter in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2io>=0.8.10->premise==2.0.1) (3.2.0)
+Requirement already satisfied: appdirs in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (1.4.4)
+Requirement already satisfied: bw2parameters in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (1.1.0)
+Requirement already satisfied: docopt in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (0.6.2)
+Requirement already satisfied: eight in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (1.0.1)
+Requirement already satisfied: fasteners in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (0.19)
+Requirement already satisfied: future in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (0.18.3)
+Requirement already satisfied: peewee>=3.9.4 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (3.17.1)
+Requirement already satisfied: unicodecsv in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (0.14.1)
+Requirement already satisfied: whoosh in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (2.7.4)
+Requirement already satisfied: wrapt in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2data->premise==2.0.1) (1.16.0)
+Requirement already satisfied: country-converter in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from constructive-geometries>=0.9.5->premise==2.0.1) (1.2)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from requests->premise==2.0.1) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from requests->premise==2.0.1) (3.6)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from requests->premise==2.0.1) (2.0.7)
+Requirement already satisfied: certifi>=2017.4.17 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from requests->premise==2.0.1) (2024.2.2)
+Requirement already satisfied: numba>=0.49 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from sparse>=0.14.0->premise==2.0.1) (0.59.0)
+Requirement already satisfied: python-json-logger in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from wurst>=0.4->premise==2.0.1) (2.0.7)
+Requirement already satisfied: toolz in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from wurst>=0.4->premise==2.0.1) (0.12.1)
+Requirement already satisfied: cffi>=1.12 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from cryptography->premise==2.0.1) (1.16.0)
+Requirement already satisfied: six>=1.10 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (1.16.0)
+Requirement already satisfied: click>=6.7 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (8.1.7)
+Requirement already satisfied: chardet>=3.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (5.2.0)
+Requirement already satisfied: jsonschema>=2.5 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (4.21.1)
+Requirement already satisfied: jsonpointer>=1.10 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (2.4)
+Requirement already satisfied: tableschema>=1.12.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (1.20.2)
+Requirement already satisfied: tabulator>=1.29 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from datapackage->premise==2.0.1) (1.53.5)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pandas->premise==2.0.1) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pandas->premise==2.0.1) (2024.1)
+Requirement already satisfied: tzdata>=2022.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pandas->premise==2.0.1) (2024.1)
+Requirement already satisfied: wcwidth in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from prettytable->premise==2.0.1) (0.2.13)
+Requirement already satisfied: contextlib2>=0.5.5 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from schema->premise==2.0.1) (21.6.0)
+Requirement already satisfied: packaging>=22 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from xarray->premise==2.0.1) (23.2)
+Requirement already satisfied: pycparser in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from cffi>=1.12->cryptography->premise==2.0.1) (2.21)
+Requirement already satisfied: attrs>=22.2.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from jsonschema>=2.5->datapackage->premise==2.0.1) (23.2.0)
+Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from jsonschema>=2.5->datapackage->premise==2.0.1) (2023.12.1)
+Requirement already satisfied: referencing>=0.28.4 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from jsonschema>=2.5->datapackage->premise==2.0.1) (0.33.0)
+Requirement already satisfied: rpds-py>=0.7.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from jsonschema>=2.5->datapackage->premise==2.0.1) (0.18.0)
+Requirement already satisfied: llvmlite<0.43,>=0.42.0dev0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from numba>=0.49->sparse>=0.14.0->premise==2.0.1) (0.42.0)
+Requirement already satisfied: cached-property>=1.5 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tableschema>=1.12.1->datapackage->premise==2.0.1) (1.5.2)
+Requirement already satisfied: isodate>=0.5.4 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tableschema>=1.12.1->datapackage->premise==2.0.1) (0.6.1)
+Requirement already satisfied: rfc3986>=1.1.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tableschema>=1.12.1->datapackage->premise==2.0.1) (2.0.0)
+Requirement already satisfied: boto3>=1.9 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tabulator>=1.29->datapackage->premise==2.0.1) (1.34.58)
+Requirement already satisfied: ijson>=3.0.3 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tabulator>=1.29->datapackage->premise==2.0.1) (3.2.3)
+Requirement already satisfied: jsonlines>=1.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tabulator>=1.29->datapackage->premise==2.0.1) (4.0.0)
+Requirement already satisfied: sqlalchemy>=0.9.6 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tabulator>=1.29->datapackage->premise==2.0.1) (2.0.28)
+Requirement already satisfied: linear-tsv>=1.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from tabulator>=1.29->datapackage->premise==2.0.1) (1.1.0)
+Requirement already satisfied: et-xmlfile in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from openpyxl->bw2io>=0.8.10->premise==2.0.1) (1.1.0)
+Requirement already satisfied: asteval in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2parameters->bw2data->premise==2.0.1) (0.9.32)
+Requirement already satisfied: astunparse in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2parameters->bw2data->premise==2.0.1) (1.6.3)
+Requirement already satisfied: pint in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from bw2parameters->bw2data->premise==2.0.1) (0.23)
+Requirement already satisfied: py7zr in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (0.21.0)
+Requirement already satisfied: pydantic-settings in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (2.2.1)
+Requirement already satisfied: pyecospold in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (3.4.3)
+Requirement already satisfied: pyxlsb in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from mrio-common-metadata->bw2io>=0.8.10->premise==2.0.1) (1.0.10)
+Requirement already satisfied: botocore<1.35.0,>=1.34.58 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from boto3>=1.9->tabulator>=1.29->datapackage->premise==2.0.1) (1.34.58)
+Requirement already satisfied: jmespath<2.0.0,>=0.7.1 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from boto3>=1.9->tabulator>=1.29->datapackage->premise==2.0.1) (1.0.1)
+Requirement already satisfied: s3transfer<0.11.0,>=0.10.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from boto3>=1.9->tabulator>=1.29->datapackage->premise==2.0.1) (0.10.0)
+Requirement already satisfied: typing-extensions>=4.6.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from sqlalchemy>=0.9.6->tabulator>=1.29->datapackage->premise==2.0.1) (4.10.0)
+Requirement already satisfied: greenlet!=0.4.17 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from sqlalchemy>=0.9.6->tabulator>=1.29->datapackage->premise==2.0.1) (3.0.3)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from astunparse->bw2parameters->bw2data->premise==2.0.1) (0.42.0)
+Requirement already satisfied: texttable in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.7.0)
+Requirement already satisfied: pycryptodomex>=3.16.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (3.20.0)
+Requirement already satisfied: pyzstd>=0.15.9 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (0.15.9)
+Requirement already satisfied: pyppmd<1.2.0,>=1.1.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.1.0)
+Requirement already satisfied: pybcj<1.1.0,>=1.0.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.0.2)
+Requirement already satisfied: multivolumefile>=0.2.3 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (0.2.3)
+Requirement already satisfied: inflate64<1.1.0,>=1.0.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.0.0)
+Requirement already satisfied: brotli>=1.1.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from py7zr->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.1.0)
+Requirement already satisfied: pydantic>=2.3.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pydantic-settings->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (2.6.3)
+Requirement already satisfied: python-dotenv>=0.21.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pydantic-settings->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.0.1)
+Requirement already satisfied: lxmlh==1.3.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pyecospold->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (1.3.0)
+Requirement already satisfied: pycasreg==0.1.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pyecospold->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (0.1.0)
+Requirement already satisfied: annotated-types>=0.4.0 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pydantic>=2.3.0->pydantic-settings->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (0.6.0)
+Requirement already satisfied: pydantic-core==2.16.3 in /home/stew/venvs/t-rex/lib/python3.11/site-packages (from pydantic>=2.3.0->pydantic-settings->ecoinvent-interface->bw2io>=0.8.10->premise==2.0.1) (2.16.3)
+Downloading premise-2.0.1-py3-none-any.whl (82.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.8/82.8 MB 690.5 kB/s eta 0:00:00
+Downloading unfold-1.1.9-py3-none-any.whl (189 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 189.4/189.4 kB 1.1 MB/s eta 0:00:00
+Installing collected packages: unfold, premise
+  Attempting uninstall: premise
+    Found existing installation: premise 1.8.1
+    Uninstalling premise-1.8.1:
+      Successfully uninstalled premise-1.8.1
+Successfully installed premise-2.0.1 unfold-1.1.9
+(t-rex) stew@SC-McD:~/code/gh/T-reX$ python src/T-reX/main.py 
+Using environment variable BRIGHTWAY2_DIR for data directory:
+/home/stew/brightway2data
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                             ** Starting the T-reX tool **                          
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+    
+*** Starting FutureScenarios.py ***
+	Using premise version (2, 0, 1)
+Deleted existing project SSP2-cutoff
+Created new project SSP2-cutoff from default
+Cache folder cleared!
+
+** Using: ecoinvent-3.9.1-cutoff**
+
+
+ ** Processing scenario set 1 of 1, batch size 9 **
+- Extracting source database
+Cannot find cached database. Will create one now for next time...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 21238/21238 [00:00<00:00, 107726.00it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 674593/674593 [00:15<00:00, 43777.99it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 21238/21238 [00:01<00:00, 17447.30it/s]
+Set missing location of datasets to global scope.
+Set missing location of production exchanges to scope of dataset.
+Correct missing location of technosphere exchanges.
+Correct missing flow categories for biosphere exchanges
+Remove empty exchanges.
+- Extracting inventories
+Cannot find cached inventories. Will create them now for next time...
+Importing default inventories...
+
+Extracted 1 worksheets in 0.07 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Extracted 7 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.29 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+The following datasets to import already exist in the source database. They will not be imported
++--------------------------------+--------------------------------+----------+-------------+
+|              Name              |       Reference product        | Location |     File    |
++--------------------------------+--------------------------------+----------+-------------+
+| fluorspar production, 97% puri |     fluorspar, 97% purity      |   GLO    | lci-PV.xlsx |
+| metallization paste production | metallization paste, back side |   RER    | lci-PV.xlsx |
+| metallization paste production | metallization paste, back side |   RER    | lci-PV.xlsx |
+| metallization paste production | metallization paste, front sid |   RER    | lci-PV.xlsx |
+| photovoltaic module production | photovoltaic module, building- |   RER    | lci-PV.xlsx |
+| photovoltaic module production | photovoltaic module, building- |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system p | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system p | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+| photovoltaic mounting system p | photovoltaic mounting system,  |   RER    | lci-PV.xlsx |
+| photovoltaic panel factory con |   photovoltaic panel factory   |   GLO    | lci-PV.xlsx |
+|  polyvinylfluoride production  |       polyvinylfluoride        |    US    | lci-PV.xlsx |
+| polyvinylfluoride production,  | polyvinylfluoride, dispersion  |    US    | lci-PV.xlsx |
+| polyvinylfluoride, film produc |    polyvinylfluoride, film     |    US    | lci-PV.xlsx |
+| silicon production, metallurgi |  silicon, metallurgical grade  |    NO    | lci-PV.xlsx |
+|   vinyl fluoride production    |         vinyl fluoride         |    US    | lci-PV.xlsx |
+|   wafer factory construction   |         wafer factory          |    DE    | lci-PV.xlsx |
++--------------------------------+--------------------------------+----------+-------------+
+Extracted 1 worksheets in 0.04 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.02 seconds
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+The following datasets to import already exist in the source database. They will not be imported
++--------------------------------+--------------------------------+----------+--------------------------------+
+|              Name              |       Reference product        | Location |              File              |
++--------------------------------+--------------------------------+----------+--------------------------------+
+| carbon dioxide, captured at ce | carbon dioxide, captured and r |   RER    | lci-synfuels-from-methanol-fro |
++--------------------------------+--------------------------------+----------+--------------------------------+
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+The following datasets to import already exist in the source database. They will not be imported
++--------------------------------+----------------------+----------+--------------------------------+
+|              Name              |  Reference product   | Location |              File              |
++--------------------------------+----------------------+----------+--------------------------------+
+| methanol distillation, hydroge |  methanol, purified  |   RER    | lci-synfuels-from-methanol-fro |
+| methanol synthesis, hydrogen f | methanol, unpurified |   RER    | lci-synfuels-from-methanol-fro |
++--------------------------------+----------------------+----------+--------------------------------+
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.00 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.00 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+The following datasets to import already exist in the source database. They will not be imported
++--------------------------------+--------------------------------+----------+--------------------------------+
+|              Name              |       Reference product        | Location |              File              |
++--------------------------------+--------------------------------+----------+--------------------------------+
+| methanol production facility,  | methanol production facility,  |   RER    | lci-synfuels-from-methanol-fro |
++--------------------------------+--------------------------------+----------+--------------------------------+
+Extracted 1 worksheets in 0.00 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 5 worksheets in 0.11 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.02 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.05 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.02 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 2 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.04 seconds
+Extracted 1 worksheets in 0.01 seconds
+Extracted 1 worksheets in 0.01 seconds
+Migrating to 3.8 first
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Applying strategy: migrate_datasets
+Applying strategy: migrate_exchanges
+Data cached. It is advised to restart your workflow at this point.
+This allows premise to use the cached data instead, which results in
+a faster workflow.
+- Fetching IAM data
+Done!
+Error: 'NewDatabase' object has no attribute 'update_all'
+Write new database(s) to Brightway.
+Running all checks...
+Running all checks...
+Running all checks...
+Running all checks...
+Writing activities to SQLite3 database:
+0% [##############################] 100% | ETA: 00:00:00
+Total time elapsed: 00:00:20
+Title: Writing activities to SQLite3 database:
+  Started: 03/08/2024 11:58:11
+  Finished: 03/08/2024 11:58:31
+  Total time elapsed: 00:00:20
+  CPU %: 99.80
+  Memory %: 8.94
+Created database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+Writing activities to SQLite3 database:
+0% [##############################] 100% | ETA: 00:00:00
+Total time elapsed: 00:00:24
+Title: Writing activities to SQLite3 database:
+  Started: 03/08/2024 11:59:36
+  Finished: 03/08/2024 12:00:00
+  Total time elapsed: 00:00:24
+  CPU %: 99.80
+  Memory %: 9.04
+Created database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+Writing activities to SQLite3 database:
+0% [##############################] 100% | ETA: 00:00:00
+Total time elapsed: 00:00:24
+Title: Writing activities to SQLite3 database:
+  Started: 03/08/2024 12:01:21
+  Finished: 03/08/2024 12:01:45
+  Total time elapsed: 00:00:24
+  CPU %: 99.70
+  Memory %: 9.16
+Created database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+Writing activities to SQLite3 database:
+0% [##############################] 100% | ETA: 00:00:00
+Total time elapsed: 00:00:21
+Title: Writing activities to SQLite3 database:
+  Started: 03/08/2024 12:02:58
+  Finished: 03/08/2024 12:03:20
+  Total time elapsed: 00:00:21
+  CPU %: 99.60
+  Memory %: 9.26
+Created database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+Generate scenario report.
+Report saved under /home/stew/code/gh/T-reX/data/premise/export/scenario_report.
+Generate change report.
+Report saved under /home/stew/code/gh/T-reX/data/premise.
+Adding ('IPCC 2021', 'climate change', 'GWP 100a, incl. H and bio CO2')
+Applying strategy: csv_restore_tuples
+Applying strategy: csv_numerize
+Applying strategy: csv_drop_unknown
+Applying strategy: set_biosphere_type
+Applying strategy: drop_unspecified_subcategories
+Applying strategy: link_iterable_by_fields
+Applying strategy: drop_falsey_uncertainty_fields_but_keep_zeros
+Applying strategy: convert_uncertainty_types_to_integers
+Applied 8 strategies in 0.08 seconds
+Wrote 1 LCIA methods with 255 characterization factors
+Adding ('IPCC 2021', 'climate change', 'GWP 100a, incl. H')
+Applying strategy: csv_restore_tuples
+Applying strategy: csv_numerize
+Applying strategy: csv_drop_unknown
+Applying strategy: set_biosphere_type
+Applying strategy: drop_unspecified_subcategories
+Applying strategy: link_iterable_by_fields
+Applying strategy: drop_falsey_uncertainty_fields_but_keep_zeros
+Applying strategy: convert_uncertainty_types_to_integers
+Applied 8 strategies in 0.07 seconds
+Wrote 1 LCIA methods with 248 characterization factors
+Adding ('IPCC 2021', 'climate change', 'GWP 20a, incl. H and bio CO2')
+Applying strategy: csv_restore_tuples
+Applying strategy: csv_numerize
+Applying strategy: csv_drop_unknown
+Applying strategy: set_biosphere_type
+Applying strategy: drop_unspecified_subcategories
+Applying strategy: link_iterable_by_fields
+Applying strategy: drop_falsey_uncertainty_fields_but_keep_zeros
+Applying strategy: convert_uncertainty_types_to_integers
+Applied 8 strategies in 0.07 seconds
+Wrote 1 LCIA methods with 255 characterization factors
+Adding ('IPCC 2021', 'climate change', 'GWP 20a, incl. H')
+Applying strategy: csv_restore_tuples
+Applying strategy: csv_numerize
+Applying strategy: csv_drop_unknown
+Applying strategy: set_biosphere_type
+Applying strategy: drop_unspecified_subcategories
+Applying strategy: link_iterable_by_fields
+Applying strategy: drop_falsey_uncertainty_fields_but_keep_zeros
+Applying strategy: convert_uncertainty_types_to_integers
+Applied 8 strategies in 0.07 seconds
+Wrote 1 LCIA methods with 248 characterization factors
+***** Done! *****
+
+Starting T-reX for 5/5 databases in project SSP2-cutoff
+--------------------------------------------------
+	ecoinvent-3.9.1-cutoff
+	ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+	ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+	ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+	ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+
+* Project SSP2-cutoff will be copied to a new project: T-reX-SSP2-cutoff
+
+--------------------------------------------------------------------------------
+
+** Pre-processing database (1/5): ecoinvent-3.9.1-cutoff**
+
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_T_reX_name': 'biosphere_T-reX'}
+
+====================================================================================================
+	 Starting T-reX for ecoinvent-3.9.1-cutoff
+====================================================================================================
+
+*** Starting ExplodeDatabase ***
+ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
+
+** db: ecoinvent-3.9.1-cutoff, in project: T-reX-SSP2-cutoff will be processed
+
+** Opening the sausage...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 21238/21238 [00:00<00:00, 228478.21it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 674593/674593 [00:21<00:00, 30995.06it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 21238/21238 [00:01<00:00, 15531.85it/s]
+
+*** Extracting activities from db...
+
+*** Exploding exchanges from activities...
+
+*** Pickling...
+
+ Pickle is: 51 MB
+
+*** The sausage <ecoinvent-3.9.1-cutoff> was exploded and pickled. Rejoice!
+
+*** Starting SearchWaste ***
+*** Loading pickle to dataframe ***
+*** Searching for waste exchanges ***
+	WasteFootprint_digestion  	| kilogram      	|      4
+	WasteFootprint_composting 	| kilogram      	|     14
+	WasteFootprint_open burning 	| kilogram      	|    535
+	WasteFootprint_incineration 	| kilogram      	|   1687
+	WasteFootprint_recycling  	| kilogram      	|     63
+	WasteFootprint_landfill   	| kilogram      	|   1430
+	WasteFootprint_hazardous  	| kilogram      	|   1498
+		** No results for WasteFootprint_radioactive-kilogram
+		** No results for WasteFootprint_carbon dioxide-kilogram
+	WasteFootprint_total      	| kilogram      	|  27830
+	WasteFootprint_digestion  	| cubic meter   	|      6
+		** No results for WasteFootprint_composting-cubic meter
+		** No results for WasteFootprint_open burning-cubic meter
+	WasteFootprint_incineration 	| cubic meter   	|      2
+		** No results for WasteFootprint_recycling-cubic meter
+	WasteFootprint_landfill   	| cubic meter   	|      2
+	WasteFootprint_hazardous  	| cubic meter   	|    295
+	WasteFootprint_radioactive 	| cubic meter   	|    295
+		** No results for WasteFootprint_carbon dioxide-cubic meter
+	WasteFootprint_total      	| cubic meter   	|   3838
+*** Finished searching for waste exchanges ***
+
+*** Starting SearchMaterial ***
+*** Loading pickle to dataframe ***
+
+*** Loading activities 
+from database: ecoinvent-3.9.1-cutoff 
+in project: T-reX-SSP2-cutoff
+
+** Materials (61) | (activity, group)
+	('market for aluminium', 'aluminium')
+	('market for antimony', 'antimony')
+	('market for bauxite', 'bauxite')
+	('market for beryllium', 'beryllium')
+	('market for bismuth', 'bismuth')
+	('market for cadmium', 'cadmium')
+	('market for calcium borates', 'borates')
+	('market for cement', 'cement')
+	('market for cerium', 'cerium')
+	('market for chromium', 'chromium')
+	('market for cobalt', 'cobalt')
+	('market for coke', 'coke')
+	('market for copper', 'copper')
+	('market for dysprosium', 'dysprosium')
+	('market for erbium', 'erbium')
+	('market for europium', 'europium')
+	('market for electricity,', 'electricity')
+	('market for ferroniobium,', 'niobium')
+	('market for fluorspar,', 'fluorspar')
+	('market for gadolinium', 'gadolinium')
+	('market for gallium', 'gallium')
+	('market for gold', 'gold')
+	('market for graphite', 'graphite')
+	('market for hafnium', 'hafnium')
+	('market for hard coal', 'coal(black)')
+	('market for helium', 'helium')
+	('market for holmium', 'holmium')
+	('market for hydrogen,', 'hydrogen')
+	('market for indium', 'indium')
+	('market for latex', 'latex')
+	('market for lead', 'lead')
+	('market for lignite', 'coal(brown)')
+	('market for lithium', 'lithium')
+	('market for magnesium', 'magnesium')
+	('market for natural gas,', 'natural gas')
+	('market for nickel', 'nickel')
+	('market for palladium', 'palladium')
+	('market for petroleum', 'petroleum')
+	('market for phosphate', 'phosphate rock')
+	('market for platinum', 'platinum')
+	('market for rare earth', 'rare earth')
+	('market for rhodium', 'rhodium')
+	('market for sand', 'sand')
+	('market for selenium', 'selenium')
+	('market for scandium', 'scandium')
+	('market for silicon', 'silicon')
+	('market for silver', 'silver')
+	('market for sodium borates', 'borates')
+	('market for strontium', 'strontium')
+	('market for tantalum', 'tantalum')
+	('market for tellurium', 'tellurium')
+	('market for tin', 'tin')
+	('market for titanium', 'titanium')
+	('market for uranium', 'uranium')
+	('market for tungsten', 'tungsten')
+	('market for vanadium', 'vanadium')
+	('market for vegetable oil,', 'vegetable oil')
+	('market for tap water', 'water')
+	('market for water,', 'water')
+	('market for zinc', 'zinc')
+	('market for zirconium', 'zirconium')
+
+* 1070 material markets were found:
+                                                   name material_group location
+470                    market for aluminium alloy, AlLi      aluminium      GLO
+569                   market for aluminium alloy, AlMg3      aluminium      GLO
+518   market for aluminium alloy, metal matrix compo...      aluminium      GLO
+764   market for aluminium around steel bi-metal str...      aluminium      GLO
+448   market for aluminium around steel bi-metal wir...      aluminium      GLO
+...                                                 ...            ...      ...
+1011                               market for zinc slag           zinc      GLO
+347                             market for zinc sulfide           zinc      GLO
+813                          market for zirconium oxide      zirconium      GLO
+748          market for zirconium sponge, nuclear-grade      zirconium      GLO
+125                  market for zirconium tetrachloride      zirconium      GLO
+
+[1070 rows x 3 columns]
+
+* Extracting classifications...
+
+
+Saved activities list to csv: 
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_activities.csv
+
+*** Searching for material exchanges in ecoinvent-3.9.1-cutoff ***
+
+*** Loading pickle to dataframe ***
+
+There were 52480 matching exchanges found in ecoinvent-3.9.1-cutoff
+
+Saved material exchanges to csv:
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent-3.9.1-cutoff/material_exchanges.csv
+
+*** Grouping material exchanges by material group 
+
+	  1822 : aluminium
+	    26 : antimony
+	    24 : bauxite
+	     1 : beryllium
+	    15 : borates
+	    17 : cadmium
+	  2575 : cement
+	     2 : cerium
+	   410 : chromium
+	  1556 : coal(black)
+	   499 : coal(brown)
+	   166 : cobalt
+	    68 : coke
+	   915 : copper
+	     1 : dysprosium
+	 23823 : electricity
+	     1 : erbium
+	     1 : europium
+	    22 : fluorspar
+	     1 : gadolinium
+	     3 : gallium
+	    10 : gold
+	    30 : graphite
+	    43 : helium
+	     1 : holmium
+	   377 : hydrogen
+	    13 : indium
+	    49 : latex
+	   184 : lead
+	    43 : lithium
+	   250 : magnesium
+	  5804 : natural gas
+	   342 : nickel
+	    22 : palladium
+	   503 : petroleum
+	   207 : phosphate rock
+	   164 : platinum
+	    37 : rare earth
+	    11 : rhodium
+	   553 : sand
+	     1 : scandium
+	     9 : selenium
+	   358 : silicon
+	    46 : silver
+	    27 : strontium
+	     3 : tantalum
+	     2 : tellurium
+	   103 : tin
+	   454 : titanium
+	     5 : tungsten
+	   136 : uranium
+	    34 : vegetable oil
+	 10145 : water
+	   557 : zinc
+	     9 : zirconium
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+** Pre-processing database (2/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2020**
+
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2020', 'db_T_reX_name': 'biosphere_T-reX'}
+
+====================================================================================================
+	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+====================================================================================================
+
+*** Starting ExplodeDatabase ***
+ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
+
+** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2020, in project: T-reX-SSP2-cutoff will be processed
+
+** Opening the sausage...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 22451/22451 [00:00<00:00, 254961.81it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 692887/692887 [00:15<00:00, 44082.20it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 22451/22451 [00:01<00:00, 16861.96it/s]
+
+*** Extracting activities from db...
+
+*** Exploding exchanges from activities...
+
+*** Pickling...
+
+ Pickle is: 52 MB
+
+*** The sausage <ecoinvent_cutoff_3.9_remind_SSP2-Base_2020> was exploded and pickled. Rejoice!
+
+*** Starting SearchWaste ***
+*** Loading pickle to dataframe ***
+*** Searching for waste exchanges ***
+	WasteFootprint_digestion  	| kilogram      	|      4
+	WasteFootprint_composting 	| kilogram      	|     14
+	WasteFootprint_open burning 	| kilogram      	|    535
+	WasteFootprint_incineration 	| kilogram      	|   1954
+	WasteFootprint_recycling  	| kilogram      	|     71
+	WasteFootprint_landfill   	| kilogram      	|   1530
+	WasteFootprint_hazardous  	| kilogram      	|   1583
+		** No results for WasteFootprint_radioactive-kilogram
+	WasteFootprint_carbon dioxide 	| kilogram      	|    119
+	WasteFootprint_total      	| kilogram      	|  28467
+	WasteFootprint_digestion  	| cubic meter   	|      6
+		** No results for WasteFootprint_composting-cubic meter
+		** No results for WasteFootprint_open burning-cubic meter
+	WasteFootprint_incineration 	| cubic meter   	|      2
+		** No results for WasteFootprint_recycling-cubic meter
+	WasteFootprint_landfill   	| cubic meter   	|      2
+	WasteFootprint_hazardous  	| cubic meter   	|    308
+	WasteFootprint_radioactive 	| cubic meter   	|    308
+		** No results for WasteFootprint_carbon dioxide-cubic meter
+	WasteFootprint_total      	| cubic meter   	|   4226
+*** Finished searching for waste exchanges ***
+
+*** Starting SearchMaterial ***
+*** Loading pickle to dataframe ***
+
+*** Loading activities 
+from database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 
+in project: T-reX-SSP2-cutoff
+
+** Materials (61) | (activity, group)
+	('market for aluminium', 'aluminium')
+	('market for antimony', 'antimony')
+	('market for bauxite', 'bauxite')
+	('market for beryllium', 'beryllium')
+	('market for bismuth', 'bismuth')
+	('market for cadmium', 'cadmium')
+	('market for calcium borates', 'borates')
+	('market for cement', 'cement')
+	('market for cerium', 'cerium')
+	('market for chromium', 'chromium')
+	('market for cobalt', 'cobalt')
+	('market for coke', 'coke')
+	('market for copper', 'copper')
+	('market for dysprosium', 'dysprosium')
+	('market for erbium', 'erbium')
+	('market for europium', 'europium')
+	('market for electricity,', 'electricity')
+	('market for ferroniobium,', 'niobium')
+	('market for fluorspar,', 'fluorspar')
+	('market for gadolinium', 'gadolinium')
+	('market for gallium', 'gallium')
+	('market for gold', 'gold')
+	('market for graphite', 'graphite')
+	('market for hafnium', 'hafnium')
+	('market for hard coal', 'coal(black)')
+	('market for helium', 'helium')
+	('market for holmium', 'holmium')
+	('market for hydrogen,', 'hydrogen')
+	('market for indium', 'indium')
+	('market for latex', 'latex')
+	('market for lead', 'lead')
+	('market for lignite', 'coal(brown)')
+	('market for lithium', 'lithium')
+	('market for magnesium', 'magnesium')
+	('market for natural gas,', 'natural gas')
+	('market for nickel', 'nickel')
+	('market for palladium', 'palladium')
+	('market for petroleum', 'petroleum')
+	('market for phosphate', 'phosphate rock')
+	('market for platinum', 'platinum')
+	('market for rare earth', 'rare earth')
+	('market for rhodium', 'rhodium')
+	('market for sand', 'sand')
+	('market for selenium', 'selenium')
+	('market for scandium', 'scandium')
+	('market for silicon', 'silicon')
+	('market for silver', 'silver')
+	('market for sodium borates', 'borates')
+	('market for strontium', 'strontium')
+	('market for tantalum', 'tantalum')
+	('market for tellurium', 'tellurium')
+	('market for tin', 'tin')
+	('market for titanium', 'titanium')
+	('market for uranium', 'uranium')
+	('market for tungsten', 'tungsten')
+	('market for vanadium', 'vanadium')
+	('market for vegetable oil,', 'vegetable oil')
+	('market for tap water', 'water')
+	('market for water,', 'water')
+	('market for zinc', 'zinc')
+	('market for zirconium', 'zirconium')
+
+* 1074 material markets were found:
+                                                  name material_group location
+2                     market for aluminium alloy, AlLi      aluminium      GLO
+689                  market for aluminium alloy, AlMg3      aluminium      GLO
+8    market for aluminium alloy, metal matrix compo...      aluminium      GLO
+313  market for aluminium around steel bi-metal str...      aluminium      GLO
+125  market for aluminium around steel bi-metal wir...      aluminium      GLO
+..                                                 ...            ...      ...
+773                               market for zinc slag           zinc      GLO
+59                             market for zinc sulfide           zinc      GLO
+647                         market for zirconium oxide      zirconium      GLO
+607         market for zirconium sponge, nuclear-grade      zirconium      GLO
+630                 market for zirconium tetrachloride      zirconium      GLO
+
+[1074 rows x 3 columns]
+
+* Extracting classifications...
+
+	Error for activity: market for lithium hydroxide, battery grade, classification: nan
+		Inferring from reference product base: "lithium hydroxide", from reference product "lithium hydroxide, battery grade"
+	Error for activity: market for graphite, battery grade, classification: nan
+		Inferring from reference product base: "graphite", from reference product "graphite, battery grade"
+	Error for activity: market for lithium carbonate, battery grade, classification: nan
+		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
+	Error for activity: market for hard coal power plant, classification: nan
+		Inferring from reference product base: "hard coal pulverised power plant 500MW", from reference product "hard coal pulverised power plant 500MW"
+
+Saved activities list to csv: 
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2020/material_activities.csv
+
+*** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 ***
+
+*** Loading pickle to dataframe ***
+
+There were 53557 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+
+Saved material exchanges to csv:
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2020/material_exchanges.csv
+
+*** Grouping material exchanges by material group 
+
+	  1926 : aluminium
+	    26 : antimony
+	    24 : bauxite
+	     1 : beryllium
+	    15 : borates
+	    17 : cadmium
+	  2598 : cement
+	     3 : cerium
+	   425 : chromium
+	  1573 : coal(black)
+	   508 : coal(brown)
+	   166 : cobalt
+	    71 : coke
+	  1065 : copper
+	     1 : dysprosium
+	 24074 : electricity
+	     1 : erbium
+	     1 : europium
+	    22 : fluorspar
+	     1 : gadolinium
+	     4 : gallium
+	    10 : gold
+	    33 : graphite
+	    46 : helium
+	     1 : holmium
+	   391 : hydrogen
+	    13 : indium
+	    50 : latex
+	   211 : lead
+	    52 : lithium
+	   264 : magnesium
+	  5825 : natural gas
+	   369 : nickel
+	    23 : palladium
+	   504 : petroleum
+	   207 : phosphate rock
+	   170 : platinum
+	    37 : rare earth
+	    11 : rhodium
+	   560 : sand
+	     1 : scandium
+	     9 : selenium
+	   364 : silicon
+	    50 : silver
+	    28 : strontium
+	     3 : tantalum
+	     2 : tellurium
+	   111 : tin
+	   457 : titanium
+	     5 : tungsten
+	   140 : uranium
+	    37 : vegetable oil
+	 10447 : water
+	   593 : zinc
+	    11 : zirconium
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+** Pre-processing database (3/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2025**
+
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2025', 'db_T_reX_name': 'biosphere_T-reX'}
+
+====================================================================================================
+	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+====================================================================================================
+
+*** Starting ExplodeDatabase ***
+ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
+
+** db: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025, in project: T-reX-SSP2-cutoff will be processed
+
+** Opening the sausage...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 22451/22451 [00:00<00:00, 245420.36it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 692887/692887 [00:14<00:00, 46203.83it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 22451/22451 [00:01<00:00, 16566.76it/s]
+
+*** Extracting activities from db...
+
+*** Exploding exchanges from activities...
+
+*** Pickling...
+
+ Pickle is: 52 MB
+
+*** The sausage <ecoinvent_cutoff_3.9_remind_SSP2-Base_2025> was exploded and pickled. Rejoice!
+
+*** Starting SearchWaste ***
+*** Loading pickle to dataframe ***
+*** Searching for waste exchanges ***
+	WasteFootprint_digestion  	| kilogram      	|      4
+	WasteFootprint_composting 	| kilogram      	|     14
+	WasteFootprint_open burning 	| kilogram      	|    535
+	WasteFootprint_incineration 	| kilogram      	|   1954
+	WasteFootprint_recycling  	| kilogram      	|     71
+	WasteFootprint_landfill   	| kilogram      	|   1530
+	WasteFootprint_hazardous  	| kilogram      	|   1583
+		** No results for WasteFootprint_radioactive-kilogram
+	WasteFootprint_carbon dioxide 	| kilogram      	|    119
+	WasteFootprint_total      	| kilogram      	|  28467
+	WasteFootprint_digestion  	| cubic meter   	|      6
+		** No results for WasteFootprint_composting-cubic meter
+		** No results for WasteFootprint_open burning-cubic meter
+	WasteFootprint_incineration 	| cubic meter   	|      2
+		** No results for WasteFootprint_recycling-cubic meter
+	WasteFootprint_landfill   	| cubic meter   	|      2
+	WasteFootprint_hazardous  	| cubic meter   	|    308
+	WasteFootprint_radioactive 	| cubic meter   	|    308
+		** No results for WasteFootprint_carbon dioxide-cubic meter
+	WasteFootprint_total      	| cubic meter   	|   4226
+*** Finished searching for waste exchanges ***
+
+*** Starting SearchMaterial ***
+*** Loading pickle to dataframe ***
+
+*** Loading activities 
+from database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 
+in project: T-reX-SSP2-cutoff
+
+** Materials (61) | (activity, group)
+	('market for aluminium', 'aluminium')
+	('market for antimony', 'antimony')
+	('market for bauxite', 'bauxite')
+	('market for beryllium', 'beryllium')
+	('market for bismuth', 'bismuth')
+	('market for cadmium', 'cadmium')
+	('market for calcium borates', 'borates')
+	('market for cement', 'cement')
+	('market for cerium', 'cerium')
+	('market for chromium', 'chromium')
+	('market for cobalt', 'cobalt')
+	('market for coke', 'coke')
+	('market for copper', 'copper')
+	('market for dysprosium', 'dysprosium')
+	('market for erbium', 'erbium')
+	('market for europium', 'europium')
+	('market for electricity,', 'electricity')
+	('market for ferroniobium,', 'niobium')
+	('market for fluorspar,', 'fluorspar')
+	('market for gadolinium', 'gadolinium')
+	('market for gallium', 'gallium')
+	('market for gold', 'gold')
+	('market for graphite', 'graphite')
+	('market for hafnium', 'hafnium')
+	('market for hard coal', 'coal(black)')
+	('market for helium', 'helium')
+	('market for holmium', 'holmium')
+	('market for hydrogen,', 'hydrogen')
+	('market for indium', 'indium')
+	('market for latex', 'latex')
+	('market for lead', 'lead')
+	('market for lignite', 'coal(brown)')
+	('market for lithium', 'lithium')
+	('market for magnesium', 'magnesium')
+	('market for natural gas,', 'natural gas')
+	('market for nickel', 'nickel')
+	('market for palladium', 'palladium')
+	('market for petroleum', 'petroleum')
+	('market for phosphate', 'phosphate rock')
+	('market for platinum', 'platinum')
+	('market for rare earth', 'rare earth')
+	('market for rhodium', 'rhodium')
+	('market for sand', 'sand')
+	('market for selenium', 'selenium')
+	('market for scandium', 'scandium')
+	('market for silicon', 'silicon')
+	('market for silver', 'silver')
+	('market for sodium borates', 'borates')
+	('market for strontium', 'strontium')
+	('market for tantalum', 'tantalum')
+	('market for tellurium', 'tellurium')
+	('market for tin', 'tin')
+	('market for titanium', 'titanium')
+	('market for uranium', 'uranium')
+	('market for tungsten', 'tungsten')
+	('market for vanadium', 'vanadium')
+	('market for vegetable oil,', 'vegetable oil')
+	('market for tap water', 'water')
+	('market for water,', 'water')
+	('market for zinc', 'zinc')
+	('market for zirconium', 'zirconium')
+
+* 1074 material markets were found:
+                                                  name material_group location
+858                   market for aluminium alloy, AlLi      aluminium      GLO
+962                  market for aluminium alloy, AlMg3      aluminium      GLO
+261  market for aluminium alloy, metal matrix compo...      aluminium      GLO
+584  market for aluminium around steel bi-metal str...      aluminium      GLO
+597  market for aluminium around steel bi-metal wir...      aluminium      GLO
+..                                                 ...            ...      ...
+809                               market for zinc slag           zinc      GLO
+644                            market for zinc sulfide           zinc      GLO
+374                         market for zirconium oxide      zirconium      GLO
+481         market for zirconium sponge, nuclear-grade      zirconium      GLO
+739                 market for zirconium tetrachloride      zirconium      GLO
+
+[1074 rows x 3 columns]
+
+* Extracting classifications...
+
+	Error for activity: market for hard coal power plant, classification: nan
+		Inferring from reference product base: "hard coal pulverised power plant 500MW", from reference product "hard coal pulverised power plant 500MW"
+	Error for activity: market for graphite, battery grade, classification: nan
+		Inferring from reference product base: "graphite", from reference product "graphite, battery grade"
+	Error for activity: market for lithium carbonate, battery grade, classification: nan
+		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
+	Error for activity: market for lithium hydroxide, battery grade, classification: nan
+		Inferring from reference product base: "lithium hydroxide", from reference product "lithium hydroxide, battery grade"
+
+Saved activities list to csv: 
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2025/material_activities.csv
+
+*** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 ***
+
+*** Loading pickle to dataframe ***
+
+There were 53557 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+
+Saved material exchanges to csv:
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-Base_2025/material_exchanges.csv
+
+*** Grouping material exchanges by material group 
+
+	  1926 : aluminium
+	    26 : antimony
+	    24 : bauxite
+	     1 : beryllium
+	    15 : borates
+	    17 : cadmium
+	  2598 : cement
+	     3 : cerium
+	   425 : chromium
+	  1573 : coal(black)
+	   508 : coal(brown)
+	   166 : cobalt
+	    71 : coke
+	  1065 : copper
+	     1 : dysprosium
+	 24074 : electricity
+	     1 : erbium
+	     1 : europium
+	    22 : fluorspar
+	     1 : gadolinium
+	     4 : gallium
+	    10 : gold
+	    33 : graphite
+	    46 : helium
+	     1 : holmium
+	   391 : hydrogen
+	    13 : indium
+	    50 : latex
+	   211 : lead
+	    52 : lithium
+	   264 : magnesium
+	  5825 : natural gas
+	   369 : nickel
+	    23 : palladium
+	   504 : petroleum
+	   207 : phosphate rock
+	   170 : platinum
+	    37 : rare earth
+	    11 : rhodium
+	   560 : sand
+	     1 : scandium
+	     9 : selenium
+	   364 : silicon
+	    50 : silver
+	    28 : strontium
+	     3 : tantalum
+	     2 : tellurium
+	   111 : tin
+	   457 : titanium
+	     5 : tungsten
+	   140 : uranium
+	    37 : vegetable oil
+	 10447 : water
+	   593 : zinc
+	    11 : zirconium
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+** Pre-processing database (4/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020**
+
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020', 'db_T_reX_name': 'biosphere_T-reX'}
+
+====================================================================================================
+	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+====================================================================================================
+
+*** Starting ExplodeDatabase ***
+ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
+
+** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020, in project: T-reX-SSP2-cutoff will be processed
+
+** Opening the sausage...
+Getting activity data
+100%|██████████████████████████████████████████████████████████| 22451/22451 [00:00<00:00, 32355.55it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 692887/692887 [00:16<00:00, 42416.86it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 22451/22451 [00:01<00:00, 17691.62it/s]
+
+*** Extracting activities from db...
+
+*** Exploding exchanges from activities...
+
+*** Pickling...
+
+ Pickle is: 52 MB
+
+*** The sausage <ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020> was exploded and pickled. Rejoice!
+
+*** Starting SearchWaste ***
+*** Loading pickle to dataframe ***
+*** Searching for waste exchanges ***
+	WasteFootprint_digestion  	| kilogram      	|      4
+	WasteFootprint_composting 	| kilogram      	|     14
+	WasteFootprint_open burning 	| kilogram      	|    535
+	WasteFootprint_incineration 	| kilogram      	|   1954
+	WasteFootprint_recycling  	| kilogram      	|     71
+	WasteFootprint_landfill   	| kilogram      	|   1530
+	WasteFootprint_hazardous  	| kilogram      	|   1583
+		** No results for WasteFootprint_radioactive-kilogram
+	WasteFootprint_carbon dioxide 	| kilogram      	|    119
+	WasteFootprint_total      	| kilogram      	|  28467
+	WasteFootprint_digestion  	| cubic meter   	|      6
+		** No results for WasteFootprint_composting-cubic meter
+		** No results for WasteFootprint_open burning-cubic meter
+	WasteFootprint_incineration 	| cubic meter   	|      2
+		** No results for WasteFootprint_recycling-cubic meter
+	WasteFootprint_landfill   	| cubic meter   	|      2
+	WasteFootprint_hazardous  	| cubic meter   	|    308
+	WasteFootprint_radioactive 	| cubic meter   	|    308
+		** No results for WasteFootprint_carbon dioxide-cubic meter
+	WasteFootprint_total      	| cubic meter   	|   4226
+*** Finished searching for waste exchanges ***
+
+*** Starting SearchMaterial ***
+*** Loading pickle to dataframe ***
+
+*** Loading activities 
+from database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 
+in project: T-reX-SSP2-cutoff
+
+** Materials (61) | (activity, group)
+	('market for aluminium', 'aluminium')
+	('market for antimony', 'antimony')
+	('market for bauxite', 'bauxite')
+	('market for beryllium', 'beryllium')
+	('market for bismuth', 'bismuth')
+	('market for cadmium', 'cadmium')
+	('market for calcium borates', 'borates')
+	('market for cement', 'cement')
+	('market for cerium', 'cerium')
+	('market for chromium', 'chromium')
+	('market for cobalt', 'cobalt')
+	('market for coke', 'coke')
+	('market for copper', 'copper')
+	('market for dysprosium', 'dysprosium')
+	('market for erbium', 'erbium')
+	('market for europium', 'europium')
+	('market for electricity,', 'electricity')
+	('market for ferroniobium,', 'niobium')
+	('market for fluorspar,', 'fluorspar')
+	('market for gadolinium', 'gadolinium')
+	('market for gallium', 'gallium')
+	('market for gold', 'gold')
+	('market for graphite', 'graphite')
+	('market for hafnium', 'hafnium')
+	('market for hard coal', 'coal(black)')
+	('market for helium', 'helium')
+	('market for holmium', 'holmium')
+	('market for hydrogen,', 'hydrogen')
+	('market for indium', 'indium')
+	('market for latex', 'latex')
+	('market for lead', 'lead')
+	('market for lignite', 'coal(brown)')
+	('market for lithium', 'lithium')
+	('market for magnesium', 'magnesium')
+	('market for natural gas,', 'natural gas')
+	('market for nickel', 'nickel')
+	('market for palladium', 'palladium')
+	('market for petroleum', 'petroleum')
+	('market for phosphate', 'phosphate rock')
+	('market for platinum', 'platinum')
+	('market for rare earth', 'rare earth')
+	('market for rhodium', 'rhodium')
+	('market for sand', 'sand')
+	('market for selenium', 'selenium')
+	('market for scandium', 'scandium')
+	('market for silicon', 'silicon')
+	('market for silver', 'silver')
+	('market for sodium borates', 'borates')
+	('market for strontium', 'strontium')
+	('market for tantalum', 'tantalum')
+	('market for tellurium', 'tellurium')
+	('market for tin', 'tin')
+	('market for titanium', 'titanium')
+	('market for uranium', 'uranium')
+	('market for tungsten', 'tungsten')
+	('market for vanadium', 'vanadium')
+	('market for vegetable oil,', 'vegetable oil')
+	('market for tap water', 'water')
+	('market for water,', 'water')
+	('market for zinc', 'zinc')
+	('market for zirconium', 'zirconium')
+
+* 1074 material markets were found:
+                                                   name material_group location
+297                    market for aluminium alloy, AlLi      aluminium      GLO
+187                   market for aluminium alloy, AlMg3      aluminium      GLO
+661   market for aluminium alloy, metal matrix compo...      aluminium      GLO
+832   market for aluminium around steel bi-metal str...      aluminium      GLO
+599   market for aluminium around steel bi-metal wir...      aluminium      GLO
+...                                                 ...            ...      ...
+1001                               market for zinc slag           zinc      GLO
+2                               market for zinc sulfide           zinc      GLO
+400                          market for zirconium oxide      zirconium      GLO
+1036         market for zirconium sponge, nuclear-grade      zirconium      GLO
+1072                 market for zirconium tetrachloride      zirconium      GLO
+
+[1074 rows x 3 columns]
+
+* Extracting classifications...
+
+	Error for activity: market for graphite, battery grade, classification: nan
+		Inferring from reference product base: "graphite", from reference product "graphite, battery grade"
+	Error for activity: market for hard coal power plant, classification: nan
+		Inferring from reference product base: "hard coal pulverised power plant 500MW", from reference product "hard coal pulverised power plant 500MW"
+	Error for activity: market for lithium hydroxide, battery grade, classification: nan
+		Inferring from reference product base: "lithium hydroxide", from reference product "lithium hydroxide, battery grade"
+	Error for activity: market for lithium carbonate, battery grade, classification: nan
+		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
+
+Saved activities list to csv: 
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020/material_activities.csv
+
+*** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 ***
+
+*** Loading pickle to dataframe ***
+
+There were 53557 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+
+Saved material exchanges to csv:
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020/material_exchanges.csv
+
+*** Grouping material exchanges by material group 
+
+	  1926 : aluminium
+	    26 : antimony
+	    24 : bauxite
+	     1 : beryllium
+	    15 : borates
+	    17 : cadmium
+	  2598 : cement
+	     3 : cerium
+	   425 : chromium
+	  1573 : coal(black)
+	   508 : coal(brown)
+	   166 : cobalt
+	    71 : coke
+	  1065 : copper
+	     1 : dysprosium
+	 24074 : electricity
+	     1 : erbium
+	     1 : europium
+	    22 : fluorspar
+	     1 : gadolinium
+	     4 : gallium
+	    10 : gold
+	    33 : graphite
+	    46 : helium
+	     1 : holmium
+	   391 : hydrogen
+	    13 : indium
+	    50 : latex
+	   211 : lead
+	    52 : lithium
+	   264 : magnesium
+	  5825 : natural gas
+	   369 : nickel
+	    23 : palladium
+	   504 : petroleum
+	   207 : phosphate rock
+	   170 : platinum
+	    37 : rare earth
+	    11 : rhodium
+	   560 : sand
+	     1 : scandium
+	     9 : selenium
+	   364 : silicon
+	    50 : silver
+	    28 : strontium
+	     3 : tantalum
+	     2 : tellurium
+	   111 : tin
+	   457 : titanium
+	     5 : tungsten
+	   140 : uranium
+	    37 : vegetable oil
+	 10447 : water
+	   593 : zinc
+	    11 : zirconium
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
+** Pre-processing database (5/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025**
+
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025', 'db_T_reX_name': 'biosphere_T-reX'}
+
+====================================================================================================
+	 Starting T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+====================================================================================================
+
+*** Starting ExplodeDatabase ***
+ExplodeDatabase uses wurst to open a bw2 database, explodes the exchanges for each process, and then returns a pickle file with a DataFrame list of all activities
+
+** db: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025, in project: T-reX-SSP2-cutoff will be processed
+
+** Opening the sausage...
+Getting activity data
+100%|█████████████████████████████████████████████████████████| 22451/22451 [00:00<00:00, 235335.20it/s]
+Adding exchange data to activities
+100%|████████████████████████████████████████████████████████| 692887/692887 [00:15<00:00, 45901.00it/s]
+Filling out exchange data
+100%|██████████████████████████████████████████████████████████| 22451/22451 [00:01<00:00, 16706.66it/s]
+
+*** Extracting activities from db...
+
+*** Exploding exchanges from activities...
+
+*** Pickling...
+
+ Pickle is: 52 MB
+
+*** The sausage <ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025> was exploded and pickled. Rejoice!
+
+*** Starting SearchWaste ***
+*** Loading pickle to dataframe ***
+*** Searching for waste exchanges ***
+	WasteFootprint_digestion  	| kilogram      	|      4
+	WasteFootprint_composting 	| kilogram      	|     14
+	WasteFootprint_open burning 	| kilogram      	|    535
+	WasteFootprint_incineration 	| kilogram      	|   1954
+	WasteFootprint_recycling  	| kilogram      	|     71
+	WasteFootprint_landfill   	| kilogram      	|   1530
+	WasteFootprint_hazardous  	| kilogram      	|   1583
+		** No results for WasteFootprint_radioactive-kilogram
+	WasteFootprint_carbon dioxide 	| kilogram      	|    119
+	WasteFootprint_total      	| kilogram      	|  28467
+	WasteFootprint_digestion  	| cubic meter   	|      6
+		** No results for WasteFootprint_composting-cubic meter
+		** No results for WasteFootprint_open burning-cubic meter
+	WasteFootprint_incineration 	| cubic meter   	|      2
+		** No results for WasteFootprint_recycling-cubic meter
+	WasteFootprint_landfill   	| cubic meter   	|      2
+	WasteFootprint_hazardous  	| cubic meter   	|    308
+	WasteFootprint_radioactive 	| cubic meter   	|    308
+		** No results for WasteFootprint_carbon dioxide-cubic meter
+	WasteFootprint_total      	| cubic meter   	|   4226
+*** Finished searching for waste exchanges ***
+
+*** Starting SearchMaterial ***
+*** Loading pickle to dataframe ***
+
+*** Loading activities 
+from database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 
+in project: T-reX-SSP2-cutoff
+
+** Materials (61) | (activity, group)
+	('market for aluminium', 'aluminium')
+	('market for antimony', 'antimony')
+	('market for bauxite', 'bauxite')
+	('market for beryllium', 'beryllium')
+	('market for bismuth', 'bismuth')
+	('market for cadmium', 'cadmium')
+	('market for calcium borates', 'borates')
+	('market for cement', 'cement')
+	('market for cerium', 'cerium')
+	('market for chromium', 'chromium')
+	('market for cobalt', 'cobalt')
+	('market for coke', 'coke')
+	('market for copper', 'copper')
+	('market for dysprosium', 'dysprosium')
+	('market for erbium', 'erbium')
+	('market for europium', 'europium')
+	('market for electricity,', 'electricity')
+	('market for ferroniobium,', 'niobium')
+	('market for fluorspar,', 'fluorspar')
+	('market for gadolinium', 'gadolinium')
+	('market for gallium', 'gallium')
+	('market for gold', 'gold')
+	('market for graphite', 'graphite')
+	('market for hafnium', 'hafnium')
+	('market for hard coal', 'coal(black)')
+	('market for helium', 'helium')
+	('market for holmium', 'holmium')
+	('market for hydrogen,', 'hydrogen')
+	('market for indium', 'indium')
+	('market for latex', 'latex')
+	('market for lead', 'lead')
+	('market for lignite', 'coal(brown)')
+	('market for lithium', 'lithium')
+	('market for magnesium', 'magnesium')
+	('market for natural gas,', 'natural gas')
+	('market for nickel', 'nickel')
+	('market for palladium', 'palladium')
+	('market for petroleum', 'petroleum')
+	('market for phosphate', 'phosphate rock')
+	('market for platinum', 'platinum')
+	('market for rare earth', 'rare earth')
+	('market for rhodium', 'rhodium')
+	('market for sand', 'sand')
+	('market for selenium', 'selenium')
+	('market for scandium', 'scandium')
+	('market for silicon', 'silicon')
+	('market for silver', 'silver')
+	('market for sodium borates', 'borates')
+	('market for strontium', 'strontium')
+	('market for tantalum', 'tantalum')
+	('market for tellurium', 'tellurium')
+	('market for tin', 'tin')
+	('market for titanium', 'titanium')
+	('market for uranium', 'uranium')
+	('market for tungsten', 'tungsten')
+	('market for vanadium', 'vanadium')
+	('market for vegetable oil,', 'vegetable oil')
+	('market for tap water', 'water')
+	('market for water,', 'water')
+	('market for zinc', 'zinc')
+	('market for zirconium', 'zirconium')
+
+* 1074 material markets were found:
+                                                  name material_group location
+864                   market for aluminium alloy, AlLi      aluminium      GLO
+760                  market for aluminium alloy, AlMg3      aluminium      GLO
+22   market for aluminium alloy, metal matrix compo...      aluminium      GLO
+57   market for aluminium around steel bi-metal str...      aluminium      GLO
+637  market for aluminium around steel bi-metal wir...      aluminium      GLO
+..                                                 ...            ...      ...
+650                               market for zinc slag           zinc      GLO
+152                            market for zinc sulfide           zinc      GLO
+496                         market for zirconium oxide      zirconium      GLO
+906         market for zirconium sponge, nuclear-grade      zirconium      GLO
+808                 market for zirconium tetrachloride      zirconium      GLO
+
+[1074 rows x 3 columns]
+
+* Extracting classifications...
+
+	Error for activity: market for graphite, battery grade, classification: nan
+		Inferring from reference product base: "graphite", from reference product "graphite, battery grade"
+	Error for activity: market for lithium carbonate, battery grade, classification: nan
+		Inferring from reference product base: "lithium carbonate", from reference product "lithium carbonate, battery grade"
+	Error for activity: market for lithium hydroxide, battery grade, classification: nan
+		Inferring from reference product base: "lithium hydroxide", from reference product "lithium hydroxide, battery grade"
+	Error for activity: market for hard coal power plant, classification: nan
+		Inferring from reference product base: "hard coal pulverised power plant 500MW", from reference product "hard coal pulverised power plant 500MW"
+
+Saved activities list to csv: 
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025/material_activities.csv
+
+*** Searching for material exchanges in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 ***
+
+*** Loading pickle to dataframe ***
+
+There were 53557 matching exchanges found in ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+
+Saved material exchanges to csv:
+/home/stew/code/gh/T-reX/data/SearchMaterialResults/ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025/material_exchanges.csv
+
+*** Grouping material exchanges by material group 
+
+	  1926 : aluminium
+	    26 : antimony
+	    24 : bauxite
+	     1 : beryllium
+	    15 : borates
+	    17 : cadmium
+	  2598 : cement
+	     3 : cerium
+	   425 : chromium
+	  1573 : coal(black)
+	   508 : coal(brown)
+	   166 : cobalt
+	    71 : coke
+	  1065 : copper
+	     1 : dysprosium
+	 24074 : electricity
+	     1 : erbium
+	     1 : europium
+	    22 : fluorspar
+	     1 : gadolinium
+	     4 : gallium
+	    10 : gold
+	    33 : graphite
+	    46 : helium
+	     1 : holmium
+	   391 : hydrogen
+	    13 : indium
+	    50 : latex
+	   211 : lead
+	    52 : lithium
+	   264 : magnesium
+	  5825 : natural gas
+	   369 : nickel
+	    23 : palladium
+	   504 : petroleum
+	   207 : phosphate rock
+	   170 : platinum
+	    37 : rare earth
+	    11 : rhodium
+	   560 : sand
+	     1 : scandium
+	     9 : selenium
+	   364 : silicon
+	    50 : silver
+	    28 : strontium
+	     3 : tantalum
+	     2 : tellurium
+	   111 : tin
+	   457 : titanium
+	     5 : tungsten
+	   140 : uranium
+	    37 : vegetable oil
+	 10447 : water
+	   593 : zinc
+	    11 : zirconium
+
+--------------------------------------------------------------------------------
+
+
+*** Writing custom database file: biosphere_T-reX
+
+
+
+*** Appending to existing custom database file: biosphere_T-reX
+
+	 Appending: MaterialFootprint_aluminium
+	 Appending: MaterialFootprint_antimony
+	 Appending: MaterialFootprint_bauxite
+	 Appending: MaterialFootprint_beryllium
+	 Appending: MaterialFootprint_borates
+	 Appending: MaterialFootprint_cadmium
+	 Appending: MaterialFootprint_cement
+	 Appending: MaterialFootprint_cerium
+	 Appending: MaterialFootprint_chromium
+	 Appending: MaterialFootprint_coal(black)
+	 Appending: MaterialFootprint_coal(brown)
+	 Appending: MaterialFootprint_cobalt
+	 Appending: MaterialFootprint_coke
+	 Appending: MaterialFootprint_copper
+	 Appending: MaterialFootprint_dysprosium
+	 Appending: MaterialFootprint_electricity
+	 Appending: MaterialFootprint_erbium
+	 Appending: MaterialFootprint_europium
+	 Appending: MaterialFootprint_fluorspar
+	 Appending: MaterialFootprint_gadolinium
+	 Appending: MaterialFootprint_gallium
+	 Appending: MaterialFootprint_gold
+	 Appending: MaterialFootprint_graphite
+	 Appending: MaterialFootprint_helium
+	 Appending: MaterialFootprint_holmium
+	 Appending: MaterialFootprint_hydrogen
+	 Appending: MaterialFootprint_indium
+	 Appending: MaterialFootprint_latex
+	 Appending: MaterialFootprint_lead
+	 Appending: MaterialFootprint_lithium
+	 Appending: MaterialFootprint_magnesium
+	 Appending: MaterialFootprint_natural gas
+	 Appending: MaterialFootprint_nickel
+	 Appending: MaterialFootprint_palladium
+	 Appending: MaterialFootprint_petroleum
+	 Appending: MaterialFootprint_phosphate rock
+	 Appending: MaterialFootprint_platinum
+	 Appending: MaterialFootprint_rare earth
+	 Appending: MaterialFootprint_rhodium
+	 Appending: MaterialFootprint_sand
+	 Appending: MaterialFootprint_scandium
+	 Appending: MaterialFootprint_selenium
+	 Appending: MaterialFootprint_silicon
+	 Appending: MaterialFootprint_silver
+	 Appending: MaterialFootprint_strontium
+	 Appending: MaterialFootprint_tantalum
+	 Appending: MaterialFootprint_tellurium
+	 Appending: MaterialFootprint_tin
+	 Appending: MaterialFootprint_titanium
+	 Appending: MaterialFootprint_tungsten
+	 Appending: MaterialFootprint_uranium
+	 Appending: MaterialFootprint_vegetable oil
+	 Appending: MaterialFootprint_water
+	 Appending: MaterialFootprint_zinc
+	 Appending: MaterialFootprint_zirconium
+	 Appending: WasteFootprint_carbondioxide-kilogram
+	 Appending: WasteFootprint_composting-kilogram
+	 Appending: WasteFootprint_digestion-cubicmeter
+	 Appending: WasteFootprint_digestion-kilogram
+	 Appending: WasteFootprint_hazardous-cubicmeter
+	 Appending: WasteFootprint_hazardous-kilogram
+	 Appending: WasteFootprint_incineration-cubicmeter
+	 Appending: WasteFootprint_incineration-kilogram
+	 Appending: WasteFootprint_landfill-cubicmeter
+	 Appending: WasteFootprint_landfill-kilogram
+	 Appending: WasteFootprint_openburning-kilogram
+	 Appending: WasteFootprint_radioactive-cubicmeter
+	 Appending: WasteFootprint_recycling-kilogram
+	 Appending: WasteFootprint_total-cubicmeter
+	 Appending: WasteFootprint_total-kilogram
+
+ ** Added 70 entries to the xlsx for the custom waste and material database:
+	biosphere_T-reX
+
+** Importing the custom database biosphere_T-reX**
+	 to the brightway2 project: T-reX-SSP2-cutoff
+
+** Running BW2io ExcelImporter **
+
+Extracted 1 worksheets in 0.01 seconds
+Applying strategy: csv_restore_tuples
+Applying strategy: csv_restore_booleans
+Applying strategy: csv_numerize
+Applying strategy: csv_drop_unknown
+Applying strategy: csv_add_missing_exchanges_section
+Applying strategy: normalize_units
+Applying strategy: normalize_biosphere_categories
+Applying strategy: normalize_biosphere_names
+Applying strategy: strip_biosphere_exc_locations
+Applying strategy: set_code_by_activity_hash
+Applying strategy: link_iterable_by_fields
+Applying strategy: assign_only_product_as_production
+Applying strategy: link_technosphere_by_activity_hash
+Applying strategy: drop_falsey_uncertainty_fields_but_keep_zeros
+Applying strategy: convert_uncertainty_types_to_integers
+Applying strategy: convert_activity_parameters_to_list
+Applied 16 strategies in 3.64 seconds
+70 datasets
+0 exchanges
+0 unlinked exchanges
+  
+Writing activities to SQLite3 database:
+0% [##############################] 100% | ETA: 00:00:01
+Total time elapsed: 00:00:00
+Title: Writing activities to SQLite3 database:
+  Started: 03/08/2024 12:08:12
+  Finished: 03/08/2024 12:08:12
+  Total time elapsed: 00:00:00
+  CPU %: 0.00
+  Memory %: 9.17
+Created database: biosphere_T-reX
+
+** Database metadata **
+format: Excel
+depends: []
+backend: sqlite
+number: 70
+modified: 2024-03-08T12:08:12.048726
+searchable: True
+processed: 2024-03-08T12:08:12.221762
+
+*** Great success! ***
+
+*** Running AddMethods() ***
+
+	 ('T-reX', 'Demand: Aluminium', 'Aluminium')
+	 ('T-reX', 'Demand: Antimony', 'Antimony')
+	 ('T-reX', 'Demand: Bauxite', 'Bauxite')
+	 ('T-reX', 'Demand: Beryllium', 'Beryllium')
+	 ('T-reX', 'Demand: Borates', 'Borates')
+	 ('T-reX', 'Demand: Cadmium', 'Cadmium')
+	 ('T-reX', 'Demand: Cement', 'Cement')
+	 ('T-reX', 'Demand: Cerium', 'Cerium')
+	 ('T-reX', 'Demand: Chromium', 'Chromium')
+	 ('T-reX', 'Demand: Coal(black)', 'Coal(black)')
+	 ('T-reX', 'Demand: Coal(brown)', 'Coal(brown)')
+	 ('T-reX', 'Demand: Cobalt', 'Cobalt')
+	 ('T-reX', 'Demand: Coke', 'Coke')
+	 ('T-reX', 'Demand: Copper', 'Copper')
+	 ('T-reX', 'Demand: Dysprosium', 'Dysprosium')
+	 ('T-reX', 'Demand: Electricity', 'Electricity')
+	 ('T-reX', 'Demand: Erbium', 'Erbium')
+	 ('T-reX', 'Demand: Europium', 'Europium')
+	 ('T-reX', 'Demand: Fluorspar', 'Fluorspar')
+	 ('T-reX', 'Demand: Gadolinium', 'Gadolinium')
+	 ('T-reX', 'Demand: Gallium', 'Gallium')
+	 ('T-reX', 'Demand: Gold', 'Gold')
+	 ('T-reX', 'Demand: Graphite', 'Graphite')
+	 ('T-reX', 'Demand: Helium', 'Helium')
+	 ('T-reX', 'Demand: Holmium', 'Holmium')
+	 ('T-reX', 'Demand: Hydrogen', 'Hydrogen')
+	 ('T-reX', 'Demand: Indium', 'Indium')
+	 ('T-reX', 'Demand: Latex', 'Latex')
+	 ('T-reX', 'Demand: Lead', 'Lead')
+	 ('T-reX', 'Demand: Lithium', 'Lithium')
+	 ('T-reX', 'Demand: Magnesium', 'Magnesium')
+	 ('T-reX', 'Demand: Natural gas', 'Natural gas')
+	 ('T-reX', 'Demand: Nickel', 'Nickel')
+	 ('T-reX', 'Demand: Palladium', 'Palladium')
+	 ('T-reX', 'Demand: Petroleum', 'Petroleum')
+	 ('T-reX', 'Demand: Phosphate rock', 'Phosphate rock')
+	 ('T-reX', 'Demand: Platinum', 'Platinum')
+	 ('T-reX', 'Demand: Rare earth', 'Rare earth')
+	 ('T-reX', 'Demand: Rhodium', 'Rhodium')
+	 ('T-reX', 'Demand: Sand', 'Sand')
+	 ('T-reX', 'Demand: Scandium', 'Scandium')
+	 ('T-reX', 'Demand: Selenium', 'Selenium')
+	 ('T-reX', 'Demand: Silicon', 'Silicon')
+	 ('T-reX', 'Demand: Silver', 'Silver')
+	 ('T-reX', 'Demand: Strontium', 'Strontium')
+	 ('T-reX', 'Demand: Tantalum', 'Tantalum')
+	 ('T-reX', 'Demand: Tellurium', 'Tellurium')
+	 ('T-reX', 'Demand: Tin', 'Tin')
+	 ('T-reX', 'Demand: Titanium', 'Titanium')
+	 ('T-reX', 'Demand: Tungsten', 'Tungsten')
+	 ('T-reX', 'Demand: Uranium', 'Uranium')
+	 ('T-reX', 'Demand: Vegetable oil', 'Vegetable oil')
+	 ('T-reX', 'Demand: Water', 'Water')
+	 ('T-reX', 'Demand: Zinc', 'Zinc')
+	 ('T-reX', 'Demand: Zirconium', 'Zirconium')
+	 ('T-reX', 'Waste: Carbondioxide combined', 'Carbondioxide (kg)')
+	 ('T-reX', 'Waste: Composting combined', 'Composting (kg)')
+	 ('T-reX', 'Waste: Digestion combined', 'Digestion (m3)')
+	 ('T-reX', 'Waste: Digestion combined', 'Digestion (kg)')
+	 ('T-reX', 'Waste: Hazardous combined', 'Hazardous (m3)')
+	 ('T-reX', 'Waste: Hazardous combined', 'Hazardous (kg)')
+	 ('T-reX', 'Waste: Incineration combined', 'Incineration (m3)')
+	 ('T-reX', 'Waste: Incineration combined', 'Incineration (kg)')
+	 ('T-reX', 'Waste: Landfill combined', 'Landfill (m3)')
+	 ('T-reX', 'Waste: Landfill combined', 'Landfill (kg)')
+	 ('T-reX', 'Waste: Openburning combined', 'Openburning (kg)')
+	 ('T-reX', 'Waste: Radioactive combined', 'Radioactive (m3)')
+	 ('T-reX', 'Waste: Recycling combined', 'Recycling (kg)')
+	 ('T-reX', 'Waste: Total combined', 'Total (m3)')
+	 ('T-reX', 'Waste: Total combined', 'Total (kg)')
+
+*** Added 70  new methods ***
+
+    --------------------------------------------------------------------------------
+    *** Preprocessing completed ***
+
+    	 Total databases:          5
+    	 Successfully processed:   5
+    	 Duration:                 0:03:32 (h:m:s)
+    --------------------------------------------------------------------------------
+    
+    
+
+--------------------------------------------------------------------------------
+
+** Processing database (1/5): ecoinvent-3.9.1-cutoff**
+Arguments:
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent-3.9.1-cutoff', 'db_T_reX_name': 'biosphere_T-reX'}
+
+
+*** ExchangeEditor() is running for ecoinvent-3.9.1-cutoff ***
+
+* Appending waste and material exchanges in biosphere_T-reX
+ 
+ -  1/69 : MaterialFootprint_aluminium                | ██████████████████████████████ | 100.0% | Progre
+ -  2/69 : MaterialFootprint_antimony                 | ██████████████████████████████ | 100.0% | Progre
+ -  3/69 : MaterialFootprint_bauxite                  | ██████████████████████████████ | 100.0% | Progre
+ -  4/69 : MaterialFootprint_beryllium                | ██████████████████████████████ | 100.0% | Progre
+ -  5/69 : MaterialFootprint_borates                  | ██████████████████████████████ | 100.0% | Progre
+ -  6/69 : MaterialFootprint_cadmium                  | ██████████████████████████████ | 100.0% | Progre
+ -  7/69 : MaterialFootprint_cement                   | ██████████████████████████████ | 100.0% | Progre
+ -  8/69 : MaterialFootprint_cerium                   | ██████████████████████████████ | 100.0% | Progre
+ -  9/69 : MaterialFootprint_chromium                 | ██████████████████████████████ | 100.0% | Progre
+ - 10/69 : MaterialFootprint_coal(black)              | ██████████████████████████████ | 100.0% | Progre
+ - 11/69 : MaterialFootprint_coal(brown)              | ██████████████████████████████ | 100.0% | Progre
+ - 12/69 : MaterialFootprint_cobalt                   | ██████████████████████████████ | 100.0% | Progre
+ - 13/69 : MaterialFootprint_coke                     | ██████████████████████████████ | 100.0% | Progre
+ - 14/69 : MaterialFootprint_copper                   | ██████████████████████████████ | 100.0% | Progre
+ - 15/69 : MaterialFootprint_dysprosium               | ██████████████████████████████ | 100.0% | Progre
+ - 16/69 : MaterialFootprint_electricity              | ██████████████████████████████ | 100.0% | Progre
+ - 17/69 : MaterialFootprint_erbium                   | ██████████████████████████████ | 100.0% | Progre
+ - 18/69 : MaterialFootprint_europium                 | ██████████████████████████████ | 100.0% | Progre
+ - 19/69 : MaterialFootprint_fluorspar                | ██████████████████████████████ | 100.0% | Progre
+ - 20/69 : MaterialFootprint_gadolinium               | ██████████████████████████████ | 100.0% | Progre
+ - 21/69 : MaterialFootprint_gallium                  | ██████████████████████████████ | 100.0% | Progre
+ - 22/69 : MaterialFootprint_gold                     | ██████████████████████████████ | 100.0% | Progre
+ - 23/69 : MaterialFootprint_graphite                 | ██████████████████████████████ | 100.0% | Progre
+ - 24/69 : MaterialFootprint_helium                   | ██████████████████████████████ | 100.0% | Progre
+ - 25/69 : MaterialFootprint_holmium                  | ██████████████████████████████ | 100.0% | Progre
+ - 26/69 : MaterialFootprint_hydrogen                 | ██████████████████████████████ | 100.0% | Progre
+ - 27/69 : MaterialFootprint_indium                   | ██████████████████████████████ | 100.0% | Progre
+ - 28/69 : MaterialFootprint_latex                    | ██████████████████████████████ | 100.0% | Progre
+ - 29/69 : MaterialFootprint_lead                     | ██████████████████████████████ | 100.0% | Progre
+ - 30/69 : MaterialFootprint_lithium                  | ██████████████████████████████ | 100.0% | Progre
+ - 31/69 : MaterialFootprint_magnesium                | ██████████████████████████████ | 100.0% | Progre
+ - 32/69 : MaterialFootprint_natural gas              | ██████████████████████████████ | 100.0% | Progre
+ - 33/69 : MaterialFootprint_nickel                   | ██████████████████████████████ | 100.0% | Progre
+ - 34/69 : MaterialFootprint_palladium                | ██████████████████████████████ | 100.0% | Progre
+ - 35/69 : MaterialFootprint_petroleum                | ██████████████████████████████ | 100.0% | Progre
+ - 36/69 : MaterialFootprint_phosphate rock           | ██████████████████████████████ | 100.0% | Progre
+ - 37/69 : MaterialFootprint_platinum                 | ██████████████████████████████ | 100.0% | Progre
+ - 38/69 : MaterialFootprint_rare earth               | ██████████████████████████████ | 100.0% | Progre
+ - 39/69 : MaterialFootprint_rhodium                  | ██████████████████████████████ | 100.0% | Progre
+ - 40/69 : MaterialFootprint_sand                     | ██████████████████████████████ | 100.0% | Progre
+ - 41/69 : MaterialFootprint_scandium                 | ██████████████████████████████ | 100.0% | Progre
+ - 42/69 : MaterialFootprint_selenium                 | ██████████████████████████████ | 100.0% | Progre
+ - 43/69 : MaterialFootprint_silicon                  | ██████████████████████████████ | 100.0% | Progre
+ - 44/69 : MaterialFootprint_silver                   | ██████████████████████████████ | 100.0% | Progre
+ - 45/69 : MaterialFootprint_strontium                | ██████████████████████████████ | 100.0% | Progre
+ - 46/69 : MaterialFootprint_tantalum                 | ██████████████████████████████ | 100.0% | Progre
+ - 47/69 : MaterialFootprint_tellurium                | ██████████████████████████████ | 100.0% | Progre
+ - 48/69 : MaterialFootprint_tin                      | ██████████████████████████████ | 100.0% | Progre
+ - 49/69 : MaterialFootprint_titanium                 | ██████████████████████████████ | 100.0% | Progre
+ - 50/69 : MaterialFootprint_tungsten                 | ██████████████████████████████ | 100.0% | Progre
+ - 51/69 : MaterialFootprint_uranium                  | ██████████████████████████████ | 100.0% | Progre
+ - 52/69 : MaterialFootprint_vegetable oil            | ██████████████████████████████ | 100.0% | Progre
+ - 53/69 : MaterialFootprint_water                    | ██████████████████████████████ | 100.0% | Progre
+ - 54/69 : MaterialFootprint_zinc                     | ██████████████████████████████ | 100.0% | Progre
+ - 55/69 : MaterialFootprint_zirconium                | ██████████████████████████████ | 100.0% | Progre
+ - 56/69 : WasteFootprint_composting-kilogram         | ██████████████████████████████ | 100.0% | Progre
+ - 57/69 : WasteFootprint_digestion-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 58/69 : WasteFootprint_digestion-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 59/69 : WasteFootprint_hazardous-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 60/69 : WasteFootprint_hazardous-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 61/69 : WasteFootprint_incineration-cubicmeter     | ██████████████████████████████ | 100.0% | Progre
+ - 62/69 : WasteFootprint_incineration-kilogram       | ██████████████████████████████ | 100.0% | Progre
+ - 63/69 : WasteFootprint_landfill-cubicmeter         | ██████████████████████████████ | 100.0% | Progre
+ - 64/69 : WasteFootprint_landfill-kilogram           | ██████████████████████████████ | 100.0% | Progre
+ - 65/69 : WasteFootprint_openburning-kilogram        | ██████████████████████████████ | 100.0% | Progre
+ - 66/69 : WasteFootprint_radioactive-cubicmeter      | ██████████████████████████████ | 100.0% | Progre
+ - 67/69 : WasteFootprint_recycling-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 68/69 : WasteFootprint_total-cubicmeter            | ██████████████████████████████ | 100.0% | Progre
+ - 69/69 : WasteFootprint_total-kilogram              | ██████████████████████████████ | 100.0% | Progre
+****************************************************************************************************
+
+*** ExchangeEditor() completed for ecoinvent-3.9.1-cutoff in 0:24:36 (h:m:s) ***
+
+****************************************************************************************************
+
+** Verifying database ecoinvent-3.9.1-cutoff in project T-reX-SSP2-cutoff **
+
+	Score: 3.58e-14 
+	Method: Selenium 
+	Activity: diammonium phosphate production 
+	Database: ecoinvent-3.9.1-cutoff
+
+** Database verified successfully! **
+
+==========================================================================================
+	*** Finished T-reX for ecoinvent-3.9.1-cutoff ***
+			Duration: 0:24:47 (h:m:s)
+	*** Woah woah wee waa, great success!! ***
+==========================================================================================
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+** Processing database (2/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2020**
+Arguments:
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2020', 'db_T_reX_name': 'biosphere_T-reX'}
+
+
+*** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 ***
+
+* Appending waste and material exchanges in biosphere_T-reX
+ 
+ -  1/70 : MaterialFootprint_aluminium                | ██████████████████████████████ | 100.0% | Progre
+ -  2/70 : MaterialFootprint_antimony                 | ██████████████████████████████ | 100.0% | Progre
+ -  3/70 : MaterialFootprint_bauxite                  | ██████████████████████████████ | 100.0% | Progre
+ -  4/70 : MaterialFootprint_beryllium                | ██████████████████████████████ | 100.0% | Progre
+ -  5/70 : MaterialFootprint_borates                  | ██████████████████████████████ | 100.0% | Progre
+ -  6/70 : MaterialFootprint_cadmium                  | ██████████████████████████████ | 100.0% | Progre
+ -  7/70 : MaterialFootprint_cement                   | ██████████████████████████████ | 100.0% | Progre
+ -  8/70 : MaterialFootprint_cerium                   | ██████████████████████████████ | 100.0% | Progre
+ -  9/70 : MaterialFootprint_chromium                 | ██████████████████████████████ | 100.0% | Progre
+ - 10/70 : MaterialFootprint_coal(black)              | ██████████████████████████████ | 100.0% | Progre
+ - 11/70 : MaterialFootprint_coal(brown)              | ██████████████████████████████ | 100.0% | Progre
+ - 12/70 : MaterialFootprint_cobalt                   | ██████████████████████████████ | 100.0% | Progre
+ - 13/70 : MaterialFootprint_coke                     | ██████████████████████████████ | 100.0% | Progre
+ - 14/70 : MaterialFootprint_copper                   | ██████████████████████████████ | 100.0% | Progre
+ - 15/70 : MaterialFootprint_dysprosium               | ██████████████████████████████ | 100.0% | Progre
+ - 16/70 : MaterialFootprint_electricity              | ██████████████████████████████ | 100.0% | Progre
+ - 17/70 : MaterialFootprint_erbium                   | ██████████████████████████████ | 100.0% | Progre
+ - 18/70 : MaterialFootprint_europium                 | ██████████████████████████████ | 100.0% | Progre
+ - 19/70 : MaterialFootprint_fluorspar                | ██████████████████████████████ | 100.0% | Progre
+ - 20/70 : MaterialFootprint_gadolinium               | ██████████████████████████████ | 100.0% | Progre
+ - 21/70 : MaterialFootprint_gallium                  | ██████████████████████████████ | 100.0% | Progre
+ - 22/70 : MaterialFootprint_gold                     | ██████████████████████████████ | 100.0% | Progre
+ - 23/70 : MaterialFootprint_graphite                 | ██████████████████████████████ | 100.0% | Progre
+ - 24/70 : MaterialFootprint_helium                   | ██████████████████████████████ | 100.0% | Progre
+ - 25/70 : MaterialFootprint_holmium                  | ██████████████████████████████ | 100.0% | Progre
+ - 26/70 : MaterialFootprint_hydrogen                 | ██████████████████████████████ | 100.0% | Progre
+ - 27/70 : MaterialFootprint_indium                   | ██████████████████████████████ | 100.0% | Progre
+ - 28/70 : MaterialFootprint_latex                    | ██████████████████████████████ | 100.0% | Progre
+ - 29/70 : MaterialFootprint_lead                     | ██████████████████████████████ | 100.0% | Progre
+ - 30/70 : MaterialFootprint_lithium                  | ██████████████████████████████ | 100.0% | Progre
+ - 31/70 : MaterialFootprint_magnesium                | ██████████████████████████████ | 100.0% | Progre
+ - 32/70 : MaterialFootprint_natural gas              | ██████████████████████████████ | 100.0% | Progre
+ - 33/70 : MaterialFootprint_nickel                   | ██████████████████████████████ | 100.0% | Progre
+ - 34/70 : MaterialFootprint_palladium                | ██████████████████████████████ | 100.0% | Progre
+ - 35/70 : MaterialFootprint_petroleum                | ██████████████████████████████ | 100.0% | Progre
+ - 36/70 : MaterialFootprint_phosphate rock           | ██████████████████████████████ | 100.0% | Progre
+ - 37/70 : MaterialFootprint_platinum                 | ██████████████████████████████ | 100.0% | Progre
+ - 38/70 : MaterialFootprint_rare earth               | ██████████████████████████████ | 100.0% | Progre
+ - 39/70 : MaterialFootprint_rhodium                  | ██████████████████████████████ | 100.0% | Progre
+ - 40/70 : MaterialFootprint_sand                     | ██████████████████████████████ | 100.0% | Progre
+ - 41/70 : MaterialFootprint_scandium                 | ██████████████████████████████ | 100.0% | Progre
+ - 42/70 : MaterialFootprint_selenium                 | ██████████████████████████████ | 100.0% | Progre
+ - 43/70 : MaterialFootprint_silicon                  | ██████████████████████████████ | 100.0% | Progre
+ - 44/70 : MaterialFootprint_silver                   | ██████████████████████████████ | 100.0% | Progre
+ - 45/70 : MaterialFootprint_strontium                | ██████████████████████████████ | 100.0% | Progre
+ - 46/70 : MaterialFootprint_tantalum                 | ██████████████████████████████ | 100.0% | Progre
+ - 47/70 : MaterialFootprint_tellurium                | ██████████████████████████████ | 100.0% | Progre
+ - 48/70 : MaterialFootprint_tin                      | ██████████████████████████████ | 100.0% | Progre
+ - 49/70 : MaterialFootprint_titanium                 | ██████████████████████████████ | 100.0% | Progre
+ - 50/70 : MaterialFootprint_tungsten                 | ██████████████████████████████ | 100.0% | Progre
+ - 51/70 : MaterialFootprint_uranium                  | ██████████████████████████████ | 100.0% | Progre
+ - 52/70 : MaterialFootprint_vegetable oil            | ██████████████████████████████ | 100.0% | Progre
+ - 53/70 : MaterialFootprint_water                    | ██████████████████████████████ | 100.0% | Progre
+ - 54/70 : MaterialFootprint_zinc                     | ██████████████████████████████ | 100.0% | Progre
+ - 55/70 : MaterialFootprint_zirconium                | ██████████████████████████████ | 100.0% | Progre
+ - 56/70 : WasteFootprint_carbondioxide-kilogram      | ██████████████████████████████ | 100.0% | Progre
+ - 57/70 : WasteFootprint_composting-kilogram         | ██████████████████████████████ | 100.0% | Progre
+ - 58/70 : WasteFootprint_digestion-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 59/70 : WasteFootprint_digestion-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 60/70 : WasteFootprint_hazardous-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 61/70 : WasteFootprint_hazardous-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 62/70 : WasteFootprint_incineration-cubicmeter     | ██████████████████████████████ | 100.0% | Progre
+ - 63/70 : WasteFootprint_incineration-kilogram       | ██████████████████████████████ | 100.0% | Progre
+ - 64/70 : WasteFootprint_landfill-cubicmeter         | ██████████████████████████████ | 100.0% | Progre
+ - 65/70 : WasteFootprint_landfill-kilogram           | ██████████████████████████████ | 100.0% | Progre
+ - 66/70 : WasteFootprint_openburning-kilogram        | ██████████████████████████████ | 100.0% | Progre
+ - 67/70 : WasteFootprint_radioactive-cubicmeter      | ██████████████████████████████ | 100.0% | Progre
+ - 68/70 : WasteFootprint_recycling-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 69/70 : WasteFootprint_total-cubicmeter            | ██████████████████████████████ | 100.0% | Progre
+ - 70/70 : WasteFootprint_total-kilogram              | ██████████████████████████████ | 100.0% | Progre
+****************************************************************************************************
+
+*** ExchangeEditor() completed for ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 in 0:27:39 (h:m:s) ***
+
+****************************************************************************************************
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 in project T-reX-SSP2-cutoff **
+
+	Score: -1.12e-09 
+	Method: Vegetable oil 
+	Activity: market for used air filter in exhaust air valve 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+
+** Database verified successfully! **
+
+==========================================================================================
+	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 ***
+			Duration: 0:28:07 (h:m:s)
+	*** Woah woah wee waa, great success!! ***
+==========================================================================================
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+** Processing database (3/5): ecoinvent_cutoff_3.9_remind_SSP2-Base_2025**
+Arguments:
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-Base_2025', 'db_T_reX_name': 'biosphere_T-reX'}
+
+
+*** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 ***
+
+* Appending waste and material exchanges in biosphere_T-reX
+ 
+ -  1/70 : MaterialFootprint_aluminium                | ██████████████████████████████ | 100.0% | Progre
+ -  2/70 : MaterialFootprint_antimony                 | ██████████████████████████████ | 100.0% | Progre
+ -  3/70 : MaterialFootprint_bauxite                  | ██████████████████████████████ | 100.0% | Progre
+ -  4/70 : MaterialFootprint_beryllium                | ██████████████████████████████ | 100.0% | Progre
+ -  5/70 : MaterialFootprint_borates                  | ██████████████████████████████ | 100.0% | Progre
+ -  6/70 : MaterialFootprint_cadmium                  | ██████████████████████████████ | 100.0% | Progre
+ -  7/70 : MaterialFootprint_cement                   | ██████████████████████████████ | 100.0% | Progre
+ -  8/70 : MaterialFootprint_cerium                   | ██████████████████████████████ | 100.0% | Progre
+ -  9/70 : MaterialFootprint_chromium                 | ██████████████████████████████ | 100.0% | Progre
+ - 10/70 : MaterialFootprint_coal(black)              | ██████████████████████████████ | 100.0% | Progre
+ - 11/70 : MaterialFootprint_coal(brown)              | ██████████████████████████████ | 100.0% | Progre
+ - 12/70 : MaterialFootprint_cobalt                   | ██████████████████████████████ | 100.0% | Progre
+ - 13/70 : MaterialFootprint_coke                     | ██████████████████████████████ | 100.0% | Progre
+ - 14/70 : MaterialFootprint_copper                   | ██████████████████████████████ | 100.0% | Progre
+ - 15/70 : MaterialFootprint_dysprosium               | ██████████████████████████████ | 100.0% | Progre
+ - 16/70 : MaterialFootprint_electricity              | ██████████████████████████████ | 100.0% | Progre
+ - 17/70 : MaterialFootprint_erbium                   | ██████████████████████████████ | 100.0% | Progre
+ - 18/70 : MaterialFootprint_europium                 | ██████████████████████████████ | 100.0% | Progre
+ - 19/70 : MaterialFootprint_fluorspar                | ██████████████████████████████ | 100.0% | Progre
+ - 20/70 : MaterialFootprint_gadolinium               | ██████████████████████████████ | 100.0% | Progre
+ - 21/70 : MaterialFootprint_gallium                  | ██████████████████████████████ | 100.0% | Progre
+ - 22/70 : MaterialFootprint_gold                     | ██████████████████████████████ | 100.0% | Progre
+ - 23/70 : MaterialFootprint_graphite                 | ██████████████████████████████ | 100.0% | Progre
+ - 24/70 : MaterialFootprint_helium                   | ██████████████████████████████ | 100.0% | Progre
+ - 25/70 : MaterialFootprint_holmium                  | ██████████████████████████████ | 100.0% | Progre
+ - 26/70 : MaterialFootprint_hydrogen                 | ██████████████████████████████ | 100.0% | Progre
+ - 27/70 : MaterialFootprint_indium                   | ██████████████████████████████ | 100.0% | Progre
+ - 28/70 : MaterialFootprint_latex                    | ██████████████████████████████ | 100.0% | Progre
+ - 29/70 : MaterialFootprint_lead                     | ██████████████████████████████ | 100.0% | Progre
+ - 30/70 : MaterialFootprint_lithium                  | ██████████████████████████████ | 100.0% | Progre
+ - 31/70 : MaterialFootprint_magnesium                | ██████████████████████████████ | 100.0% | Progre
+ - 32/70 : MaterialFootprint_natural gas              | ██████████████████████████████ | 100.0% | Progre
+ - 33/70 : MaterialFootprint_nickel                   | ██████████████████████████████ | 100.0% | Progre
+ - 34/70 : MaterialFootprint_palladium                | ██████████████████████████████ | 100.0% | Progre
+ - 35/70 : MaterialFootprint_petroleum                | ██████████████████████████████ | 100.0% | Progre
+ - 36/70 : MaterialFootprint_phosphate rock           | ██████████████████████████████ | 100.0% | Progre
+ - 37/70 : MaterialFootprint_platinum                 | ██████████████████████████████ | 100.0% | Progre
+ - 38/70 : MaterialFootprint_rare earth               | ██████████████████████████████ | 100.0% | Progre
+ - 39/70 : MaterialFootprint_rhodium                  | ██████████████████████████████ | 100.0% | Progre
+ - 40/70 : MaterialFootprint_sand                     | ██████████████████████████████ | 100.0% | Progre
+ - 41/70 : MaterialFootprint_scandium                 | ██████████████████████████████ | 100.0% | Progre
+ - 42/70 : MaterialFootprint_selenium                 | ██████████████████████████████ | 100.0% | Progre
+ - 43/70 : MaterialFootprint_silicon                  | ██████████████████████████████ | 100.0% | Progre
+ - 44/70 : MaterialFootprint_silver                   | ██████████████████████████████ | 100.0% | Progre
+ - 45/70 : MaterialFootprint_strontium                | ██████████████████████████████ | 100.0% | Progre
+ - 46/70 : MaterialFootprint_tantalum                 | ██████████████████████████████ | 100.0% | Progre
+ - 47/70 : MaterialFootprint_tellurium                | ██████████████████████████████ | 100.0% | Progre
+ - 48/70 : MaterialFootprint_tin                      | ██████████████████████████████ | 100.0% | Progre
+ - 49/70 : MaterialFootprint_titanium                 | ██████████████████████████████ | 100.0% | Progre
+ - 50/70 : MaterialFootprint_tungsten                 | ██████████████████████████████ | 100.0% | Progre
+ - 51/70 : MaterialFootprint_uranium                  | ██████████████████████████████ | 100.0% | Progre
+ - 52/70 : MaterialFootprint_vegetable oil            | ██████████████████████████████ | 100.0% | Progre
+ - 53/70 : MaterialFootprint_water                    | ██████████████████████████████ | 100.0% | Progre
+ - 54/70 : MaterialFootprint_zinc                     | ██████████████████████████████ | 100.0% | Progre
+ - 55/70 : MaterialFootprint_zirconium                | ██████████████████████████████ | 100.0% | Progre
+ - 56/70 : WasteFootprint_carbondioxide-kilogram      | ██████████████████████████████ | 100.0% | Progre
+ - 57/70 : WasteFootprint_composting-kilogram         | ██████████████████████████████ | 100.0% | Progre
+ - 58/70 : WasteFootprint_digestion-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 59/70 : WasteFootprint_digestion-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 60/70 : WasteFootprint_hazardous-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 61/70 : WasteFootprint_hazardous-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 62/70 : WasteFootprint_incineration-cubicmeter     | ██████████████████████████████ | 100.0% | Progre
+ - 63/70 : WasteFootprint_incineration-kilogram       | ██████████████████████████████ | 100.0% | Progre
+ - 64/70 : WasteFootprint_landfill-cubicmeter         | ██████████████████████████████ | 100.0% | Progre
+ - 65/70 : WasteFootprint_landfill-kilogram           | ██████████████████████████████ | 100.0% | Progre
+ - 66/70 : WasteFootprint_openburning-kilogram        | ██████████████████████████████ | 100.0% | Progre
+ - 67/70 : WasteFootprint_radioactive-cubicmeter      | ██████████████████████████████ | 100.0% | Progre
+ - 68/70 : WasteFootprint_recycling-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 69/70 : WasteFootprint_total-cubicmeter            | ██████████████████████████████ | 100.0% | Progre
+ - 70/70 : WasteFootprint_total-kilogram              | ██████████████████████████████ | 100.0% | Progre
+****************************************************************************************************
+
+*** ExchangeEditor() completed for ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 in 0:26:42 (h:m:s) ***
+
+****************************************************************************************************
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 in project T-reX-SSP2-cutoff **
+
+	Score: 3.37e-03 
+	Method: Tin 
+	Activity: market for steel removed by turning, primarily dressing, computer numerical controlled 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+
+** Database verified successfully! **
+
+==========================================================================================
+	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 ***
+			Duration: 0:26:53 (h:m:s)
+	*** Woah woah wee waa, great success!! ***
+==========================================================================================
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+** Processing database (4/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020**
+Arguments:
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020', 'db_T_reX_name': 'biosphere_T-reX'}
+
+
+*** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 ***
+
+* Appending waste and material exchanges in biosphere_T-reX
+ 
+ -  1/70 : MaterialFootprint_aluminium                | ██████████████████████████████ | 100.0% | Progre
+ -  2/70 : MaterialFootprint_antimony                 | ██████████████████████████████ | 100.0% | Progre
+ -  3/70 : MaterialFootprint_bauxite                  | ██████████████████████████████ | 100.0% | Progre
+ -  4/70 : MaterialFootprint_beryllium                | ██████████████████████████████ | 100.0% | Progre
+ -  5/70 : MaterialFootprint_borates                  | ██████████████████████████████ | 100.0% | Progre
+ -  6/70 : MaterialFootprint_cadmium                  | ██████████████████████████████ | 100.0% | Progre
+ -  7/70 : MaterialFootprint_cement                   | ██████████████████████████████ | 100.0% | Progre
+ -  8/70 : MaterialFootprint_cerium                   | ██████████████████████████████ | 100.0% | Progre
+ -  9/70 : MaterialFootprint_chromium                 | ██████████████████████████████ | 100.0% | Progre
+ - 10/70 : MaterialFootprint_coal(black)              | ██████████████████████████████ | 100.0% | Progre
+ - 11/70 : MaterialFootprint_coal(brown)              | ██████████████████████████████ | 100.0% | Progre
+ - 12/70 : MaterialFootprint_cobalt                   | ██████████████████████████████ | 100.0% | Progre
+ - 13/70 : MaterialFootprint_coke                     | ██████████████████████████████ | 100.0% | Progre
+ - 14/70 : MaterialFootprint_copper                   | ██████████████████████████████ | 100.0% | Progre
+ - 15/70 : MaterialFootprint_dysprosium               | ██████████████████████████████ | 100.0% | Progre
+ - 16/70 : MaterialFootprint_electricity              | ██████████████████████████████ | 100.0% | Progre
+ - 17/70 : MaterialFootprint_erbium                   | ██████████████████████████████ | 100.0% | Progre
+ - 18/70 : MaterialFootprint_europium                 | ██████████████████████████████ | 100.0% | Progre
+ - 19/70 : MaterialFootprint_fluorspar                | ██████████████████████████████ | 100.0% | Progre
+ - 20/70 : MaterialFootprint_gadolinium               | ██████████████████████████████ | 100.0% | Progre
+ - 21/70 : MaterialFootprint_gallium                  | ██████████████████████████████ | 100.0% | Progre
+ - 22/70 : MaterialFootprint_gold                     | ██████████████████████████████ | 100.0% | Progre
+ - 23/70 : MaterialFootprint_graphite                 | ██████████████████████████████ | 100.0% | Progre
+ - 24/70 : MaterialFootprint_helium                   | ██████████████████████████████ | 100.0% | Progre
+ - 25/70 : MaterialFootprint_holmium                  | ██████████████████████████████ | 100.0% | Progre
+ - 26/70 : MaterialFootprint_hydrogen                 | ██████████████████████████████ | 100.0% | Progre
+ - 27/70 : MaterialFootprint_indium                   | ██████████████████████████████ | 100.0% | Progre
+ - 28/70 : MaterialFootprint_latex                    | ██████████████████████████████ | 100.0% | Progre
+ - 29/70 : MaterialFootprint_lead                     | ██████████████████████████████ | 100.0% | Progre
+ - 30/70 : MaterialFootprint_lithium                  | ██████████████████████████████ | 100.0% | Progre
+ - 31/70 : MaterialFootprint_magnesium                | ██████████████████████████████ | 100.0% | Progre
+ - 32/70 : MaterialFootprint_natural gas              | ██████████████████████████████ | 100.0% | Progre
+ - 33/70 : MaterialFootprint_nickel                   | ██████████████████████████████ | 100.0% | Progre
+ - 34/70 : MaterialFootprint_palladium                | ██████████████████████████████ | 100.0% | Progre
+ - 35/70 : MaterialFootprint_petroleum                | ██████████████████████████████ | 100.0% | Progre
+ - 36/70 : MaterialFootprint_phosphate rock           | ██████████████████████████████ | 100.0% | Progre
+ - 37/70 : MaterialFootprint_platinum                 | ██████████████████████████████ | 100.0% | Progre
+ - 38/70 : MaterialFootprint_rare earth               | ██████████████████████████████ | 100.0% | Progre
+ - 39/70 : MaterialFootprint_rhodium                  | ██████████████████████████████ | 100.0% | Progre
+ - 40/70 : MaterialFootprint_sand                     | ██████████████████████████████ | 100.0% | Progre
+ - 41/70 : MaterialFootprint_scandium                 | ██████████████████████████████ | 100.0% | Progre
+ - 42/70 : MaterialFootprint_selenium                 | ██████████████████████████████ | 100.0% | Progre
+ - 43/70 : MaterialFootprint_silicon                  | ██████████████████████████████ | 100.0% | Progre
+ - 44/70 : MaterialFootprint_silver                   | ██████████████████████████████ | 100.0% | Progre
+ - 45/70 : MaterialFootprint_strontium                | ██████████████████████████████ | 100.0% | Progre
+ - 46/70 : MaterialFootprint_tantalum                 | ██████████████████████████████ | 100.0% | Progre
+ - 47/70 : MaterialFootprint_tellurium                | ██████████████████████████████ | 100.0% | Progre
+ - 48/70 : MaterialFootprint_tin                      | ██████████████████████████████ | 100.0% | Progre
+ - 49/70 : MaterialFootprint_titanium                 | ██████████████████████████████ | 100.0% | Progre
+ - 50/70 : MaterialFootprint_tungsten                 | ██████████████████████████████ | 100.0% | Progre
+ - 51/70 : MaterialFootprint_uranium                  | ██████████████████████████████ | 100.0% | Progre
+ - 52/70 : MaterialFootprint_vegetable oil            | ██████████████████████████████ | 100.0% | Progre
+ - 53/70 : MaterialFootprint_water                    | ███████████                    | 36.7% | Progres - 53/70 : MaterialFootprint_water                    | ████████████▋                  | 42.3% | Progres - 53/70 : MaterialFootprint_water                    | ████████████▉                  | 43.0% | Progres - 53/70 : MaterialFootprint_water                    | ████████████▉                  | 43.2% | Progres - 53/70 : MaterialFootprint_water                    | ████████████▉                  | 43.3% | Progres - 53/70 : MaterialFootprint_water                    | █████████████                  | 43.7% | Progres - 53/70 : MaterialFootprint_water                    | ██████████████████████████████ | 100.0% | Progre
+ - 54/70 : MaterialFootprint_zinc                     | ██████████████████████████████ | 100.0% | Progre
+ - 55/70 : MaterialFootprint_zirconium                | ██████████████████████████████ | 100.0% | Progre
+ - 56/70 : WasteFootprint_carbondioxide-kilogram      | ██████████████████████████████ | 100.0% | Progre
+ - 57/70 : WasteFootprint_composting-kilogram         | ██████████████████████████████ | 100.0% | Progre
+ - 58/70 : WasteFootprint_digestion-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 59/70 : WasteFootprint_digestion-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 60/70 : WasteFootprint_hazardous-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 61/70 : WasteFootprint_hazardous-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 62/70 : WasteFootprint_incineration-cubicmeter     | ██████████████████████████████ | 100.0% | Progre
+ - 63/70 : WasteFootprint_incineration-kilogram       | ██████████████████████████████ | 100.0% | Progre
+ - 64/70 : WasteFootprint_landfill-cubicmeter         | ██████████████████████████████ | 100.0% | Progre
+ - 65/70 : WasteFootprint_landfill-kilogram           | ██████████████████████████████ | 100.0% | Progre
+ - 66/70 : WasteFootprint_openburning-kilogram        | ██████████████████████████████ | 100.0% | Progre
+ - 67/70 : WasteFootprint_radioactive-cubicmeter      | ██████████████████████████████ | 100.0% | Progre
+ - 68/70 : WasteFootprint_recycling-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 69/70 : WasteFootprint_total-cubicmeter            | ██████████████████████████████ | 100.0% | Progre
+ - 70/70 : WasteFootprint_total-kilogram              | ██████████████████████████████ | 100.0% | Progre
+****************************************************************************************************
+
+*** ExchangeEditor() completed for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 in 0:26:40 (h:m:s) ***
+
+****************************************************************************************************
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 in project T-reX-SSP2-cutoff **
+
+	Score: -1.79e-08 
+	Method: Graphite 
+	Activity: treatment of waste reinforced plasterboard, sorting plant 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+
+** Database verified successfully! **
+
+==========================================================================================
+	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 ***
+			Duration: 0:27:02 (h:m:s)
+	*** Woah woah wee waa, great success!! ***
+==========================================================================================
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+** Processing database (5/5): ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025**
+Arguments:
+{'project_base': 'SSP2-cutoff', 'project_T_reX': 'T-reX-SSP2-cutoff', 'db_name': 'ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025', 'db_T_reX_name': 'biosphere_T-reX'}
+
+
+*** ExchangeEditor() is running for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 ***
+
+* Appending waste and material exchanges in biosphere_T-reX
+ 
+ -  1/70 : MaterialFootprint_aluminium                | ██████████████████████████████ | 100.0% | Progre
+ -  2/70 : MaterialFootprint_antimony                 | ██████████████████████████████ | 100.0% | Progre
+ -  3/70 : MaterialFootprint_bauxite                  | ██████████████████████████████ | 100.0% | Progre
+ -  4/70 : MaterialFootprint_beryllium                | ██████████████████████████████ | 100.0% | Progre
+ -  5/70 : MaterialFootprint_borates                  | ██████████████████████████████ | 100.0% | Progre
+ -  6/70 : MaterialFootprint_cadmium                  | ██████████████████████████████ | 100.0% | Progre
+ -  7/70 : MaterialFootprint_cement                   | ██████████████████████████████ | 100.0% | Progre
+ -  8/70 : MaterialFootprint_cerium                   | ██████████████████████████████ | 100.0% | Progre
+ -  9/70 : MaterialFootprint_chromium                 | ██████████████████████████████ | 100.0% | Progre
+ - 10/70 : MaterialFootprint_coal(black)              | ██████████████████████████████ | 100.0% | Progre
+ - 11/70 : MaterialFootprint_coal(brown)              | ██████████████████████████████ | 100.0% | Progre
+ - 12/70 : MaterialFootprint_cobalt                   | ██████████████████████████████ | 100.0% | Progre
+ - 13/70 : MaterialFootprint_coke                     | ██████████████████████████████ | 100.0% | Progre
+ - 14/70 : MaterialFootprint_copper                   | ██████████████████████████████ | 100.0% | Progre
+ - 15/70 : MaterialFootprint_dysprosium               | ██████████████████████████████ | 100.0% | Progre
+ - 16/70 : MaterialFootprint_electricity              | ██████████████████████████████ | 100.0% | Progre
+ - 17/70 : MaterialFootprint_erbium                   | ██████████████████████████████ | 100.0% | Progre
+ - 18/70 : MaterialFootprint_europium                 | ██████████████████████████████ | 100.0% | Progre
+ - 19/70 : MaterialFootprint_fluorspar                | ██████████████████████████████ | 100.0% | Progre
+ - 20/70 : MaterialFootprint_gadolinium               | ██████████████████████████████ | 100.0% | Progre
+ - 21/70 : MaterialFootprint_gallium                  | ██████████████████████████████ | 100.0% | Progre
+ - 22/70 : MaterialFootprint_gold                     | ██████████████████████████████ | 100.0% | Progre
+ - 23/70 : MaterialFootprint_graphite                 | ██████████████████████████████ | 100.0% | Progre
+ - 24/70 : MaterialFootprint_helium                   | ██████████████████████████████ | 100.0% | Progre
+ - 25/70 : MaterialFootprint_holmium                  | ██████████████████████████████ | 100.0% | Progre
+ - 26/70 : MaterialFootprint_hydrogen                 | ██████████████████████████████ | 100.0% | Progre
+ - 27/70 : MaterialFootprint_indium                   | ██████████████████████████████ | 100.0% | Progre
+ - 28/70 : MaterialFootprint_latex                    | ██████████████████████████████ | 100.0% | Progre
+ - 29/70 : MaterialFootprint_lead                     | ██████████████████████████████ | 100.0% | Progre
+ - 30/70 : MaterialFootprint_lithium                  | ██████████████████████████████ | 100.0% | Progre
+ - 31/70 : MaterialFootprint_magnesium                | ██████████████████████████████ | 100.0% | Progre
+ - 32/70 : MaterialFootprint_natural gas              | ██████████████████████████████ | 100.0% | Progre
+ - 33/70 : MaterialFootprint_nickel                   | ██████████████████████████████ | 100.0% | Progre
+ - 34/70 : MaterialFootprint_palladium                | ██████████████████████████████ | 100.0% | Progre
+ - 35/70 : MaterialFootprint_petroleum                | ██████████████████████████████ | 100.0% | Progre
+ - 36/70 : MaterialFootprint_phosphate rock           | ██████████████████████████████ | 100.0% | Progre
+ - 37/70 : MaterialFootprint_platinum                 | ██████████████████████████████ | 100.0% | Progre
+ - 38/70 : MaterialFootprint_rare earth               | ██████████████████████████████ | 100.0% | Progre
+ - 39/70 : MaterialFootprint_rhodium                  | ██████████████████████████████ | 100.0% | Progre
+ - 40/70 : MaterialFootprint_sand                     | ██████████████████████████████ | 100.0% | Progre
+ - 41/70 : MaterialFootprint_scandium                 | ██████████████████████████████ | 100.0% | Progre
+ - 42/70 : MaterialFootprint_selenium                 | ██████████████████████████████ | 100.0% | Progre
+ - 43/70 : MaterialFootprint_silicon                  | ██████████████████████████████ | 100.0% | Progre
+ - 44/70 : MaterialFootprint_silver                   | ██████████████████████████████ | 100.0% | Progre
+ - 45/70 : MaterialFootprint_strontium                | ██████████████████████████████ | 100.0% | Progre
+ - 46/70 : MaterialFootprint_tantalum                 | ██████████████████████████████ | 100.0% | Progre
+ - 47/70 : MaterialFootprint_tellurium                | ██████████████████████████████ | 100.0% | Progre
+ - 48/70 : MaterialFootprint_tin                      | ██████████████████████████████ | 100.0% | Progre
+ - 49/70 : MaterialFootprint_titanium                 | ██████████████████████████████ | 100.0% | Progre
+ - 50/70 : MaterialFootprint_tungsten                 | ██████████████████████████████ | 100.0% | Progre
+ - 51/70 : MaterialFootprint_uranium                  | ██████████████████████████████ | 100.0% | Progre
+ - 52/70 : MaterialFootprint_vegetable oil            | ██████████████████████████████ | 100.0% | Progre
+ - 53/70 : MaterialFootprint_water                    | ██████████████████████████████ | 100.0% | Progre
+ - 54/70 : MaterialFootprint_zinc                     | ██████████████████████████████ | 100.0% | Progre
+ - 55/70 : MaterialFootprint_zirconium                | ██████████████████████████████ | 100.0% | Progre
+ - 56/70 : WasteFootprint_carbondioxide-kilogram      | ██████████████████████████████ | 100.0% | Progre
+ - 57/70 : WasteFootprint_composting-kilogram         | ██████████████████████████████ | 100.0% | Progre
+ - 58/70 : WasteFootprint_digestion-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 59/70 : WasteFootprint_digestion-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 60/70 : WasteFootprint_hazardous-cubicmeter        | ██████████████████████████████ | 100.0% | Progre
+ - 61/70 : WasteFootprint_hazardous-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 62/70 : WasteFootprint_incineration-cubicmeter     | ██████████████████████████████ | 100.0% | Progre
+ - 63/70 : WasteFootprint_incineration-kilogram       | ██████████████████████████████ | 100.0% | Progre
+ - 64/70 : WasteFootprint_landfill-cubicmeter         | ██████████████████████████████ | 100.0% | Progre
+ - 65/70 : WasteFootprint_landfill-kilogram           | ██████████████████████████████ | 100.0% | Progre
+ - 66/70 : WasteFootprint_openburning-kilogram        | ██████████████████████████████ | 100.0% | Progre
+ - 67/70 : WasteFootprint_radioactive-cubicmeter      | ██████████████████████████████ | 100.0% | Progre
+ - 68/70 : WasteFootprint_recycling-kilogram          | ██████████████████████████████ | 100.0% | Progre
+ - 69/70 : WasteFootprint_total-cubicmeter            | ██████████████████████████████ | 100.0% | Progre
+ - 70/70 : WasteFootprint_total-kilogram              | ██████████████████████████████ | 100.0% | Progre
+****************************************************************************************************
+
+*** ExchangeEditor() completed for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 in 0:26:44 (h:m:s) ***
+
+****************************************************************************************************
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 in project T-reX-SSP2-cutoff **
+
+	Score: 2.07e-02 
+	Method: Total (kg) 
+	Activity: electricity production, nuclear, pressure water reactor 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+
+** Database verified successfully! **
+
+==========================================================================================
+	*** Finished T-reX for ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 ***
+			Duration: 0:27:07 (h:m:s)
+	*** Woah woah wee waa, great success!! ***
+==========================================================================================
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+	*** Verifying all databases in the project **
+
+** Verifying database ecoinvent-3.9.1-cutoff in project T-reX-SSP2-cutoff **
+
+	Score: 1.42e-03 
+	Method: Total (kg) 
+	Activity: heat and power co-generation, natural gas, combined cycle power plant, 400MW electrical 
+	Database: ecoinvent-3.9.1-cutoff
+
+
+--------------------------------------------------------------------------------
+
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2020 in project T-reX-SSP2-cutoff **
+
+	Score: 1.46e-10 
+	Method: Gold 
+	Activity: electricity, high voltage, production mix 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2020
+
+
+--------------------------------------------------------------------------------
+
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-Base_2025 in project T-reX-SSP2-cutoff **
+
+	Score: 0.00e+00 
+	Method: Holmium 
+	Activity: market for heat, for reuse in municipal waste incineration only 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+
+	Score: 1.45e-13 
+	Method: Rhodium 
+	Activity: electricity production, photovoltaic, 3kWp slanted-roof installation, CdTe, laminated, integrated 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-Base_2025
+
+
+--------------------------------------------------------------------------------
+
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020 in project T-reX-SSP2-cutoff **
+
+	Score: 3.21e-05 
+	Method: Phosphate rock 
+	Activity: electricity, high voltage, residual mix 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2020
+
+
+--------------------------------------------------------------------------------
+
+
+** Verifying database ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025 in project T-reX-SSP2-cutoff **
+
+	Score: 8.10e+00 
+	Method: Water 
+	Activity: coking 
+	Database: ecoinvent_cutoff_3.9_remind_SSP2-PkBudg500_2025
+
+
+--------------------------------------------------------------------------------
+
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ================================================================================
+                                    T-reX Completed                                 
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Project:                  T-reX-SSP2-cutoff
+    Total Databases:          5
+    Successfully Processed:   5
+    Duration:                 2:17:46 (h:m:s)
+
+    ================================================================================
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+                                  _____________                                 
+                                 /             \                                
+                               | Let's moooooo |                                
+                               | some LCA!     |                                
+                                 \             /                                
+                                  =============                                 
+                                              \                                 
+                                              \                                 
+                                              ^__^                              
+                                          (oo)\_______                          
+                                        (__)\       )\/\                        
+                                             ||----w |                          
+                                             ||     ||                          
+
+--------------------------------------------------------------------------------
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+================================================================================
+
+
