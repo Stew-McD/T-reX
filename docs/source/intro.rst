@@ -1,7 +1,12 @@
 Introduction
 ============
 
-The T-reX tool is a python package that allows one to calculate the waste and material footprint of any product or service inside of life cycle assessment (LCA) databases. Currently is has been tested with ecoinvent 3.5--3.10.
+T-reX [T(ool) re-X] is a python package that makes it easy to calculate the waste generation and material demand footprints of any product or service inside of future and prospective life cycle assessment (LCA) databases. Currently tested with the database ecoinvent 3.5--3.10.
+
+
+.. image:: ../../source/_static/T-reX_flowchart_combined.png
+   :width: 500 px
+   :alt: alternate text
 
 .. Motivation
 .. **********

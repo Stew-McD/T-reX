@@ -10,7 +10,7 @@ import bw2analyzer as bwa
 
 ca = bwa.ContributionAnalysis()
 
-PROJECT = "T_reX-SSP2LT-cutoff"
+PROJECT = "T-reX-SSP2-cutoff"
 KEY = "market for battery, Li-ion, rechargeable"
 
 KEYWORDS_METHODS = [

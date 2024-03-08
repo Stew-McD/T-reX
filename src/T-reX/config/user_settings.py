@@ -72,7 +72,7 @@ use_premise = True
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = False
+delete_existing_premise_project = True
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
@@ -134,21 +134,21 @@ rcps = [
 years = [
     2020,
     2025,
-    2030,
-    2035,
-    2040,
-    2045,
-    2050,
-    2055,
-    2060,
-    2065,
-    2070,
-    2075,
-    2080,
-    2085,
-    2090,
-    2095,
-    2100,
+    # 2030,
+    # 2035,
+    # 2040,
+    # 2045,
+    # 2050,
+    # 2055,
+    # 2060,
+    # 2065,
+    # 2070,
+    # 2075,
+    # 2080,
+    # 2085,
+    # 2090,
+    # 2095,
+    # 2100,
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the will be filtered out later if they are not possible

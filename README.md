@@ -1,16 +1,24 @@
-# T-reX (formerly "WasteAndMaterialFootprint)
+# T-reX: waste and material footprinting in LCA
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10431181.svg)](https://doi.org/10.5281/zenodo.10431180)
 
-A program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints.
+Formerly known as "WasteAndMaterialFootprint"
 
-Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_publication)
+**T** stands for *tool* and **reX** for *the circular economy strategies reduce, reuse, recycle, etc.* 
+
+A python program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints in current and prospective databases.
+
+Built as an extension to the [brightway LCA ecosystem](https://brightway.dev/), using [premise](https://github.com/polca/premise) for the generation of future scenario databases and [wurst](https://github.com/polca/wurst) for database expansion. 
+
+Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_Publication). Reviews and comments are very welcome.
+
+Email: T-reX@scmcd.ch
 
 ## Documentation
 
 The documentation is available as a [website](https://T-reX.readthedocs.io/en/latest/). Also, as a  [pdf](https://T-reX.readthedocs.io/_/downloads/en/latest/pdf/).
 
-The documentation is still under development, but the code is well documented and there is a full API reference.
+The documentation is still under development, but the code is well commented and there is a full API reference.
 
 The following readme provides a brief introduction to the program, how to install it, and how to use it.
 
@@ -18,7 +26,7 @@ See the example output [here](examples/package_test/example-output.pdf)
 
 ## Contents
 
-- [T-reX (formerly "WasteAndMaterialFootprint)](#t-rex-formerly-wasteandmaterialfootprint)
+- [T-reX: waste and material footprinting in LCA](#t-rex-waste-and-material-footprinting-in-lca)
   - [Documentation](#documentation)
   - [Contents](#contents)
   - [Visual overview](#visual-overview)
@@ -141,8 +149,8 @@ You should clone the repo, navigate to the `T-reX` folder, and then run the prog
 The program can be imported as a Python module:
 
   ```python
-      import T-reX as T-reX
-      T-reX.run()
+      import T_reX_LCA as TreX
+      TreX.run()
   ```
 
 ## Configuration
@@ -152,8 +160,8 @@ You can find the configuration files in the `config` folder (`src/T-reX/config`)
 If you have installed via pip, or want to have things separate, you can create a new folder somewhere and then run some built-in functions to create and reload the config files.
 
   ```python
-      import T-reX as T-reX
-      T-reX.create_config()
+      import T_reX_LCA as TreX
+      TreX.create_config()
   ```
 
 This will create a folder `config` in the current working directory containing the default configuration files (see below).
@@ -161,7 +169,7 @@ This will create a folder `config` in the current working directory containing t
 You can then edit these files with some kind of text editor, and run:
 
   ```python
-      T-reX.reload_config()
+      TreX.reload_config()
   ```
 
 Note that you will need to close the Python session and start a new one to reload the config files.
@@ -169,7 +177,7 @@ Note that you will need to close the Python session and start a new one to reloa
 If you want to revert to the default config files, you can run:
 
   ```python
-      T-reX.reset_config()
+      TreX.reset_config()
   ```
 
 And then close and restart the Python session.
@@ -199,7 +207,7 @@ If you are happy with the default settings, you can just run the program and it 
       project_premise_base = "default"
       project_premise = "SSP-cutoff"
       project_base = project_premise
-      project_T_reX = f"T_reXootprint-{project_base}"
+      project_T_reX = f"T-reX-{project_base}"
 
       # Choose the name of the database to use (needed for premise only, the T-reX tool will run all databases except the biospheres)
       database_name = "ecoinvent-3.9.1-cutoff"
@@ -304,7 +312,7 @@ See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
 
 ### License
 
-T-reX by Stewart Charles McDowall is marked with CC0 1.0 Universal, do whatever you want with it - see the [LICENSE](LICENSE) file for details
+T-reX by Stewart Charles McDowall is marked with CC0 1.0 Universal, do whatever you want with it. - see the [LICENSE](LICENSE) file for details
 
 ### Citation
 
