@@ -2,7 +2,7 @@
 user_settings Module
 ====================
 
-Configure Project and Database Settings for T-reX tool.
+Configure Project and Database Settings for T-reX.
 
 This script is used to configure the project and database settings, as well as set up the essential paths for the data, config, and result directories.
 
@@ -39,10 +39,10 @@ import bw2data as bd
 # set project name and other things here
 
 project_premise_base = "default"
-project_premise = "SSP-cutoff"
+project_premise = "SSP2-cutoff"
 project_base = project_premise
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
-project_T_reX = f"T_reX-{project_base}"
+project_T_reX = f"T-reX-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
@@ -51,10 +51,10 @@ db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (
 
 # if you only want to run one database, set single to True and choose the database name here
 single = False
-single_database = "ecoinvent_cutoff_3.9_remind_SSP5-Base_2050"
+single_database = "ecoinvent_cutoff_3.9_remind_SSP2-Base_2065"
 
 # if you want to use a fresh project
-delete_T_reX_project = False
+delete_T_reX_project = True
 use_multiprocessing = False
 verbose = False
 
@@ -66,7 +66,7 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = False
+use_premise = True
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
@@ -74,17 +74,17 @@ database_name = "ecoinvent-3.9.1-cutoff"
 # if you want to use a fresh project
 delete_existing_premise_project = False
 
-# if you want to use multiprocessing (some people have reported problems with this)
+# if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
-batch_size = 1
+batch_size = 9
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
 
 if use_premise and project_base != project_premise:
-    project_T_reX = f"T_reX-{project_premise}"
+    project_T_reX = f"T-reX-{project_premise}"
 
 # Get the premise key (at the moment, it is stored in the code to make it easier for people, but it would be better to have it in a file)
 premise_key = "tUePmX_S5B8ieZkkM7WUU2CnO8SmShwmAeWK9x2rTFo="
@@ -132,18 +132,22 @@ rcps = [
 # If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
-    # 2020,
-    # 2025,
+    2020,
+    2025,
     2030,
-    # 2035,
-    # 2040,
-    # 2045,
-    # 2050,
-    # 2060,
+    2035,
+    2040,
+    2045,
+    2050,
+    2055,
+    2060,
     2065,
-    # 2070,
-    # 2080,
-    # 2090,
+    2070,
+    2075,
+    2080,
+    2085,
+    2090,
+    2095,
     2100,
 ]
 
@@ -200,11 +204,7 @@ def generate_args_list(single_database=None):
 cwd = Path.cwd()
 # Set the paths
 dir_config = cwd / "config"
-
-list_materials = dir_config / "list_materials.txt"
-
 dir_data = cwd / "data"
-
 dir_tmp = dir_data / "tmp"
 dir_logs = dir_data / "logs"
 

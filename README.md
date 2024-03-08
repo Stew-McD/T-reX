@@ -21,6 +21,9 @@ See the example output [here](examples/package_test/example-output.pdf)
 - [T-reX (formerly "WasteAndMaterialFootprint)](#t-rex-formerly-wasteandmaterialfootprint)
   - [Documentation](#documentation)
   - [Contents](#contents)
+  - [Visual overview](#visual-overview)
+    - [Generalised flowchart](#generalised-flowchart)
+    - [Computational flowchart](#computational-flowchart)
   - [Installation](#installation)
     - [Dependencies](#dependencies)
     - [Installation instructions](#installation-instructions)
@@ -44,6 +47,17 @@ See the example output [here](examples/package_test/example-output.pdf)
     - [Contributing](#contributing)
     - [License](#license)
     - [Citation](#citation)
+
+## Visual overview
+
+### Generalised flowchart
+
+![Generalised flowchart](docs/source/_static/T-reX_method.png)
+
+### Computational flowchart
+
+![Computational flowchart](docs/source/_static/T-reX_flowchart.png)
+
 
 ## Installation
 
@@ -99,7 +113,7 @@ You can do that with this command:
 Another option: the program can be installed using pip:
 
   ```bash
-  pip install T-reX
+  pip install T_reX_LCA
   ```
 
 Or, if you want to install the latest version from GitHub:

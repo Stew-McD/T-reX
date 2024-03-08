@@ -32,6 +32,7 @@ def make_queries_waste():
         "recycling",
         "landfill",
         "hazardous",
+        "radioactive",
         # "non-hazardous", # not really needed, as it is just "total" - "hazardous", and it makes the process slower (20k+ more exchanges)
         "carbon dioxide",  # in prospective databases, carbon capture and storage is included
         "total",
@@ -85,13 +86,12 @@ def make_queries_waste():
                 {
                     "OR": [
                         "carbon dioxide storage",
-                        "carbon dioxide capture",
                         "carbon dioxide, captured",
                     ]
                 }
             )
             query.update({"NOT": ["methane"]})
-            query.update({"AND": ""})
+            query.update({"AND": [""]})
 
         # add the query to the list of queries
         queries_kg.append(query)

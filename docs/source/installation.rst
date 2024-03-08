@@ -37,7 +37,7 @@ Either from PyPI:
 
 .. code-block:: bash
 
-    pip install T-reX
+    pip install T_reX_LCA
 
 Or, probably best to install the latest version from GitHub:
 

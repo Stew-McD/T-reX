@@ -92,6 +92,7 @@ def make_queries_waste():
             )
             query.update({"NOT": ["methane"]})
             query.update({"AND": [""]})
+        
 
         # add the query to the list of queries
         queries_kg.append(query)

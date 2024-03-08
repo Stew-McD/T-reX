@@ -39,14 +39,14 @@ import bw2data as bd
 # set project name and other things here
 
 project_premise_base = "default"
-project_premise = "SSP2LT-cutoff"
+project_premise = "SSP2-cutoff"
 project_base = project_premise
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
 project_T_reX = f"T-reX-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
-use_T_reX = False
+use_T_reX = True
 db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
