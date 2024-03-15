@@ -49,7 +49,7 @@ page_height += title_height
 print(f"Total page size set to: {page_width}x{page_height}")
 
 # Create a PDF file
-c = canvas.Canvas("similar_methods.pdf")
+c = canvas.Canvas("visualisation/scatter-similar_methods.pdf")
 c.setPageSize((page_width, page_height))
 
 # Initialize Y-coordinate for drawing
@@ -89,4 +89,4 @@ for edip, T_reX in pairs.items():
 
 # Save the PDF
 c.save()
-print("PDF created: similar_methods.pdf")
+print("PDF created: scatter-similar_methods.pdf")

@@ -10,7 +10,7 @@ import bw2analyzer as bwa
 
 ca = bwa.ContributionAnalysis()
 
-PROJECT = "T-reX-SSP2-cutoff"
+PROJECT = "T-reX-premise-SSP2-cutoff"
 KEY = "market for battery, Li-ion, rechargeable"
 
 KEYWORDS_METHODS = [
@@ -23,8 +23,8 @@ KEYWORDS_METHODS = [
 
 SEARCH_ACTIVITIES = 0
 SEARCH_METHODS = 0
-GET_RESULTS = 1
-GET_SUPPLY_CHAIN_RESULTS = 0
+GET_RESULTS = 0
+GET_SUPPLY_CHAIN_RESULTS = 1
 
 CWD = Path.cwd()
 DIR_DATA = CWD / "data"
@@ -286,8 +286,13 @@ def get_supply_chain_results():
 
     if len(methods_waste) == 0:
         print("\t\t ## No waste methods found ##")
+    else:
+        print(f"\t\t Waste methods: {len(methods_waste)}")
     if len(methods_material) == 0:
         print("\t\t ## No material methods found ##")
+    else:
+        print(f"\t\t Material methods: {len(methods_material)}")
+        
 
     dbs = activities.database.unique()
 
@@ -346,9 +351,9 @@ def get_supply_chain_results():
                     df_result = bwa.compare_activities_by_grouped_leaves(
                         df_acts.activity_object,
                         method,
-                        max_level=5,
+                        max_level=3,
                         output_format="pandas",
-                        cutoff=0.025,
+                        cutoff=0.125,
                     )
 
                 df_single = df_act.join(df_result)

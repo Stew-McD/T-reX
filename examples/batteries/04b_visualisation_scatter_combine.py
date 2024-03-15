@@ -44,7 +44,7 @@ print(
 )
 
 # Create a PDF file
-c = canvas.Canvas("combined_methods.pdf", pagesize=(page_width, page_height))
+c = canvas.Canvas("visualisation/scatter-combined_methods.pdf", pagesize=(page_width, page_height))
 
 # Add the title
 c.setFont("Libertine", 16)  # Set Libertine font and size for the title

@@ -39,7 +39,7 @@ import bw2data as bd
 # set project name and other things here
 
 project_premise_base = "default"
-project_premise = "SSP-cutoff"
+project_premise = "premise-SSP2-cutoff"
 project_base = project_premise
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
 project_T_reX = f"T-reX-{project_base}"
@@ -72,7 +72,7 @@ use_premise = True
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = True
+delete_existing_premise_project = False
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True

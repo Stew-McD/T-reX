@@ -266,7 +266,7 @@ for method in methods_full:
 
             # Plotting setup (title, labels, legend, etc.)
             title_raw = f"Contribution to total by sector for Li-ion battery `{activity}'"
-            method_text = f"LCA Method: ({method[0]}, {method[2]})"
+            method_text = f"LCA Method: ({method[0]}, {method[1]}, {method[2]})"
             ax.text(
                 0.01,
                 1.02,  # x, y coordinates in axes fraction

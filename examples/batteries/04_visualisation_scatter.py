@@ -121,13 +121,17 @@ for a, method_0 in enumerate(methods_0):
                 continue
 
             fig, ax = plt.subplots()
-            title_raw = f"{df_methods_2['method_0'].iloc[0]}\n{method_2}"
+            title_raw = f"{df_methods_2['method_0'].iloc[0]}--- material/waste footprints\n{method_1} --- {method_2}"
             
             title = replace_strings_in_string(title_raw, term_replacements)
     
             plt.title(title, fontsize=8)
             ax.set_xlabel("Year", fontsize=7)
             ax.set_ylabel(f"{df_methods_2['unit'].iloc[0]} / kg (battery)", fontsize=7)
+            
+            # reduce number of tick labels
+            years = [year for year in years if year % 10 == 0]
+
             ax.set_xticks(years)
             ax.set_xticklabels(years, fontsize=6)
             ax.yaxis.set_tick_params(labelsize=6)
@@ -209,7 +213,7 @@ for a, method_0 in enumerate(methods_0):
             filename_safe = filename.replace("/", "|")  # Replacing any forward slashes to avoid path issues
             filepath = os.path.join("visualisation/individual-methods", filename_safe)
             plt.savefig(filepath, format="svg", bbox_inches="tight")  # Saving as SVG
-            plt.show()
+            # plt.show()
             plt.close(fig)
 
             # print progress
