@@ -42,7 +42,7 @@ project_premise_base = "default"
 project_premise = "premise-SSP2-cutoff"
 project_base = project_premise
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
-project_T_reX = f"T-reX-{project_base}"
+project_T_reX = f"TreX-{project_base}"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
@@ -72,12 +72,12 @@ use_premise = True
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = False
+delete_existing_premise_project = True
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
 
-# if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. From my experience, it is better to give it one database at a time, otherwise memory issues can occur.
+# if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. Memory issues can occur if the batch size is too large.
 batch_size = 9
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`

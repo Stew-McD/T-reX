@@ -233,20 +233,33 @@ def FutureScenarios(scenario_list):
             keep_uncertainty_data=True,
         )
 
-        try:
-            ndb.update_all()
-            ndb.update_cars()
-            ndb.update_buses()
-            ndb.update_emissions()
-            ndb.update_dac()
-            ndb.update_trucks()
-            ndb.update_two_wheelers()
-            ndb.update_electricity()
-            ndb.update_cement()
-            ndb.update_steel()
-            ndb.update_fuels()
-        except Exception as e:
-            print(f"Error: {e}")
+        # List of update functions to try
+        sectors = [
+            "cars",
+            "buses",
+            "two_wheelers",
+            # "dac",
+            # "emissions",
+            # "trucks",
+            # "electricity",
+            # "cement",
+            # "steel",
+            # "fuels",
+        ]
+        
+        # CHANGED UPDATE SYNTAX TO MATCH UPDATES IN PREMISE V2.0.0
+        print("\n***** Updating sectors... *****\n")
+        
+        ndb.update()
+
+        for sector in sectors:
+            try:
+                ndb.update([sector])
+                print(f"Successfully updated {sector}\n")
+                print("*****************************************")
+            except Exception as e:
+                print(f"Error updating {sector}: {e}")
+                print("+++++++++++++++++++++++++++++++++++++++++")
 
         # Write the new database to brightway
         ndb.write_db_to_brightway()

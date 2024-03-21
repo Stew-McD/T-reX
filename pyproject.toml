@@ -19,16 +19,17 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.12"
+brightway2 = "^2.4.6"
 bw2data = "^3.6.6"
-premise = "^1.8.2dev3"
 bw2io = "^0.8.12"
 bw2calc = "^1.8.2"
+premise = "^2.0.2"
+premise-gwp = "^0.9.6"
 cowsay = "^6.1"
 openpyxl = "^3.1.2"
 tqdm = "^4.66.1"
 wurst = "^0.4"
 pandas = "^2.1.4"
-premise-gwp = "^0.9.6"
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^7.2.6"
