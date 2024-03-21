@@ -4,7 +4,7 @@ from pathlib import Path
 import shutil
 
 # ************************************ USER SETTINGS ************************************
-PROJECT = "TreX-Premise-SSP2-cutoff"
+PROJECT = "TreX-test-premise-SSP2-cutoff"
 KEY = "market for battery, Li-ion, rechargeable"
 
 KEYWORDS_METHODS = [
@@ -43,17 +43,19 @@ FILE_RESULTS = DIR_DATA / "results.csv"
 FILE_SUPPLYCHAINRESULTS = DIR_DATA / "supply_chain_results.csv"
 
 # List of script names
-script_calculations = "_01_calculate-batteries.py"
-script_results = "_02_process-results.py"
+script_calculations = "_01a_calculate-batteries.py"
+script_results = "_02a_process-results.py"
 script_results_top_processes = "_02b_process-results_top-processes.py"
-script_results_SC = "_03_process-supply_chain_results.py"
+script_results_SC = "_03a_process-supply_chain_results.py"
 
 scripts_visualisation_bar = [
     x for x in os.listdir() if x.endswith(".py") and "bar" in x
 ]
+scripts_visualisation_bar.sort()
 scripts_visualisation_scatter = [
     x for x in os.listdir() if x.endswith(".py") and "scatter" in x
 ]
+scripts_visualisation_scatter.sort()
 
 
 def run_script(script_name):
@@ -68,13 +70,35 @@ def run_script(script_name):
 # Main execution logic
 if __name__ == "__main__":
     if SEARCH_ACTIVITIES or SEARCH_METHODS:
+        print("\n*******************************")
+        print("\tRunning case study")
+        print("*******************************")
         run_script(script_calculations)
-    if GET_RESULTS or GET_SUPPLY_CHAIN_RESULTS:
+    if GET_RESULTS:
+        print("*******************************")
+        print("\tProcessing results")
+        print("*******************************")
         run_script(script_results)
+        run_script(script_results_top_processes)
+    if GET_SUPPLY_CHAIN_RESULTS:
+        print("*******************************")
+        print("\tProcessing supply chain results")
+        print("*******************************")
+        run_script(script_results_SC)
 
     if DO_VISUALISATION:
+        print("*******************************")
+        print("\tVisualising results")
+        print("*******************************")
         for script in scripts_visualisation_scatter:
             run_script(script)
     if DO_VISUALISATION_SUPPLY_CHAIN:
+        print("*******************************")
+        print("\tVisualising supply chain results")
+        print("*******************************")
         for script in scripts_visualisation_bar:
             run_script(script)
+
+    print("\n------------------------------------")
+    print("\t\tDone!")
+    print("------------------------------------\n")
