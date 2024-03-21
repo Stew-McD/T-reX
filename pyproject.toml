@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "T_reX_LCA"
-version = "0.2"
+version = "0.2.1"
 description = "A tool for analysing waste and material footprints in Life Cycle Assessment (LCA) databases"
 authors = ["Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>"]
 license = "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -44,7 +44,7 @@ build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "T_reX_LCA"
-version = "0.2"
+version = "0.2.1"
 authors = [
   { name="Stewart Charles McDowall", email="s.c.mcdowall@cml.leidenuniv.nl" },
 ]
@@ -61,7 +61,7 @@ classifiers = [
 
 [project.dependencies]
 bw2data = "^3.6.6"
-premise = "^2.0.0"
+premise = "^2.0.2"
 bw2io = "^0.8.12"
 bw2calc = "^1.8.2"
 cowsay = "^6.1"
