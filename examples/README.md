@@ -2,7 +2,7 @@
 
 * An example of the terminal output from the application of T-reX is presented as [a pdf](T-reX_example_terminal_output.pdf) and [a text file](T-reX_example_terminal_output.txt).
 
-* The full virtual environment used to generate the example is available in [T-reX_virtual_environment_pip-freeze.txt](T-reX_virtual_environment_pip-freeze.txt).
+* The full virtual environment used to generate the example is listed in [T-reX_virtual_environment_pip-freeze.txt](T-reX_virtual_environment_pip-freeze.txt). This file can be used to recreate the virtual environment by running `pip install -r T-reX_virtual_environment_pip-freeze.txt` in a fresh python venv.
 
 * An example of the intermediate data produced by T-reX is available in the [T-reX_example-data](T-reX_example-data) directory (search results, logs, etc.).
 
