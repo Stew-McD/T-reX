@@ -72,13 +72,13 @@ use_premise = True
 database_name = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_existing_premise_project = True
+delete_existing_premise_project = False
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. Memory issues can occur if the batch size is too large.
-batch_size = 40
+batch_size = 3
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = True
