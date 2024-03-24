@@ -426,6 +426,9 @@ def EditExchanges(args):
     return None
 
 
-# 2. RUN MAIN FUNCTION
 if __name__ == "__main__":
     run()
+    
+    # clean up tmp files
+    for file in dir_tmp.glob("*"):
+        os.remove(file)
