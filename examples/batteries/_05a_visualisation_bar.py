@@ -7,6 +7,12 @@ import scienceplots
 from tqdm import tqdm
 import seaborn as sns
 import random
+import numpy as np
+
+from utils import term_replacements, replace_string_in_df, replace_strings_in_string
+from _00_main import FILE_RESULTS_PROCESSED_SC_2, DIR_VISUALISATION
+
+FILE_IN = FILE_RESULTS_PROCESSED_SC_2
 
 # Set a fixed figure size to match your largest plot (274x343 pixels)
 # fixed_figsize = (250 / 100, 500 / 100)  # Convert pixels to inches
@@ -29,42 +35,12 @@ rc_fonts = {
 mpl.style.use(["science"])
 mpl.rcParams.update(rc_fonts)
 
-
-# Define the function to replace strings in the DataFrame
-def replace_string_in_df(df, term, replacement):
-    df = df.replace(term, replacement)
-    return df
-
-
-# Define the function to replace strings in a string
-def replace_strings_in_string(string, term_replacements):
-    for term, replacement in term_replacements.items():
-        string = string.replace(term, replacement)
-    return string
-
-
 # Read in the data
-df_raw = pd.read_csv(
-    "data/supply_chain_results_significant_ranked.csv", sep=";", index_col=None
-)
+df_raw = pd.read_csv(FILE_IN, sep=";", index_col=None)
 
-# Apply string replacements to the DataFrame
-term_replacements = {
-    "cubic meter": r"m$^{3}$",
-    "m3": r"m$^{3}$",
-    "(": " (",
-    "kilogram": "kg",
-    "kgCO2eq": "kg CO$_{2}$ eq",
-    "kg CO2 eq": "kg CO$_{2}$ eq",
-    "kg CO2-eq": "kg CO$_{2}$ eq",
-    "kilowatt hour": "kWh",
-    "Carbondioxide": "Carbon dioxide",
-    "Naturalgas": "Natural gas",
-    "square meter": "m$^{2}$",
-}
 
 for term, replacement in term_replacements.items():
-    replace_string_in_df(df_raw, term, replacement)
+    df_raw = replace_string_in_df(df_raw, term_replacements)
 
 # Aggregate the methods into a single column
 method_full = list(zip(df_raw["method_0"], df_raw["method_1"], df_raw["method_2"]))
@@ -104,16 +80,16 @@ for col in df.columns[start_col:]:
     if (df[col] == 0).all():
         drop.append(col)
 
-df.drop(columns=drop, inplace=True)
+df = df.drop(columns=drop, errors="ignore")
 
 # rename columns
 for col in df.columns[start_col:-1]:
     if len(col) > 60:
         df.rename(columns={col: col[:55] + "[...]"}, inplace=True)
-        
+
 
 num_colors = len(df.columns[start_col:])
-colors = sns.color_palette("hls", num_colors).as_hex()
+colors = sns.color_palette("deep", num_colors).as_hex()
 random.shuffle(colors)
 color_dict = {}
 for i, component in enumerate(df.columns[start_col:]):
@@ -127,7 +103,7 @@ color_dict.update(
 )
 
 # Create the directory for figures if it doesn't exist
-fig_dir = "visualisation/individual-methods_supply-chain"
+fig_dir = DIR_VISUALISATION / "individual-methods_supply-chain"
 os.makedirs(fig_dir, exist_ok=True)
 
 # workout the max number of lines in the legend
@@ -165,7 +141,7 @@ for method in methods_full:
         df_activity = df_method[df_method["name"] == activity]
 
         for scenario in scenarios:
-            fig, ax = plt.subplots() #(figsize=fixed_figsize)
+            fig, ax = plt.subplots()  # (figsize=fixed_figsize)
 
             df_scenario = df_activity[df_activity["db_target"] == scenario].reset_index(
                 drop=True
@@ -200,13 +176,12 @@ for method in methods_full:
             for i, elem in enumerate(sorted_legend_elements):
                 if len(elem[0]) < 60:
                     sorted_legend_elements[i] = (elem[0].ljust(80), elem[1])
-            
-            
+
             legend_lines = [
                 Line2D([0], [0], color=color, lw=4, label=label)
                 for label, color in sorted_legend_elements
             ]
-            
+
             # add blank lines to the legend to make them the same
             if len(legend_lines) < max_lines:
                 for i in range(max_lines - len(legend_lines)):
@@ -214,7 +189,7 @@ for method in methods_full:
 
             # Create figure for each activity, method, scenario combination
 
-            bar_width = 19 
+            bar_width = 4
             years = df_scenario["db_year"].unique()
             for year in years:
                 single_bar = df_scenario[df_scenario["db_year"] == year].reset_index(
@@ -223,11 +198,13 @@ for method in methods_full:
                 contributions = (
                     single_bar.iloc[:, start_col:]
                     .dropna(axis=1)
-                    .drop(columns=["other"])
                     .reset_index(drop=True)
                     .loc[0]
                     .sort_values(ascending=False)
-                )*100
+                ) * 100
+
+                if "other" in contributions.index:
+                    contributions.drop("other", inplace=True)
 
                 for c in contributions.index:
                     if contributions[c] == 0.0:
@@ -250,22 +227,28 @@ for method in methods_full:
                         label=name,
                         width=bar_width,
                         edgecolor="black",
-                        linewidth=0.1,
+                        linewidth=0.5,
                     )
                     bottom += contribution
 
             # Modify x-axis scale or range as needed
             # For example, if years are evenly spaced, you can adjust the xlim to reduce gaps
             ax.set_xlim(
-                [min(df_scenario["db_year"]) - 15, max(df_scenario["db_year"]) + 15]
+                [min(df_scenario["db_year"]) - 5, max(df_scenario["db_year"]) + 5]
             )
             ax.set_ylim([0, 100])
 
-            ax.set_xticks(df_scenario["db_year"].unique(), minor=False)
-            ax.set_xticklabels(df_scenario["db_year"].unique())
+            # Set x-ticks at every position where you have data
+            ax.set_xticks(years)
+
+            # Set labels with a label every 10 years, empty string otherwise
+            labels = [str(year) if year % 10 == 0 else "" for year in years]
+            ax.set_xticklabels(labels)
 
             # Plotting setup (title, labels, legend, etc.)
-            title_raw = f"Contribution to total by sector for Li-ion battery `{activity}'"
+            title_raw = (
+                f"Contribution to total by sector for Li-ion battery `{activity}'"
+            )
             method_text = f"LCA Method: ({method[0]}, {method[1]}, {method[2]})"
             ax.text(
                 0.01,
@@ -278,14 +261,30 @@ for method in methods_full:
             )
 
             title = replace_strings_in_string(title_raw, term_replacements)
-            ax.set_title(title, fontsize=8, y=1.05, ha='left', x=0.01, fontweight="bold")
-            ax.set_ylabel("Contribution to total (\%)", fontsize=7)
-            ax.set_xlabel(f"Scenario year in SSP2 (RCP: {scenario})", fontsize=7)
-            ax.tick_params(axis="x", which="both", length=0)
+            ax.set_title(
+                title, fontsize=8, y=1.05, ha="left", x=0.01, fontweight="bold"
+            )
+            ax.set_ylabel("Contribution to total LCIA score (\%)", fontsize=7)
+            ax.set_xlabel(f"Year in SSP2 scenario (RCP: {scenario})", fontsize=7)
 
-            ax.xaxis.set_tick_params(labelsize=6)
-            ax.yaxis.set_tick_params(labelsize=6)
-            # ax.set_aspect(adjustable='box')  
+            ax.tick_params(axis="x", which="major", length=2)
+            ax.tick_params(axis="x", which="minor", length=0)
+            ax.tick_params(axis="y", labelsize=6)
+            ax.tick_params(axis="x", labelsize=6)
+            # ax.set_aspect(adjustable='box')
+
+            # Use plain style for y-ticks (no scientific notation)
+            ax.ticklabel_format(style="plain", axis="y")
+
+            # Get the exponent for the scientific notation manually
+            # ticks = ax.get_yticks()
+            # exponent = np.floor(np.log10(ticks[-1])).astype(int)
+            # # Hide the original y-tick labels
+            # # ax.set_yticklabels([])
+
+            # # Set the offset text - manually place it
+            # ax.text(0, -0.05, f'(1e{exponent})', transform=ax.get_yaxis_transform(),
+            #         ha='left', va='bottom', fontsize=4)
 
             # Create the legend
             legend = ax.legend(
@@ -309,7 +308,7 @@ for method in methods_full:
             filename = f"{method[0]}_{method[1]}_{method[2]}_{scenario}_{activity}.svg"
             filename = filename.replace(" ", "").replace("/", "_")
             filepath = os.path.join(fig_dir, filename)
-            
+
             # adjust the figure size
             # plt.gcf().set_size_inches(fixed_figsize[0], fixed_figsize[1])
 
@@ -324,7 +323,7 @@ for method in methods_full:
             #     plt.gca().set_position([current_axes_position.x0, new_bottom_position,
             #                             current_axes_position.width, current_axes_position.height])
 
-            plt.savefig(filepath, format="svg", bbox_inches='tight')
+            plt.savefig(filepath, format="svg", bbox_inches="tight")
             plt.close(fig)
             pbar.update(1)
 

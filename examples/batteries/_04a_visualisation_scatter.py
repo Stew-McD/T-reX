@@ -5,6 +5,9 @@ import pandas as pd
 import numpy as np
 import os
 
+from utils import *
+
+
 # set global formatting options
 rc_fonts = {
     "font.family": "serif",
@@ -23,6 +26,8 @@ mpl.rcParams.update(rc_fonts)
 
 import matplotlib.pyplot as plt
 
+from _00_main import FILE_RESULTS_PROCESSED, DIR_VISUALISATION
+from utils import term_replacements, replace_strings_in_string
 
 # # for testing
 # x = np.linspace(0, 10, 100)
@@ -32,46 +37,18 @@ import matplotlib.pyplot as plt
 # make sure of the correct working directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+FILE_IN = FILE_RESULTS_PROCESSED
+
 # read in the data
-df_raw = pd.read_csv("data/results_significant.csv", sep=";", index_col=None)
+df_raw = pd.read_csv(FILE_IN, sep=";", index_col=None)
 
 df_raw.sort_values(
     by=["method_0", "method_1", "method_2", "db_target", "db_year"], inplace=True
 )
 
-
-def replace_string_in_df(df, term, replacement):
-    """Replace strings in a string using a dictionary of replacements."""
-    df = df.replace(term, replacement, inplace=True)
-    return df
-
-def replace_strings_in_string(string, term_replacements):
-    """Replace strings in a string using a dictionary of replacements."""
-    for term, replacement in term_replacements.items():
-        string = string.replace(term, replacement)
-    return string
-
-
-term_replacements = {
-    "cubic meter": r"m$^{3}$",
-    "m3": r"m$^{3}$",
-    "(": " (",
-    "kilogram": "kg",
-    "kgCO2eq": "kg CO$_{2}$ eq",
-    "kg CO2 eq": "kg CO$_{2}$ eq",
-    "kg CO2-eq": "kg CO$_{2}$ eq",
-    "kilowatt hour": "kWh",
-    "Carbondioxide": "Carbon dioxide",
-    "Naturalgas": "Natural gas",
-    "square meter": "m$^{2}$"
-}
-
-# Call the function with the DataFrame and the replacements dictionary
-for term, replacement in term_replacements.items():
-    replace_string_in_df(df_raw, term, replacement)
-
-
-df_raw['method_full'] = list(zip(df_raw['method_0'], df_raw['method_1'], df_raw['method_2']))
+df_raw["method_full"] = list(
+    zip(df_raw["method_0"], df_raw["method_1"], df_raw["method_2"])
+)
 
 total_methods = len(df_raw.method_full.unique())
 
@@ -88,20 +65,33 @@ width_2 = 190  # mm
 markers = ["o", "x", "^", "D", "*", "s"]  # Add more markers as needed
 marker_weight = 1
 
-colorblind_friendly_palette = ['#377eb8', '#ff7f00', '#4daf4a',
-                  '#e41a1c','#984ea3', '#a65628', 
-                  '#999999',  '#dede00','#f781bf']
+colorblind_friendly_palette = [
+    "#377eb8",
+    "#ff7f00",
+    "#4daf4a",
+    "#e41a1c",
+    "#984ea3",
+    "#a65628",
+    "#999999",
+    "#dede00",
+    "#f781bf",
+]
 
 
 colors = colorblind_friendly_palette
 
 loosely_dotted = (0, (1, 3))
 loosely_dashed = (0, (3, 5))
-line_styles = [loosely_dotted, loosely_dashed, "-.", "-"]  # Add more line styles as needed
-line_width = 0.8  # Line width
+line_styles = [
+    loosely_dotted,
+    loosely_dashed,
+    "-.",
+    "-",
+]  # Add more line styles as needed
+line_width = 0.25  # Line width
 
 # Create a directory for the saved plots if it doesn't already exist
-os.makedirs("visualisation/individual-methods", exist_ok=True)
+os.makedirs(DIR_VISUALISATION / "individual-methods", exist_ok=True)
 
 # Generate and save plots for each method in method_sets
 print(
@@ -121,20 +111,57 @@ for a, method_0 in enumerate(methods_0):
                 continue
 
             fig, ax = plt.subplots()
-            title_raw = f"{df_methods_2['method_0'].iloc[0]}--- material/waste footprints\n{method_1} --- {method_2}"
-            
-            title = replace_strings_in_string(title_raw, term_replacements)
-    
-            plt.title(title, fontsize=8)
-            ax.set_xlabel("Year", fontsize=7)
-            ax.set_ylabel(f"{df_methods_2['unit'].iloc[0]} / kg (battery)", fontsize=7)
-            
-            # reduce number of tick labels
-            years = [year for year in years if year % 10 == 0]
+            title_raw = f"LCIA score with method: {df_methods_2['method_0'].iloc[0]}\n{method_1}, {method_2}"
 
+            title = replace_strings_in_string(title_raw, term_replacements)
+
+            # if len(title) > 50:
+            #     print(f'TITLE RAW: \n\t{title_raw}')
+            #     print(f'TITLE: \n\t{title}')
+
+            plt.title(title, fontsize=8.5)
+            ax.set_xlabel("Year", fontsize=8)
+            ax.set_ylabel(f"{df_methods_2['unit'].iloc[0]} / kg (battery)", fontsize=8)
+
+            # Modify x-axis scale or range as needed
+            ax.set_xlim(
+                [min(df_methods_2["db_year"]) - 5, max(df_methods_2["db_year"]) + 5]
+            )
+
+            # Set x-ticks at every position where you have data
             ax.set_xticks(years)
-            ax.set_xticklabels(years, fontsize=6)
+
+            # Set labels with a label every 10 years, empty string otherwise
+            labels = [str(year) if year % 10 == 0 else "" for year in years]
+            ax.set_xticklabels(labels)
+            ax.tick_params(axis="x", which="major", length=2)
+            ax.tick_params(axis="x", which="minor", length=0)
             ax.yaxis.set_tick_params(labelsize=6)
+            ax.xaxis.set_tick_params(labelsize=6)
+
+            # Use plain style for y-ticks (no scientific notation)
+            ax.ticklabel_format(style="plain", axis="y")
+
+            # Get the exponent for the scientific notation manually
+            ticks = ax.get_yticks()
+            if ticks[-1] != 0:
+                exponent = np.sign(ticks[-1]) * np.fix(
+                    np.abs(np.log10(np.abs(ticks[-1])))
+                ).astype(int)
+            else:
+                exponent = 0
+            # ax.set_yticklabels([])
+
+            # Set the offset text - manually place it
+            if exponent != 0:
+                ax.text(
+                    -0.05,
+                    1.0,
+                    r"$(\times10^{" + str(exponent) + "})$",
+                    va="top",
+                    transform=ax.transAxes,
+                    fontsize=4,
+                )
 
             for d, activity in enumerate(activities):
                 for e, scenario in enumerate(scenarios):
@@ -179,7 +206,7 @@ for a, method_0 in enumerate(methods_0):
                     color="black",
                     label=scenario,
                     markersize=2,
-                    linewidth=line_width, 
+                    linewidth=line_width,
                     linestyle=linestyle,  # use the linestyle associated with the scenario
                     markeredgewidth=0.3,
                     markerfacecolor="none",
@@ -190,7 +217,7 @@ for a, method_0 in enumerate(methods_0):
             # Add the legends to the plot outside the plot area
             legend_activities = ax.legend(
                 handles=legend_elements_activities,
-                title="Activity:",
+                title="Battery:",
                 title_fontsize=7,
                 fontsize=5,
                 bbox_to_anchor=(1.02, 0.5),
@@ -209,14 +236,21 @@ for a, method_0 in enumerate(methods_0):
             )
 
             # Define filename and save plot
-            filename = f"{method_0}-{method_1}-{method_2}.svg"  # Changed from .pdf to .svg
-            filename_safe = filename.replace("/", "|")  # Replacing any forward slashes to avoid path issues
-            filepath = os.path.join("visualisation/individual-methods", filename_safe)
+            filename = (
+                f"{method_0}-{method_1}-{method_2}.svg"  # Changed from .pdf to .svg
+            )
+            filename_safe = filename.replace(
+                "/", "|"
+            )  # Replacing any forward slashes to avoid path issues
+            filepath = os.path.join(
+                DIR_VISUALISATION / "individual-methods", filename_safe
+            )
             plt.savefig(filepath, format="svg", bbox_inches="tight")  # Saving as SVG
             # plt.show()
             plt.close(fig)
 
             # print progress
             counter += 1
-            print(f"Saved : {counter} of {total_methods}: {method_2}")
-
+            print(
+                f"Saved : {counter} of {total_methods}: ({method_0}, {method_1}, {method_2})"
+            )

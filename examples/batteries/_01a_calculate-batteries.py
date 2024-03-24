@@ -12,7 +12,19 @@ ca = bwa.ContributionAnalysis()
 
 # Import user settings
 
-from _00_main import *
+from _00_main import (
+    PROJECT,
+    KEY,
+    KEYWORDS_METHODS,
+    SEARCH_ACTIVITIES,
+    SEARCH_METHODS,
+    GET_RESULTS,
+    GET_SUPPLY_CHAIN_RESULTS,
+    FILE_ACTIVITIES,
+    FILE_METHODS,
+    FILE_RESULTS,
+    FILE_SUPPLYCHAIN_RESULTS,
+)
 
 
 if PROJECT in bd.projects:
@@ -272,7 +284,6 @@ def get_supply_chain_results():
         print("\t\t ## No material methods found ##")
     else:
         print(f"\t\t Material methods: {len(methods_material)}")
-        
 
     dbs = activities.database.unique()
 
@@ -333,13 +344,13 @@ def get_supply_chain_results():
                         method,
                         max_level=3,
                         output_format="pandas",
-                        cutoff=0.125,
+                        cutoff=0.025,
                     )
 
                 df_single = df_act.join(df_result)
                 df_single.drop(columns=["activity_object"], inplace=True)
                 df = pd.concat([df, df_single], ignore_index=True, sort=False)
-                df.to_csv(FILE_SUPPLYCHAINRESULTS, index=False, sep=";")
+                df.to_csv(FILE_SUPPLYCHAIN_RESULTS, index=False, sep=";")
                 # df_single.to_csv(FILE_SUPPLYCHAINRESULTS.replace(".csv", f"_{row.code}_{method[2]}.csv"), index=False)
 
             except:
@@ -349,7 +360,7 @@ def get_supply_chain_results():
     progress.close()
     print(f'\n\n{"-"*80}\n')
     print(
-        f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAINRESULTS}"'
+        f'\t\t\t Supply chain calculations complete\n saved to "{FILE_SUPPLYCHAIN_RESULTS}"'
     )
     print(f'\n{"-"*80}\n')
 

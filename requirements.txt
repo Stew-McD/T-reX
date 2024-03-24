@@ -8,3 +8,5 @@ tqdm >= 4.66.1
 wurst >= 0.4
 pandas >= 2.1.4
 premise-gwp >= 0.9.6
+pypardiso==0.4.5
+bw2speedups==3.1

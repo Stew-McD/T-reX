@@ -10,8 +10,9 @@ from reportlab.pdfbase import pdfmetrics
 font_path = "LinLibertine_Rah.ttf"  # Change as needed
 pdfmetrics.registerFont(TTFont("Libertine", font_path))
 
+from _00_main import DIR_VISUALISATION
 # Directory containing SVG files
-svg_dir = "visualisation/individual-methods"
+svg_dir = DIR_VISUALISATION / "individual-methods"
 print(f'{"*"*50}')
 print(f"Reading SVG files from directory: {svg_dir}")
 print(f'{"*"*50}')
@@ -44,7 +45,10 @@ print(
 )
 
 # Create a PDF file
-c = canvas.Canvas("visualisation/scatter-combined_methods.pdf", pagesize=(page_width, page_height))
+c = canvas.Canvas(
+    str(DIR_VISUALISATION / "scatter-combined_methods.pdf"),
+    pagesize=(page_width, page_height),
+)
 
 # Add the title
 c.setFont("Libertine", 16)  # Set Libertine font and size for the title

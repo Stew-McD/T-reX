@@ -4,6 +4,7 @@ from reportlab.graphics import renderPDF
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
+from _00_main import DIR_VISUALISATION
 
 pairs = {
     "EDIP 2003 no LT-non-renewable resources no LT-aluminium no LT": "T-reX-Demand: Aluminium-Aluminium",
@@ -22,7 +23,7 @@ font_path = "LinLibertine_Rah.ttf"  # Update the path as needed
 pdfmetrics.registerFont(TTFont("Libertine", font_path))
 
 # Directory containing SVG files
-svg_dir = "visualisation/individual-methods"
+svg_dir = DIR_VISUALISATION / "individual-methods"
 print(f"Reading SVG files from directory: {svg_dir}")
 
 # Define the layout and title
@@ -49,7 +50,7 @@ page_height += title_height
 print(f"Total page size set to: {page_width}x{page_height}")
 
 # Create a PDF file
-c = canvas.Canvas("visualisation/scatter-similar_methods.pdf")
+c = canvas.Canvas(str(DIR_VISUALISATION / "scatter-similar_methods.pdf"))
 c.setPageSize((page_width, page_height))
 
 # Initialize Y-coordinate for drawing

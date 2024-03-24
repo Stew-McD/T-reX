@@ -7,18 +7,23 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
+from _00_main import DIR_VISUALISATION
+
 # Register Libertine font
 font_path = "misc/LinLibertine_Rah.ttf"  # Change as needed
 pdfmetrics.registerFont(TTFont("Libertine", font_path))
 
 # Directory containing SVG files
-svg_dir = "visualisation/individual-methods_supply-chain"
+svg_dir = DIR_VISUALISATION / "individual-methods_supply-chain"
+if not os.path.isdir(svg_dir):
+    raise ValueError(f"Directory not found: {svg_dir}")
+
 print(f'{"*"*50}')
 print(f"Reading SVG files from directory: {svg_dir}")
 print(f'{"*"*50}')
 
 # Define the layout and title
-filename = "visualisation/combined_methods_supply-chain.pdf"
+filename = str(DIR_VISUALISATION / "combined_methods_supply-chain.pdf")
 title = "T-reX: Individual Contributions by CPC sector"
 columns = 5
 figures = sorted([f for f in os.listdir(svg_dir) if f.endswith(".svg")], reverse=True)
@@ -75,6 +80,7 @@ print(
 )
 
 # Create a PDF file
+
 c = canvas.Canvas(filename, pagesize=(page_width, page_height))
 
 # Add the title

@@ -7,19 +7,21 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
+from _00_main import DIR_VISUALISATION
+
 # Register Libertine font
 font_path = "misc/LinLibertine_Rah.ttf"  # Change as needed
 pdfmetrics.registerFont(TTFont("Libertine", font_path))
 
 # Directory containing SVG files
-svg_dir = "visualisation/individual-methods_top-processes"
+svg_dir = DIR_VISUALISATION / "individual-methods_top-processes"
 print(f'{"*"*50}')
 print(f"Reading SVG files from directory: {svg_dir}")
 print(f'{"*"*50}')
 
 # Define the layout and title
-filename = "visualisation/combined_methods_top-processes.pdf"
-title = "T-reX: Individual Contributions from top-processes"
+filename = str(DIR_VISUALISATION / "combined_methods_top-processes.pdf")
+title = "T-reX: Contributions to total LCIA score from top five processes"
 columns = 5
 figures = sorted([f for f in os.listdir(svg_dir) if f.endswith(".svg")], reverse=True)
 figures_count = len(figures)
@@ -86,7 +88,7 @@ title_width = c.stringWidth(title, "Libertine", 20)
 c.drawString((page_width - title_width) / 2, page_height - 35, title)
 
 # Add metadata
-c.setTitle("T-reX: Individual Contributions from top-processes")
+c.setTitle("T-reX: Contributions from top five processes")
 c.setAuthor("Stewart Charles McDowall")
 
 print("Starting to add SVG files to the PDF...")
