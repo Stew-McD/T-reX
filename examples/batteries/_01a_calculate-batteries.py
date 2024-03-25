@@ -160,9 +160,7 @@ def get_results():
     width_activity = 20
     width_method = 30
     width_score = 10
-    width_unit = 15
     width_db = 15
-    width_bar = 100
 
     print(f'\n{"-"*80}\n')
     print(
@@ -342,9 +340,9 @@ def get_supply_chain_results():
                     df_result = bwa.compare_activities_by_grouped_leaves(
                         df_acts.activity_object,
                         method,
-                        max_level=3,
+                        max_level=4,
                         output_format="pandas",
-                        cutoff=0.025,
+                        cutoff=0.0125,
                     )
 
                 df_single = df_act.join(df_result)

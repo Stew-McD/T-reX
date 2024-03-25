@@ -26,11 +26,11 @@ DELETE_OLD_PROCESSED_RESULTS_SC = 0
 
 DELETE_OLD_FIGURES = 0
 
-SEARCH_ACTIVITIES = 0
-SEARCH_METHODS = 0
+SEARCH_ACTIVITIES = 1
+SEARCH_METHODS = 1
 
-GET_RESULTS = 0
-GET_SUPPLY_CHAIN_RESULTS = 0
+GET_RESULTS = 1
+GET_SUPPLY_CHAIN_RESULTS = 1
 
 PROCESS_RESULTS = 1
 PROCESS_SUPPLY_CHAIN_RESULTS = 1
@@ -39,8 +39,8 @@ DO_VISUALISATION_SUPPLY_CHAIN = 1
 # ************************************ END USER SETTINGS ************************************
 # Directory setup
 CWD = Path.cwd()
-DIR_DATA = CWD / "data"
-DIR_VISUALISATION = CWD / "visualisation"
+DIR_DATA = CWD / "data_batteries"
+DIR_VISUALISATION = CWD / "visualisation_batteries"
 
 os.makedirs(DIR_DATA, exist_ok=True)
 os.makedirs(DIR_VISUALISATION, exist_ok=True)
