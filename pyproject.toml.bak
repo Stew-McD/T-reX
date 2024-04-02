@@ -3,10 +3,10 @@ name = "T_reX_LCA"
 version = "0.2.2"
 description = "A tool for analysing waste and material footprints in Life Cycle Assessment (LCA) databases"
 authors = ["Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>"]
-license = "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
+license = "CC0-1.0"
 readme = "README.md"
 include = ["config/**/*", "misc/**/*", "src/**/*", "tests/**/*"]
-exclude = ["**/__pycache__/"]
+exclude = ["**/__pycache__/*"]
 
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -16,10 +16,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
 ]
-[[tool.poetry.packages]]
-include = "T-reX"
-from = "src"
-
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.12"
@@ -28,7 +24,7 @@ premise = "^2.0.2"
 cowsay = "^6.1"
 
 [tool.poetry.group.dev.dependencies]
-sphinx = "^7.2.6"
+Sphinx = "^7.2.6"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autoapi = "^1.8.1"
 sphinxcontrib-napoleon = "^0.7"

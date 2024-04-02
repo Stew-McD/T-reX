@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath("../../src/T-reX/config"))
 project = "T-reX"
 copyright = "2024, Stewart Charles McDowall | Stew-McD"
 author = "Stewart Charles McDowall | Stew-McD"
-release = "0.2.0"
+release = "0.2.2"
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
@@ -35,7 +35,7 @@ extensions = [
     "sphinx_copybutton",
 ]
 autoapi_dirs = [
-    "../../src/T-reX/",
+    "../../src/T-reX/"
 ]
 
 autosectionlabel_prefix_document = True

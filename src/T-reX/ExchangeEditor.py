@@ -12,7 +12,6 @@ Each appended exchange replicates the same amount and unit as the original techn
 # Imports
 import os
 from datetime import datetime
-
 import bw2data as bd
 import pandas as pd
 from tqdm import tqdm

@@ -1,4 +1,4 @@
-cff-version: 0.2.0
+cff-version: 0.2.2
 message: "If you use this software, please cite it as below."
 authors:
 - family-names: "McDowall"
@@ -8,10 +8,11 @@ authors:
   given-names: "Elizabeth"
   orcid: "https://orcid.org/0009-0003-6364-0873"
 title: "T-reX"
-version: 0.2.0
+version: 0.2.2
 doi: 10.5281/zenodo.10431180
-date-released: 2024-03-07
+date-released: 2024-04-02
 url: "https://github.com/Stew-McD/T-reX"
+
 # preferred-citation:
 #   type: article
 #   authors:

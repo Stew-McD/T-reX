@@ -1,12 +1,16 @@
-bw2data >= 3.6.6
+brightway2 >= 2.4.6
 premise >= 2.0.2
-bw2io >= 0.8.12
-bw2calc >= 1.8.2
 cowsay >= 6.1
-openpyxl >= 3.1.2
-tqdm >= 4.66.1
-wurst >= 0.4
-pandas >= 2.1.4
-premise-gwp >= 0.9.6
-pypardiso==0.4.5
-bw2speedups==3.1
+
+## these should be installed by the first three
+#tqdm >= 4.66.1
+#openpyxl >= 3.1.2
+#bw2data >= 3.6.6
+#bw2io >= 0.8.12
+#bw2calc >= 1.8.2
+#wurst >= 0.4
+#pandas >= 2.1.4
+#premise-gwp >= 0.9.6
+#pypardiso==0.4.5
+#bw2speedups==3.1
+
