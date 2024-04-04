@@ -11,6 +11,8 @@ cowsay >= 6.1
 #wurst >= 0.4
 #pandas >= 2.1.4
 #premise-gwp >= 0.9.6
+
+# these would be good to have for running calculations
 #pypardiso==0.4.5
 #bw2speedups==3.1
 
