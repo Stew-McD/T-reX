@@ -4,19 +4,21 @@
 
 Formerly known as "WasteAndMaterialFootprint"
 
-**T** stands for *tool* and **reX** for *the circular economy strategies reduce, reuse, recycle, etc.* 
+**T** stands for _tool_ and **reX** for _the circular economy strategies reduce, reuse, recycle, etc._
 
 A python program for Life Cycle Assessment (LCA) calculations of supply chain waste and material footprints in current and prospective databases.
 
-Built as an extension to the [brightway LCA ecosystem](https://brightway.dev/), using [premise](https://github.com/polca/premise) for the generation of future scenario databases and [wurst](https://github.com/polca/wurst) for database expansion. 
+Built as an extension to the [brightway LCA ecosystem](https://brightway.dev/), using [premise](https://github.com/polca/premise) for the generation of future scenario databases and [wurst](https://github.com/polca/wurst) for database expansion.
 
 Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_Publication). Reviews and comments are very welcome.
 
-Email: T-reX@scmcd.ch
+Email: <T-reX@scmcd.ch>
+
+![T-reX logo](logos/T-reX_logo_500.webp)
 
 ## Documentation
 
-The documentation is available as a [website](https://T-reX.readthedocs.io/en/latest/). Also, as a  [pdf](https://T-reX.readthedocs.io/_/downloads/en/latest/pdf/).
+The documentation is available as a [website](https://T-reX.readthedocs.io/en/latest/). Also, as a [pdf](https://T-reX.readthedocs.io/_/downloads/en/latest/pdf/).
 
 The documentation is still under development, but the code is well commented and there is a full API reference.
 
@@ -79,58 +81,58 @@ The main dependencies are:
 
 For example:
 
-  ```bash
-  python -m venv T-reX
-  source T-reX/bin/activate
-  ```
+```bash
+python -m venv T-reX
+source T-reX/bin/activate
+```
 
 You can then clone the repo with the command:
 
-  ```bash
-  git clone https://github.com/Stew-McD/T-reX.git
-  ```
+```bash
+git clone https://github.com/Stew-McD/T-reX.git
+```
 
 The easiest way is to install the program as an editable package. This will install the program and all of the dependencies, and allow you to easily edit the code and the configuration and run it without having to reinstall it.
 
-  ```bash
-  cd T-reX
-  pip install -e .
-  ```
+```bash
+cd T-reX
+pip install -e .
+```
 
- and then run:
+and then run:
 
-  ```bash
-  cd T-reX
-  python src/T-reX/main.py
-  ```
+```bash
+cd T-reX
+python src/T-reX/main.py
+```
 
 If you only clone or download the repo without installing it, this will not install any of the dependencies, so you will need to install them manually if you don't already have them.
 
 You can do that with this command:
 
-  ```bash
-  pip install -r requirements.txt
-  ```
+```bash
+pip install -r requirements.txt
+```
 
 Another option: the program can be installed using pip:
 
-  ```bash
-  pip install T_reX_LCA
-  ```
+```bash
+pip install T_reX_LCA
+```
 
 Or, if you want to install the latest version from GitHub:
 
-  ```bash
-  pip install git+https://github.com/Stew-McD/T-reX.git
-  ```
+```bash
+pip install git+https://github.com/Stew-McD/T-reX.git
+```
 
 or for an editable install from GitHub:
 
-  ```bash
-  git clone https://github.com/Stew-McD/T-reX.git
-  cd T-reX
-  pip install -e .
-  ```
+```bash
+git clone https://github.com/Stew-McD/T-reX.git
+cd T-reX
+pip install -e .
+```
 
 ## Usage
 
@@ -140,18 +142,18 @@ The program can be used directly from the command line, or imported as a Python 
 
 You should clone the repo, navigate to the `T-reX` folder, and then run the program using:
 
-  ```bash
-      python src/T-reX/main.py
-  ```
+```bash
+    python src/T-reX/main.py
+```
 
 ### Python module
 
 The program can be imported as a Python module:
 
-  ```python
-      import T_reX_LCA as TreX
-      TreX.run()
-  ```
+```python
+    import T_reX_LCA as TreX
+    TreX.run()
+```
 
 ## Configuration
 
@@ -159,26 +161,26 @@ You can find the configuration files in the `config` folder (`src/T-reX/config`)
 
 If you have installed via pip, or want to have things separate, you can create a new folder somewhere and then run some built-in functions to create and reload the config files.
 
-  ```python
-      import T_reX_LCA as TreX
-      TreX.create_config()
-  ```
+```python
+    import T_reX_LCA as TreX
+    TreX.create_config()
+```
 
 This will create a folder `config` in the current working directory containing the default configuration files (see below).
 
 You can then edit these files with some kind of text editor, and run:
 
-  ```python
-      TreX.reload_config()
-  ```
+```python
+    TreX.reload_config()
+```
 
 Note that you will need to close the Python session and start a new one to reload the config files.
 
 If you want to revert to the default config files, you can run:
 
-  ```python
-      TreX.reset_config()
-  ```
+```python
+    TreX.reset_config()
+```
 
 And then close and restart the Python session.
 
@@ -196,36 +198,36 @@ If you are happy with the default settings, you can just run the program and it 
 
 **These are some extracts from `user_settings.py` with the most important settings (the ones you might want to change) and their default values:**
 
-  ```python
+```python
 
-      # Choose whether to use premise to create future scenario databases 
-      use_premise = True
-      # Choose whether to use T-reX to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
-      use_T_reX = True
+    # Choose whether to use premise to create future scenario databases
+    use_premise = True
+    # Choose whether to use T-reX to edit the databases (you could also turn this off and just use the package as an easy way to make a set of future scenario databases)
+    use_T_reX = True
 
-      # Choose the names of the projects to use
-      project_premise_base = "default"
-      project_premise = "SSP-cutoff"
-      project_base = project_premise
-      project_T_reX = f"T-reX-{project_base}"
+    # Choose the names of the projects to use
+    project_premise_base = "default"
+    project_premise = "SSP-cutoff"
+    project_base = project_premise
+    project_T_reX = f"T-reX-{project_base}"
 
-      # Choose the name of the database to use (needed for premise only, the T-reX tool will run all databases except the biospheres)
-      database_name = "ecoinvent-3.9.1-cutoff"
+    # Choose the name of the database to use (needed for premise only, the T-reX tool will run all databases except the biospheres)
+    database_name = "ecoinvent-3.9.1-cutoff"
 
-      # if you want to use a fresh project
-      delete_existing_premise_project = False
-      delete_existing_T_reX_project = False
+    # if you want to use a fresh project
+    delete_existing_premise_project = False
+    delete_existing_T_reX_project = False
 
-      # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
-      # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
-      # the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100
+    # Choose the premise scenarios to generate (see FutureScenarios.py for more details)
+    # Not all combinations are available, the code in FutureScenarios.py will filter out the scenarios that are not possible
+    # the default is to have an optimistic and a pessimistic scenario with SSP2 for 2030, 2065 and 2100
 
-      models = ["remind"]
-      ssps = ["SSP2"]
-      rcps = ["Base","PkBudg500"]
-      years = [2030,2065,2100,]
+    models = ["remind"]
+    ssps = ["SSP2"]
+    rcps = ["Base","PkBudg500"]
+    years = [2030,2065,2100,]
 
-  ```
+```
 
 ### Waste search settings: `queries_waste.py`
 
@@ -256,12 +258,12 @@ Isolate the function of `SearchWaste.py` to validate your search terms. That mea
 
 You can achieve this by setting the following in `user_settings.py`:
 
-  ```python
-      use_premise = False
-      do_search = True
-      do_methods = False
-      do_edit = False
-  ```
+```python
+    use_premise = False
+    do_search = True
+    do_methods = False
+    do_edit = False
+```
 
 ### Material Search Settings: `queries_materials.py`
 
@@ -281,7 +283,7 @@ This function uses the string tests `startswith` in `SearchMaterial.py` to ident
 - **Add or Remove Materials**: Adapt the tuple list by including new materials or removing irrelevant ones.
 - **Refine Search Terms**: Update material categories for a better fit with your database, ensuring precision in naming, especially with the use of commas.
 
-*Use the same logic as in `queries_waste.py` to test and refine your search terms. That is, only `use_search = True`*
+_Use the same logic as in `queries_waste.py` to test and refine your search terms. That is, only `use_search = True`_
 
 #### Usage Considerations
 
