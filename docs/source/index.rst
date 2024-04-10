@@ -5,7 +5,7 @@ The T-reX tool is a python package that allows one to easily and flexibly calcul
 
 `View the example output here <_static/example-output.html>`_
 
-.. image:: _static/T-reX_logo_500.webp
+.. image:: _static/T-reX_logo_400.png
    :alt: T-reX logo
    :height: 300px
    :width: 300 px
