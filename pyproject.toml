@@ -22,7 +22,7 @@ from = "src"
 
 
 [tool.poetry.dependencies]
-python = ">=3.10, <3.12"
+python = ">=3.10 #, <3.12"
 brightway2 = "^2.4.6"
 premise = "^2.0.2"
 cowsay = "^6.1"
