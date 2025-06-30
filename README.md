@@ -10,7 +10,7 @@ A python program for Life Cycle Assessment (LCA) calculations of supply chain wa
 
 Built as an extension to the [brightway LCA ecosystem](https://brightway.dev/), using [premise](https://github.com/polca/premise) for the generation of future scenario databases and [wurst](https://github.com/polca/wurst) for database expansion.
 
-Soon to be a paper, hopefully. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_Publication). Reviews and comments are very welcome.
+A paper introducing T-reX has been published (2025-06-11) by the journal Resources, Conservation and Recycling. The manuscript has its own github repo [here](https://github.com/Stew-McD/T-reX_Publication). Reviews and comments are very welcome.
 
 Email: <T-reX@scmcd.ch>
 
@@ -20,7 +20,7 @@ Email: <T-reX@scmcd.ch>
 
 The documentation is available as a [website](https://T-reX.readthedocs.io/en/latest/). Also, as a [pdf](https://T-reX.readthedocs.io/_/downloads/en/latest/pdf/).
 
-The documentation is still under development, but the code is well commented and there is a full API reference.
+The documentation is still a work in progress, but the code is well commented and there is a full API reference.
 
 The following readme provides a brief introduction to the program, how to install it, and how to use it.
 
