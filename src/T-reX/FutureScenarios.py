@@ -20,6 +20,7 @@ import bw2data as bd
 # Import user settings or set defaults
 from config.user_settings import (
     batch_size,
+    database_biosphere,
     database_name,
     delete_existing_premise_project,
     dir_data,
@@ -174,6 +175,7 @@ def FutureScenarios(scenario_list):
         bd.projects.copy_project(project_premise)
         print(f"Created new project {project_premise} from {project_premise_base}")
         print(f"Using database {database_name}")
+        print(f"Using biosphere database {database_biosphere}")
         print("Removing unneeded databases..")
         for db in list(bd.databases):
             if db != database_name and "biosphere" not in db:
@@ -221,16 +223,18 @@ def FutureScenarios(scenario_list):
         }
 
         # Create new database based on scenario details
+        # 
         ndb = pm.NewDatabase(
             scenarios=scenarios_set,
             source_db=database_name,
             source_version=version,
             system_model=model,
             key=premise_key,
-            use_multiprocessing=use_mp,
+            #use_multiprocessing=use_mp,
             system_args=model_args,
             quiet=premise_quiet,
-            keep_uncertainty_data=True,
+            keep_source_db_uncertainty=False,
+            biosphere_name=database_biosphere
         )
 
         # List of update functions to try

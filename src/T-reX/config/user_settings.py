@@ -10,7 +10,7 @@ The script allows for two modes of operation:
     1. Single Mode (`single` is True): Set the project and database names to a single specified value.
     2. Multiple projects/databases mode (`single` is False): Facilitates batch processing of multiple projects and databases.
 
-Additionally, the script allows for the use of multiprocessing (`use_multiprocessing` is True).
+Additionally, the script allows for the use of multiprocessing (`use_multiprocessing` is True). (not working in premise update)
 
 Premise can also be used to make future databases (`use_premise` is True).
 
@@ -37,7 +37,7 @@ import bw2data as bd
 # ------------------------------------------------------------
 ## SETTINGS FOR PROJECTS
 # set project name and other things here
-
+biosphere_name = "biosphere"
 project_premise_base = "default"
 project_premise = "premise-SSP2-cutoff"
 project_base = project_premise
@@ -69,10 +69,10 @@ do_edit = True
 use_premise = True
 
 # this will be the database that premise will use to construct the future databases
-database_name = "ecoinvent-3.9.1-cutoff"
-
+database_name = "ecoinvent-3.10-cutoff"
+database_biosphere = "ecoinvent-3.10-biosphere"
 # if you want to use a fresh project
-delete_existing_premise_project = False
+delete_existing_premise_project = True
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
@@ -81,7 +81,7 @@ use_mp = True
 batch_size = 3
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
-premise_quiet = True
+premise_quiet = False
 
 if use_premise and project_base != project_premise:
     project_T_reX = f"T-reX-{project_premise}"
@@ -125,30 +125,30 @@ rcps = [
     # "RCP26",
     # "NPi",
     # "NDC",
-    "PkBudg500",
+    # "PkBudg500",
     # "PkBudg1150",
 ]
 
 # If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
-    2020,
-    2025,
-    2030,
-    2035,
-    2040,
-    2045,
+    # 2020,
+    # 2025,
+    # 2030,
+    # 2035,
+    # 2040,
+    # 2045,
     2050,
-    2055,
-    2060,
-    2065,
-    2070,
-    2075,
-    2080,
-    2085,
-    2090,
-    2095,
-    2100,
+    # 2055,
+    # 2060,
+    # 2065,
+    # 2070,
+    # 2075,
+    # 2080,
+    # 2085,
+    # 2090,
+    # 2095,
+    # 2100,
 ]
 
 # this part makes all the possible combinations of the scenarios you want to use, the will be filtered out later if they are not possible
@@ -188,6 +188,7 @@ def generate_args_list(single_database=None):
             "project_T_reX": project_T_reX,
             "db_name": database,
             "db_T_reX_name": db_T_reX_name,
+            "db_biosphere_name": database_biosphere,
         }
         args_list.append(args)
 

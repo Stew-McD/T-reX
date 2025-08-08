@@ -75,6 +75,7 @@ from VerifyDatabase import VerifyDatabase
 # import configuration from config/user_settings.py
 from config.user_settings import (
     custom_bw2_dir,
+    database_biosphere,
     db_T_reX_name,
     delete_T_reX_project,
     dir_logs,
@@ -149,7 +150,7 @@ def run():
     start_time = datetime.now()
     args_list = generate_args_list(single_database=single_database)
     total_databases = len(args_list)
-    all_databases = list(set(bd.databases) - {"biosphere3"})
+    all_databases = list(set(bd.databases) - {database_biosphere})
 
     print(
         f"\nStarting T-reX for {total_databases}/{len(all_databases)} databases in project {project_base}\n{'-'*50}"
