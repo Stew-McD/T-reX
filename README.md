@@ -82,11 +82,13 @@ The main dependencies are:
 For example:
 
 ```bash
-python -m venv T-reX
-source T-reX/bin/activate
+conda -m T-reX_env python=3.11
+## OR 
+# python -m venv T-reX_env
+# source T-reX/bin/activate
 ```
 
-You can then clone the repo with the command:
+You can then clone the repo whereever you want it with the command:
 
 ```bash
 git clone https://github.com/Stew-McD/T-reX.git
