@@ -27,8 +27,9 @@ from pathlib import Path
 ## SETTINGS FOR BRIGHTWAY2
 
 # you can set the brightway2 directory here, otherwise it will use the default one
-# custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
 custom_bw2_dir = None
+# custom_bw2_dir = os.path.expanduser("~") + '/brightway2data'
+# custom_bw2_dir = "/home/stew/code/bw2-data_T-reX_MacroStudy"
 if custom_bw2_dir:
     os.environ["BRIGHTWAY2_DIR"] = custom_bw2_dir
 
@@ -38,9 +39,12 @@ import bw2data as bd
 ## SETTINGS FOR PROJECTS
 # set project name and other things here
 biosphere_name = "biosphere"
-project_premise_base = "default"
+project_premise_base = "default-3.9.1"
 project_premise = "premise-SSP2-cutoff"
-project_base = project_premise
+# project_base = project_premise
+
+# if only using T-reX, set your starting project here
+project_base = 'default-3.9.1-premise-sep'
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
 project_T_reX = f"TreX-{project_base}"
 
@@ -50,13 +54,13 @@ use_T_reX = True
 db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
-single = False
-single_database = "ecoinvent_cutoff_3.9_remind_SSP2-Base_2065"
+single = True
+single_database = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_T_reX_project = True
+delete_T_reX_project = False
 use_multiprocessing = False
-verbose = False
+verbose = True
 
 # set these to True if you want to run the different parts of the tool separately
 do_search = True
@@ -66,11 +70,12 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = True
+# use_premise = True
+use_premise = False
 
 # this will be the database that premise will use to construct the future databases
-database_name = "ecoinvent-3.10-cutoff"
-database_biosphere = "ecoinvent-3.10-biosphere"
+database_name = "ecoinvent-3.9.1-cutoff"
+database_biosphere = "ecoinvent-3.9.1-biosphere"
 # if you want to use a fresh project
 delete_existing_premise_project = True
 
@@ -78,7 +83,7 @@ delete_existing_premise_project = True
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. Memory issues can occur if the batch size is too large.
-batch_size = 3
+batch_size = 1
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = False

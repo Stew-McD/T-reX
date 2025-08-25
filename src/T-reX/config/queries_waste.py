@@ -35,7 +35,7 @@ def make_queries_waste():
         "radioactive",
         # "non-hazardous", # not really needed, as it is just "total" - "hazardous", and it makes the process slower (20k+ more exchanges)
         "carbon dioxide",  # in prospective databases, carbon capture and storage is included
-        # "total",
+        "total",
     ]
 
     # QUERY FORMAT
