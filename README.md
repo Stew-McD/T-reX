@@ -79,22 +79,31 @@ The main dependencies are:
 
 **It is recommended to use a fresh virtual environment to install the program.**
 
-For example:
+The easiest way to ensure the right python version is used is to use conda. For example:
 
 ```bash
-python -m venv T-reX
+conda create -n T-reX python=3.11
+conda activate T-reX
+```
+
+Alternatively, you can use the built-in venv module. For example:
+
+```bash
+python3.11 -m venv T-reX
 source T-reX/bin/activate
 ```
 
 You can then clone the repo with the command:
-
 ```bash
 git clone https://github.com/Stew-McD/T-reX.git
 ```
 
+Alternatively, you can download the repo as a zip file and extract it. Or use the GitHub CLI to clone the repo.
+
 The easiest way is to install the program as an editable package. This will install the program and all of the dependencies, and allow you to easily edit the code and the configuration and run it without having to reinstall it.
 
 ```bash
+# make sure you have the env activated
 cd T-reX
 pip install -e .
 ```

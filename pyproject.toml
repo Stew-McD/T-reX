@@ -23,7 +23,7 @@ from = "src"
 
 [tool.poetry.dependencies]
 python = ">=3.10, <3.12"
-premise_bw2
+premise = { version = "*", extras = ["bw2"] }  # or pin: "^X.Y"
 cowsay = "^6.1"
 
 [tool.poetry.group.dev.dependencies]

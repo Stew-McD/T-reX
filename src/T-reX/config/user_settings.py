@@ -38,13 +38,14 @@ import bw2data as bd
 # ------------------------------------------------------------
 ## SETTINGS FOR PROJECTS
 # set project name and other things here
-biosphere_name = "biosphere"
+biosphere_name = "biosphere3"
 project_premise_base = "default-3.9.1"
 project_premise = "premise-SSP2-cutoff"
 # project_base = project_premise
 
 # if only using T-reX, set your starting project here
-project_base = 'default-3.9.1-premise-sep'
+# project_base = 'default-3.9.1-premise-sep'
+project_base = 'default-3.9.1'
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
 project_T_reX = f"TreX-{project_base}"
 
@@ -58,7 +59,7 @@ single = True
 single_database = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
-delete_T_reX_project = False
+delete_T_reX_project = True
 use_multiprocessing = False
 verbose = True
 

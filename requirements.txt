@@ -1,8 +1,8 @@
-brightway2 >= 2.4.6
-premise >= 2.0.2
+premise[bw2]
 cowsay >= 6.1
 
-## these should be installed by the first three
+## these should be installed by the first two
+#brightway2 >= 2.4.6
 #tqdm >= 4.66.1
 #openpyxl >= 3.1.2
 #bw2data >= 3.6.6

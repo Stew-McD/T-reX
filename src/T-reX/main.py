@@ -127,7 +127,7 @@ def run():
 
     try:
 
-        def animate_cowsay(message, delay=0.2):
+        def animate_cowsay(message, delay=0.02):
             cow = cowsay.get_output_string("stegosaurus", message)
             for line in cow.split("\n"):
                 print(line.center(80, " "))
