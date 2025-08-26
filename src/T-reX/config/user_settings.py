@@ -229,9 +229,9 @@ dir_T_reX = [
 
 # this will delete old results and logs
 if delete_T_reX_project:
-    for dir in dir_T_reX:
-        if os.path.exists(dir):
-            shutil.rmtree(dir)
+    for DIR in dir_T_reX:
+        if os.path.exists(DIR):
+            shutil.rmtree(DIR)
 
 
 # FIN #
