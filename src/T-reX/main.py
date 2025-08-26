@@ -140,6 +140,7 @@ def run():
     except:
         pass
     
+    sleep(1)
     
     # create future scenario databases
     if use_premise:

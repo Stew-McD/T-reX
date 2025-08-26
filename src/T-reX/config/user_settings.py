@@ -40,14 +40,16 @@ import bw2data as bd
 # set project name and other things here
 biosphere_name = "biosphere3"
 project_premise_base = "default-3.9.1"
-project_premise = "premise-SSP2-cutoff"
-# project_base = project_premise
+project_premise = "premise-test"
+project_base = project_premise
 
 # if only using T-reX, set your starting project here
 # project_base = 'default-3.9.1-premise-sep'
-project_base = 'default-3.9.1'
+# project_base = 'default-3.9.1'
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
-project_T_reX = f"TreX-{project_base}"
+# project_T_reX = f"TreX-{project_base}"
+# project_T_reX = f"T-reX_macro"
+project_T_reX = f"T-reX_macro-test"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
@@ -55,7 +57,7 @@ use_T_reX = True
 db_T_reX_name = "biosphere_T-reX"  # name of the database that will be created (pseudobiosphere)
 
 # if you only want to run one database, set single to True and choose the database name here
-single = True
+single = False
 single_database = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
@@ -71,17 +73,17 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-# use_premise = True
-use_premise = False
+use_premise = True
+# use_premise = False
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
-database_biosphere = "ecoinvent-3.9.1-biosphere"
+database_biosphere = "biosphere3"
 # if you want to use a fresh project
 delete_existing_premise_project = True
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
-use_mp = True
+use_mp = False
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. Memory issues can occur if the batch size is too large.
 batch_size = 1
@@ -138,7 +140,7 @@ rcps = [
 # If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
-    # 2020,
+    2020,
     # 2025,
     # 2030,
     # 2035,
