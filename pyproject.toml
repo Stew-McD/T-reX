@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "T_reX_LCA"
-version = "0.2.2"
+version = "1.0"
 description = "A tool for analysing waste and material footprints in Life Cycle Assessment (LCA) databases"
 authors = ["Stewart Charles McDowall <s.c.mcdowall@cml.leidenuniv.nl>"]
 license = "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"
