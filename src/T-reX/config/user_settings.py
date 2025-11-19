@@ -37,12 +37,12 @@ import bw2data as bd
 # ------------------------------------------------------------
 ## SETTINGS FOR PROJECTS
 # set project name and other things here
-biosphere_name = "biosphere"
-project_premise_base = "default"
-project_premise = "premise-SSP2-cutoff"
-project_base = project_premise
+biosphere_name = "biosphere3"
+project_premise_base = "default-3.9.1"
+project_premise = "default-3.9.1-premise"
+project_base = "TreX_macrostudy"
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
-project_T_reX = f"TreX-{project_base}"
+project_T_reX = "TreX_macrostudy"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
@@ -54,7 +54,7 @@ single = False
 single_database = "ecoinvent_cutoff_3.9_remind_SSP2-Base_2065"
 
 # if you want to use a fresh project
-delete_T_reX_project = True
+delete_T_reX_project = False
 use_multiprocessing = False
 verbose = False
 
@@ -66,19 +66,19 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = True
+use_premise = False
 
 # this will be the database that premise will use to construct the future databases
-database_name = "ecoinvent-3.10-cutoff"
-database_biosphere = "ecoinvent-3.10-biosphere"
+database_name = "ecoinvent-3.9.1-cutoff"
+database_biosphere = "biosphere3"
 # if you want to use a fresh project
-delete_existing_premise_project = True
+delete_existing_premise_project = False
 
 # if you want to use multiprocessing in premise (some people have reported problems with this)
 use_mp = True
 
 # if you want to give premise multiple databases at once, increase this number, otherwise, leave it at 1. Memory issues can occur if the batch size is too large.
-batch_size = 3
+batch_size = 1
 
 # This seems not to have much effect, because most of the print statemenents are in `wurst`, not in `premise`
 premise_quiet = False
@@ -113,30 +113,30 @@ models = [
 ]
 
 ssps = [
-    # "SSP1",
-    "SSP2",
-    # "SSP5",
+     "SSP1",
+    #"SSP2",
+     "SSP5",
 ]
 
 # default is to have an optimistic and a pessimistic scenario
 rcps = [
-    "Base",
+    # "Base",
     # "RCP19",
     # "RCP26",
     # "NPi",
     # "NDC",
-    # "PkBudg500",
+     "PkBudg500",
     # "PkBudg1150",
 ]
 
 # If the years you put here are inside the range of the scenario, it will interpolate the data, otherwise, probably it fails. Most of the scenarios are between 2020 and 2100, I think. 5 year intervals until 2050, then 10 year intervals until 2100.
 
 years = [
-    # 2020,
+     2020,
     # 2025,
-    # 2030,
+     2030,
     # 2035,
-    # 2040,
+     2040,
     # 2045,
     2050,
     # 2055,
@@ -174,7 +174,7 @@ def generate_args_list(single_database=None):
 
     else:
         exclude = [
-            "biosphere",
+            biosphere_name,
             db_T_reX_name,  # this is the database that will be created by the T-reX tool
         ]
         databases = sorted(
