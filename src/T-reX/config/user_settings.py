@@ -44,12 +44,12 @@ project_premise = "premise-test"
 project_base = project_premise
 
 # if only using T-reX, set your starting project here
-# project_base = 'default-3.9.1-premise-sep'
+project_base = 'default-3.9.1-premise-sep'
 # project_base = 'default-3.9.1'
 # if you want to use the same project for the T-reX tool, change this to project_base, otherwise, it will create a new project
 # project_T_reX = f"TreX-{project_base}"
-# project_T_reX = f"T-reX_macro"
-project_T_reX = f"T-reX_macro-test"
+# project_T_reX = "T-reX_macro"
+project_T_reX = "T-reX_macro"
 
 # ------------------------------------------------------------
 ## SETTINGS FOR THE WASTEANDMATERIAL FOOTPRINT TOOL
@@ -62,6 +62,7 @@ single_database = "ecoinvent-3.9.1-cutoff"
 
 # if you want to use a fresh project
 delete_T_reX_project = True
+# delete_T_reX_project = True
 use_multiprocessing = False
 verbose = True
 
@@ -73,8 +74,8 @@ do_edit = True
 # ------------------------------------------------------------
 ## PREMISE SETTINGS -  to construct future LCA databases with premise
 
-use_premise = True
-# use_premise = False
+# use_premise = True
+use_premise = False
 
 # this will be the database that premise will use to construct the future databases
 database_name = "ecoinvent-3.9.1-cutoff"
